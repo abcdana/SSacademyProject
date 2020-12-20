@@ -84,8 +84,8 @@ public class Login {
 						
 						System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", id);
 						AdminController admin = new AdminController();
-						admin.adminMain();
-						
+						admin.adminMain(); //관리자 메인메뉴
+
 					} else if ((id.substring(0, 1)).equals("S")) { //아이디 S로 시작 : 교육생
 
 						sql = "select id, substr(ssn, 8, 7) pw, name from tblStudent";
@@ -95,7 +95,7 @@ public class Login {
 							if (rs.getString("id").equals(id) && rs.getString("pw").equals(pw)) {
 								System.out.printf("\n\t\t교육생 %s님 SSacademy 접속을 환영합니다.", rs.getString("name")); 
 								StudentController student = new StudentController();
-								student.studentMain();
+								student.studentMain(); //교육생 메인메뉴
 							}
 						}
 						
@@ -108,7 +108,7 @@ public class Login {
 							if (rs.getString("id").equals(id) && rs.getString("pw").equals(pw)) {
 								System.out.printf("\n\t\t교사 %s님 SSacademy 접속을 환영합니다.", rs.getString("name"));
 								TeacherController teacher = new TeacherController();
-								teacher.teacherMain();
+								teacher.teacherMain(); //교사 메인메뉴
 							}
 						}
 					} 

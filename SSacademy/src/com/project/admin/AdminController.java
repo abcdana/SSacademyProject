@@ -72,6 +72,10 @@ public class AdminController {
 			} else if (sel.equals("12")) {
 				System.out.println("12.  우수 훈련생 관리 - 임채원");
 				break;
+			} else if (sel.equals("")) {
+				System.out.println("\n\t\t**로그아웃 되었습니다.**");
+				System.out.println("\t\t메인화면으로 돌아갑니다.\n\n");
+				break;
 			} else {
 				check = false;
 				System.out.println("\n\t\t※ 잘못된 선택입니다.");

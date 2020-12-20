@@ -23,12 +23,12 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
+		while(true) {
+			showMainLogo();	//로고
+			showLogin();	//로그인 메인
+		}
 		
-		showMainLogo();	//로고
-		showLogin();	//로그인 메인
-		
-		
-		
+
 	}//main
 
 	
