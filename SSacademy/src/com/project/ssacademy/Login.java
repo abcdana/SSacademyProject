@@ -5,13 +5,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.project.admin.AdminController;
+import com.project.student.StudentController;
+import com.project.teacher.TeacherController;
+
 public class Login {
 
 	private static Scanner scan;
 	private static Connection conn;
 	private static Statement stat;
 	private static ResultSet rs;
-	private static Login lg;
 
 	static {
 		scan = new Scanner(System.in);
@@ -56,14 +59,13 @@ public class Login {
 		
 		
 		try {
-				
+			//통합로그인으로 구현 -> union을 이용하여 관리자, 교육생, 교사의 id, pw만 조회	
 			String sql = "select id, pw from tblAdmin \n" + 
 					"    union select id, substr(ssn, 8, 7) pw from tblStudent\n" + 
 					"        union select id, substr(ssn, 8, 7) pw from tblTeacher";
 			
 			rs = stat.executeQuery(sql);
 		
-			
 			while (check) {
 				
 				while(rs.next()) {
@@ -75,28 +77,29 @@ public class Login {
 					}
 				}
 				
-				rs.close();
-				
 				if (check == false) {
 					
 
-					if ((id.substring(0, 1)).equals("A")) {
+					if ((id.substring(0, 1)).equals("A")) { //아이디 A로 시작 : 관리자
 						
-						//System.out.println("관리자");
 						System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", id);
+						AdminController admin = new AdminController();
+						admin.adminMain();
 						
-					} else if ((id.substring(0, 1)).equals("S")) {
+					} else if ((id.substring(0, 1)).equals("S")) { //아이디 S로 시작 : 교육생
 
 						sql = "select id, substr(ssn, 8, 7) pw, name from tblStudent";
 						rs = stat.executeQuery(sql);
-						
+					
 						while(rs.next()) {
 							if (rs.getString("id").equals(id) && rs.getString("pw").equals(pw)) {
 								System.out.printf("\n\t\t교육생 %s님 SSacademy 접속을 환영합니다.", rs.getString("name")); 
+								StudentController student = new StudentController();
+								student.studentMain();
 							}
 						}
 						
-					} else if ((id.substring(0, 1)).equals("T")) {
+					} else if ((id.substring(0, 1)).equals("T")) { //아이디 T로 시작 : 교사
 											
 						sql = "select id, substr(ssn, 8, 7) pw, name from tblTeacher";
 						rs = stat.executeQuery(sql);
@@ -104,6 +107,8 @@ public class Login {
 						while(rs.next()) {
 							if (rs.getString("id").equals(id) && rs.getString("pw").equals(pw)) {
 								System.out.printf("\n\t\t교사 %s님 SSacademy 접속을 환영합니다.", rs.getString("name"));
+								TeacherController teacher = new TeacherController();
+								teacher.teacherMain();
 							}
 						}
 					} 
@@ -113,15 +118,12 @@ public class Login {
 					unifiedLoginPage();
 					break;
 				}
-				
 			}
-			
 			
 		} catch (Exception e) {
 			System.out.println("primaryLogin.enUnifiedLoginPage()");
 			e.printStackTrace();
 		}
-		
 		
 	}//unifiedLoginPage()
 	

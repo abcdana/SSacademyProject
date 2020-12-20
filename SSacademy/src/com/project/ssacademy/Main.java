@@ -24,8 +24,8 @@ public class Main {
 	public static void main(String[] args) {
 		
 		
-		showMainLogo();
-		showLogin();
+		showMainLogo();	//로고
+		showLogin();	//로그인 메인
 		
 		
 		
@@ -81,6 +81,8 @@ public class Main {
 		} else {
 			System.out.println("\n\t\t※ 잘못된 선택입니다.");
 			System.out.println("\t\t입력하신 번호를 다시 확인해주세요.");
+			System.out.println();
+			showLogin();
 		}
 		
 	}//showLogin
