@@ -1,4 +1,4 @@
-package com.project.admin;
+package com.project.ssacademy;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
