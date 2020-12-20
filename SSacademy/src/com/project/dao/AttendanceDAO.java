@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import com.project.admin.DBUtil;
 import com.project.dto.AttendanceDTO;
@@ -14,9 +15,10 @@ import com.project.dto.AttendanceDTO;
  */
 public class AttendanceDAO {
 	
+	private static Scanner scan = new Scanner(System.in);
 	private Connection conn;
-	private Statement stat;	//매개변수X
-	private PreparedStatement pstat; //매개변수X
+	private Statement stat;
+	private PreparedStatement pstat; 
 	private ResultSet rs;
 
 	/**
