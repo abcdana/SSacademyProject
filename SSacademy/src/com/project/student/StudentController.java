@@ -57,10 +57,6 @@ public class StudentController {
 			} else if (sel.equals("7")) {
 				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
 				break;
-			} else if (sel.equals("")) {
-				System.out.println("\n\t\t**로그아웃 되었습니다.**");
-				System.out.println("\t\t메인화면으로 돌아갑니다.\n\n");
-				break;
 			} else {
 				check = false;
 				System.out.println("\n\t\t※ 잘못된 선택입니다.");

@@ -26,7 +26,6 @@ public class AdminView {
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
-		System.out.println("\t█ 로그아웃 하시려면 엔터를 입력하세요.");
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
 
