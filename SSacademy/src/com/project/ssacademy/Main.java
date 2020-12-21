@@ -10,10 +10,10 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner scan;
-	private static Login lg;
+	private static LoginController lg;
 	
 	static {
-		lg = new Login();
+		lg = new LoginController();
 		scan = new Scanner(System.in);
 	}
 	
@@ -73,7 +73,7 @@ public class Main {
 		
 		if (num.equals("1")) {
 			//System.out.println("로그인");// + 로그인 클래스
-			lg.unifiedLoginPage();
+			lg.login();
 		} else if (num.equals("0"))  {
 			System.out.println("\n\t\t**프로그램을 종료합니다.**");
 			System.exit(0);

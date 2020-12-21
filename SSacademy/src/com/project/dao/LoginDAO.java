@@ -1,37 +1,43 @@
-package com.project.ssacademy;
+package com.project.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
 import com.project.admin.AdminController;
+import com.project.dto.AdminDTO;
+import com.project.ssacademy.DBUtil;
 import com.project.student.StudentController;
 import com.project.teacher.TeacherController;
 
-public class Login {
-
-	private static Scanner scan;
-	private static Connection conn;
-	private static Statement stat;
-	private static ResultSet rs;
-
-	static {
-		scan = new Scanner(System.in);
-	}
-
+/**
+ * 
+ * @author 김다은
+ *
+ */
+public class LoginDAO {
+	
+	private static Scanner scan = new Scanner(System.in);
+	private Connection conn;
+	private Statement stat;
+	private PreparedStatement pstat; 
+	private ResultSet rs;
+	
 	/**
 	 * 기본 생성자 Connection과 Statement를 생성한다.
 	 */
-	public Login() {
+	public LoginDAO() {
 		
 		try {
 			
-			conn = DBUtil.open();
-			stat = conn.createStatement();
+			this.conn = DBUtil.open();
+			this.stat = conn.createStatement();
+			
 			
 		} catch (Exception e) {
-			System.out.println("primaryLogin.enLogin()");
+			System.out.println("primaryLoginDAO.enLogin()");
 			e.printStackTrace();
 		}
 	}
@@ -45,25 +51,16 @@ public class Login {
 		String pw = "";
 		boolean check = true;
 		
-		
-		System.out.println();
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t   로그인\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		System.out.println();
-		
 		System.out.print("\t█ ID : ");
 		id = scan.nextLine();		
 		System.out.print("\t█ PW : ");
 		pw = scan.nextLine();
 		
-		
 		try {
 			//통합로그인으로 구현 -> union을 이용하여 관리자, 교육생, 교사의 id, pw만 조회	
-			String sql = "select id, pw, id as name from tblAdmin \n" + 
-					"    union select id, substr(ssn, 8, 7), name from tblStudent\n" + 
-					"        union select id, substr(ssn, 8, 7), name from tblTeacher\n" + 
-					"            order by id;";
+			String sql = "select id, pw from tblAdmin \n" + 
+					"    union select id, substr(ssn, 8, 7) pw from tblStudent\n" + 
+					"        union select id, substr(ssn, 8, 7) pw from tblTeacher";
 			 
 			rs = stat.executeQuery(sql);
 		
@@ -82,8 +79,11 @@ public class Login {
 					
 					if ((id.substring(0, 1)).equals("A")) { //아이디 A로 시작 : 관리자
 						
-						System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", id);
-						AdminController admin = new AdminController();
+//						System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", id);
+						AdminDAO dao = new AdminDAO();
+						AdminDTO dto = dao.getAdmin(id);
+						
+						AdminController admin = new AdminController(dto);
 						admin.adminMain();
 						
 					} else if ((id.substring(0, 1)).equals("S")) { //아이디 S로 시작 : 교육생
@@ -126,6 +126,5 @@ public class Login {
 		}
 		
 	}//unifiedLoginPage()
-	
-	
+
 }

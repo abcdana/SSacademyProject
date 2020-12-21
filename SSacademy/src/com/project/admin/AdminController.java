@@ -2,6 +2,8 @@ package com.project.admin;
 
 import java.util.Scanner;
 
+import com.project.dto.AdminDTO;
+
 /**
  * 관리자 컨트롤러입니다.
  * --세부사항 적기
@@ -12,15 +14,16 @@ public class AdminController {
 	
 	private Scanner scan;
 	private AdminView view;
+	private AdminDTO adto;
 
 	/**
 	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
 	 */
-	public AdminController() {
+	public AdminController(AdminDTO dto) {
 		
 		scan = new Scanner(System.in);
 		view = new AdminView();
-		
+		this.adto = dto;
 	}
 	
 	
@@ -28,6 +31,8 @@ public class AdminController {
 	 * 관리자 메인입니다.
 	 */
 	public void adminMain() {
+		
+		System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", adto.getId());
 		
 		boolean check = true;
 		while (check) {
