@@ -8,7 +8,11 @@ import java.sql.Statement;
 
 import com.project.ssacademy.DBUtil;
 
-//관리자정보
+/**
+ * 관리자와 관련된 DAO
+ * @author 임채원
+ *
+ */
 public class AdminDAO {
 
 	private Connection conn;

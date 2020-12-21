@@ -60,10 +60,11 @@ public class Login {
 		
 		try {
 			//통합로그인으로 구현 -> union을 이용하여 관리자, 교육생, 교사의 id, pw만 조회	
-			String sql = "select id, pw from tblAdmin \n" + 
-					"    union select id, substr(ssn, 8, 7) pw from tblStudent\n" + 
-					"        union select id, substr(ssn, 8, 7) pw from tblTeacher";
-			
+			String sql = "select id, pw, id as name from tblAdmin \n" + 
+					"    union select id, substr(ssn, 8, 7), name from tblStudent\n" + 
+					"        union select id, substr(ssn, 8, 7), name from tblTeacher\n" + 
+					"            order by id;";
+			 
 			rs = stat.executeQuery(sql);
 		
 			while (check) {
@@ -79,7 +80,6 @@ public class Login {
 				
 				if (check == false) {
 					
-
 					if ((id.substring(0, 1)).equals("A")) { //아이디 A로 시작 : 관리자
 						
 						System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", id);

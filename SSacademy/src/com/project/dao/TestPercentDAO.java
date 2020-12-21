@@ -7,12 +7,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.project.ssacademy.DBUtil;
+
 /**
- * 강의가능과목관련 모든 프로시저를 관리하는 DAO
- * @author 박지현
+ * 시험배점정보와 관련된 기능을 관리하는 DAO
+ * @author 김주혁
  *
  */
-public class AvailableSubjectDAO {
+public class TestPercentDAO {
 
 	private Connection conn;
 	private Statement stat;
@@ -21,19 +22,20 @@ public class AvailableSubjectDAO {
 	private ResultSet rs;
 	
 	/**
-	 * 기본 생성자 Connection과 Statement를 생성한다.
+	 * TestPercentDAO의 생성자
 	 */
-	public AvailableSubjectDAO() {
+	public TestPercentDAO() {
 		
 		try {
-		
-			this.conn = DBUtil.open();
-			this.stat = conn.createStatement();
+			
+			conn = DBUtil.open();
+			stat = conn.createStatement();
 			
 		} catch (Exception e) {
-			System.out.println("AvailableSubject.AvailableSubject()");
+			System.out.println("TestPercentDAO.TestPercentDAO()");
 			e.printStackTrace();
 		}
-
+		
 	}
+	
 }

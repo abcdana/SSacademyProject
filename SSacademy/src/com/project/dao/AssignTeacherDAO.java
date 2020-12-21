@@ -7,12 +7,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import com.project.ssacademy.DBUtil;
+
 /**
- * 강의가능과목관련 모든 프로시저를 관리하는 DAO
- * @author 박지현
+ * 교사배정정보와 관련된 기능을 관리하는 DAO
+ * @author 김주혁
  *
  */
-public class AvailableSubjectDAO {
+public class AssignTeacherDAO {
 
 	private Connection conn;
 	private Statement stat;
@@ -20,20 +21,18 @@ public class AvailableSubjectDAO {
 	private CallableStatement cstat;
 	private ResultSet rs;
 	
-	/**
-	 * 기본 생성자 Connection과 Statement를 생성한다.
-	 */
-	public AvailableSubjectDAO() {
+	public AssignTeacherDAO() {
 		
 		try {
-		
-			this.conn = DBUtil.open();
-			this.stat = conn.createStatement();
+			
+			conn = DBUtil.open();
+			stat = conn.createStatement();
 			
 		} catch (Exception e) {
-			System.out.println("AvailableSubject.AvailableSubject()");
+			System.out.println("AssignTeacherDAO.AssignTeacherDAO()");
 			e.printStackTrace();
 		}
-
+		
 	}
+	
 }
