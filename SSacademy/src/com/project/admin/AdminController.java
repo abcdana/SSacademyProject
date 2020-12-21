@@ -17,7 +17,7 @@ public class AdminController {
 	private AdminDTO adto;
 
 	/**
-	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
+	 * 기본 생성자에서 컨트롤에 이용될 DTO들을 생성해준다. 
 	 */
 	public AdminController(AdminDTO dto) {
 		
@@ -44,6 +44,8 @@ public class AdminController {
 			
 			if (sel.equals("1")) {
 				System.out.println("1.	기초 정보 관리 - 김다은");
+				BasicInfoManage manage = new BasicInfoManage();
+				manage.basicInfoMain();
 				break;
 			} else if (sel.equals("2")) {
 				System.out.println("2.	교사 계정 관리 - 김주혁");
