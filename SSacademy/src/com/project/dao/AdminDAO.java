@@ -39,7 +39,7 @@ public class AdminDAO {
 	/**
 	 * 
 	 * @param id 
-	 * @return AdminDTO 
+	 * @return AdminDTO (해당 id의 관리자 정보)
 	 */
 	public AdminDTO getAdmin(String id) {
 		try {

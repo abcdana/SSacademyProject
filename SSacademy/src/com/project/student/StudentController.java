@@ -2,6 +2,8 @@ package com.project.student;
 
 import java.util.Scanner;
 
+import com.project.dto.StudentDTO;
+
 
 /**
  * 교육생 컨트롤러입니다.
@@ -13,14 +15,16 @@ public class StudentController {
 
 	private Scanner scan;
 	private StudentView view;
+	private StudentDTO sdto;
 
 	/**
 	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
 	 */
-	public StudentController() {
+	public StudentController(StudentDTO dto) {
 		
 		scan = new Scanner(System.in);
 		view = new StudentView();
+		this.sdto = dto;
 		
 	}
 	
@@ -28,6 +32,9 @@ public class StudentController {
 	 * 교육생 메인입니다.
 	 */
 	public void studentMain() {
+		
+		System.out.printf("\n\t\t교육생 %s님 SSacademy 접속을 환영합니다.", sdto.getName());
+		System.out.print("\n\t\t――――――――――――――――――――――――――――――――――――――――――――");
 		
 		boolean check = true;
 		while (check) {

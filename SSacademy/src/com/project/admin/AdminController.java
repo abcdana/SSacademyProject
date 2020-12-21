@@ -33,6 +33,7 @@ public class AdminController {
 	public void adminMain() {
 		
 		System.out.printf("\n\t\t관리자 %s님 SSacademy 접속을 환영합니다.", adto.getId());
+		System.out.print("\n\t\t――――――――――――――――――――――――――――――――――――――――――――――");
 		
 		boolean check = true;
 		while (check) {

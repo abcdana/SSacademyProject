@@ -2,26 +2,34 @@ package com.project.teacher;
 
 import java.util.Scanner;
 
+import com.project.dto.TeacherDTO;
+
 
 public class TeacherController {
 
 	private Scanner scan;
 	private TeacherView view;
+	private TeacherDTO tdto;
 	
 	/**
 	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
 	 */
-	public TeacherController() {
+	public TeacherController(TeacherDTO dto) {
 		
 		scan = new Scanner(System.in);
 		view = new TeacherView();
+		this.tdto = dto;
 		
 	}
-	
+
+
 	/**
 	 * 교사 메인입니다.
 	 */
 	public void teacherMain() {
+		
+		System.out.printf("\n\t\t교사 %s님 SSacademy 접속을 환영합니다.", tdto.getName());
+		System.out.print("\n\t\t――――――――――――――――――――――――――――――――――――――――――");
 		
 		boolean check = true;
 		while (check) {
