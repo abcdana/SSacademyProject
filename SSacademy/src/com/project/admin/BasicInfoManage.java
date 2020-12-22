@@ -320,12 +320,13 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
-				
+				view.roomListHeader();
+				roomList();
 				pause();
 			} else if (num.equals("2")) {
 				addRoomInfoMenu();
 			} else if (num.equals("3")) {
-			
+				updateRoomInfo();
 				pause();
 			} else if (num.equals("4")) {
 				deleteRoomInfoMenu();
@@ -340,6 +341,26 @@ public class BasicInfoManage {
 	}//roomInfoMenu()
 	
 	
+	
+	/**
+	 * 강의실 기초정보를 조회하는 메서드이다.
+	 */
+	private void roomList() {
+
+		view.roomListHeader2();
+		
+		ArrayList<RoomDTO> list = rdao.roomList();
+		
+		for (RoomDTO dto : list) {
+			System.out.printf("\t%6s\t%22s\t%22s명\n"
+							, dto.getSeqRoom()
+							, dto.getName()
+							, dto.getPeople());
+			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
+			
+		}
+	}//roomList()
+
 	/**
 	 * 기초 강의실 등록 메서드이다.
 	 */
@@ -384,6 +405,56 @@ public class BasicInfoManage {
 		
 	}//addRoom(RoomDTO rdto)
 
+    
+
+	private void updateRoomInfo() {
+		
+		//헤더
+		
+		//view
+		
+		roomList(); //전체 강의실
+		
+		System.out.print("\n\t█ 강의실 번호 : ");
+		String seqRoom = scan.nextLine();
+		
+		RoomDTO dto = rdao.get(seqRoom);
+		
+		System.out.println();
+		System.out.println("\t* 강의실번호 : " + dto.getSeqRoom());
+		System.out.println("\t* 강의실명 : " + dto.getName());
+		System.out.println("\t* 수용인원 : " + dto.getPeople());
+		System.out.println("\n");
+		
+		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		System.out.print("\t█ 수정할 강의실명 : ");
+		String name = scan.nextLine();
+		if (name.equals("")) {
+			name = dto.getName();
+		}
+		
+		System.out.print("\t█ 수정할 수용인원 : ");
+		String people = scan.nextLine();
+		if (people.equals("")) {
+			people = dto.getPeople();
+		}
+		
+		RoomDTO dto2 = new RoomDTO();
+		
+		dto2.setSeqRoom(seqRoom);
+		dto2.setName(name);
+		dto2.setPeople(people);
+		
+		int result = rdao.updateRoom(dto2);
+		
+		view.updateResult(result);
+		
+		
+	}//updateRoomInfo()
+
+    
+    
     
     /**
      * 강의실 삭제 메뉴 메서드이다.
