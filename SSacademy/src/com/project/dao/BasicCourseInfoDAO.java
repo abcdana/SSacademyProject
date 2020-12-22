@@ -105,8 +105,73 @@ public class BasicCourseInfoDAO {
 	}
 	
 	
+	/**
+	 * 
+	 * @param seqBasicCourseInfo
+	 * @return dto 객체 반환
+	 */
+	public BasicCourseInfoDTO get(String seqBasicCourseInfo) {
+		
+		try {
+			
+			String sql = "select * from tblBasicCourseInfo where seqBasicCourseInfo = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqBasicCourseInfo);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				
+				BasicCourseInfoDTO dto = new BasicCourseInfoDTO();
+				
+				dto.setSeqBasicCourseInfo(rs.getString("seqBasicCourseInfo"));
+				dto.setName(rs.getString("name"));
+				dto.setPeriod(rs.getString("period"));
+				dto.setInfo(rs.getString("info"));
+				
+				return dto;
+			}
+
+		} catch (Exception e) {
+			System.out.println("primaryBasicCourseInfoDAO.enget()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
-	//public int updateCourse(String )
+	
+	/**
+	 * 기존 과정정보를 수정하는 메소드이다.
+	 * 과정명, 과정기간, 과정설명중 원하는 항목만 수정할 수 있다.
+	 * 등록 성공 여부를 return한다. 등록 성공 시 1, 실패 시 0을 반환한다.
+	 * @param bcidto2 과정 데이터 정보
+	 * @return 성공 여부
+	 */
+	public int updateCourse(BasicCourseInfoDTO dto2) {
+		
+		try {
+			
+			String sql = "update tblBasicCourseInfo set name=?, period=?, info=? "
+							+ "where seqBasicCourseInfo=?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, dto2.getName());
+			pstat.setString(2, dto2.getPeriod());
+			pstat.setString(3, dto2.getInfo());
+			pstat.setString(4, dto2.getSeqBasicCourseInfo());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryBasicCourseInfoDAO.enupdateCourse()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 	
 
 

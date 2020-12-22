@@ -68,11 +68,12 @@ public class BasicInfoManage {
 		String num = scan.nextLine();
 		
 		if (num.equals("1")) {
+			view.courseListHeader();
 			courseList();
 		} else if (num.equals("2")) {
 			addCourseInfoMenu();
 		} else if (num.equals("3")) {
-			
+			updateCourseMenu();
 		} else if (num.equals("4")) {
 			
 		} else {
@@ -80,6 +81,26 @@ public class BasicInfoManage {
 		}
 	}
 
+	
+	/**
+	 * 과정기초정보를 조회하는 메서드이다. -> 과정소개는 제외
+	 */
+	//과정정보 목록 조회 헤더는 따로 분리시켜 놓았다. 수정, 삭제에서 재사용함
+	private void courseList() {
+		
+		view.courseListHeader2();
+		
+		ArrayList<BasicCourseInfoDTO> list = bcidao.courseList();
+		
+		for(BasicCourseInfoDTO dto : list) {
+			System.out.printf("\t%4s\t%-35s\t%7s일\n"
+								, dto.getSeqBasicCourseInfo()
+								, dto.getName()
+								, dto.getPeriod());
+			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
+		}
+	
+	}
 	
 	/**
 	 * 과정기초정보를 추가하는 메서드이다.
@@ -106,7 +127,7 @@ public class BasicInfoManage {
 		
 		while (loop) {
 			
-			view.chooseUpdateOrNot();
+			view.chooseAddOrNot();
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
@@ -125,30 +146,66 @@ public class BasicInfoManage {
 	private void addCourseInfo(BasicCourseInfoDTO bcidto) {
 
 		int result = bcidao.addCourse(bcidto);
-		
 		view.addResult(result);
 		
 	}
 
-
-	/**
-	 * 과정기초정보를 조회하는 메서드이다.
-	 */
-	private void courseList() {
-		
-		System.out.println("과정 조회하기");
-		
-		ArrayList<BasicCourseInfoDTO> list = bcidao.courseList();
-		
-		for(BasicCourseInfoDTO dto : list) {
-			System.out.printf("%s, %s, %s, %s"
-								, dto.getSeqBasicCourseInfo()
-								, dto.getName()
-								, dto.getPeriod()
-								, dto.getInfo());
-		}
 	
+	private void updateCourseMenu() {
+		
+		view.updateCourseHeader();
+		
+		courseList(); //전체과정
+		
+		System.out.print("\n\t█ 과정번호 : ");
+		String seqBasicCourseInfo = scan.nextLine();
+		
+		BasicCourseInfoDTO dto = bcidao.get(seqBasicCourseInfo);
+		
+		System.out.println();
+		System.out.println("\t* 과정번호 : " + dto.getSeqBasicCourseInfo());
+		System.out.println("\t* 과정이름 : " + dto.getName());
+		System.out.println("\t* 과정기간 : " + dto.getPeriod());
+		System.out.println("\t* 과정소개 : " + dto.getInfo());
+		System.out.println("\n");
+		
+		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		System.out.print("\t█ 수정할 과정이름 : ");
+		String name = scan.nextLine();
+		
+		if (name.equals("")) {
+			name = dto.getName();
+		}
+		
+		System.out.print("\t█ 수정할 과정기간 : ");
+		String period = scan.nextLine();
+		
+		if (period.equals("")) {
+			period = dto.getPeriod();
+		}
+		
+		System.out.print("\t█ 수정할 과정소개 : ");
+		String info = scan.nextLine();
+		
+		if (info.equals("")) {
+			info = dto.getInfo();
+		}
+		
+		
+		BasicCourseInfoDTO dto2 = new BasicCourseInfoDTO();
+		
+		dto2.setSeqBasicCourseInfo(seqBasicCourseInfo);
+		dto2.setName(name);
+		dto2.setPeriod(period);
+		dto2.setInfo(info);
+		
+		int result = bcidao.updateCourse(dto2);
+		
+		view.updateResult(result);
+		
 	}
+
 
 
 }
