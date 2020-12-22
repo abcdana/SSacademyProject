@@ -116,7 +116,7 @@ public class StudentDAO {
 			stat.close();
 			conn.close();
 			
-			
+			System.out.println("뒤로가려면 아무 키나 누르세요");
 
 		} catch (Exception e) {
 			System.out.println("Ex07_CallableStatement.m5()");
