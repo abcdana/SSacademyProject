@@ -38,7 +38,8 @@ public class AdminView {
 	}
 	
 	
-
+	//////////////////////////////////////////지현//////////////////////////////////////////
+	
 	public void start() {
 		
 		System.out.println("\t┌───────────────────────────────────────────────┐");
@@ -237,6 +238,9 @@ public class AdminView {
 	}
 		
 
+	//////////////////////////////////////////다은///////////////////////////////////////////
+	
+	
 	/**
 	 * 관리자기능 중 기초정보관리 메뉴를 출력하는 메소드이다.
 	 */
@@ -382,36 +386,6 @@ public class AdminView {
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
 	
-
-	public void menu_AdministerStudent() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
-		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-
-	public void menu_adminStd_search() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
-		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-	
-
 	
 	/**
 	 * 관리자 뷰의 수정 결과를 출력하는 메소드이다.
@@ -503,7 +477,6 @@ public class AdminView {
 	
 	
 	
-	
 	/**
 	 * 기초 강의실정보관리 메뉴를 출력하는 메소드이다.
 	 */
@@ -586,6 +559,38 @@ public class AdminView {
 		
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 		
+	}
+	
+	
+	/////////////////////////////////////////////////채원///////////////////////////////////////////
+	
+	
+	public void menu_AdministerStudent() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
+		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
+
+	public void menu_adminStd_search() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
+		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
 	}
 	
 	
