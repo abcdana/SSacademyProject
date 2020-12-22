@@ -60,7 +60,8 @@ public class AdminController {
 				System.out.println("4.	개설 과목 관리 -박지현");
 				//break;
 			} else if (sel.equals("5")) {
-				System.out.println("5.	교육생 관리 - 임채원");
+        System.out.println("5.	교육생 관리 - 임채원");
+				AdministerStudent.AdministerStudent(adto);
 				//break;
 			} else if (sel.equals("6")) {
 				System.out.println("6.	시험 관리 - 조성진");
