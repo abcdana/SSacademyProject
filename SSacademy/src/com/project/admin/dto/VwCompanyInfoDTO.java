@@ -1,4 +1,4 @@
-package com.project.admindto;
+package com.project.admin.dto;
 
 public class VwCompanyInfoDTO {
 
