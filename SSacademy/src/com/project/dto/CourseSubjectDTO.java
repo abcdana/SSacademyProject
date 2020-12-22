@@ -6,6 +6,7 @@ public class CourseSubjectDTO {
 	private String seqBasicCourseInfo;
 	private String seqBasicSubject;
 	
+
 	public String getSeqCourseSubject() {
 		return seqCourseSubject;
 	}
@@ -25,5 +26,5 @@ public class CourseSubjectDTO {
 		this.seqBasicSubject = seqBasicSubject;
 	}
 	
-	
 }
+
