@@ -216,7 +216,7 @@ public class AdminView {
 		
 		System.out.println();
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 삭제 하기\t0. 뒤로 가기\t\t\t  │");
+		System.out.println("\t│\t\t1. 항목 삭제 하기\t0. 뒤로 가기\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		

@@ -62,7 +62,7 @@ public class BasicInfoManage {
 				loop = false;
 			}
 		}
-	}
+	}//basicInfoMain()
 	
 	/**
 	 * 기초과정정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
@@ -83,10 +83,10 @@ public class BasicInfoManage {
 			} else if (num.equals("2")) {
 				addCourseInfoMenu();
 			} else if (num.equals("3")) {
-				updateCourse();
+				updateCourseInfo();
 				pause();
 			} else if (num.equals("4")) {
-				deleteCourse();
+				deleteCourseInfoMenu();
 				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
@@ -95,7 +95,7 @@ public class BasicInfoManage {
 			
 		}//while
 		
-	}
+	}//basicCourseinfo()
 
 	
 	/**
@@ -116,7 +116,7 @@ public class BasicInfoManage {
 			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
 		}
 	
-	}
+	}//courseList()
 	
 	
 	/**
@@ -148,7 +148,7 @@ public class BasicInfoManage {
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
-				addCourseInfo(bcidto);
+				addCourseInfo(bcidto);	//과정 추가
 				return ;
 			} else {
 				loop = false;
@@ -156,7 +156,7 @@ public class BasicInfoManage {
 		
 		}//while
 		
-	}
+	}//addCourseInfoMenu()
 
 	
 	/**
@@ -167,13 +167,13 @@ public class BasicInfoManage {
 		int result = bcidao.addCourse(bcidto);
 		view.addResult(result);
 		
-	}
+	}//addCourseInfo(BasicCourseInfoDTO bcidto)
 
 	
 	/**
 	 * 기존 과정정보를 수정하는 메서드이다.
 	 */
-	private void updateCourse() {
+	private void updateCourseInfo() {
 		
 		view.updateCourseHeader();
 		
@@ -222,32 +222,52 @@ public class BasicInfoManage {
 		
 		view.updateResult(result);
 		
-	}
+	}//updateCourseInfo()
 
 
 	
 	/**
 	 * 과정정보를 삭제하는 메서드이다.
 	 */
-	private void deleteCourse() {
+	private void deleteCourseInfoMenu() {
 		
 		view.deleteCourseHeader();
 		
 		courseList(); //전체과정
 		
+		System.out.println();
 		System.out.print("\t█ 삭제할 과정번호 : ");
 		String seqBasicCourseInfo = scan.nextLine();
 		
-		int result = bcidao.deleteCourse(seqBasicCourseInfo);
-		
-		view.deleteResult(result);
-		
-	}
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseDeleteOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				deleteCourseInfo(seqBasicCourseInfo); //과정 삭제
+				return ;
+			} else {
+				loop = false;
+			}
+		}
+	}//deleteCourseInfoMenu()
 
+	/**
+	 * 기존 과정정보를 삭제하는 메서드이다.
+	 */
+	private void deleteCourseInfo(String seqBasicCourseInfo) {
+
+		int result = bcidao.deleteCourse(seqBasicCourseInfo);
+		view.addResult(result);
+		
+	}//deleteCourseInfo(String seqBasicCourseInfo)
+	
 	
 	private static void pause() {
 		System.out.println("\n\t\t이전 페이지로 가시려면 엔터를 눌러주세요.");
 		scan.nextLine();
-	}
+	}//pause()
 
 }
