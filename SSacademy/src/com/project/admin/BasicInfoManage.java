@@ -323,12 +323,12 @@ public class BasicInfoManage {
 				
 				pause();
 			} else if (num.equals("2")) {
-				addRoomMenu();
+				addRoomInfoMenu();
 			} else if (num.equals("3")) {
 			
 				pause();
 			} else if (num.equals("4")) {
-			
+				deleteRoomInfoMenu();
 				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
@@ -343,7 +343,7 @@ public class BasicInfoManage {
 	/**
 	 * 기초 강의실 등록 메서드이다.
 	 */
-	private void addRoomMenu() {
+	private void addRoomInfoMenu() {
 		
 		view.addSubjectHeader();
 		
@@ -364,28 +364,64 @@ public class BasicInfoManage {
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
-				addRoom(rdto);
+				addRoomInfo(rdto);
 				return;
 			} else {
 				loop = false;
 			}
-			
 		}
-		
 	}//addRoomMenu()
-	
 	
 	
 	/**
 	 * 새로운 강의실을 등록하는 메서드이다.
 	 * @param rdto
 	 */
-    private void addRoom(RoomDTO rdto) {
+    private void addRoomInfo(RoomDTO rdto) {
 		
     	int result = rdao.addRoom(rdto);
     	view.addResult(result);
 		
 	}//addRoom(RoomDTO rdto)
+
+    
+    /**
+     * 강의실 삭제 메뉴 메서드이다.
+     */
+    private void deleteRoomInfoMenu() {
+    	
+    	view.deleteCourseHeader();
+    	
+    	//roomList(); //전체 강의실 목록
+    	
+		System.out.print("\t█ 강의실 번호 : ");
+		String seqRoom = scan.nextLine();
+    	
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseDeleteOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				deleteRoomInfo(seqRoom);
+				return;
+			} else {
+				loop = false;
+			}
+		}
+		
+    }//deleteRoomInfoMenu()
+    
+    
+    
+	private void deleteRoomInfo(String seqRoom) {
+		
+		int result = rdao.deleteRoom(seqRoom);
+		view.deleteResult(result);
+		
+	}//deleteRoomInfo(String seqRoom)
+	
 
 	/**
      * 기초 교재정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
@@ -416,5 +452,5 @@ public class BasicInfoManage {
 			
 		}//while
 		
-	}
+	}//bookInfoMenu()
 }

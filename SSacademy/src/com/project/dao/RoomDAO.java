@@ -59,4 +59,29 @@ public class RoomDAO {
 		return 0;
 	}
 
+	
+	/**
+	 * 기존 강의실정보를 삭제하는 메서드이다.
+	 * 강의실 번호를 받아와 강의실 데이터를 삭제한다.
+	 * 등록 성공시 1, 실패시 0을 반환한다.
+	 * @param seqRoom 강의실 번호
+	 * @return 성공 여부
+	 */
+	public int deleteRoom(String seqRoom) {
+
+		try {
+			
+			String sql = "{ call procDeleteRoom(?) }";
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqRoom);
+			return cstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryRoomDAO.endeleteRoom()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
 }
