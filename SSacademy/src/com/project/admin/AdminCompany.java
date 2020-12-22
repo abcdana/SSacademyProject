@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
 
-import com.project.admin.dto.VwCompanyInfoDTO;
+import com.project.admindto.VwCompanyInfoDTO;
 import com.project.dao.CompanyInfoDAO;
 import com.project.dto.CompanyInfoDTO;
 /**
@@ -23,9 +23,6 @@ public class AdminCompany {
 		
 	}
 	public static void main(String[] args) {
-		menu();
-	}
-	public static void menu() {
 		
 	
 
@@ -80,43 +77,14 @@ public class AdminCompany {
 	private static void list() { //전체목록조회
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwCompanyInfoDTO dto : list) {
 			
-			if(dto.getName().length() <= 5) {
-
-				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-				
-			} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-					System.out.printf("%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-							dto.getState(),dto.getSeqCompanyInfo(),
-							dto.getName(),dto.getStartDate(),
-							dto.getEndDate(),dto.getEmploymentType(),
-							dto.getSalary(),dto.getComField(),
-							dto.getComSize(),dto.getAddress());
-			}
-
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
 			
 		}
 		
@@ -171,43 +139,16 @@ public class AdminCompany {
 		System.out.printf("\t\t\t\t - %s 공고 조회 -\n",word);
 		System.out.println();
 		ArrayList<VwCompanyInfoDTO> list = dao.list(word);
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwCompanyInfoDTO dto : list) {
 			
-			if(dto.getName().length() <= 5) {
-
-				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-				
-			} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-					System.out.printf("%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-							dto.getState(),dto.getSeqCompanyInfo(),
-							dto.getName(),dto.getStartDate(),
-							dto.getEndDate(),dto.getEmploymentType(),
-							dto.getSalary(),dto.getComField(),
-							dto.getComSize(),dto.getAddress());
-			}
-		}
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
+					}//for
+		
 	}
 
 	private static void salary() {
@@ -255,43 +196,15 @@ public class AdminCompany {
 		System.out.printf("\t\t\t\t - %s 소재 채용공고 조회 -\n",word);
 		System.out.println();
 		ArrayList<VwCompanyInfoDTO> list = dao.city(word);
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwCompanyInfoDTO dto : list) {
 			
-			if(dto.getName().length() <= 5) {
-
-				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-				
-			} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-					System.out.printf("%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-							dto.getState(),dto.getSeqCompanyInfo(),
-							dto.getName(),dto.getStartDate(),
-							dto.getEndDate(),dto.getEmploymentType(),
-							dto.getSalary(),dto.getComField(),
-							dto.getComSize(),dto.getAddress());
-			}
-		} //for
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
+					}//for
 		
 	}
 
@@ -303,8 +216,8 @@ public class AdminCompany {
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t\t\t\t-검색 가능한 업무 목록-");
 		System.out.println();
-		ArrayList<VwCompanyInfoDTO> list2 = dao.comfield();
-		for(VwCompanyInfoDTO dto : list2) {
+		ArrayList<VwCompanyInfoDTO> list = dao.comfield();
+		for(VwCompanyInfoDTO dto : list) {
 			System.out.printf("\t\t\t\t%s  \n",dto.getComField());
 		}
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
@@ -312,47 +225,19 @@ public class AdminCompany {
 		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
 		String word = scan.nextLine();
 		System.out.println();
-		System.out.printf("\t\t\t\t - %s 업무 채용공고 조회 -\n",word.toUpperCase());
+		System.out.printf("\t\t\t\t - %s 업무 채용공고 조회 -\n",word);
 		System.out.println();
 		
-		ArrayList<VwCompanyInfoDTO> list = dao.comField(word.toUpperCase());
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		for(VwCompanyInfoDTO dto : list) {
+		ArrayList<VwCompanyInfoDTO> list2 = dao.comField(word);
+		for(VwCompanyInfoDTO dto : list2) {
 			
-			if(dto.getName().length() <= 5) {
-
-				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-				
-			} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-						dto.getState(),dto.getSeqCompanyInfo(),
-						dto.getName(),dto.getStartDate(),
-						dto.getEndDate(),dto.getEmploymentType(),
-						dto.getSalary(),dto.getComField(),
-						dto.getComSize(),dto.getAddress());
-			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
-					System.out.printf("%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
-							dto.getState(),dto.getSeqCompanyInfo(),
-							dto.getName(),dto.getStartDate(),
-							dto.getEndDate(),dto.getEmploymentType(),
-							dto.getSalary(),dto.getComField(),
-							dto.getComSize(),dto.getAddress());
-			}
-		} //for
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
+					} //for
 		
 	}
 
@@ -405,7 +290,7 @@ public class AdminCompany {
 		
 	}
 
-	private static boolean seDate(String startDate, String endDate) { //TODO 유효성 검사해야함
+	private static boolean seDate(String startDate, String endDate) { //유효성 검사
 		Calendar scal = Calendar.getInstance();
 		int sYear = Integer.parseInt(startDate.substring(0,3));
 		int sMonth = Integer.parseInt(startDate.substring(5,6));
@@ -427,15 +312,24 @@ public class AdminCompany {
 	}
 
 	private static void edit() {
-		
+		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		
 			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 			System.out.println("\t┃\t\t\t연계기업 채용공고 수정\t\t\t\t  ┃");
 			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
+			System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 			System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 			System.out.println();
-			list(); // 전체 채용공고출력
+			for(VwCompanyInfoDTO dto : list) {
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
+					} //for
+			System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 			
 		System.out.print("\t█ 수정 원하시는 번호를 입력하세요. : ");
 		String seq = scan.nextLine();
@@ -513,7 +407,6 @@ public class AdminCompany {
 		
 	}
 
-	
 	private static void delete() {
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -523,7 +416,14 @@ public class AdminCompany {
 	
 		System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 		System.out.println();
-			list(); // 전체채용목록 출력
+		for(VwCompanyInfoDTO dto : list) {
+		System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+				dto.getState(),dto.getSeqCompanyInfo(),
+				dto.getName(),dto.getStartDate(),
+				dto.getEndDate(),dto.getComField(),
+				dto.getSalary(),dto.getEmploymentType(),
+				dto.getComSize(),dto.getAddress());
+				} //for
 
 		
 	System.out.print("\t█ 삭제 원하시는 번호를 입력하세요. : ");
