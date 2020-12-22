@@ -28,5 +28,33 @@ public class AdminView {
 		
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
+	
+	public void menu_AdministerStudent() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
+		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
 
+	public void menu_adminStd_search() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
+		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
+	
 }
