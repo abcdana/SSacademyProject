@@ -1,5 +1,9 @@
 package com.project.admin;
 
+import com.project.admin.dto.VwCompanyInfoDTO;
+import com.project.dao.CompanyInfoDAO;
+import com.project.dto.CompanyInfoDTO;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -7,6 +11,7 @@ import java.util.Scanner;
 import com.project.admin.dto.VwCompanyInfoDTO;
 import com.project.dao.CompanyInfoDAO;
 import com.project.dto.CompanyInfoDTO;
+
 /**
  * 연계기업채용공고 관리페이지입니다.
  * @author 조혜승
@@ -27,8 +32,6 @@ public class AdminCompany {
 	}
 	public static void menu() {
 		
-	
-
 		
 		boolean loop = true;
 	while(loop) {
@@ -80,9 +83,11 @@ public class AdminCompany {
 	private static void list() { //전체목록조회
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
+
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+
 		for(VwCompanyInfoDTO dto : list) {
 			
 			if(dto.getName().length() <= 5) {
@@ -226,10 +231,13 @@ public class AdminCompany {
 		System.out.println();
 		System.out.printf("\t\t\t - 연봉 %s 이상 %s 미만 채용공고 조회 -\n",word,word2);
 		System.out.println();
+
 		ArrayList<VwCompanyInfoDTO> list = dao.salary(word,word2);
+
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+
 		for(VwCompanyInfoDTO dto : list) {
 			
 			if(dto.getName().length() <= 5) {

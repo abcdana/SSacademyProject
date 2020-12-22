@@ -60,7 +60,8 @@ public class AdminController {
 				System.out.println("4.	개설 과목 관리 -박지현");
 				//break;
 			} else if (sel.equals("5")) {
-				System.out.println("5.	교육생 관리 - 임채원");
+        System.out.println("5.	교육생 관리 - 임채원");
+				AdministerStudent.AdministerStudent(adto);
 				//break;
 			} else if (sel.equals("6")) {
 				System.out.println("6.	시험 관리 - 조성진");
@@ -79,6 +80,8 @@ public class AdminController {
 				//break;
 			} else if (sel.equals("11")) {
 				System.out.println("11.  강의 및 시설 평가 조회 - 김주혁");
+				EvaluationManagement evaluation = new EvaluationManagement();
+				evaluation.main();
 				//break;
 			} else if (sel.equals("12")) {
 				System.out.println("12.  우수 훈련생 관리 - 임채원");

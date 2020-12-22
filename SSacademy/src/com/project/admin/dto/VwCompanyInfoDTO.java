@@ -72,6 +72,5 @@ public class VwCompanyInfoDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+
 }

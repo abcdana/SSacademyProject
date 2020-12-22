@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.project.admin.dto.TeacherSearchDTO;
+import com.project.admin.dto.ViewTeacherCourseDTO;
 import com.project.dto.TeacherDTO;
 import com.project.ssacademy.DBUtil;
 
@@ -283,7 +283,7 @@ public class TeacherDAO {
 	 * @param seqTeacher 검색할 교사의 교사번호
 	 * @return 특정 교사의 강의 정보를 저장한 ArrayList
 	 */
-	public ArrayList<TeacherSearchDTO> search(String seqTeacher) {
+	public ArrayList<ViewTeacherCourseDTO> search(String seqTeacher) {
 		
 		try {
 			
@@ -294,10 +294,10 @@ public class TeacherDAO {
 			
 			rs = pstat.executeQuery();
 			
-			ArrayList<TeacherSearchDTO> list = new ArrayList<TeacherSearchDTO>();
+			ArrayList<ViewTeacherCourseDTO> list = new ArrayList<ViewTeacherCourseDTO>();
 			
 			while (rs.next()) {
-				TeacherSearchDTO dto = new TeacherSearchDTO();
+				ViewTeacherCourseDTO dto = new ViewTeacherCourseDTO();
 				
 				dto.setSeqTeacher(rs.getString("seqTeacher"));
 				dto.setTeacherName(rs.getString("tname"));
