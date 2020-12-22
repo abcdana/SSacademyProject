@@ -1,12 +1,12 @@
 package com.project.admin;
+
 import com.project.admin.dto.VwCompanyInfoDTO;
 import com.project.dao.CompanyInfoDAO;
 import com.project.dto.CompanyInfoDTO;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
-
-
 
 /**
  * 연계기업채용공고 관리페이지입니다.
@@ -76,7 +76,7 @@ public class AdminCompany {
 	private static void list() { //전체목록조회
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
-		
+
 		for(VwCompanyInfoDTO dto : list) {
 			
 			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
@@ -167,7 +167,9 @@ public class AdminCompany {
 		System.out.println();
 		System.out.printf("\t\t\t - 연봉 %s 이상 %s 미만 채용공고 조회 -\n",word,word2);
 		System.out.println();
-		ArrayList<VwCompanyInfoDTO> list = dao.salary(word, word2);
+
+		ArrayList<VwCompanyInfoDTO> list = dao.salary(word,word2);
+
 		for(VwCompanyInfoDTO dto : list) {
 			
 			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
