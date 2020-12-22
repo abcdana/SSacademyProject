@@ -3,7 +3,7 @@ package com.project.admin;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.project.admin.dto.TeacherSearchDTO;
+import com.project.admin.dto.ViewTeacherCourseDTO;
 import com.project.dao.AvailableSubjectDAO;
 import com.project.dao.BasicSubjectDAO;
 import com.project.dao.TeacherDAO;
@@ -87,17 +87,16 @@ public class TeacherAccountManagement {
 		//특정 교사 정보 가져오기
 		//과정명, 과정시작일, 과정종료일, 과목명, 과목시작일, 과목종료일, 교재명, 강의실, 강의진행여부
 		//교사번호 선택
-		ArrayList<TeacherSearchDTO> list = tdao.search(seqTeacher);
+		ArrayList<ViewTeacherCourseDTO> list = tdao.search(seqTeacher);
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t교사 상세 정보\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-
 		
-		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목이름]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
+		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목이름]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
 		
-		for (TeacherSearchDTO dto : list) {
+		for (ViewTeacherCourseDTO dto : list) {
 			System.out.printf("\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
 								, dto.getTeacherName()
 								, dto.getCourseName()
@@ -123,6 +122,12 @@ public class TeacherAccountManagement {
 		//삭제할 교사의 정보 가져오기
 		TeacherDTO tdto = tdao.get(seqTeacher);
 		
+		if (tdto == null) {
+			System.out.println("\t해당 교사 번호는 없습니다.");
+			pause();
+			return;
+		}
+		
 		//강의중인지 확인하기
 		//0이면 강의X, 1이면 강의중
 		int result = tdao.checkLecture(seqTeacher);
@@ -133,8 +138,10 @@ public class TeacherAccountManagement {
 			System.out.println("\t┃\t\t\t\t교사 계정 삭제\t\t\t\t  ┃");
 			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			
-			System.out.println("\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
-			System.out.printf("\t  %s\t%s\t%s\t%s\n"
+			System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+			System.out.println("\t\t\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
+			System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+			System.out.printf("\t\t\t  %s\t%s\t%s\t%s\n"
 									, tdto.getSeqTeacher()
 									, tdto.getName()
 									, tdto.getSsn()
@@ -154,15 +161,21 @@ public class TeacherAccountManagement {
 				int result2 = tdao.delete(seqTeacher);
 				
 				if (result2 > 0) {
-					System.out.println("\t교사 삭제를 성공하였습니다.");
+					System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+					System.out.println("\t┃\t\t\t    교사 계정 삭제 성공\t\t\t\t  ┃");
+					System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 					pause();
 				} else {
-					System.out.println("\t교사 삭제를 실패하였습니다.");
+					System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+					System.out.println("\t┃\t\t\t    교사 계정 삭제 실패\t\t\t\t  ┃");
+					System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 					pause();
 					return;
 				}
 			} else if (sel.equals("2")) {
-				System.out.println("\t삭제를 취소합니다.");
+				System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+				System.out.println("\t┃\t\t\t    교사 계정 삭제 취소\t\t\t\t  ┃");
+				System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 				pause();
 			} else {
 				wrongInput();
@@ -187,13 +200,23 @@ public class TeacherAccountManagement {
 		//수정할 교사의 정보 가져오기
 		TeacherDTO tdto = tdao.get(seqTeacher);
 		
+		//수정할 교사 번호가 없는 경우
+		if (tdto == null) {
+			System.out.println("\t해당 교사 번호는 없습니다.");
+			pause();
+			return;
+		}
+		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t교사 계정 수정\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
-		System.out.println("\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
-		System.out.printf("\t  %s\t%s\t%s\t%s\n"
+		//수정 전 교사 계정 정보 출력
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t\t\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.printf("\t\t\t  %s\t%s\t%s\t%s\n"
 								, tdto.getSeqTeacher()
 								, tdto.getName()
 								, tdto.getSsn()
@@ -223,6 +246,7 @@ public class TeacherAccountManagement {
 			tel = tdto.getTel();
 		}
 		
+		//수정할 교사 정보 DTO 생성
 		TeacherDTO newtdto = new TeacherDTO();
 		
 		newtdto.setSeqTeacher(seqTeacher);
@@ -234,26 +258,32 @@ public class TeacherAccountManagement {
 		int result = tdao.edit(newtdto);
 		
 		if (result > 0) {
-			System.out.println("\t교사 정보 수정을 성공하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    교사 정보 수정 성공\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		} else {
-			System.out.println("\t교사 정보 수정을 실패하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    교사 정보 수정 실패\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 			return;
 		}
 
-		System.out.println("\t가능 과목을 수정합니다.");
+		System.out.println("\t강의 가능 과목을 수정합니다.");
 		pause();
 		
-		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t가능 과목 목록\t\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t    강의 가능 과목 목록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
+		//수정전 교사 가능 과목 출력 
 		ArrayList<BasicSubjectDTO> list = bsdao.get(seqTeacher);
-		System.out.println("\t[과목 번호]\t[과목 이름]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t\t\t[번호]\t\t[과목명]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		
 		for (BasicSubjectDTO dto : list) {
-			System.out.printf("\t   %s\t\t%s\n"
+			System.out.printf("\t\t\t  %s\t\t%s\n"
 								, dto.getSeqBasicSubject()
 								, dto.getName());
 			
@@ -278,10 +308,14 @@ public class TeacherAccountManagement {
 		}
 		
 		if (result2 > 0) {
-			System.out.println("\t강의 가능 과목 수정을 성공하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t강의 가능 과목 수정 성공\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 		} else {
-			System.out.println("\t강의 가능 과목 수정을 실패하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t강의 가능 과목 수정 실패\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 		}
 		
@@ -296,14 +330,18 @@ public class TeacherAccountManagement {
 		ArrayList<TeacherDTO> list = tdao.list();
 		
 		System.out.println();
-		System.out.println("\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t\t\t[번호]\t[이름]\t[주민등록번호]\t[전화번호]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
 		
 		for (TeacherDTO tdto : list) {
-			System.out.printf("\t  %s\t%s\t%s\t%s\n"
+			System.out.printf("\t\t\t  %s\t%s\t%s\t%s\n"
 					, tdto.getSeqTeacher()
 					, tdto.getName()
 					, tdto.getSsn()
 					, tdto.getTel());
+			System.out.println("\t――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
 		}
 	} //viewTeacherAccountList
 
@@ -324,6 +362,7 @@ public class TeacherAccountManagement {
 		System.out.print("\t전화번호 : ");
 		String tel = scan.nextLine();
 		
+		
 		System.out.println();
 		
 		//교사DTO 생성
@@ -336,9 +375,13 @@ public class TeacherAccountManagement {
 		int result = tdao.add(tdto);
 		
 		if (result > 0) {
-			System.out.println("\t교사 등록에 성공하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    교사 계정 등록 성공\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		} else {
-			System.out.println("\t교사 등록에 실패하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    교사 계정 등록 실패\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 			return;
 		}
@@ -366,10 +409,14 @@ public class TeacherAccountManagement {
 		int result2 = asdao.add(tdto.getSeqTeacher(), availableSubjectList);
 		
 		if (result2 > 0) {
-			System.out.println("\t과목 등록에 성공하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    가능 과목 등록 성공\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 		} else {
-			System.out.println("\t과목 등록에 실패하였습니다.");
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t    가능 과목 등록 실패\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 		}
 		

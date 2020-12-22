@@ -1,6 +1,11 @@
 package com.project.admin.dto;
 
-public class CourseSearchDTO {
+/**
+ * 종료된 과정 정보를 담는 DTO
+ * @author 김주혁
+ *
+ */
+public class ViewEndCourseDTO {
 
 	private String seqOpenCourse;
 	private String courseName;
