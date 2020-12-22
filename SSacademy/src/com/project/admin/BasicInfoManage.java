@@ -16,7 +16,7 @@ import com.project.dto.BasicCourseInfoDTO;
  */
 public class BasicInfoManage {
 	
-	private Scanner scan = new Scanner(System.in);;
+	private static Scanner scan = new Scanner(System.in);;
 	private AdminView view;
 	private BasicCourseInfoDAO bcidao;
 	private RoomDAO rdao;
@@ -42,20 +42,25 @@ public class BasicInfoManage {
 	 */
 	public void basicInfoMain() {
 		
-		view.basicInfoMenu(); //기초 정보 관리 메뉴
-		String num = scan.nextLine();
+		boolean loop = true;
 		
-		if (num.equals("1")) {
-			basicCourseinfo();
-		} else if (num.equals("2")) {
+		while (loop) {
 			
-		} else if (num.equals("3")) {
+			view.basicInfoMenu(); //기초 정보 관리 메뉴
+			String num = scan.nextLine();
 			
-		} else if (num.equals("4")) {
-			
-		} else {
-			System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
-			
+			if (num.equals("1")) {
+				basicCourseinfo();
+			} else if (num.equals("2")) {
+				
+			} else if (num.equals("3")) {
+				
+			} else if (num.equals("4")) {
+				
+			} else {
+				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
+				loop = false;
+			}
 		}
 	}
 	
@@ -64,21 +69,29 @@ public class BasicInfoManage {
 	 */
 	private void basicCourseinfo() {
 		
-		view.courseInfoMenu();	//과정 정보 관리 메뉴(CRUD)
-		String num = scan.nextLine();
+		boolean loop = true;
 		
-		if (num.equals("1")) {
-			view.courseListHeader();
-			courseList();
-		} else if (num.equals("2")) {
-			addCourseInfoMenu();
-		} else if (num.equals("3")) {
-			updateCourseMenu();
-		} else if (num.equals("4")) {
+		while (loop) {
 			
-		} else {
-			System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
-		}
+			view.courseInfoMenu();	//과정 정보 관리 메뉴(CRUD)
+			String num = scan.nextLine();
+			
+			if (num.equals("1")) {
+				view.courseListHeader();
+				courseList();
+			} else if (num.equals("2")) {
+				addCourseInfoMenu();
+			} else if (num.equals("3")) {
+				updateCourse();
+			} else if (num.equals("4")) {
+				deleteCourse();
+			} else {
+				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
+				loop = false;
+			}//if	
+			
+		}//while
+		
 	}
 
 	
@@ -100,7 +113,9 @@ public class BasicInfoManage {
 			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
 		}
 	
+		//pause();
 	}
+	
 	
 	/**
 	 * 과정기초정보를 추가하는 메서드이다.
@@ -124,7 +139,7 @@ public class BasicInfoManage {
 		bcidto.setInfo(info);
 		
 		boolean loop = true;
-		
+		 
 		while (loop) {
 			
 			view.chooseAddOrNot();
@@ -136,10 +151,13 @@ public class BasicInfoManage {
 			} else {
 				loop = false;
 			}
-			
-		}
+		
+		}//while
+		
+		//pause();
 	}
 
+	
 	/**
 	 * 새로운 과정기초정보를 추가하는 메서드이다.
 	 */
@@ -151,7 +169,10 @@ public class BasicInfoManage {
 	}
 
 	
-	private void updateCourseMenu() {
+	/**
+	 * 기존 과정정보를 수정하는 메서드이다.
+	 */
+	private void updateCourse() {
 		
 		view.updateCourseHeader();
 		
@@ -173,25 +194,21 @@ public class BasicInfoManage {
 		
 		System.out.print("\t█ 수정할 과정이름 : ");
 		String name = scan.nextLine();
-		
 		if (name.equals("")) {
 			name = dto.getName();
 		}
 		
 		System.out.print("\t█ 수정할 과정기간 : ");
 		String period = scan.nextLine();
-		
 		if (period.equals("")) {
 			period = dto.getPeriod();
 		}
 		
 		System.out.print("\t█ 수정할 과정소개 : ");
 		String info = scan.nextLine();
-		
 		if (info.equals("")) {
 			info = dto.getInfo();
 		}
-		
 		
 		BasicCourseInfoDTO dto2 = new BasicCourseInfoDTO();
 		
@@ -204,8 +221,34 @@ public class BasicInfoManage {
 		
 		view.updateResult(result);
 		
+		pause();
 	}
 
 
+	
+	/**
+	 * 과정정보를 삭제하는 메서드이다.
+	 */
+	private void deleteCourse() {
+		
+		view.deleteCourseHeader();
+		
+		courseList(); //전체과정
+		
+		System.out.print("\t█ 삭제할 과정번호 : ");
+		String seqBasicCourseInfo = scan.nextLine();
+		
+		int result = bcidao.deleteCourse(seqBasicCourseInfo);
+		
+		view.deleteResult(result);
+		
+		pause();
+	}
+
+	
+	private static void pause() {
+		System.out.println("\n\t\t이전 페이지로 가시려면 엔터를 눌러주세요.");
+		scan.nextLine();
+	}
 
 }

@@ -193,5 +193,54 @@ public class AdminView {
 	}
 	
 	
+	/**
+	 * 과정 삭제 헤더 출력 메소드이다.
+	 */
+	public void deleteCourseHeader() {
+	
+	System.out.println("\n");
+	System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	System.out.println("\t┃\t\t\t       기존 과정 삭제\t\t\t\t  ┃");
+	System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	System.out.println();
+	System.out.println("\t\t   기존 과정을 삭제하시려면 아래 항목을 작성해주세요.");
+	System.out.println();
+	
+	}
+
+	/**
+	 * 삭제 내용 등록 또는 취소를 고르는 메뉴 출력 메소드이다.
+	 */
+	public void chooseDeleteOrNot() {
+		
+		System.out.println();
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 삭제 하기\t0. 뒤로 가기\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+	}
+	
+	
+	
+	/**
+	 * 관리자 뷰의 삭제 결과를 출력하는 메소드이다.
+	 * 0일 시 수정 실패, 1일 시 수정 성공 문구를 출력한다.
+	 * @param result 0 또는 1이 저장되어 있는 변수
+	 */
+	public void deleteResult(int result) {
+		
+		System.out.println();
+		
+		if (result == 1) {
+			System.out.println("\t\t** 삭제에 성공했습니다. **");
+		} else {
+			System.out.println("\t\t** 삭제에 실패했습니다. **");
+		}
+		
+	}
+	
+	
 	
 }
