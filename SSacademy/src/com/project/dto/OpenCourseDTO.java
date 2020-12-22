@@ -1,7 +1,7 @@
 package com.project.dto;
 
 public class OpenCourseDTO {
-	
+
 	private String seqOpenCourse;
 	private String seqRoom;
 	private String seqBasicCourseInfo;
@@ -55,3 +55,4 @@ public class OpenCourseDTO {
 	}
 	
 }
+
