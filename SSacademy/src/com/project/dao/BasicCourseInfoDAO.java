@@ -172,6 +172,33 @@ public class BasicCourseInfoDAO {
 		
 		return 0;
 	}
+
+	
+	/**
+	 * 기존 과정정보를 삭제하는 메소드이다.
+	 * 삭제를 원하는 과정정보번호를 입력하면 해당 번호의 모든 데이터를 삭제한다.
+	 * 등록 성공 여부를 return한다. 등록 성공 시 1, 실패 시 0을 반환한다.
+	 * @param seqBasicCourseInfo 과정정보번호
+	 * @return 성공 여부
+	 */
+	public int deleteCourse(String seqBasicCourseInfo) {
+		
+		try {
+			
+			String sql = "delete from tblBasicCourseInfo where seqBasicCourseInfo = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqBasicCourseInfo);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryBasicCourseInfoDAO.endelete()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 	
 
 
