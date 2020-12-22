@@ -7,6 +7,7 @@ import com.project.dao.BasicCourseInfoDAO;
 import com.project.dao.BookDAO;
 import com.project.dao.RoomDAO;
 import com.project.dto.BasicCourseInfoDTO;
+import com.project.dto.RoomDTO;
 
 /**
  * 기초정보의 조회, 등록, 수정, 삭제 기능을 포함한다.
@@ -50,13 +51,13 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
-				basicCourseinfo();
+				courseinfoMenu();
 			} else if (num.equals("2")) {
-				
+				subjectInfoMenu();
 			} else if (num.equals("3")) {
-				
+				roomInfoMenu();
 			} else if (num.equals("4")) {
-				
+				bookInfoMenu();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
 				loop = false;
@@ -64,10 +65,11 @@ public class BasicInfoManage {
 		}
 	}//basicInfoMain()
 	
+
 	/**
 	 * 기초과정정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
 	 */
-	private void basicCourseinfo() {
+	private void courseinfoMenu() {
 		
 		boolean loop = true;
 		
@@ -270,4 +272,149 @@ public class BasicInfoManage {
 		scan.nextLine();
 	}//pause()
 
+	
+	/**
+	 * 기초 과목정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
+	 */
+	private void subjectInfoMenu() {
+		
+		boolean loop = true;
+		while (loop) {
+			
+			view.subjectInfoMenu();	//과목 정보 관리 메뉴(CRUD)
+			String num = scan.nextLine();
+			
+			if (num.equals("1")) {
+				
+				pause();
+			} else if (num.equals("2")) {
+				
+			} else if (num.equals("3")) {
+				
+				pause();
+			} else if (num.equals("4")) {
+				
+				pause();
+			} else {
+				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
+				loop = false;
+			}//if	
+			
+		}//while
+		
+	}//subjectInfoMenu()
+	
+	
+	
+
+
+	/**
+	 * 기초 강의실정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
+	 */
+	private void roomInfoMenu() {
+		
+		boolean loop = true;
+		while (loop) {
+			
+			view.roomInfoMenu();	//강의실 정보 관리 메뉴(CRUD)
+			String num = scan.nextLine();
+			
+			if (num.equals("1")) {
+				
+				pause();
+			} else if (num.equals("2")) {
+				addRoomMenu();
+			} else if (num.equals("3")) {
+			
+				pause();
+			} else if (num.equals("4")) {
+			
+				pause();
+			} else {
+				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
+				loop = false;
+			}//if	
+			
+		}//while
+		
+	}//roomInfoMenu()
+	
+	
+	/**
+	 * 기초 강의실 등록 메서드이다.
+	 */
+	private void addRoomMenu() {
+		
+		view.addSubjectHeader();
+		
+		System.out.print("\t█ 강의실명 : ");
+		String name = scan.nextLine();
+		
+		System.out.print("\t█ 수용인원 : ");
+		String people = scan.nextLine();
+		
+		RoomDTO rdto = new RoomDTO();
+		rdto.setName(name);
+		rdto.setPeople(people);
+		
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseAddOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				addRoom(rdto);
+				return;
+			} else {
+				loop = false;
+			}
+			
+		}
+		
+	}//addRoomMenu()
+	
+	
+	
+	/**
+	 * 새로운 강의실을 등록하는 메서드이다.
+	 * @param rdto
+	 */
+    private void addRoom(RoomDTO rdto) {
+		
+    	int result = rdao.addRoom(rdto);
+    	view.addResult(result);
+		
+	}//addRoom(RoomDTO rdto)
+
+	/**
+     * 기초 교재정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
+     */
+	private void bookInfoMenu() {
+	
+		boolean loop = true;
+		while (loop) {
+			
+			view.bookInfoMenu();	//교재 정보 관리 메뉴(CRUD)
+			String num = scan.nextLine();
+			
+			if (num.equals("1")) {
+				
+				pause();
+			} else if (num.equals("2")) {
+				
+			} else if (num.equals("3")) {
+				
+				pause();
+			} else if (num.equals("4")) {
+				
+				pause();
+			} else {
+				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
+				loop = false;
+			}//if	
+			
+		}//while
+		
+	}
 }

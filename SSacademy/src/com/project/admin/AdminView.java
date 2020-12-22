@@ -243,5 +243,92 @@ public class AdminView {
 	}
 	
 	
+	/**
+	 * 기초 과목정보관리 메뉴를 출력하는 메소드이다.
+	 */
+	public void subjectInfoMenu() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t과목 정보 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 과목 정보 조회\t3. 과목 정보 수정\t\t  │");
+		System.out.println("\t│\t\t2. 과목 정보 추가\t4. 과목 정보 삭제\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+	
+	
+	
+	
+	
+	
+	/**
+	 * 기초 강의실정보관리 메뉴를 출력하는 메소드이다.
+	 */
+	public void roomInfoMenu() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t    강의실 정보 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 강의실 정보 조회\t3. 강의실 정보 수정\t\t  │");
+		System.out.println("\t│\t\t2. 강의실 정보 추가\t4. 강의실 정보 삭제\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+	
+	
+	
+	
+	/**
+	 * 강의실 추가 헤더 출력 메소드이다.
+	 */
+	public void addSubjectHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t     새로운 강의실 추가\t\t\t          ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   새로운 강의실을 추가하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+		
+	}
+	
+	
+	
+	/**
+	 * 기초 교재정보관리 메뉴를 출력하는 메소드이다.
+	 */
+	public void bookInfoMenu() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교재 정보 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 교재 정보 조회\t3. 교재 정보 수정\t\t  │");
+		System.out.println("\t│\t\t2. 교재 정보 추가\t4. 교재 정보 삭제\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+	
+	
+	
 	
 }
