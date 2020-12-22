@@ -7,6 +7,7 @@ import com.project.dao.BasicCourseInfoDAO;
 import com.project.dao.BookDAO;
 import com.project.dao.RoomDAO;
 import com.project.dto.BasicCourseInfoDTO;
+import com.project.dto.BookDTO;
 import com.project.dto.RoomDTO;
 
 /**
@@ -320,12 +321,13 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
-				
+				view.roomListHeader();
+				roomList();
 				pause();
 			} else if (num.equals("2")) {
 				addRoomInfoMenu();
 			} else if (num.equals("3")) {
-			
+				updateRoomInfo();
 				pause();
 			} else if (num.equals("4")) {
 				deleteRoomInfoMenu();
@@ -340,6 +342,26 @@ public class BasicInfoManage {
 	}//roomInfoMenu()
 	
 	
+	
+	/**
+	 * 강의실 기초정보를 조회하는 메서드이다.
+	 */
+	private void roomList() {
+
+		view.roomListHeader2();
+		
+		ArrayList<RoomDTO> list = rdao.roomList();
+		
+		for (RoomDTO dto : list) {
+			System.out.printf("\t%6s\t%22s\t%22s명\n"
+							, dto.getSeqRoom()
+							, dto.getName()
+							, dto.getPeople());
+			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
+			
+		}
+	}//roomList()
+
 	/**
 	 * 기초 강의실 등록 메서드이다.
 	 */
@@ -384,6 +406,56 @@ public class BasicInfoManage {
 		
 	}//addRoom(RoomDTO rdto)
 
+    
+
+	private void updateRoomInfo() {
+		
+		//헤더
+		
+		//view
+		
+		roomList(); //전체 강의실
+		
+		System.out.print("\n\t█ 강의실 번호 : ");
+		String seqRoom = scan.nextLine();
+		
+		RoomDTO dto = rdao.get(seqRoom);
+		
+		System.out.println();
+		System.out.println("\t* 강의실번호 : " + dto.getSeqRoom());
+		System.out.println("\t* 강의실명 : " + dto.getName());
+		System.out.println("\t* 수용인원 : " + dto.getPeople());
+		System.out.println("\n");
+		
+		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		System.out.print("\t█ 수정할 강의실명 : ");
+		String name = scan.nextLine();
+		if (name.equals("")) {
+			name = dto.getName();
+		}
+		
+		System.out.print("\t█ 수정할 수용인원 : ");
+		String people = scan.nextLine();
+		if (people.equals("")) {
+			people = dto.getPeople();
+		}
+		
+		RoomDTO dto2 = new RoomDTO();
+		
+		dto2.setSeqRoom(seqRoom);
+		dto2.setName(name);
+		dto2.setPeople(people);
+		
+		int result = rdao.updateRoom(dto2);
+		
+		view.updateResult(result);
+		
+		
+	}//updateRoomInfo()
+
+    
+    
     
     /**
      * 강의실 삭제 메뉴 메서드이다.
@@ -435,15 +507,15 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
-				
+				bookList();
 				pause();
 			} else if (num.equals("2")) {
-				
+				addBookInfoMenu();
 			} else if (num.equals("3")) {
-				
+				updateBookInfo();
 				pause();
 			} else if (num.equals("4")) {
-				
+				deleteBookInfoMenu();
 				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
@@ -453,4 +525,181 @@ public class BasicInfoManage {
 		}//while
 		
 	}//bookInfoMenu()
+	
+	
+	/**
+	 * 기초 교재 조회 메서드이다.
+	 */
+	private void bookList() {
+		
+		//헤더
+		
+		ArrayList<BookDTO> list = bdao.bookList();
+		
+		for (BookDTO dto : list) {
+			
+			System.out.printf("\t%4s\t%25s\t%10s\t%10s\n"
+					, dto.getSeqBook()
+					, dto.getName()
+					, dto.getPublisher()
+					, dto.getWriter());
+			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
+		}
+		
+	}
+	
+	
+	/**
+	 * 기초 교재정보 등록 메서드이다.
+	 */
+	private void addBookInfoMenu() {
+		
+		//헤더
+		
+		System.out.print("\t█ 교재이름 : ");
+		String name = scan.nextLine();
+		
+		System.out.print("\t█ 출판사 : ");
+		String publisher = scan.nextLine();
+		
+		System.out.print("\t█ 저자명 : ");
+		String writer = scan.nextLine();
+		
+		BookDTO bdto = new BookDTO();
+		bdto.setName(name);
+		bdto.setPublisher(publisher);
+		bdto.setWriter(writer);
+		
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseAddOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				addBookInfo(bdto);
+				return;
+			} else {
+				loop = false;
+			}
+
+		}
+
+	}//addBookInfoMenu()
+	
+	
+	/**
+	 * 새로운 교재를 등록하는 메서드이다.
+	 * @param bdto 교재 데이터 객체
+	 */
+	private void addBookInfo(BookDTO bdto) {
+		
+		int result = bdao.addBook(bdto);
+		view.addResult(result);
+	}
+	
+	
+	private void updateBookInfo() {
+		
+		//헤더
+		
+		//view
+		
+		bookList();
+		
+		System.out.print("\n\t█ 교재 번호 : ");
+		String seqBook = scan.nextLine();
+		
+		BookDTO dto = bdao.get(seqBook);
+		
+		System.out.println();
+		System.out.println("\t* 교재번호 : " + dto.getSeqBook());
+		System.out.println("\t* 교재이름 : " + dto.getName());
+		System.out.println("\t* 출판사 : " + dto.getPublisher());
+		System.out.println("\t* 저자명 : " + dto.getWriter());
+		System.out.println("\n");
+		
+		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		System.out.print("\t█ 수정할 교재이름 : ");
+		String name = scan.nextLine();
+		if (name.equals("")) {
+			name = dto.getName();
+		}
+		
+		System.out.print("\t█ 수정할 출판사 : ");
+		String publisher = scan.nextLine();
+		if (publisher.equals("")) {
+			publisher = dto.getPublisher();
+		}
+		
+		System.out.print("\t█ 수정할 저자명 : ");
+		String writer = scan.nextLine();
+		if (writer.equals("")) {
+			writer = dto.getWriter();
+		}
+		
+		BookDTO dto2 = new BookDTO();
+		
+		dto2.setSeqBook(seqBook);
+		dto2.setName(name);
+		dto2.setPublisher(publisher);
+		dto2.setWriter(writer);
+		
+		int result = bdao.updateBook(dto2);
+		
+		view.updateResult(result);
+		
+	}//updateBookInfo()
+	
+	
+	/**
+	 * 교재 삭제 메뉴 메서드이다.
+	 */
+	private void deleteBookInfoMenu() {
+		
+		//헤더
+		
+		System.out.print("\t█ 교재 번호 : ");
+		String seqBook = scan.nextLine();
+    	
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseDeleteOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				deleteBookInfo(seqBook);
+				return;
+			} else {
+				loop = false;
+			}
+		}
+		
+	}
+
+	/**
+	 * 교재 삭제 메서드이다.
+	 * @param seqBook 교재 번호
+	 */
+	private void deleteBookInfo(String seqBook) {
+		
+		int result = bdao.deleteBook(seqBook);
+		view.deleteResult(result);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
