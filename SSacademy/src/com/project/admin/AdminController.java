@@ -68,6 +68,7 @@ public class AdminController {
 				break;
 			} else if (sel.equals("9")) {
 				System.out.println("9.	연계 기업 취업공고 관리 -조혜승");
+		
 				break;
 			} else if (sel.equals("10")) {
 				System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");
