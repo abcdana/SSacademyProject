@@ -37,7 +37,6 @@ public class LoginDAO {
 			this.conn = DBUtil.open();
 			this.stat = conn.createStatement();
 			
-			
 		} catch (Exception e) {
 			System.out.println("primaryLoginDAO.enLogin()");
 			e.printStackTrace();
