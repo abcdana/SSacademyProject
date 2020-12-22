@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.project.admin.dto.TeacherSearchDTO;
 import com.project.dto.TeacherDTO;
 import com.project.ssacademy.DBUtil;
 
@@ -27,7 +28,7 @@ public class TeacherDAO {
 	private ResultSet rs;
 	
 	/**
-	 * 생성자
+	 * TeacherDAO 클래스 생성자
 	 */
 	public TeacherDAO() {
 		
@@ -81,6 +82,10 @@ public class TeacherDAO {
 	}
 
 
+	/**
+	 * 교사 목록 가져오기
+	 * @return 교사 정보를 저장한 ArrayList
+	 */
 	public ArrayList<TeacherDTO> list() {
 		
 		try {
@@ -117,6 +122,11 @@ public class TeacherDAO {
 	}
 
 
+	/**
+	 * 교사 추가하기
+	 * @param 추가할 교사의 정보를 담은 dto
+	 * @return 추가 성공 여부
+	 */
 	public int add(TeacherDTO dto) {
 		
 		try {
@@ -145,6 +155,11 @@ public class TeacherDAO {
 	}
 
 
+	/**
+	 * 교사 정보 가져오기
+	 * @param seqTeacher 교사번호에 해당하는 교사 정보
+	 * @return 교사 정보를 담은 dto
+	 */
 	public TeacherDTO get(String seqTeacher) {
 		
 		try {
@@ -179,6 +194,11 @@ public class TeacherDAO {
 	}
 
 
+	/**
+	 * 교사 정보 수정하기
+	 * @param newtdto 수정될 교사 정보를 담은 dto
+	 * @return 수정 성공 여부
+	 */
 	public int edit(TeacherDTO newtdto) {
 		
 		try {
@@ -200,6 +220,107 @@ public class TeacherDAO {
 		}
 		
 		return 0;
+	}
+
+
+	/**
+	 * 강의 여부 확인하기
+	 * @param seqTeacher 해당 교사의 교사 번호
+	 * @return 강의 여부 반환
+	 */
+	public int checkLecture(String seqTeacher) {
+		
+		try {
+			
+			String sql = "{ call procLectureState(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqTeacher);
+			cstat.registerOutParameter(2, OracleTypes.NUMBER);
+			
+			cstat.executeQuery();
+			
+			int result = cstat.getInt(2);
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.checkLecture()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	/**
+	 * 교사 삭제하기
+	 * @param seqTeacher 삭제할 교사의 교사 번호
+	 * @return 삭제 성공 여부
+	 */
+	public int delete(String seqTeacher) {
+		
+		try {
+			
+			String sql = "update tblTeacher set id = null, ssn = null, tel = null where seqTeacher = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqTeacher);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.delete()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	/**
+	 * 특정 교사 검색하기
+	 * @param seqTeacher 검색할 교사의 교사번호
+	 * @return 특정 교사의 강의 정보를 저장한 ArrayList
+	 */
+	public ArrayList<TeacherSearchDTO> search(String seqTeacher) {
+		
+		try {
+			
+			String sql = "select * from vwCourseInfo where seqTeacher = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqTeacher);
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<TeacherSearchDTO> list = new ArrayList<TeacherSearchDTO>();
+			
+			while (rs.next()) {
+				TeacherSearchDTO dto = new TeacherSearchDTO();
+				
+				dto.setSeqTeacher(rs.getString("seqTeacher"));
+				dto.setTeacherName(rs.getString("tname"));
+				dto.setCourseName(rs.getString("cname"));
+				dto.setCourseStartDate(rs.getString("cstartDate").substring(0, 10));
+				dto.setCourseEndDate(rs.getString("cendDate").substring(0, 10));
+				dto.setRoom(rs.getString("room"));
+				dto.setSubjectName(rs.getString("sname"));
+				dto.setSubjectStartDate(rs.getString("sstartDate").substring(0, 10));
+				dto.setSubjectEndDate(rs.getString("sendDate").substring(0, 10));
+				dto.setLectureState(rs.getString("lectureState"));
+				
+				list.add(dto);
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.search()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	
