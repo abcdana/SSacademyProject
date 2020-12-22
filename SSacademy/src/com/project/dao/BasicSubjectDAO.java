@@ -12,7 +12,7 @@ import com.project.ssacademy.DBUtil;
 
 /**
  * 기초과목관련 모든 프로시저를 관리하는 DAO
- * @author 박지현
+ * @author 박지현, 김다은
  *
  */
 public class BasicSubjectDAO {
@@ -74,5 +74,26 @@ public class BasicSubjectDAO {
 		
 		return null;
 	}
+
+	public int addSubject(BasicSubjectDTO bsdto) {
+		
+		try {
+			
+			String sql = "{ call procAddBasicSubject(?, ?, ?) }";
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, bsdto.getName());
+			cstat.setString(2, bsdto.getInfo());
+			cstat.setString(3, bsdto.getSeqBook());
+			return cstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryBasicSubjectDAO.enaddSubject()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
 }
 
