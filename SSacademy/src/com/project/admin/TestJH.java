@@ -8,7 +8,7 @@ import oracle.sql.OffsetDST;
  * @author jenny
  *
  */
-public class Test {
+public class TestJH {
 	
 	public static void main(String[] args) {
 		

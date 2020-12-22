@@ -44,11 +44,11 @@ public class OpenCourse {
 		if(num.equals("1")) {
 			OpenCourseList();  //개설과정조회
 		} else if (num.equals("2")) {
-			OpenCourseReg();	//개설과정등록
+			openCourseAdd();	//개설과정등록
 		} else if (num.equals("3")) {
-			OpenCourseEdit();	//개설과정수정
+			openCourseAdd();	//개설과정수정
 		} else if (num.equals("4")) {
-			OpenCourseDelete();	//개설과정삭제
+			openCourseAdd();	//개설과정삭제
 		} else {
 			pause();
 		}
@@ -96,7 +96,6 @@ public class OpenCourse {
 			pause();
 		}
 	
-	
 	}
 	
 	
@@ -112,12 +111,9 @@ public class OpenCourse {
 	//A-003-1-1 특정개설과정 교육생조회
 	public void SpecificStudent(String seqOpenCourse, String openCourseName) {
 									//과정번호, 과정명
-		//과정번호 넣고 교육생리스트 호출
+		//과정번호 넣고 교육생DAO 호출
 		ArrayList<OpenCourseStudentDTO> list = oc.OpenCourseStudent(seqOpenCourse);
 		adView.SpecificStudentView(list, openCourseName);
-		
-		
-		
 	}
 	
 	
@@ -126,17 +122,44 @@ public class OpenCourse {
 	/**
 	 * 개설과정등록
 	 */
-	public static void OpenCourseReg() {
+	public void openCourseAdd() {
 		
+		//개설과정등록 메뉴 헤더
+		adView.openCourseAddView();
 		
+		System.out.print("강의실번호: \n");
+		String seqRoom = scan.nextLine();
+		
+		System.out.print("기초과정번호: \n");
+		String seqBasicCourse = scan.nextLine();
+		
+		System.out.print("시작일: \n");
+		String startDate = scan.nextLine();
+		
+		System.out.print("종료일: \n");
+		String endDate = scan.nextLine();
+		
+		System.out.print("인원: \n");
+		String count = scan.nextLine();
+		
+		//개설과정 공통 DTO에 값 쓰기
+		OpenCourseDTO oc = new OpenCourseDTO();
+		
+		oc.setSeqRoom(seqRoom);
+		oc.setSeqBasicCourseInfo(seqBasicCourse);
+		oc.setStartDate(startDate);
+		oc.setEndDate(endDate);
+		oc.setMemberCount(count);
+		
+		adView.AddCheck();
+	
+	}
+	
+	public static void openCourseEdit() {
 		
 	}
 	
-	public static void OpenCourseEdit() {
-		
-	}
-	
-	public static void OpenCourseDelete() {
+	public static void openCourseDelete() {
 		
 	}
 
