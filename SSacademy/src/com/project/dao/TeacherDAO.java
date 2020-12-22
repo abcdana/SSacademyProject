@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.project.admin.dto.TeacherSearchDTO;
 import com.project.dto.TeacherDTO;
 import com.project.ssacademy.DBUtil;
 
@@ -200,6 +201,92 @@ public class TeacherDAO {
 		}
 		
 		return 0;
+	}
+
+
+	public int checkLecture(String seqTeacher) {
+		
+		try {
+			
+			String sql = "{ call procLectureState(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqTeacher);
+			cstat.registerOutParameter(2, OracleTypes.NUMBER);
+			
+			cstat.executeQuery();
+			
+			int result = cstat.getInt(2);
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.checkLecture()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	public int delete(String seqTeacher) {
+		
+		try {
+			
+			String sql = "update tblTeacher set id = null, ssn = null, tel = null where seqTeacher = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqTeacher);
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.delete()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+
+
+	public ArrayList<TeacherSearchDTO> search(String seqTeacher) {
+		
+		try {
+			
+			String sql = "select * from vwCourseInfo where seqTeacher = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqTeacher);
+			
+			rs = pstat.executeQuery();
+			
+			ArrayList<TeacherSearchDTO> list = new ArrayList<TeacherSearchDTO>();
+			
+			while (rs.next()) {
+				TeacherSearchDTO dto = new TeacherSearchDTO();
+				
+				dto.setSeqTeacher(rs.getString("seqTeacher"));
+				dto.setTeacherName(rs.getString("tname"));
+				dto.setCourseName(rs.getString("cname"));
+				dto.setCourseStartDate(rs.getString("cstartDate").substring(0, 10));
+				dto.setCourseEndDate(rs.getString("cendDate").substring(0, 10));
+				dto.setRoom(rs.getString("room"));
+				dto.setSubjectName(rs.getString("sname"));
+				dto.setSubjectStartDate(rs.getString("sstartDate").substring(0, 10));
+				dto.setSubjectEndDate(rs.getString("sendDate").substring(0, 10));
+				dto.setLectureState(rs.getString("lectureState"));
+				
+				list.add(dto);
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.search()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	
