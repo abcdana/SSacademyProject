@@ -79,12 +79,15 @@ public class BasicInfoManage {
 			if (num.equals("1")) {
 				view.courseListHeader();
 				courseList();
+				pause();
 			} else if (num.equals("2")) {
 				addCourseInfoMenu();
 			} else if (num.equals("3")) {
 				updateCourse();
+				pause();
 			} else if (num.equals("4")) {
 				deleteCourse();
+				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
 				loop = false;
@@ -113,7 +116,6 @@ public class BasicInfoManage {
 			System.out.println("\t───────────────────────────────────────────────────────────────────────────");			
 		}
 	
-		//pause();
 	}
 	
 	
@@ -154,7 +156,6 @@ public class BasicInfoManage {
 		
 		}//while
 		
-		//pause();
 	}
 
 	
@@ -221,7 +222,6 @@ public class BasicInfoManage {
 		
 		view.updateResult(result);
 		
-		pause();
 	}
 
 
@@ -242,7 +242,6 @@ public class BasicInfoManage {
 		
 		view.deleteResult(result);
 		
-		pause();
 	}
 
 	
