@@ -1,6 +1,11 @@
 package com.project.admin.dto;
 
-public class SpecificCourseEvaluationDTO {
+/**
+ * 특정 과정의 평가 정보를 담는 DTO
+ * @author 김주혁
+ *
+ */
+public class ViewSpecificEvaluationDTO {
 
 	private String seqOpenCourse;
 	private String seqStudent;

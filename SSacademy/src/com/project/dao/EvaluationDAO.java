@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import com.project.admin.dto.CourseSearchDTO;
-import com.project.admin.dto.SpecificCourseEvaluationDTO;
+import com.project.admin.dto.ViewEndCourseDTO;
+import com.project.admin.dto.ViewSpecificEvaluationDTO;
 import com.project.ssacademy.DBUtil;
 
 //평가정보
@@ -34,7 +34,7 @@ public class EvaluationDAO {
 		
 	}
 
-	public ArrayList<CourseSearchDTO> courseList(String word) {
+	public ArrayList<ViewEndCourseDTO> courseList(String word) {
 		
 		try {
 			String sql = "";
@@ -47,10 +47,10 @@ public class EvaluationDAO {
 			stat = conn.createStatement();
 			rs = stat.executeQuery(sql);
 			
-			ArrayList<CourseSearchDTO> list = new ArrayList<CourseSearchDTO>();
+			ArrayList<ViewEndCourseDTO> list = new ArrayList<ViewEndCourseDTO>();
 			
 			while (rs.next()) {
-				CourseSearchDTO dto = new CourseSearchDTO();
+				ViewEndCourseDTO dto = new ViewEndCourseDTO();
 				
 				dto.setSeqTeacher(rs.getString("seqTeacher"));
 				dto.setTeacherName(rs.getString("teacher"));
@@ -74,7 +74,7 @@ public class EvaluationDAO {
 		return null;
 	}
 
-	public ArrayList<SpecificCourseEvaluationDTO> courseEvaluationList(String seqOpenCourse) {
+	public ArrayList<ViewSpecificEvaluationDTO> courseEvaluationList(String seqOpenCourse) {
 		
 		try {
 			
@@ -85,10 +85,10 @@ public class EvaluationDAO {
 			
 			rs = pstat.executeQuery();
 			
-			ArrayList<SpecificCourseEvaluationDTO> list = new ArrayList<SpecificCourseEvaluationDTO>();
+			ArrayList<ViewSpecificEvaluationDTO> list = new ArrayList<ViewSpecificEvaluationDTO>();
 			
 			while (rs.next()) {
-				SpecificCourseEvaluationDTO dto = new SpecificCourseEvaluationDTO();
+				ViewSpecificEvaluationDTO dto = new ViewSpecificEvaluationDTO();
 				
 				dto.setSeqOpenCourse(rs.getString("seqOpenCourse"));
 				dto.setSeqStudent(rs.getString("seqStudent"));

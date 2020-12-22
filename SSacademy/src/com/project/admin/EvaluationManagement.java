@@ -3,8 +3,8 @@ package com.project.admin;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.project.admin.dto.CourseSearchDTO;
-import com.project.admin.dto.SpecificCourseEvaluationDTO;
+import com.project.admin.dto.ViewEndCourseDTO;
+import com.project.admin.dto.ViewSpecificEvaluationDTO;
 import com.project.dao.EvaluationDAO;
 
 public class EvaluationManagement {
@@ -32,7 +32,7 @@ public class EvaluationManagement {
 			String sel = scan.nextLine();
 			
 			if (sel.equals("1")) {
-				//특별 과정 평가 조회
+				//특정 과정 평가 조회
 				viewCourseEvaluation();
 			} else if (sel.equals("2")) {
 				//특정 교사 평가 조회
@@ -64,9 +64,9 @@ public class EvaluationManagement {
 		
 		System.out.println("\t[교사번호]\t[교사이름]\t[개설과정번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]");
 		
-		ArrayList<CourseSearchDTO> list = dao.courseList(seqTeacher);
+		ArrayList<ViewEndCourseDTO> list = dao.courseList(seqTeacher);
 		
-		for (CourseSearchDTO dto : list) {
+		for (ViewEndCourseDTO dto : list) {
 			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t    %s\n"
 								, dto.getSeqTeacher()
 								, dto.getTeacherName()
@@ -95,9 +95,16 @@ public class EvaluationManagement {
 		
 		System.out.println("\t[번호]\t[이름]\t[강의계획서 이행] [교사의 강의전달 및 이해] [교사의 소통] [강의 유익성] [전반적인 만족] [시설 만족] [사후 관리 만족]");
 		
-		ArrayList<SpecificCourseEvaluationDTO> list = dao.courseEvaluationList(seqOpenCourse);
+		ArrayList<ViewSpecificEvaluationDTO> list = dao.courseEvaluationList(seqOpenCourse);
+		
+		//해당 과정 번호가 없는 경우
+		if (list.size() == 0) {
+			System.out.println("해당 과정 번호가 없습니다.");
+			pause();
+			return;
+		}
 
-		for (SpecificCourseEvaluationDTO dto : list) {
+		for (ViewSpecificEvaluationDTO dto : list) {
 			System.out.printf("\t  %s\t%s\t\t%s\t\t   %s\t\t\t%s\t\t%s\t\t%s\t   %s\t\t  %s\n"
 								, dto.getSeqStudent()
 								, dto.getStudentName()
@@ -126,9 +133,16 @@ public class EvaluationManagement {
 		
 		System.out.println("\t[교사번호]\t[교사이름]\t[개설과정번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]");
 		
-		ArrayList<CourseSearchDTO> list = dao.courseList(null);
+		ArrayList<ViewEndCourseDTO> list = dao.courseList(null);
 		
-		for (CourseSearchDTO dto : list) {
+		//종료된 과정이 없는 경우
+		if (list.size() == 0) {
+			System.out.println("\t종료된 과정이 없습니다.");
+			pause();
+			return;
+		}
+		
+		for (ViewEndCourseDTO dto : list) {
 			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t    %s\n"
 								, dto.getSeqTeacher()
 								, dto.getTeacherName()

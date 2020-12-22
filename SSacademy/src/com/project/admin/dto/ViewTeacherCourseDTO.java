@@ -1,11 +1,11 @@
 package com.project.admin.dto;
 
 /**
- * 특정 교사 검색 DTO
+ * 특정 교사의 과정 정보를 담는 DTO
  * @author 김주혁
  *
  */
-public class TeacherSearchDTO {
+public class ViewTeacherCourseDTO {
 
 	private String seqTeacher;
 	private String teacherName;
