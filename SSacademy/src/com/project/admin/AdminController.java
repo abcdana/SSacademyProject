@@ -45,11 +45,11 @@ public class AdminController {
 			String sel = scan.nextLine();
 			
 			if (sel.equals("1")) {
-				System.out.println("1.	기초 정보 관리 - 김다은");
+				//System.out.println("1.	기초 정보 관리 - 김다은");
 				BasicInfoManage manage = new BasicInfoManage();
 				manage.basicInfoMain();
 			} else if (sel.equals("2")) {
-				System.out.println("2.	교사 계정 관리 - 김주혁");
+				//System.out.println("2.	교사 계정 관리 - 김주혁");
 				TeacherAccountManagement teacherAccount = new TeacherAccountManagement(); //교사 계정 관리 생성
 				teacherAccount.main(); //교사 계정 관리 메인
 				//break;
