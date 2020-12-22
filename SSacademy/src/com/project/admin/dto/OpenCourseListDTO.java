@@ -1,58 +1,88 @@
-package com.project.dto;
+package com.project.admin.dto;
 
-public class OpenCourseDTO {
+/**
+ * @author jenny
+ *
+ */
+public class OpenCourseListDTO {
 
 	private String seqOpenCourse;
-	private String seqRoom;
-	private String seqBasicCourseInfo;
+	private String name;
 	private String startDate;
 	private String endDate;
+	private String room;
 	private String memberCount;
-	private String courseRegistrationState;
+	private String state;
 	
 	
 	public String getSeqOpenCourse() {
 		return seqOpenCourse;
 	}
+	
+	
 	public void setSeqOpenCourse(String seqOpenCourse) {
 		this.seqOpenCourse = seqOpenCourse;
 	}
-	public String getSeqRoom() {
-		return seqRoom;
+	
+	
+	public String getName() {
+		return name;
 	}
-	public void setSeqRoom(String seqRoom) {
-		this.seqRoom = seqRoom;
+	
+	
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getSeqBasicCourseInfo() {
-		return seqBasicCourseInfo;
-	}
-	public void setSeqBasicCourseInfo(String seqBasicCourseInfo) {
-		this.seqBasicCourseInfo = seqBasicCourseInfo;
-	}
+	
+	
 	public String getStartDate() {
 		return startDate;
 	}
+	
+	
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
+	
+	
 	public String getEndDate() {
 		return endDate;
 	}
+	
+	
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	
+	
+	public String getRoom() {
+		return room;
+	}
+	
+	
+	public void setRoom(String room) {
+		this.room = room;
+	}
+	
+	
 	public String getMemberCount() {
 		return memberCount;
 	}
+	
+	
 	public void setMemberCount(String memberCount) {
 		this.memberCount = memberCount;
 	}
-	public String getCourseRegistrationState() {
-		return courseRegistrationState;
-	}
-	public void setCourseRegistrationState(String courseRegistrationState) {
-		this.courseRegistrationState = courseRegistrationState;
+	
+	
+	public String getState() {
+		return state;
 	}
 	
+	
+	public void setState(String state) {
+		this.state = state;
+	}
+	
+	
 }
-
