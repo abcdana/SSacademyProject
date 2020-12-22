@@ -25,6 +25,7 @@ public class CourseSubjectDTO {
 	public void setSeqBasicSubject(String seqBasicSubject) {
 		this.seqBasicSubject = seqBasicSubject;
 	}
+
 	
 }
 
