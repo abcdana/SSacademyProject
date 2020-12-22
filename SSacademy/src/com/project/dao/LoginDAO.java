@@ -24,7 +24,7 @@ public class LoginDAO {
 	private static Scanner scan = new Scanner(System.in);
 	private Connection conn;
 	private Statement stat;
-	private PreparedStatement pstat; 
+	private PreparedStatement pstat;
 	private ResultSet rs;
 	
 	/**
@@ -36,7 +36,6 @@ public class LoginDAO {
 			
 			this.conn = DBUtil.open();
 			this.stat = conn.createStatement();
-			
 			
 		} catch (Exception e) {
 			System.out.println("primaryLoginDAO.enLogin()");
