@@ -76,6 +76,8 @@ public class AdminController {
 				//break;
 			} else if (sel.equals("11")) {
 				System.out.println("11.  강의 및 시설 평가 조회 - 김주혁");
+				EvaluationManagement evaluation = new EvaluationManagement();
+				evaluation.main();
 				//break;
 			} else if (sel.equals("12")) {
 				System.out.println("12.  우수 훈련생 관리 - 임채원");
