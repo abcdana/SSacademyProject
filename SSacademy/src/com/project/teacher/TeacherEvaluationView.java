@@ -8,12 +8,21 @@ import com.project.admin.dto.ViewSpecificEvaluationDTO;
 import com.project.dao.EvaluationDAO;
 import com.project.dto.TeacherDTO;
 
+/**
+ * 교사 평가 조회를 담당하는 클래스
+ * @author 김주혁
+ *
+ */
 public class TeacherEvaluationView {
 
 	private Scanner scan;
 	private EvaluationDAO dao;
 	private TeacherDTO tdto;
 	
+	/**
+	 * 교사 평가 조회 클래스의 생성자
+	 * @param tdto 로그인한 교사 정보
+	 */
 	public TeacherEvaluationView(TeacherDTO tdto) {
 		
 		scan = new Scanner(System.in);
@@ -22,6 +31,9 @@ public class TeacherEvaluationView {
 		
 	}
 	
+	/**
+	 * 교사 평가 조회 클래스의 메인 메서드
+	 */
 	public void main() {
 		
 		boolean loop = true;
@@ -49,17 +61,58 @@ public class TeacherEvaluationView {
 			}
 			
 			
+		}	
+		
+	} //main
+	
+	
+	private void viewCourseList() {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t종료 과정 목록\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t[번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]");
+		
+		ArrayList<ViewEndCourseDTO> list = dao.courseList(tdto.getSeqTeacher());
+		
+		for (ViewEndCourseDTO dto : list) {
+			System.out.printf("\t  %s\t%s\t%s\t%s\t   %s명\n"
+								, dto.getSeqOpenCourse()
+								, dto.getCourseName()
+								, dto.getCourseStartDate()
+								, dto.getCourseEndDate()
+								, dto.getStudentCount());
 		}
 		
+	} //viewCourseList
+	
+	
+	private void menu() {
 		
-	}
-
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교사 평가 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t\t    1. 특정 과정 평가 조회\t\t\t  │");
+		System.out.println("\t│\t\t\t    0. 뒤로 가기\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	} //menu
+	
+	
 	private void viewEvaluation() {
 		
 		System.out.print("\t█ 과정 번호를 입력하세요. : ");
 		String seqOpenCourse = scan.nextLine();
 		
-		System.out.println("\n");
+		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t과정 평가 정보\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
@@ -98,45 +151,7 @@ public class TeacherEvaluationView {
 		pause();
 		
 	} //viewEvaluation
-
-	private void menu() {
-		
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교사 평가 조회\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t\t    1. 특정 과정 평가 조회\t\t\t  │");
-		System.out.println("\t│\t\t\t    0. 뒤로 가기\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-		
-		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
-		
-	} //menu
-
-	private void viewCourseList() {
-		
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t종료 과정 목록\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t[번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]");
-		
-		ArrayList<ViewEndCourseDTO> list = dao.courseList(tdto.getSeqTeacher());
-		
-		for (ViewEndCourseDTO dto : list) {
-			System.out.printf("\t  %s\t%s\t%s\t%s\t   %s명\n"
-								, dto.getSeqOpenCourse()
-								, dto.getCourseName()
-								, dto.getCourseStartDate()
-								, dto.getCourseEndDate()
-								, dto.getStudentCount());
-		}
-		
-	} //viewCourseList
+	
 	
 	private void pause() {
 		
