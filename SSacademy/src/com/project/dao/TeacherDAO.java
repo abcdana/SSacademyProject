@@ -167,7 +167,7 @@ public class TeacherDAO {
 			String sql = "select * from tblTeacher where seqTeacher = ?";
 			
 			pstat = conn.prepareStatement(sql);
-			pstat.setNString(1, seqTeacher);
+			pstat.setString(1, seqTeacher);
 			
 			rs = pstat.executeQuery();
 			

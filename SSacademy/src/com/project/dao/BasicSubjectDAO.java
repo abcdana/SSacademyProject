@@ -40,39 +40,5 @@ public class BasicSubjectDAO {
 
 	}
 
-	public ArrayList<BasicSubjectDTO> get(String seqTeacher) {
-		
-		try {
-			
-			String sql = "select bs.* from tblAvailableSubject abs inner join tblBasicSubject bs on abs.seqBasicSubject = bs.seqBasicSubject where abs.seqTeacher = ?";
-			
-			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, seqTeacher);
-			
-			rs = pstat.executeQuery();
-			
-			ArrayList<BasicSubjectDTO> list = new ArrayList<BasicSubjectDTO>();
-			
-			while (rs.next()) {
-				BasicSubjectDTO dto = new BasicSubjectDTO();
-				
-				dto.setSeqBasicSubject(rs.getString("seqBasicSubject"));
-				dto.setSeqBook(rs.getString("seqBook"));
-				dto.setName(rs.getNString("name"));
-				dto.setInfo(rs.getString("info"));
-				
-				list.add(dto);
-				
-			}
-			
-			return list;
-			
-		} catch (Exception e) {
-			System.out.println("BasicSubjectDAO.get()");
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 }
 
