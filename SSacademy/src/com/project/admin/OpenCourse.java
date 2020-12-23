@@ -199,6 +199,7 @@ public class OpenCourse {
 	 */
 	public void specificStudent(String seqOpenCourse, String openCourseName) {
 									//과정번호, 과정명
+
 		//과정번호 넣고 교육생리스트 호출
 		ArrayList<OpenCourseStudentDTO> list = ocdao.openCourseStudent(seqOpenCourse);
 		adView.specificStudentView(list, openCourseName);
@@ -280,6 +281,7 @@ public class OpenCourse {
 	/**
 	 * 개설과정등록(2) 진짜등록
 	 */
+
 	public void addOpenCourse(OpenCourseDTO ocdto) {
 		
 		//쿼리 & 쿼리 반환값
@@ -291,9 +293,41 @@ public class OpenCourse {
 		pause();
 		
 		openCourseAdd();
+  }
+  
+  
+	public void openCourseAdd() {
 		
-	}
+		//개설과정등록 메뉴 헤더
+		adView.openCourseAddView();
+		
+		System.out.print("강의실번호: \n");
+		String seqRoom = scan.nextLine();
+		
+		System.out.print("기초과정번호: \n");
+		String seqBasicCourse = scan.nextLine();
+		
+		System.out.print("시작일: \n");
+		String startDate = scan.nextLine();
+
+		System.out.print("종료일: \n");
+		String endDate = scan.nextLine();
+		
+		System.out.print("인원: \n");
+		String count = scan.nextLine();
+		
+		//개설과정 공통 DTO에 값 쓰기
+		OpenCourseDTO oc = new OpenCourseDTO();
+		
+		oc.setSeqRoom(seqRoom);
+		oc.setSeqBasicCourseInfo(seqBasicCourse);
+		oc.setStartDate(startDate);
+		oc.setEndDate(endDate);
+		oc.setMemberCount(count);
+		
+		adView.AddCheck();
 	
+	}
 	
 	/**
 	 * 개설과정수정 메서드입니다.
@@ -319,7 +353,6 @@ public class OpenCourse {
 		
 		//수정할 목록들
 		adView.openCourseEdit3();
-		
 		String num = scan.nextLine();
 		
 		ArrayList<OpenCourseListDTO> list = ocdao.openCourseList();
@@ -369,6 +402,7 @@ public class OpenCourse {
 	}
 	
 
+
 	/**
 	 * 강의실 수정 메서드입니다.
 	 */
@@ -392,7 +426,7 @@ public class OpenCourse {
 			pause();
 			openCourseEdit();
 		}
-		
+
 	}
 	
 	

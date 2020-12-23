@@ -1,4 +1,4 @@
-package com.project.admindto;
+package com.project.admin.dto;
 
 public class VwCompanyInfoDTO {
 
@@ -72,6 +72,5 @@ public class VwCompanyInfoDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+
 }
