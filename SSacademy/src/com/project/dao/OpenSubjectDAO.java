@@ -49,7 +49,7 @@ public class OpenSubjectDAO {
 	/**
 	 * 전체과목조회
 	 */
-	public ArrayList<OpenSubjectListDTO> OpenSubjectList() {
+	public ArrayList<OpenSubjectListDTO> openSubjectList() {
 			
 		try {
 			
@@ -107,7 +107,7 @@ public class OpenSubjectDAO {
 	/**
 	 * 특정과정조회에 해당하는 과목 리스트
 	 */
-	public ArrayList<OpenSubjectListDTO> SpecificOpenSubject(String seqOpenCourse) {
+	public ArrayList<OpenSubjectListDTO> specificOpenSubject(String seqOpenCourse) {
 
 		try {
 			

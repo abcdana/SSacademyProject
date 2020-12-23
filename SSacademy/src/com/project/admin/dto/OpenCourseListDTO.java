@@ -7,10 +7,12 @@ package com.project.admin.dto;
 public class OpenCourseListDTO {
 
 	private String seqOpenCourse;
+	private String seqRoom;
+	private String seqBasicCourseInfo;
+	private String room;
 	private String name;
 	private String startDate;
 	private String endDate;
-	private String room;
 	private String memberCount;
 	private String state;
 	
@@ -83,6 +85,34 @@ public class OpenCourseListDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
+
+
+	public String getSeqRoom() {
+		return seqRoom;
+	}
+
+	
+	public void setSeqRoom(String seqRoom) {
+		this.seqRoom = seqRoom;
+	}
+
+
+	/**
+	 * @return the seqBasicCourseInfo
+	 */
+	public String getSeqBasicCourseInfo() {
+		return seqBasicCourseInfo;
+	}
+
+
+	/**
+	 * @param seqBasicCourseInfo the seqBasicCourseInfo to set
+	 */
+	public void setSeqBasicCourseInfo(String seqBasicCourseInfo) {
+		this.seqBasicCourseInfo = seqBasicCourseInfo;
+	}
+	
+	
 	
 	
 }
