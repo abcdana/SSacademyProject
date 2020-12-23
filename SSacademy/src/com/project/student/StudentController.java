@@ -45,31 +45,35 @@ public class StudentController {
 			
 			if (sel.equals("1")) {
 				System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
-				break;
+				//break;
 			} else if (sel.equals("2")) {
 				System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
-				break;
+				//break;
 			} else if (sel.equals("3")) {
 				System.out.println("- 성적 조회를 할 수 있다. --조성진");
-				break;
+				//break;
 			} else if (sel.equals("4")) {
-				System.out.println("- 강의 및 시설 평가를 등록, 수정, 삭제 할 수 있다. - 김주혁");
-				break;
+				//System.out.println("- 강의 및 시설 평가를 등록, 수정, 삭제 할 수 있다. - 김주혁");
+				EvaluationManagement evaluation = new EvaluationManagement(sdto);
+				evaluation.main();
+				//break;
 			} else if (sel.equals("5")) {
 				System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
-				break;
+				//break;
 			} else if (sel.equals("6")) {
 				System.out.println("- 수료자 취업 현황을 확인할 수 있다.-- 조혜승");
-				break;
+				//break;
 			} else if (sel.equals("7")) {
 				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
-				break;
-			} else {
+				//break;
+			} else if (sel.equals("0")) {
+				//로그 아웃
 				check = false;
+			} else {
+				//check = false;
 				System.out.println("\n\t\t※ 잘못된 선택입니다.");
 				System.out.println("\t\t입력하신 번호를 다시 확인해주세요.");
 				System.out.println();
-				studentMain();
 			}
 			
 		}

@@ -107,7 +107,7 @@ public class BasicCourseInfoDAO {
 	
 	/**
 	 * 
-	 * @param seqBasicCourseInfo
+	 * @param seqBasicCourseInfo 과정 번호 
 	 * @return dto 객체 반환
 	 */
 	public BasicCourseInfoDTO get(String seqBasicCourseInfo) {

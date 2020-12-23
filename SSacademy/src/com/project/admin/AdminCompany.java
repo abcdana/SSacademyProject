@@ -40,13 +40,13 @@ public class AdminCompany {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\t\t\t\t - 전체 채용공고 조회 -");
 		System.out.println();
-			list(); //전체목록 출력
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 채용공고 검색\t\t\t\t\t  │");
-		System.out.println("\t│\t\t2. 채용공고 등록\t\t\t\t\t  │");
-		System.out.println("\t│\t\t3. 채용공고 수정\t\t\t\t\t  │");
-		System.out.println("\t│\t\t4. 채용공고 삭제\t\t\t\t\t  │");
-		System.out.println("\t│\t\t5. 이전 화면으로\t\t\t\t\t  │");
+		System.out.println("\t│\t\t1. 채용공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 채용공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 채용공고 등록\t\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 채용공고 수정\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 채용공고 삭제\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 이전 화면으로\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
@@ -54,24 +54,29 @@ public class AdminCompany {
 		String num = scan.nextLine();
 		
 		if(num.equals("1")) {
-			search();
+			list(); //전체목록 출력
 			
 			pause();
 		} else if(num.equals("2")) {
-			add();
+			search();			
 			
 			pause();
 		}else if(num.equals("3")) {
-			edit();
+			add();
 			
 			pause();
 		}else if(num.equals("4")) {
-			delete();
+			edit();
 			pause();
 		}else if(num.equals("5")) {
+			delete();
 			
-		} else {
+		} else if(num.equals("6")) {
+		  //이전화면으로 돌아가기 관리자메뉴
+			
+		}else {
 			System.out.println("\n없는 번호입니다. 다시입력해주세요.");
+
 		}
 		
 	}//while
@@ -129,7 +134,9 @@ public class AdminCompany {
 		
 	}
 
-	private static void search() { //채용공고 검색
+
+	private static void search() { //검색메뉴
+
 		
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t연계기업 채용공고 검색\t\t\t\t  ┃");
@@ -139,6 +146,7 @@ public class AdminCompany {
 		System.out.println("\t│\t\t2. 소재지별 채용공고 검색\t\t\t\t  │");
 		System.out.println("\t│\t\t3. 연봉별 채용공고 검색\t\t\t\t\t  │");
 		System.out.println("\t│\t\t4. 채용상태별 공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 이전 화면으로 \t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
@@ -155,6 +163,8 @@ public class AdminCompany {
 
 		} else if(num.equals("4")) {
 			state();
+		}else if(num.equals("5")) {
+			menu();
 		}
 		
 		
@@ -168,10 +178,15 @@ public class AdminCompany {
 		System.out.println("\t\t\t\t 검색어 : 채용중 ");
 		System.out.println("\t\t\t\t 검색어 : 채용예정 ");
 		System.out.println("\t\t\t\t 검색어 : 채용마감 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
 		String word = scan.nextLine();
+		if(word.equals("")) {
+			menu();
+		}
 		System.out.println();
 		System.out.printf("\t\t\t\t - %s 공고 조회 -\n",word);
 		System.out.println();
@@ -222,13 +237,21 @@ public class AdminCompany {
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t\t\t 검색어 예) 검색 최저금액 : 20000000 (이상)");
 		System.out.println("\t\t\t 검색어 예) 검색 최고금액 : 30000000 (미만)");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 검색 원하시는 최저금액을 입력하세요. : ");
 		String word = scan.nextLine();
+		if(word.equals("")) {
+			menu();
+		}
 		System.out.print("\t█ 검색 원하시는 최고금액을 입력하세요. : ");
 		String word2 = scan.nextLine();
 		System.out.println();
+		if(word2.equals("")) {
+			menu();
+		}
 		System.out.printf("\t\t\t - 연봉 %s 이상 %s 미만 채용공고 조회 -\n",word,word2);
 		System.out.println();
 
@@ -283,10 +306,15 @@ public class AdminCompany {
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t\t\t\t 검색어 예) 서울 ");
 		System.out.println("\t\t\t\t 검색어 예) 분당 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
 		String word = scan.nextLine();
+		if(word.equals("")) {
+			menu();
+		}
 		System.out.println();
 		System.out.printf("\t\t\t\t - %s 소재 채용공고 조회 -\n",word);
 		System.out.println();
@@ -343,20 +371,25 @@ public class AdminCompany {
 		for(VwCompanyInfoDTO dto : list2) {
 			System.out.printf("\t\t\t\t%s  \n",dto.getComField());
 		}
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
 		String word = scan.nextLine();
+		if(word.equals("")) {
+			menu();
+		}
 		System.out.println();
 		System.out.printf("\t\t\t\t - %s 업무 채용공고 조회 -\n",word.toUpperCase());
 		System.out.println();
-		
+
 		ArrayList<VwCompanyInfoDTO> list = dao.comField(word.toUpperCase());
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwCompanyInfoDTO dto : list) {
-			
+		
 			if(dto.getName().length() <= 5) {
 
 				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
@@ -398,30 +431,40 @@ public class AdminCompany {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println();
 		System.out.println("\t\t 등록을 위해 아래 내용을 입력해주세요.");
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.println();
-		System.out.print("\t회사 이름: ");
+		System.out.print("\t회사 이름 : ");
 		String name = scan.nextLine();
-		System.out.print("\t채용 시작일: ");
+		System.out.print("\t채용 시작일 : ");
 		String startDate = scan.nextLine();
-		System.out.print("\t채용 종료일: ");
+		System.out.print("\t채용 종료일 : ");
 		String endDate = scan.nextLine();
 		//boolean bool = seDate(startDate,endDate);
-		System.out.print("\t채용 분야: ");
+		System.out.print("\t채용 분야 : ");
 		String comField = scan.nextLine();
-		System.out.print("\t연봉: ");
+		System.out.print("\t연봉 : ");
 		String salary = scan.nextLine();
-		System.out.print("\t채용 형태: ");
+		System.out.print("\t채용 형태 : ");
 		String employmentType = scan.nextLine();
-		System.out.print("\t회사 규모: ");
+		System.out.print("\t회사 규모 : ");
 		String comSize = scan.nextLine();
-		System.out.print("\t회사 주소: ");
+		System.out.print("\t회사 주소 : ");
 		String address = scan.nextLine();
+		
+		if(	name.equals("") || startDate.equals("") || endDate.equals("") || comField.equals("") || 
+				salary.equals("") || employmentType.equals("") || comSize.equals("") || address.equals(""))  {
+				System.out.println();
+				System.out.println("\t**모든 값을 입력해야 합니다. 이전화면으로 돌아갑니다.");
+				System.out.println("\t엔터를 입력해주세요.");
+				scan.nextLine();
+				menu();
+			}
 		
 		CompanyInfoDTO dto = new CompanyInfoDTO();
 		dto.setName(name);
 		dto.setStartDate(startDate);
 		dto.setEndDate(endDate);
-		dto.setComField(comField);
+		dto.setComField(comField.toUpperCase());
 		dto.setSalary(salary);
 		dto.setEmploymentType(employmentType);
 		dto.setComSize(comSize);
@@ -471,10 +514,24 @@ public class AdminCompany {
 
 			System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 			System.out.println();
-			list(); // 전체 채용공고출력
+
+			for(VwCompanyInfoDTO dto : list) {
+			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+					dto.getState(),dto.getSeqCompanyInfo(),
+					dto.getName(),dto.getStartDate(),
+					dto.getEndDate(),dto.getComField(),
+					dto.getSalary(),dto.getEmploymentType(),
+					dto.getComSize(),dto.getAddress());
+					} //for
+			System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+			System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+
 			
 		System.out.print("\t█ 수정 원하시는 번호를 입력하세요. : ");
 		String seq = scan.nextLine();
+		if(seq.equals("")) {
+			menu();
+		}
 		System.out.println();
 		VwCompanyInfoDTO dto = dao.editGet(seq);
 		System.out.println("\t회사 이름: " + dto.getName());
@@ -487,6 +544,7 @@ public class AdminCompany {
 		System.out.println("\t회사 주소: " + dto.getAddress());
 		System.out.println();
 		
+		System.out.println("\t**수정을 원하지 않는 항목은 엔터를 입력하세요.");
 		System.out.print("\t수정할 회사 이름: ");
 		String name = scan.nextLine();
 		if(name.equals("")) {
@@ -533,7 +591,7 @@ public class AdminCompany {
 		dto2.setName(name);
 		dto2.setStartDate(startDate);
 		dto2.setEndDate(endDate);
-		dto2.setComField(comField);
+		dto2.setComField(comField.toUpperCase());
 		dto2.setSalary(salary);
 		dto2.setEmploymentType(employmentType);
 		dto2.setComSize(comSize);
@@ -559,22 +617,33 @@ public class AdminCompany {
 	
 		System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 		System.out.println();
-			list(); // 전체채용목록 출력
 
-		
+		for(VwCompanyInfoDTO dto : list) {
+		System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
+				dto.getState(),dto.getSeqCompanyInfo(),
+				dto.getName(),dto.getStartDate(),
+				dto.getEndDate(),dto.getComField(),
+				dto.getSalary(),dto.getEmploymentType(),
+				dto.getComSize(),dto.getAddress());
+				} //for
+	System.out.println();
+	System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 	System.out.print("\t█ 삭제 원하시는 번호를 입력하세요. : ");
 	String seq = scan.nextLine();
+	if(seq.equals("")) {
+		menu();
+	}
 	System.out.println();
 	VwCompanyInfoDTO dto = dao.editGet(seq);
 	System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-	System.out.println("\t회사 이름: " + dto.getName());
-	System.out.println("\t채용 시작일: " + dto.getStartDate());
-	System.out.println("\t채용 종료일: " + dto.getEndDate());
-	System.out.println("\t채용 분야: " + dto.getComField());
-	System.out.println("\t연봉: " + dto.getSalary());
-	System.out.println("\t채용 형태: " + dto.getEmploymentType());
-	System.out.println("\t회사 규모: " + dto.getComSize());
-	System.out.println("\t회사 주소: " + dto.getAddress());
+	System.out.println("\t회사 이름 : " + dto.getName());
+	System.out.println("\t채용 시작일 : " + dto.getStartDate());
+	System.out.println("\t채용 종료일 : " + dto.getEndDate());
+	System.out.println("\t채용 분야 : " + dto.getComField());
+	System.out.println("\t연봉 : " + dto.getSalary());
+	System.out.println("\t채용 형태 : " + dto.getEmploymentType());
+	System.out.println("\t회사 규모 : " + dto.getComSize());
+	System.out.println("\t회사 주소 : " + dto.getAddress());
 	System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 	System.out.println();
 	
