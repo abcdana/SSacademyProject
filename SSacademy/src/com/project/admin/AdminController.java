@@ -49,7 +49,7 @@ public class AdminController {
 				BasicInfoManage manage = new BasicInfoManage();
 				manage.basicInfoMain();
 			} else if (sel.equals("2")) {
-				//System.out.println("2.	교사 계정 관리 - 김주혁");
+				//System.out.println("2.	교사 계정 관리 - 김주혁"); - 완료
 				TeacherAccountManagement teacherAccount = new TeacherAccountManagement(); //교사 계정 관리 생성
 				teacherAccount.main(); //교사 계정 관리 메인
 				//break;
@@ -79,7 +79,7 @@ public class AdminController {
 				System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");
 				//break;
 			} else if (sel.equals("11")) {
-				System.out.println("11.  강의 및 시설 평가 조회 - 김주혁");
+				//System.out.println("11.  강의 및 시설 평가 조회 - 김주혁"); - 완료
 				EvaluationManagement evaluation = new EvaluationManagement();
 				evaluation.main();
 				//break;
