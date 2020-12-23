@@ -17,7 +17,7 @@ import com.project.dto.CompanyInfoDTO;
  * @author 조혜승
  *
  */
-public class AdminCompany {
+public class CompanyInfo {
 
 	private static Scanner scan;
 	private static CompanyInfoDAO dao;
@@ -514,7 +514,7 @@ public class AdminCompany {
 
 			System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 			System.out.println();
-
+			ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 			for(VwCompanyInfoDTO dto : list) {
 			System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
 					dto.getState(),dto.getSeqCompanyInfo(),
@@ -617,7 +617,7 @@ public class AdminCompany {
 	
 		System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
 		System.out.println();
-
+		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		for(VwCompanyInfoDTO dto : list) {
 		System.out.printf("%5s %-2s %-10s %15s ~ %-10s %5s %5s %5s %10s %s\n", //TODO 맞춰야함
 				dto.getState(),dto.getSeqCompanyInfo(),

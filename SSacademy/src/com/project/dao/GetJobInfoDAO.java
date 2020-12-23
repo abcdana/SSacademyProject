@@ -9,7 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.project.admin.dto.CompleteStudentDTO;
+import com.project.admin.dto.VwEmpStatusDTO;
+import com.project.admin.dto.VwCompanyInfoDTO;
 import com.project.admin.dto.VwGetJobInfoDTO;
+import com.project.dto.CompanyInfoDTO;
 import com.project.dto.GetJobInfoDTO;
 import com.project.ssacademy.DBUtil;
 
@@ -39,8 +42,13 @@ public class GetJobInfoDAO {
 		}
 		
 	}
+	/**
+	 * 수료생 취업정보 전체를 조회할 수있는 메서드
+	 * @param word
+	 * @return
+	 */
 
-	public ArrayList<VwGetJobInfoDTO> jobList(String word) {  //수료생 취업정보 전체조회
+	public ArrayList<VwGetJobInfoDTO> jobList(String word) { 
 		
 		String where ="";
 		try {
@@ -53,17 +61,17 @@ public class GetJobInfoDAO {
 			while(rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
 				
-				dto.setGjseq(rs.getString("gjseq"));
-				dto.setName(rs.getString("name"));
-				dto.setId(rs.getString("id"));
-				dto.setCompanyName(rs.getString("companyname"));
-				dto.setDuty(rs.getString("duty"));
-				dto.setForm(rs.getString("form"));
-				dto.setSalary(rs.getString("salary"));
-				dto.setGetJobDate(rs.getString("getjobdate"));
-				dto.setLocation(rs.getString("location"));
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setCourse(rs.getString("course"));
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
 				list.add(dto);
 			}
 			
@@ -79,7 +87,11 @@ public class GetJobInfoDAO {
 		
 		return null;
 	}
-	public ArrayList<VwGetJobInfoDTO> dutyList() { //업무별 취업공고 조회위한 업무목록
+	/**
+	 * 업무별 취업공고 조회를 위한 업무목록을 출력해주는 메서드
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> dutyList() { 
 		try {
 			String sql = "select duty from vwgetjobinfoa group by duty order by duty";
 			
@@ -87,7 +99,7 @@ public class GetJobInfoDAO {
 			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
 			while(rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-				dto.setDuty(rs.getString("duty"));	
+				dto.setDuty(rs.getString("duty"));	//업무
 				list.add(dto);
 				
 				}
@@ -100,9 +112,12 @@ public class GetJobInfoDAO {
 			
 		return null;
 	}
+	/**
+	 * 취업정보 조회시 업무별로 검색해서 조회하도록 하는 메소드이다.
+	 * @param word
+	 * @return
+	 */
 	public ArrayList<VwGetJobInfoDTO> dutySearch(String word) { //업무별 검색조회
-		
-	
 		
 		try {
 			String sql = "{ call procDutyGetJobA (?,?) }";
@@ -115,17 +130,17 @@ public class GetJobInfoDAO {
 			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
 			while (rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-				dto.setGjseq(rs.getString("gjseq"));
-				dto.setName(rs.getString("name"));
-				dto.setId(rs.getString("id"));
-				dto.setCompanyName(rs.getString("companyname"));
-				dto.setDuty(rs.getString("duty"));
-				dto.setForm(rs.getString("form"));
-				dto.setSalary(rs.getString("salary"));
-				dto.setGetJobDate(rs.getString("getjobdate"));
-				dto.setLocation(rs.getString("location"));
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setCourse(rs.getString("course"));
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
 				list.add(dto);
 			}
 			return list;
@@ -140,6 +155,11 @@ public class GetJobInfoDAO {
 		
 		return null;
 	}
+	/**
+	 * 취업정보 조회시 소재지별로 검색할 수 있도록 하는 메서드
+	 * @param word
+	 * @return
+	 */
 	public ArrayList<VwGetJobInfoDTO> locationSearch(String word) { //소재지별 검색 조회
 		try {
 			String sql = "{ call procCityGetJobA (?,?) }";
@@ -152,17 +172,17 @@ public class GetJobInfoDAO {
 			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
 			while (rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-				dto.setGjseq(rs.getString("gjseq"));
-				dto.setName(rs.getString("name"));
-				dto.setId(rs.getString("id"));
-				dto.setCompanyName(rs.getString("companyname"));
-				dto.setDuty(rs.getString("duty"));
-				dto.setForm(rs.getString("form"));
-				dto.setSalary(rs.getString("salary"));
-				dto.setGetJobDate(rs.getString("getjobdate"));
-				dto.setLocation(rs.getString("location"));
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setCourse(rs.getString("course"));
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
 				list.add(dto);
 			}
 			return list;
@@ -176,7 +196,13 @@ public class GetJobInfoDAO {
 		
 		return null;
 	}
-	public ArrayList<VwGetJobInfoDTO> salarySearch(String word, String word2) { //연봉별 검색조회
+	/**
+	 * 취업정보 조회시 연봉의 최소값과 최대값의 사이를 입력해서 검색해주는 메소드
+	 * @param word
+	 * @param word2
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> salarySearch(String word, String word2) { 
 		try {
 			String sql = "{ call procSalaryGetJobA (?,?,?) }";
 			cstat = conn.prepareCall(sql);
@@ -189,17 +215,17 @@ public class GetJobInfoDAO {
 			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
 			while (rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-				dto.setGjseq(rs.getString("gjseq"));
-				dto.setName(rs.getString("name"));
-				dto.setId(rs.getString("id"));
-				dto.setCompanyName(rs.getString("companyname"));
-				dto.setDuty(rs.getString("duty"));
-				dto.setForm(rs.getString("form"));
-				dto.setSalary(rs.getString("salary"));
-				dto.setGetJobDate(rs.getString("getjobdate"));
-				dto.setLocation(rs.getString("location"));
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setCourse(rs.getString("course"));
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
 				
 				list.add(dto);
 			}
@@ -212,8 +238,11 @@ public class GetJobInfoDAO {
 		}
 		return null;
 	}
-
-	public ArrayList<CompleteStudentDTO> completeS() { // 취업 미등록된 수료생목록
+	/**
+	 * 수료는 했으나, 아직 취업 등록되지 않은 학생목록을 불러와주는 메서드
+	 * @return
+	 */
+	public ArrayList<CompleteStudentDTO> completeS() { 
 		
 
 		
@@ -223,10 +252,10 @@ public class GetJobInfoDAO {
 			ArrayList<CompleteStudentDTO> list = new ArrayList<CompleteStudentDTO>();
 			while(rs.next()) {
 				CompleteStudentDTO dto = new CompleteStudentDTO();
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setSname(rs.getString("sname"));
-				dto.setId(rs.getString("id"));
-				dto.setCourse(rs.getString("course"));
+				dto.setRcseq(rs.getString("rcseq"));	//수강정보번호
+				dto.setSname(rs.getString("sname"));	//학생이름
+				dto.setId(rs.getString("id"));			//학생아이디
+				dto.setCourse(rs.getString("course"));	//수료한 과정명
 				list.add(dto);
 			}
 			return list;
@@ -238,6 +267,11 @@ public class GetJobInfoDAO {
 		
 		return null;
 	}
+	/**
+	 * 수료생의 취업정보를 등록 해주는 메서드
+	 * @param dto
+	 * @return
+	 */
 
 	public int addGetJobInfo(GetJobInfoDTO dto) {
 		
@@ -245,13 +279,13 @@ public class GetJobInfoDAO {
 		try {
 			String sql = "{ call procAddGetJobInfo (?,?,?,?,?,?,?) } ";
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, dto.getSeqRegCourse());
-			pstat.setString(2, dto.getLocation());
-			pstat.setString(3, dto.getName());
-			pstat.setString(4, dto.getDuty());
-			pstat.setString(5, dto.getSalary());
-			pstat.setString(6, dto.getForm());
-			pstat.setString(7, dto.getGetJobDate());
+			pstat.setString(1, dto.getSeqRegCourse()); //수강정보번호
+			pstat.setString(2, dto.getLocation());		//회사주소
+			pstat.setString(3, dto.getName());			//회사이름
+			pstat.setString(4, dto.getDuty());			//업무
+			pstat.setString(5, dto.getSalary());		//연봉
+			pstat.setString(6, dto.getForm());			//고용형태
+			pstat.setString(7, dto.getGetJobDate());		//취업일
 	
 			return pstat.executeUpdate();
 			
@@ -264,7 +298,12 @@ public class GetJobInfoDAO {
 		
 		return 0;
 	}
-
+	/**
+	 * 취업정보를 수정, 삭제하기위해 이름을 검색해서 수정,삭제하기 위한 학생을 검색하는 메서드
+	 * 동명이인이 있을수 있으므로 목록 출력해준다.
+	 * @param name
+	 * @return
+	 */
 	public ArrayList<VwGetJobInfoDTO> nameSearch(String name) {
 		
 		try {
@@ -273,17 +312,17 @@ public class GetJobInfoDAO {
 			 ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
 			while(rs.next()) {
 				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-				dto.setGjseq(rs.getString("gjseq"));
-				dto.setName(rs.getString("name"));
-				dto.setId(rs.getString("id"));
-				dto.setCompanyName(rs.getString("companyname"));
-				dto.setDuty(rs.getString("duty"));
-				dto.setForm(rs.getString("form"));
-				dto.setSalary(rs.getString("salary"));
-				dto.setGetJobDate(rs.getString("getjobdate"));
-				dto.setLocation(rs.getString("location"));
-				dto.setRcseq(rs.getString("rcseq"));
-				dto.setCourse(rs.getString("course"));
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
 				list.add(dto);
 			}
 			return list;
@@ -295,18 +334,22 @@ public class GetJobInfoDAO {
 		return null;
 	}
 
-
+	/**
+	 * 수료생의 취업정보를 수정하는 메서드,
+	 * @param dto2
+	 * @return
+	 */
 	public int editGetJobInfo(GetJobInfoDTO dto2) {
 		try {
 			String sql = "{ call procUpdateGetJobInfo(?,?,?,?,?,?,?)}";
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, dto2.getSeqGetJobInfo());
-			pstat.setString(2, dto2.getLocation());
-			pstat.setString(3, dto2.getName());
-			pstat.setString(4, dto2.getDuty());
-			pstat.setString(5, dto2.getSalary());
-			pstat.setString(6, dto2.getForm());
-			pstat.setString(7, dto2.getGetJobDate());
+			pstat.setString(1, dto2.getSeqRegCourse()); //수강정보번호
+			pstat.setString(2, dto2.getLocation());		//회사주소
+			pstat.setString(3, dto2.getName());			//회사이름
+			pstat.setString(4, dto2.getDuty());			//업무
+			pstat.setString(5, dto2.getSalary());		//연봉
+			pstat.setString(6, dto2.getForm());			//고용형태
+			pstat.setString(7, dto2.getGetJobDate());		//취업일
 			
 			
 			return pstat.executeUpdate();
@@ -316,24 +359,29 @@ public class GetJobInfoDAO {
 		}
 		return 0;
 	}
+	/**
+	 * 수정할 특정 취업정보를 가져오는 메서드
+	 * @param seqGetJobInfo
+	 * @return
+	 */
 
-	public VwGetJobInfoDTO getEdit(String seqGetJobInfo) { // 수정할 한가지목록 가져오기
+	public VwGetJobInfoDTO getEdit(String seqGetJobInfo) { 
 		
 		try {
 			String sql = String.format("select * from vwGetJobInfoA where gjseq = %s",seqGetJobInfo);
 			rs = stat.executeQuery(sql);
 			rs.next();
 			VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
-			dto.setRcseq(rs.getString("rcseq"));
-			dto.setGjseq(rs.getString("gjseq"));
-			dto.setName(rs.getString("name"));
-			dto.setCompanyName(rs.getString("companyname"));
-			dto.setLocation(rs.getString("location"));
-			dto.setDuty(rs.getString("duty"));
-			dto.setSalary(rs.getString("salary"));
-			dto.setForm(rs.getString("form"));
-			dto.setGetJobDate(rs.getString("getjobdate"));
-			dto.setCourse(rs.getString("course"));
+			dto.setRcseq(rs.getString("rcseq"));				//수강정보번호
+			dto.setGjseq(rs.getString("gjseq"));				//채용정보번호
+			dto.setName(rs.getString("name"));					//학생이름
+			dto.setCompanyName(rs.getString("companyname"));		//회사이름
+			dto.setLocation(rs.getString("location"));			//회사주소
+			dto.setDuty(rs.getString("duty"));					//업무
+			dto.setSalary(rs.getString("salary"));					//급여
+			dto.setForm(rs.getString("form"));					//고용형태
+			dto.setGetJobDate(rs.getString("getjobdate"));		//취업일
+			dto.setCourse(rs.getString("course"));				//수료한과정명
 			
 			
 			return dto;
@@ -345,13 +393,17 @@ public class GetJobInfoDAO {
 		
 		return null;
 	}
-
-	public int deleteJob(String seqGetJobInfo) { //취업정보 삭제 
+	/**
+	 * 수료생의 취업정보를 삭제하는 메서드
+	 * @param seqGetJobInfo
+	 * @return
+	 */
+	public int deleteJob(String seqGetJobInfo) { 
 		
 		try {
 			String sql = "{ call procDeleteGetJobInfo(?) }";
 			pstat = conn.prepareStatement(sql);
-			pstat.setString(1, seqGetJobInfo);
+			pstat.setString(1, seqGetJobInfo); //취업정보번호
 			
 			
 			return pstat.executeUpdate();
@@ -363,5 +415,6 @@ public class GetJobInfoDAO {
 		
 		return 0;
 	}
+
 
 }

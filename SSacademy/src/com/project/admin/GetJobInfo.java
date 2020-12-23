@@ -4,18 +4,24 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.project.admin.dto.CompleteStudentDTO;
+import com.project.admin.dto.VwEmpStatusDTO;
+import com.project.admin.dto.VwCompanyInfoDTO;
 import com.project.admin.dto.VwGetJobInfoDTO;
+import com.project.dao.EmpStatusDAO;
 import com.project.dao.GetJobInfoDAO;
+import com.project.dto.CompanyInfoDTO;
+import com.project.dto.EmpStatusDTO;
 import com.project.dto.GetJobInfoDTO;
 
 public class GetJobInfo {
 	private static Scanner scan;
 	private static GetJobInfoDAO dao;
+	private static EmpStatusDAO daoE;
 	
 	static{
 		scan = new Scanner(System.in);
 		dao = new GetJobInfoDAO();
-		
+		daoE = new EmpStatusDAO();
 	}
 
 	public static void main(String[] args) {
@@ -38,9 +44,8 @@ public class GetJobInfo {
 		System.out.println("\t│\t\t5. 취업정보 삭제\t\t\t\t\t  │");
 		System.out.println("\t│\t\t6. 연계기업 취업정보 조회\t\t\t\t  │");
 		System.out.println("\t│\t\t7. 연계기업 취업정보 등록\t\t\t\t  │");
-		System.out.println("\t│\t\t8. 연계기업 취업정보 수정\t\t\t\t  │");
-		System.out.println("\t│\t\t9. 연계기업 취업정보 삭제\t\t\t\t  │");
-		System.out.println("\t│\t\t10. 이전 화면으로\t\t\t\t\t  │");
+		System.out.println("\t│\t\t8. 연계기업 취업정보 삭제\t\t\t\t  │");
+		System.out.println("\t│\t\t9. 이전 화면으로\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
@@ -75,14 +80,12 @@ public class GetJobInfo {
 			
 			pause();
 		}else if(num.equals("8")) {
-			cjobEdit();
+			cjobDelete();
 			
 			pause();
 		}else if(num.equals("9")) {
-			cjobDelete();
-			pause();
-		}else if(num.equals("10")) {
 			
+	
 		}
 		else {
 			System.out.println("\n없는 번호입니다. 다시입력해주세요.");
@@ -94,6 +97,9 @@ public class GetJobInfo {
 	}
 
 	private static void jobList() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 전체 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		ArrayList<VwGetJobInfoDTO> jobList = dao.jobList(null);
 		
 		for(VwGetJobInfoDTO dto : jobList) { //TODO 정리
@@ -171,7 +177,11 @@ public class GetJobInfo {
 								dto.getForm(), dto.getSalary(),
 								dto.getGetJobDate(), dto.getLocation());	
 		}//for
-		
+		if (jobList.size() == 0) {
+			System.out.println("\t\t\t존재하지 않는 입력값입니다. 다시입력해주세요");
+			pause();
+			return;
+		}
 		
 	}
 
@@ -211,6 +221,11 @@ public class GetJobInfo {
 								dto.getGetJobDate(),dto.getLocation(),
 								dto.getCourse());
 		}//for
+		if (jobList.size() == 0) {
+			System.out.println("\t\t\t존재하지 않는 입력값입니다. 다시입력해주세요");
+			pause();
+			return;
+		}
 		
 	}
 
@@ -244,6 +259,11 @@ public class GetJobInfo {
 								dto.getGetJobDate(),dto.getLocation(),
 								dto.getCourse());
 		}//for
+		if (jobList.size() == 0) {
+			System.out.println("\t\t\t검색한 지역은 채용공고에 존재하지 않습니다.");
+			pause();
+			return;
+		}
 	}
 
 	private static void duty() { //업무별 취업정보 조회
@@ -344,6 +364,11 @@ public class GetJobInfo {
 		for(CompleteStudentDTO dto : list) { //TODO 정리
 			System.out.printf("\t%s %s %s %s\n",dto.getRcseq(), dto.getSname(),dto.getId(), dto.getCourse());
 			
+		}
+		if (list.size() == 0) {
+			System.out.println("\t\t\t미취업 수료생이 없습니다.");
+			pause();
+			return;
 		}
 		
 	}
@@ -447,6 +472,11 @@ public class GetJobInfo {
 					dto.getForm(), dto.getSalary(),
 					dto.getGetJobDate(),dto.getLocation(),
 					dto.getCourse());
+			if (list.size() == 0) {
+				System.out.println("\t\t\t검색한 학생이름은 취업정보에 존재하지 않습니다.");
+				pause();
+				return;
+			}
 		}
 		
 		
@@ -488,7 +518,7 @@ public class GetJobInfo {
 				dto.getGetJobDate(),dto.getLocation(),
 				dto.getCourse());
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t정말로 삭제 하시겠습니까 ? (y|n) : ");
+		System.out.print("\t█정말로 삭제 하시겠습니까 ? (y|n) : ");
 		String input = scan.nextLine();
 		if(input.toLowerCase().equals("y")) {
 			int result = dao.deleteJob(seqGetJobInfo);
@@ -508,22 +538,140 @@ public class GetJobInfo {
 	}
 
 	private static void cjobList() {
-		// TODO Auto-generated method stub
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 전체 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		ArrayList<VwEmpStatusDTO> list = daoE.cjobList(null);
+		for(VwEmpStatusDTO dto : list) {
+			
+			System.out.printf("\t%s %s %s %s %s %s %s %s %s\n",
+					dto.getSeq(), dto.getName(), 
+					dto.getCompanyName(), dto.getDuty(),
+					dto.getForm(), dto.getSalary(),
+					dto.getGetJobDate(),dto.getLocation(),
+					dto.getCourse());
+			
+		}//for
 		
 	}
 
 	private static void cjobAdd() {
-		// TODO Auto-generated method stub
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 등록\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t- 연계기업 목록 -");
+		ArrayList<CompanyInfoDTO> list = daoE.companyList();
+		System.out.println();
+		for(CompanyInfoDTO dto : list) {
+			System.out.println("\t\t번호 : "+dto.getSeqCompanyInfo() + "\t회사이름 : " + dto.getName());
+			
+		}
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.print("\t█ 등록 원하는 회사 번호를 입력해 주세요. : ");
+		String seqCompanyInfo = scan.nextLine();
+		
+		if(seqCompanyInfo.equals("")) {
+			menu();
+		}
+		ArrayList<VwGetJobInfoDTO> list2 = daoE.companyGetJob(seqCompanyInfo);
+		System.out.println();
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("\t[취업번호][수강번호]\t[이름]  [ID]     \t[회사이름]    [취업일]");
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println();
+		for(VwGetJobInfoDTO dto : list2) { //TODO 맞추기
+			System.out.printf("\t%5s \t%6s  \t%s %s    %s  %s\n",
+							dto.getGjseq(), dto.getRcseq(),dto.getName(),
+							dto.getId(),dto.getCompanyName(),dto.getGetJobDate());
+		}
+		if (list2.size() == 0) {
+			System.out.println("\t\t\t선택한 기업에 취업한 수료생이 없습니다.");
+			pause();
+			return;
+		}
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.print("\t█ 등록 원하는 학생의 취업번호를 입력해 주세요.: ");
+		String gjseq = scan.nextLine();
+		if(gjseq.equals("")) {
+			menu();
+		}
+		System.out.print("\t█ 등록 원하는 학생의 수강번호를 입력해 주세요.: ");
+		String rcseq = scan.nextLine();
+		if(rcseq.equals("")) {
+			menu();
+		}
+		
+		EmpStatusDTO dto = new EmpStatusDTO();
+		dto.setSeqCompanyInfo(seqCompanyInfo);
+		dto.setSeqGetJobInfo(gjseq);
+		dto.setSeqRegCourse(rcseq);
+		
+		int result = daoE.addEmpStatus(dto);
+		if(result ==1) {
+			System.out.println("\t성공적으로 등록되었습니다.");
+		} else {
+			System.out.println("\t등록에 실패했습니다.");
+		}
+		
 		
 	}
 
-	private static void cjobEdit() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	private static void cjobDelete() {
-		// TODO Auto-generated method stub
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 삭제\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.print("\t█ 삭제 원하시는 학생이름을 입력하세요. : ");
+		String word = scan.nextLine();
+		if(word.equals("")) {
+			System.out.println("\t이전화면으로 돌아갑니다. 엔터를 입력해주세요");
+			scan.nextLine();
+			menu();
+		}
+		
+		ArrayList<VwEmpStatusDTO> list = daoE.cjobList(word);
+		for(VwEmpStatusDTO dto : list) {
+			
+			System.out.printf("\t%s %s %s %s %s %s %s %s %s\n",
+					dto.getSeq(), dto.getName(), 
+					dto.getCompanyName(), dto.getDuty(),
+					dto.getForm(), dto.getSalary(),
+					dto.getGetJobDate(),dto.getLocation(),
+					dto.getCourse());
+			
+		}//for
+		System.out.print("\t█ 삭제 원하시는 학생의 번호를입력하세요 : ");
+		String seq = scan.nextLine();
+			VwEmpStatusDTO dto = daoE.getList(seq);
+			System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+			System.out.println("\t\t\t번호 : " + dto.getSeq());
+			System.out.println("\t\t\t이름 : " + dto.getName());
+			System.out.println("\t\t\tID : " + dto.getId());
+			System.out.println("\t\t\t회사명 : " + dto.getCompanyName());
+			System.out.println("\t\t\t취업일 : " + dto.getGetJobDate());	
+			System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+			System.out.print("\t█정말로 삭제 하시겠습니까 ? (y|n) : ");
+			String input = scan.nextLine();
+			if(input.toLowerCase().equals("y")) {
+				int result = daoE.deleteEmpStatus(seq);
+				if(result ==1) {
+					System.out.println("\t성공적으로 삭제되었습니다.");
+				} else {
+					System.out.println("\t삭제 실패 하였습니다.");
+				}
+			} else if (input.toLowerCase().equals("n")){
+				System.out.println("\t이전화면으로 돌아갑니다. ");
+				menu();
+			} else {
+				System.out.println("\t잘못 입력했습니다. 다시 입력해주세요.");
+				cjobDelete();
+			}
 		
 	}
 

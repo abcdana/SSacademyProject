@@ -1,5 +1,10 @@
 package com.project.admin.dto;
 
+/**
+ * 수료한 학생 중 취업정보에 등록되지 않은 학생을 담는 DTO
+ * @author 조혜승
+ *
+ */
 public class CompleteStudentDTO {
 	private String rcseq;
 	private String sname;

@@ -2,6 +2,10 @@ package com.project.admin.dto;
 
 public class VwCompanyInfoDTO {
 
+	/**
+	 * 채용공고 정보담는 DTO
+	 * @author 조혜승
+	 */
 	private String seqCompanyInfo;
 	private String name;
 	private String startDate;
