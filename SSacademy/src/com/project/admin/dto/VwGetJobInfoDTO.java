@@ -1,17 +1,22 @@
 package com.project.admin.dto;
+/**
+ * 취업정보 담는 DTO
+ * @author 조혜승
+ *
+ */
 
 public class VwGetJobInfoDTO {
-	private String gjseq;
-	private String rcseq;
-	private String name;
-	private String id;
-	private String companyName;
-	private String duty;
-	private String form;
-	private String salary;
-	private String getJobDate;
-	private String location;
-	private String course;
+	private String gjseq; //취업정보번호
+	private String rcseq; //수강정보번호
+	private String name; //학생이름
+	private String id;  //학생아이디
+	private String companyName;	//회사이름
+	private String duty;	//업무
+	private String form;	//고용형태
+	private String salary;	//연봉
+	private String getJobDate;	//취업일
+	private String location;	//회사주소
+	private String course;		//수료과정
 
 	public String getGjseq() {
 		return gjseq;
