@@ -38,7 +38,8 @@ public class AdminView {
 	}
 	
 	
-
+	//////////////////////////////////////////지현//////////////////////////////////////////
+	
 	public void start() {
 		
 		System.out.println("\t┌───────────────────────────────────────────────┐");
@@ -237,6 +238,9 @@ public class AdminView {
 	}
 		
 
+	//////////////////////////////////////////다은///////////////////////////////////////////
+	
+	
 	/**
 	 * 관리자기능 중 기초정보관리 메뉴를 출력하는 메소드이다.
 	 */
@@ -353,7 +357,7 @@ public class AdminView {
 	
 	
 	/**
-	 * 과정 추가 헤더 출력 메소드이다.
+	 * 과정 수정 헤더 출력 메소드이다.
 	 */
 	public void updateCourseHeader() {
 		
@@ -382,36 +386,6 @@ public class AdminView {
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
 	
-
-	public void menu_AdministerStudent() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
-		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-
-	public void menu_adminStd_search() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
-		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-	
-
 	
 	/**
 	 * 관리자 뷰의 수정 결과를 출력하는 메소드이다.
@@ -499,9 +473,76 @@ public class AdminView {
 		
 	}
 	
+	/**
+	 * 과목 조회 헤더 출력 메소드이다. 
+	 */
+	public void subjectListHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t     과목 정보 목록 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	}
 	
 	
+	/**
+	 * 과목 조회 컬럼명 출력 메소드이다. 
+	 */
+	public void subjectListHeader2() {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[번호]\t\t\t[과목이름]\t\t\t[교재이름]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	
+	}
+	
+	
+	/**
+	 * 과목 추가 헤더 출력 메소드이다.
+	 */
+	public void addSubjectHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t     새로운 과목 추가\t\t\t          ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   새로운 과목을 추가하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+				
+	}
+	
+
+	/**
+	 * 과목 수정 헤더 출력 메소드이다.
+	 */
+	public void updateSubjectHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t       과목 정보 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   기존 과목을 수정하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+		
+	}
+	
+	/**
+	 * 과목 삭제 헤더 출력 메소드이다.
+	 */
+	public void deleteSubjectHeader() {
+	
+	System.out.println("\n");
+	System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	System.out.println("\t┃\t\t\t       기존 과목 삭제\t\t\t\t  ┃");
+	System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	System.out.println();
+	System.out.println("\t\t   기존 과목을 삭제하시려면 아래 항목을 작성해주세요.");
+	System.out.println();
+	
+	}
 	
 	
 	/**
@@ -525,12 +566,35 @@ public class AdminView {
 	}
 	
 	
+	/**
+	 * 강의실 조회 헤더 출력 메소드이다. 
+	 */
+	public void roomListHeader() {
+	
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t   강의실 정보 목록 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	
+	}
+	
+	/**
+	 * 강의실 조회 컬럼명 출력 메소드이다. 
+	 */
+	public void roomListHeader2() {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t  [번호]\t\t[강의실명]\t\t\t[수용인원]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+	
+	}
 	
 	
 	/**
 	 * 강의실 추가 헤더 출력 메소드이다.
 	 */
-	public void addSubjectHeader() {
+	public void addRoomHeader() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -542,6 +606,36 @@ public class AdminView {
 		
 	}
 	
+	
+	/**
+	 * 강의실 수정 헤더 출력 메소드이다.
+	 */
+	public void updateRoomHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t      강의실 정보 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   기존 강의실을 수정하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+		
+	}
+	
+	/**
+	 * 강의실 삭제 헤더 출력 메소드이다.
+	 */
+	public void deleteRoomHeader() {
+	
+	System.out.println("\n");
+	System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	System.out.println("\t┃\t\t\t      기존 강의실 삭제\t\t\t\t  ┃");
+	System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	System.out.println();
+	System.out.println("\t\t   기존 강의실을 삭제하시려면 아래 항목을 작성해주세요.");
+	System.out.println();
+	
+	}
 	
 	
 	/**
@@ -562,6 +656,107 @@ public class AdminView {
 		
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 		
+	}
+	
+	
+	/**
+	 * 교재 조회 헤더 출력 메소드이다. 
+	 */
+	public void bookListHeader() {
+	
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t     교재 정보 목록 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	}
+	
+	/**
+	 * 교재 조회 컬럼명 출력 메소드이다. 
+	 */
+	public void bookListHeader2() {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[번호]\t\t  [교재이름]\t\t      [출판사]\t       [저자]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+	}
+	
+	/**
+	 * 교재 추가 헤더 출력 메소드이다.
+	 */
+	public void addBookHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t     새로운 교재 추가\t\t\t          ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   새로운 교재를 추가하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+		
+	}
+	
+	
+	/**
+	 * 교재 수정 헤더 출력 메소드이다.
+	 */
+	public void updateBookHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t       교재 정보 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t   기존 과목을 수정하시려면 아래 항목을 작성해주세요.");
+		System.out.println();
+		
+	}
+	
+	
+	/**
+	 * 교재 삭제 헤더 출력 메소드이다.
+	 */
+	public void deleteBookHeader() {
+	
+	System.out.println("\n");
+	System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+	System.out.println("\t┃\t\t\t       기존 교재 삭제\t\t\t\t  ┃");
+	System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	System.out.println();
+	System.out.println("\t\t   기존 교재를 삭제하시려면 아래 항목을 작성해주세요.");
+	System.out.println();
+	
+	}
+	
+	/////////////////////////////////////////////////채원///////////////////////////////////////////
+	
+	
+	public void menu_AdministerStudent() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
+		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
+
+	public void menu_adminStd_search() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
+		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
+		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
 	}
 	
 	

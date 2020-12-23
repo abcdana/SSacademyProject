@@ -4,10 +4,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 
 import com.project.admin.dto.VwCompanyInfoDTO;
@@ -21,8 +19,7 @@ import oracle.jdbc.OracleTypes;
  *
  */
 public class CompanyInfoDAO {
-	
-	private static Scanner scan = new Scanner(System.in);
+
 	private Connection conn;
 	private Statement stat;
 
@@ -528,7 +525,7 @@ public VwCompanyInfoDTO editGet(String seq) {
 		return null;
 	}
 
-	public int add(CompanyInfoDTO dto) {
+	public int add(CompanyInfoDTO dto) { //채용공고 등록
 		
 
 		
@@ -556,7 +553,7 @@ public VwCompanyInfoDTO editGet(String seq) {
 		return 0;
 	}
 
-	public VwCompanyInfoDTO editGet(String seq) {
+	public VwCompanyInfoDTO editGet(String seq) { //수정할 컬럼 조회
 		
 
 		try {
@@ -590,7 +587,7 @@ public VwCompanyInfoDTO editGet(String seq) {
 		
 	}
  
-	public int edit(CompanyInfoDTO dto2) {
+	public int edit(CompanyInfoDTO dto2) { //채용공고 수정
 		
 
 		try {
@@ -618,13 +615,13 @@ public VwCompanyInfoDTO editGet(String seq) {
 		return 0;
 	}
 
-	public int delete(String seq) {
+	public int delete(String seq) { //채용공고 삭제
 
 		try {		
 			String sql = String.format("delete from tblCompanyInfo where seqCompanyInfo = '%s'",seq);
 			pstat = conn.prepareStatement(sql);
 			return pstat.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
