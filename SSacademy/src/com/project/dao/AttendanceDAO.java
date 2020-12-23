@@ -110,7 +110,6 @@ public class AttendanceDAO {
 	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqOpenCourse, String seqStudent, String startDate,
 			String endDate) {
 
-		
 		try {
 			
 			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
@@ -152,6 +151,27 @@ public class AttendanceDAO {
 
 
 
+	public int updateAttendState(String seqStudent, String attendanceDate, String attendState) {
+		
+		try {
+			
+			//ArrayList<AttendanceDTO> dto2 = new ArrayList<AttendanceDTO>();
+			String sql = "{ call procUpdateAttState(?, ?, ?) }"; 
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqStudent);
+			cstat.setString(2, attendanceDate);
+			cstat.setString(3, attendState);
+			
+			return cstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enupdateAttendState()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 
 
 

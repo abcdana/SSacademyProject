@@ -61,18 +61,16 @@ public class AttendanceManage {
 		System.out.print("\t█ 교육생 번호 : ");
 		String seqStudent = scan.nextLine();
 		
-		//view.AttendanceMenu(); //출결 관리 메뉴
-		
 		boolean loop = true;
 		while (loop) {
 			
-			view.AttendanceMenu();
+			view.AttendanceMenu(); //출결 관리 메뉴
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
 				searchPeriod(seqOpenCourse, seqStudent);
 			} else if (sel.equals("2")) {
-				
+				updateAttendState(seqOpenCourse, seqStudent);
 			} else {
 				loop = false;
 			}
@@ -82,6 +80,36 @@ public class AttendanceManage {
 	}
 	
 	
+	/**
+	 * 출결상태를 수정하는 메서드이다.
+	 * @param seqOpenCourse	개설과정 번호
+	 * @param seqStudent	교육생 번호
+	 */
+	private void updateAttendState(String seqOpenCourse, String seqStudent) {
+		
+		searchPeriod(seqOpenCourse, seqStudent);
+		
+		view.editAttedanceHeader(); //수정 헤더
+		
+		System.out.println("\t\t출결 상태를 수정할 날짜를 입력해주세요.\n");
+		System.out.print("\t█  년도 (ex. 2021) : ");
+		String year = scan.nextLine();
+		System.out.print("\t█  월 (ex. 01) : ");
+		String month = scan.nextLine();
+		System.out.print("\t█  일 (ex. 01) : ");
+		String day = scan.nextLine();
+		
+		String date = year + "-" + month + "-" + day;
+		
+		System.out.println("\t\t수정할 출결상태를 입력해주세요.\n");
+		System.out.print("\t█  출결 상태 (ex. 병가) : ");
+		String attendState = scan.nextLine();
+		
+		int result = adao.updateAttendState(seqStudent, date, attendState);
+		
+		view.updateResult(result);
+	}
+
 	/**
 	 * 출결조회 시 원하는 기간의 출결 목록을 조회 할 수 있다.
 	 * @param seqOpenCourse
