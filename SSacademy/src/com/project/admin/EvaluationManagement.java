@@ -67,7 +67,7 @@ public class EvaluationManagement {
 		ArrayList<ViewEndCourseDTO> list = dao.courseList(seqTeacher);
 		
 		for (ViewEndCourseDTO dto : list) {
-			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t    %s\n"
+			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t   %s명\n"
 								, dto.getSeqTeacher()
 								, dto.getTeacherName()
 								, dto.getSeqOpenCourse()
@@ -103,18 +103,25 @@ public class EvaluationManagement {
 			pause();
 			return;
 		}
-
+		
 		for (ViewSpecificEvaluationDTO dto : list) {
-			System.out.printf("\t  %s\t%s\t\t%s\t\t   %s\t\t\t%s\t\t%s\t\t%s\t   %s\t\t  %s\n"
-								, dto.getSeqStudent()
-								, dto.getStudentName()
-								, dto.getProcessScore()
-								, dto.getUnderstandScore()
-								, dto.getCommunicationScore()
-								, dto.getUsefulScore()
-								, dto.getSatisfactionScore()
-								, dto.getFacilityScore()
-								, dto.getManagementScore());
+			if (dto.getProcessScore() != null) {
+				System.out.printf("\t  %s\t%s\t\t%s\t\t   %s\t\t\t%s\t\t%s\t\t%s\t   %s\t\t  %s\n"
+						, dto.getSeqStudent()
+						, dto.getStudentName()
+						, dto.getProcessScore()
+						, dto.getUnderstandScore()
+						, dto.getCommunicationScore()
+						, dto.getUsefulScore()
+						, dto.getSatisfactionScore()
+						, dto.getFacilityScore()
+						, dto.getManagementScore());
+				
+			} else {
+				System.out.printf("\t  %s\t%s  -  평가 미실시\n"
+						, dto.getSeqStudent()
+						, dto.getStudentName());
+			}
 
 		}
 		
@@ -143,7 +150,7 @@ public class EvaluationManagement {
 		}
 		
 		for (ViewEndCourseDTO dto : list) {
-			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t    %s\n"
+			System.out.printf("\t    %s\t\t  %s\t      %s\t\t%s\t%s\t%s\t   %s명\n"
 								, dto.getSeqTeacher()
 								, dto.getTeacherName()
 								, dto.getSeqOpenCourse()
