@@ -276,6 +276,7 @@ public class TeacherAccountManagement {
 		System.out.println("\t┃\t\t\t    강의 가능 과목 목록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
+
 		//수정전 교사 가능 과목 출력
 		
 		//교사 강의 가능 과목 리스트 저장

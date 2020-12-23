@@ -92,6 +92,7 @@ public class AvailableSubjectDAO {
 		return 0;
 	}
 
+
 	public ArrayList<AvailableSubjectDTO> getAvailableSubject(String seqTeacher) {
 		
 		return null;
@@ -126,6 +127,8 @@ public class AvailableSubjectDAO {
 		}
 		
 		return null;
+
 	}
+
 	
 }

@@ -21,6 +21,7 @@ public class StudentView {
 		System.out.println("\t│\t\t2. 입퇴실 체크\t\t6. 취업현황 조회\t\t  │");
 		System.out.println("\t│\t\t3. 성적 조회\t\t7. 우수훈련생 확인\t\t  │");
 		System.out.println("\t│\t\t4. 강의 평가\t\t\t\t\t\t  │");
+		System.out.println("\t│\t\t0. 로그 아웃\t\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		

@@ -40,6 +40,7 @@ public class BasicSubjectDAO {
 
 	}
 
+
 //	public ArrayList<BasicSubjectDTO> get(String seqTeacher) {
 //		
 //		try {
