@@ -8,8 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.project.dto.AvailableSubjectDTO;
-import com.project.dto.BasicSubjectDTO;
 import com.project.ssacademy.DBUtil;
+
+import oracle.jdbc.OracleTypes;
 /**
  * 강의가능과목관련 모든 프로시저를 관리하는 DAO
  * @author 박지현
@@ -92,7 +93,78 @@ public class AvailableSubjectDAO {
 		
 		return 0;
 	}
+
+
+	public ArrayList<AvailableSubjectDTO> getAvailableSubject(String seqTeacher) {
+		
+		return null;
+	}
+
+	/**
+	 * 교사의 강의가능과목번호를 가져오는 DAO
+	 * @param seqTeacher 교사번호
+	 * @return 강의가능과목번호를 저장한 ArrayList
+	 */
+	public ArrayList<String> getSeqBasicSubjectList(String seqTeacher) {
+		
+		try {
+			
+			String sql = "select seqBasicSubject from tblAvailableSubject where seqTeacher = " + seqTeacher + "order by seqBasicSubject";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<String> seqBasicSubjectList = new ArrayList<String>();
+			
+			while (rs.next()) {
+				seqBasicSubjectList.add(rs.getString("seqBasicSubject"));
+			}
+			
+			return seqBasicSubjectList;
+			
+		} catch (Exception e) {
+			System.out.println("AvailableSubjectDAO.getSeqBasicSubject()");
+			e.printStackTrace();
+		}
+		
+		return null;
+
+	}
 	
 	
+	
+	/**
+	 * 강의가능과목 중복검사 DAO
+	 * 현재 강의중인 강의가능과목은 등록할 수 없습니다.
+	 * @param 강의가능과목번호
+	 * @return 중복검사 결과값 1. 이미 강의중 0. 등록가능
+	 */
+	public int checkAvailableSubject(String seqAvailableSubject) {
+		
+		try {
+			
+			String sql = "{ call CheckAvailSub(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.setString(1, seqAvailableSubject);
+			cstat.registerOutParameter(2, OracleTypes.NUMBER);
+			
+			cstat.executeUpdate();
+			
+			return cstat.getInt(2);
+			
+			
+		} catch (Exception e) {
+			System.out.println("AvailableSubjectDAO.checkAvailableSubject()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+		
+	}
+
 	
 }

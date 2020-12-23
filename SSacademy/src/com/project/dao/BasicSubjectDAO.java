@@ -40,6 +40,7 @@ public class BasicSubjectDAO {
 
 	}
 
+
 //	public ArrayList<BasicSubjectDTO> get(String seqTeacher) {
 //		
 //		try {
@@ -197,6 +198,40 @@ public class BasicSubjectDAO {
 		}
 		
 		return 0;
+	}
+
+	/**
+	 * 과목기초정보 테이블의 레코드 전체를 가져오는 메서드
+	 * @return 과목기초정보 테이블의 레코드를 담는 ArrayList
+	 */
+	public ArrayList<BasicSubjectDTO> wholeSubjectList() {
+		
+		try {
+			
+			String sql = "select * from tblBasicSubject order by seqBasicSubject";
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<BasicSubjectDTO> list = new ArrayList<BasicSubjectDTO>();
+			
+			while (rs.next()) {
+				BasicSubjectDTO dto = new BasicSubjectDTO();
+				dto.setSeqBasicSubject(rs.getString("seqBasicSubject"));
+				dto.setSeqBook(rs.getString("seqBook"));
+				dto.setName(rs.getString("name"));
+				dto.setInfo(rs.getString("info"));
+				
+				list.add(dto);
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+			System.out.println("BasicSubjectDAO.wholeSubjectList()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 

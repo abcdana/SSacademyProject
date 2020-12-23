@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenSubjectListDTO;
+import com.project.dto.OpenCourseDTO;
+import com.project.dto.OpenSubjectDTO;
 import com.project.ssacademy.DBUtil;
 
 import oracle.jdbc.OracleTypes;
@@ -26,7 +28,6 @@ public class OpenSubjectDAO {
 	private PreparedStatement pstat;
 	private CallableStatement cstat;
 	private ResultSet rs;
-	private OpenSubjectListDTO dto;
 	
 	/**
 	 * 기본 생성자 Connection과 Statement를 생성한다.
@@ -49,7 +50,7 @@ public class OpenSubjectDAO {
 	/**
 	 * 전체과목조회
 	 */
-	public ArrayList<OpenSubjectListDTO> OpenSubjectList() {
+	public ArrayList<OpenSubjectListDTO> openSubjectList() {
 			
 		try {
 			
@@ -105,9 +106,9 @@ public class OpenSubjectDAO {
 	
 	
 	/**
-	 * 특정과정조회에 해당하는 과목 리스트
+	 * 특정과목조회에 해당하는 과목정보
 	 */
-	public ArrayList<OpenSubjectListDTO> SpecificOpenSubject(String seqOpenCourse) {
+	public ArrayList<OpenSubjectListDTO> specificOpenSubject(String seqOpenCourse) {
 
 		try {
 			
@@ -155,4 +156,157 @@ public class OpenSubjectDAO {
 		
 	}
 	
+	
+	/**
+	 * 개설과목수정시 사용 할 DAO
+	 */
+	public OpenSubjectListDTO normalOpenSubject(String seqOpenSubject) {
+		
+		try {
+			
+			String sql = "select bs.name as subjectName"
+					+ "    , bc.name as courseName"
+					+ "    , t.name as teacherName"
+					+ "    , os.seqopensubject as seqOpenSubject"
+					+ "    , os.seqopencourse as seqOpenCourse"
+					+ "    , avs.seqavailablesubject as seqAvailableSubject"
+					+ "    , to_char(os.startdate, 'yyyy-mm-dd') as startDate"
+					+ "    , to_char(os.endDate, 'yyyy-mm-dd') as endDate"
+					+ " from tblBasicSubject bs"
+					+ "    inner join tblAvailableSubject avs"
+					+ "        on bs.seqbasicsubject = avs.seqbasicsubject"
+					+ "            inner join tblOpenSubject os"
+					+ "                on os.seqavailablesubject = avs.seqavailablesubject"
+					+ "                    inner join tblOpenCourse oc"
+					+ "                        on oc.seqopencourse = os.seqopencourse"
+					+ "                            inner join tblbasiccourseinfo bc"
+					+ "                                on bc.seqbasiccourseinfo = oc.seqbasiccourseinfo"
+					+ "                                    inner join tblTeacher t"
+					+ "                                        on t.seqTeacher = avs.seqTeacher"
+					+ "	where seqOpenSubject = ?";
+			
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, seqOpenSubject);
+			
+			rs = pstat.executeQuery();
+			
+			OpenSubjectListDTO osdto = new OpenSubjectListDTO();
+			
+			while(rs.next()) {
+				
+				osdto.setOpenCourseName(rs.getString("courseName"));
+				osdto.setTeacherName(rs.getString("teacherName"));
+				osdto.setSubjectName(rs.getString("subjectName"));
+				osdto.setSeqOpenSubject(rs.getString("seqOpenSubject"));
+				osdto.setAvailableSubject(rs.getString("seqAvailableSubject"));
+				osdto.setSeqOpenCourse(rs.getString("seqOpenCourse"));
+				osdto.setStartDate(rs.getString("startDate"));
+				osdto.setEndDate(rs.getString("endDate"));
+			
+				
+				return osdto;
+			}
+			
+					
+		} catch (Exception e) {
+			System.out.println("OpenSubjectDAO.normalOpenSubject()");
+		}
+		
+		return null;
+	}
+
+	
+	/**
+	 * 개설과목수정 DAO
+	 * @return 결과값 1: 수정완료 0: 수정실패
+	 */
+	
+	public int editOpenSubject(OpenSubjectListDTO osdto2) {
+		
+		try {
+			
+			String sql = "update tblOpenSubject set seqAvailableSubject = ?"
+					+ ", seqOpenCourse = ?"
+					+ ", startDate = ?"
+					+ ", endDate = ?"
+							+ "where seqOpenSubject = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			
+			pstat.setString(1, osdto2.getAvailableSubject());
+			pstat.setString(2, osdto2.getSeqOpenCourse());
+			pstat.setString(3, osdto2.getStartDate());
+			pstat.setString(4, osdto2.getEndDate());
+			pstat.setString(5, osdto2.getSeqOpenSubject());
+			
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			
+			System.out.println("OpenSubjectDAO.editOpenSubject()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	/**
+	 * 개설과목등록 DAO
+	 */
+	public int openSubjectAdd(OpenSubjectDTO osdto2) {
+		
+		try {
+
+			//개설과목등록 프로시저 호출
+			String sql = "{ call procRegistSubject2(?, ?, ?, ?) }";
+
+			cstat = conn.prepareCall(sql);
+
+			cstat.setString(1, osdto2.getSeqAvailableSubject());
+			cstat.setString(2, osdto2.getSeqOpenCourse());
+			cstat.setString(3, osdto2.getStartDate());
+			cstat.setString(4, osdto2.getEndDate());
+			
+			
+			return cstat.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			System.out.println("ArrayList<OpenCourseListDTO> OpenCourseList()");
+			e.printStackTrace();
+		}
+
+		return 0;
+	}
+	
+	
+	/**
+	 * 개설과목삭제 DAO
+	 */
+	public int openSubjectDelete(String seqOpenSubject) {
+	
+		try {
+
+			//개설과목삭제 프로시저 호출
+			String sql = "{ call procDeleteSubject2(?) }";
+
+			cstat = conn.prepareCall(sql);
+
+			cstat.setString(1, seqOpenSubject);
+		
+			int result = cstat.executeUpdate();
+		
+			return result;
+		
+		} catch (SQLException e) {
+			System.out.println("OpenSubjectDAO.openSubjectDelete()");
+			e.printStackTrace();
+		}
+
+		return 0;
+	
+	}//openCourseDelete()
 }
