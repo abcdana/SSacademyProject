@@ -677,7 +677,7 @@ public class AdminView {
 		
 		System.out.println();
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("\t[번호]\t\t  [교재이름]\t\t    [출판사]\t\t[저자]");
+		System.out.println("\t[번호]\t\t  [교재이름]\t\t      [출판사]\t       [저자]");
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 	}
 	

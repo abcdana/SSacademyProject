@@ -1,6 +1,5 @@
 package com.project.admin;
 
-import com.project.dto.BasicCourseInfoDTO;
 
 public class testDaeun {
 
@@ -25,7 +24,7 @@ public class testDaeun {
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("\t[번호]\t\t  [교재이름]\t\t    [출판사]\t\t[저자]");
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-	
+		
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");

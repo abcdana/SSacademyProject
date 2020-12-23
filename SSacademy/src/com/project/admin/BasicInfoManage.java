@@ -327,7 +327,7 @@ public class BasicInfoManage {
 		
 		for (ViewSubjectDTO dto : list) {
 			
-			System.out.printf("\t%6s\t%22s\t%22s\n"
+			System.out.printf("\t%4s\t   %-23s\t%-20s\n"
 					, dto.getSeqBasicSubject()
 					, dto.getName()
 					, dto.getBook());
@@ -717,7 +717,7 @@ public class BasicInfoManage {
 		
 		for (BookDTO dto : list) {
 			
-			System.out.printf("\t%4s\t%25s\t%10s\t%10s\n"
+			System.out.printf("\t%4s\t%-21s\t%10s\t%10s\n"
 					, dto.getSeqBook()
 					, dto.getName()
 					, dto.getPublisher()
@@ -779,8 +779,6 @@ public class BasicInfoManage {
 	
 	
 	private void updateBookInfo() {
-		
-		//헤더
 		
 		view.updateBookHeader();//view
 		
@@ -845,7 +843,6 @@ public class BasicInfoManage {
     	
 		boolean loop = true;
 		while (loop) {
-			
 			view.chooseDeleteOrNot();
 			
 			String sel = scan.nextLine();
