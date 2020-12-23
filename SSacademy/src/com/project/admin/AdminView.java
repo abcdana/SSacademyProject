@@ -16,7 +16,7 @@ public class AdminView {
 	/**
 	 * 관리자의 메인메뉴를 출력하는 메소드이다.
 	 */
-	public void menu() {
+	public static void menu() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
