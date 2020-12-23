@@ -300,10 +300,10 @@ public class BasicInfoManage {
 			} else if (num.equals("2")) {
 				addSubjectInfoMenu();
 			} else if (num.equals("3")) {
-				
+				updateSubjectInfo();
 				pause();
 			} else if (num.equals("4")) {
-				
+				deleteSubjectInfoMenu();
 				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
@@ -386,50 +386,103 @@ public class BasicInfoManage {
 	}//addSubjectInfo(BasicSubjectDTO bsdto) 
 	
 	
-//	/**
-//	 * 기존 과목을 수정하는 메서드이다.
-//	 */
-//	private void updateSubjectInfo() {
-//		
-//		//헤더
-//		
-//		subjectList(); //전체 과목
-//		
-//		System.out.print("\n\t█ 과목 번호 : ");
-//		String seqBasicSubject = scan.nextLine();
-//		
-//		ViewSubjectDTO dto = vsdao.get(seqBasicSubject);
-//		
-//		System.out.println();
-//		System.out.println("\t* 과목번호 : " + dto.getSeqBasicSubject());
-//		System.out.println("\t* 과목이름 : " + dto.getName());
-//		System.out.println("\t* 과목소개 : " + dto.getInfo());
-//		System.out.println("\t* 교재번호 : " + dto.getBook());
-//		System.out.println("\n");
-//		
-//		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
-//		
-//		System.out.print("\t█ 수정할 과목이름 : ");
-//		String name = scan.nextLine();
-//		if (name.equals("")) {
-//			name = dto.getName();
-//		}
-//		
-//		System.out.print("\t█ 수정할 과목소개 : ");
-//		String info = scan.nextLine();
-//		if (info.equals("")) {
-//			info = dto.getInfo();
-//		}
-//
-//		System.out.print("\t█ 수정할 교재번호 : ");
-//		String book = scan.nextLine();
-//		if (people.equals("")) {
-//			people = dto.getPeople();
-//		}
-//	}
-//	
+	/**
+	 * 기존 과목을 수정하는 메서드이다.
+	 */
+	private void updateSubjectInfo() {
+		
+		//헤더
+		
+		subjectList(); //전체 과목
+		
+		bookList(); //전체 교재
+		
+		System.out.print("\n\t█ 과목 번호 : ");
+		String seqBasicSubject = scan.nextLine();
+		
+		ViewSubjectDTO dto = vsdao.get(seqBasicSubject);
+		BasicSubjectDTO dtoBS = bsdao.get(seqBasicSubject);
+		
+		System.out.println();
+		System.out.println("\t* 과목번호 : " + dto.getSeqBasicSubject());
+		System.out.println("\t* 과목이름 : " + dto.getName());
+		System.out.println("\t* 과목소개 : " + dto.getInfo());
+		System.out.println("\t* 교재이름 : " + dto.getBook());
+		System.out.println("\n");
+		
+		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		System.out.print("\t█ 수정할 과목이름 : ");
+		String name = scan.nextLine();
+		if (name.equals("")) {
+			name = dto.getName();
+		}
+		
+		System.out.print("\t█ 수정할 과목소개 : ");
+		String info = scan.nextLine();
+		if (info.equals("")) {
+			info = dto.getInfo();
+		}
+		
+		System.out.print("\t█ 수정할 교재번호 : ");
+		String book = scan.nextLine();
+		if (book.equals("")) {
+			book = dtoBS.getSeqBook();
+		}
+		
+		BasicSubjectDTO dto2 = new BasicSubjectDTO();
+		
+		dto2.setSeqBasicSubject(seqBasicSubject);
+		dto2.setName(name);
+		dto2.setInfo(info);
+		dto2.setSeqBook(book);
+		
+		int result = bsdao.updateSubject(dto2);
+		
+		view.updateResult(result);
+		
+	}
 	
 	
+	/**
+	 * 과목 삭제 메뉴 메서드이다.
+	 */
+	private void deleteSubjectInfoMenu() {
+		
+		//헤더
+		
+		subjectList();
+		
+		System.out.print("\t█ 과목 번호 : ");
+		String seqBasicSubject = scan.nextLine();
+    	
+		boolean loop = true;
+		while (loop) {
+			
+			view.chooseDeleteOrNot();
+			
+			String sel = scan.nextLine();
+			if (sel.equals("1")) {
+				deleteBasicSubjectInfo(seqBasicSubject);
+				return;
+			} else {
+				loop = false;
+			}
+		}
+
+	}
+	
+	
+	/**
+	 * 강의실 삭제 메서드이다.
+	 * @param seqBasicSubject
+	 */
+	private void deleteBasicSubjectInfo(String seqBasicSubject) {
+		
+		int result = bsdao.deleteSubject(seqBasicSubject);
+		view.deleteResult(result);
+		
+	}
 
 	/**
 	 * 기초 강의실정보 조회, 추가, 수정, 삭제 메뉴 분기 메서드이다.
@@ -588,7 +641,7 @@ public class BasicInfoManage {
     	
     	view.deleteCourseHeader();
     	
-    	//roomList(); //전체 강의실 목록
+    	roomList(); //전체 강의실 목록
     	
 		System.out.print("\t█ 강의실 번호 : ");
 		String seqRoom = scan.nextLine();

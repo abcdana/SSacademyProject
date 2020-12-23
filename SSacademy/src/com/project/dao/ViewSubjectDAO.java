@@ -78,6 +78,44 @@ public class ViewSubjectDAO {
 
 		return null;
 	}
+
+	
+	/**
+	 * 
+	 * @param seqBasicSubject 과목번호
+	 * @return dto 객체 (뷰 객체)
+	 */
+	public ViewSubjectDTO get(String seqBasicSubject) {
+		
+		try {
+			
+			String sql = "select * from vwBasicSubject where seqBasicSubject = ?";
+			
+			pstat = conn.prepareStatement(sql);
+			pstat.setString(1, seqBasicSubject);
+			
+			rs = pstat.executeQuery();
+			
+			if (rs.next()) {
+				
+				ViewSubjectDTO dto = new ViewSubjectDTO();
+				
+				dto.setSeqBasicSubject(rs.getString("seqBasicSubject"));
+				dto.setName(rs.getString("name"));
+				dto.setInfo(rs.getString("info"));
+				dto.setBook(rs.getString("book"));
+				
+				return dto;
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("primaryViewSubjectDAO.enget()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 
 }
