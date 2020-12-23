@@ -39,13 +39,13 @@ public class BasicInfoManage {
 		this.bdao = new BookDAO();
 	}
 
-	//임시 메인
-	public static void main(String[] args) {
-		
-		BasicInfoManage bim = new BasicInfoManage();
-		bim.basicInfoMain();
-		
-	}
+//	//임시 메인
+//	public static void main(String[] args) {
+//		
+//		BasicInfoManage bim = new BasicInfoManage();
+//		bim.basicInfoMain();
+//		
+//	}
 	
 	/**
 	 * 기초 정보 관리 메뉴 분기 메서드이다.

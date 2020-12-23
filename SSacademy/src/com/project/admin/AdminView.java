@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenCourseStudentDTO;
 import com.project.admin.dto.OpenSubjectListDTO;
+import com.project.dto.AllOpenCourseDTO;
+import com.project.dto.AttendanceDTO;
+import com.project.dto.OpenCourseDTO;
+import com.project.dto.PeriodAttendListDTO;
+import com.project.dto.ViewStudentDTO;
 
 /**
  * 관리자 뷰 입니다.
@@ -1028,6 +1033,147 @@ public class AdminView {
 	
 	}
 	
+	
+	
+	//------------------출결관리
+	
+	/**
+	 * 출결관리 헤더를 출력하는 메서드입니다.
+	 */
+	public void AttendanceHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 출결 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+	
+	
+	/**
+	 * 출결조회시 개설과정정보 리스트를 출력하는 메소드이다.
+	 * @param result
+	 */
+	public void allOpenCourseList(ArrayList<AllOpenCourseDTO> result) {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[번호]\t\t\t[과정이름]\t\t\t       [과정시작일] [과정종료일]   [교사]     [강의실]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
+		for (AllOpenCourseDTO dto : result) {
+			
+			System.out.printf("\t%3s\t%-35s\t%-10s   %-10s    %-5s   %-10s\n"
+					, dto.getSeqOpenCourse()
+					, dto.getName()
+					, dto.getStartDate()
+					, dto.getEndDate()
+					, dto.getTeacherName()
+					, dto.getRoomName());
+		}
+		
+		System.out.println("\t────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println();
+	}
+	
+	
+	/**
+	 * 특정 개설과정 번호 선택 시 그 과정을 수강하고 있는 모든 교육생 정보를 출력하는 메서드이다.
+	 * @param aslist 특정 과정을 수강중인 교육생 정보
+	 */
+	public void allStudentList(ArrayList<ViewStudentDTO> aslist) {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[번호]\t[이름]\t    [ID]\t [PW]\t    [등록일]\t    [수강상태]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
+		for(ViewStudentDTO dto : aslist) {
+			System.out.printf("\t%4s\t%s\t%10s\t%-8s   %s\t %-20s\n"
+										,dto.getSeqStudent()
+										,dto.getName()
+										,dto.getId()
+										,dto.getPw()
+										,dto.getRegDate()
+										,dto.getStudentState());
+		}	
+		
+		System.out.println("\t──────────────────────────────────────────────────────────────────────────");
+		System.out.println();
+		
+	}
+	
+	
+	/**
+	 * 출결관리 메뉴를 출력하는 메서드이다.
+	 */
+	public void AttendanceMenu() {
+		
+		System.out.println();
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t1. 기간별 조회\t\t2. 출결 수정\t\t0. 뒤로 가기\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+	
+	
+	/**
+	 * 기간별 출결조회 헤더 출력 메서드이다.
+	 */
+	public void searchPeriodHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t  기간별 출결 목록 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+	}
+	
+	/**
+	 * 출결 상태 수정 헤더 출력 메서드이다.
+	 */
+	public void editAttedanceHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t       근태 상황 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+	}
+	
+		
+	
+	/**
+	 * 관리자 뷰의 특정 개설 과정의 특정 교육생의 특정 기간의 출결 목록을 출력하는 메소드이다.
+	 * 번호, 수강날짜, 출결상황을 출력한다.
+	 * @param result
+	 */
+	public void attendanceList(ArrayList<PeriodAttendListDTO> result) {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t  [날짜]\t [입실]\t\t [퇴실]\t\t[상태]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+		for (PeriodAttendListDTO dto : result) {
+			
+			System.out.printf("\t%s\t%-9s\t%-10s\t %-10s\n"
+					, dto.getAttendDate()
+					, dto.getInTime()
+					, dto.getOutTime()
+					, dto.getAttendState());
+		}
+		
+		System.out.println("\t─────────────────────────────────────────────────────────────");
+		System.out.println();
+		
+	}
+
+	
+	
 	/////////////////////////////////////////////////채원///////////////////////////////////////////
 	
 	
@@ -1058,6 +1204,20 @@ public class AdminView {
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 		/**
 	 * 교육생 관리 메뉴 출력 메소드이다.
