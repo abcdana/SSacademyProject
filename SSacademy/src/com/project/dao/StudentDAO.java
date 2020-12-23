@@ -5,13 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.project.dto.StudentDTO;
 import com.project.ssacademy.DBUtil;
 
 import oracle.jdbc.OracleTypes;
 
-//학생정보
+/**
+ * 학생정보관련 모든 프로시저들을 담고있는 DAO이다. 
+ * @author 임채원
+ *
+ */
 public class StudentDAO {
 
 	private Connection conn;
@@ -125,5 +130,6 @@ public class StudentDAO {
 		
 		return null;
 	}
+
 	
 }
