@@ -276,16 +276,30 @@ public class TeacherAccountManagement {
 		System.out.println("\t┃\t\t\t    강의 가능 과목 목록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
-		//수정전 교사 가능 과목 출력 
-		ArrayList<BasicSubjectDTO> list = bsdao.get(seqTeacher);
+		//수정전 교사 가능 과목 출력
+		
+		//교사 강의 가능 과목 리스트 저장
+		ArrayList<String> seqBasicSubjectList = asdao.getSeqBasicSubjectList(seqTeacher);
+		
+		//강의 가능 과목의 기초 정보 저장할 객체 선언
+		ArrayList<BasicSubjectDTO> list = new ArrayList<BasicSubjectDTO>();
+		
+		//강의 가능 과목 기초 정보 가져오기
+		for (int i=0; i<seqBasicSubjectList.size(); i++) {
+			BasicSubjectDTO bsdto = bsdao.get(seqBasicSubjectList.get(i));
+			
+			//강의 가능 과목 기초 정보 저장
+			list.add(bsdto);
+		}
+		
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("\t\t\t[번호]\t\t[과목명]");
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		
-		for (BasicSubjectDTO dto : list) {
+		for (BasicSubjectDTO bsdto : list) {
 			System.out.printf("\t\t\t  %s\t\t%s\n"
-								, dto.getSeqBasicSubject()
-								, dto.getName());
+								, bsdto.getSeqBasicSubject()
+								, bsdto.getName());
 			
 		}
 		
@@ -294,30 +308,59 @@ public class TeacherAccountManagement {
 		System.out.print("\t수정 전 과목번호 : ");
 		String oldSeq = scan.nextLine();
 		
-		//TODO 기초과목정보 목록 출력
-		
-		System.out.print("\t수정 후 과목번호 : ");
-		String newSeq = scan.nextLine();
-		
-		int result2 = 0;
-		
-		if (!oldSeq.equals("") || !newSeq.equals("")) {
-			result2 = asdao.edit(seqTeacher, oldSeq, newSeq);
-		} else {
-			result2 = 1;
-		}
-		
-		if (result2 > 0) {
+		if (!oldSeq.equals("")) { //수정 전 과목번호 입력O
+			//과목기초정보 가져오기
+			ArrayList<BasicSubjectDTO> basicSubjectList = bsdao.wholeSubjectList();
+			
 			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-			System.out.println("\t┃\t\t\t강의 가능 과목 수정 성공\t\t\t  ┃");
+			System.out.println("\t┃\t\t\t   과목 기초 정보 리스트\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t[번호]\t\t[과목명]\t\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			
+			//가져온 과목기초정보 출력
+			for (BasicSubjectDTO dto : basicSubjectList) {
+				System.out.printf("\t\t  %s\t\t%s\n", dto.getSeqBasicSubject(), dto.getName());
+				System.out.println("\t――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
+			}
+			
+			System.out.print("\t수정 후 과목번호 : ");
+			String newSeq = scan.nextLine();
+			
+			int result2 = 0;
+			
+			if (!newSeq.equals("")) { //수정 후 과목번호 입력O
+				result2 = asdao.edit(seqTeacher, oldSeq, newSeq);
+			} else { //수정 후 과목번호 입력X
+				System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+				System.out.println("\t┃\t\t\t강의 가능 과목 수정 취소\t\t\t  ┃");
+				System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+				pause();
+				return;
+			}
+			
+			if (result2 > 0) {
+				System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+				System.out.println("\t┃\t\t\t강의 가능 과목 수정 성공\t\t\t  ┃");
+				System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+				pause();
+			} else {
+				System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+				System.out.println("\t┃\t\t\t강의 가능 과목 수정 실패\t\t\t  ┃");
+				System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+				pause();
+			}
+			
+		} else { //수정 전 과목번호 입력X
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t강의 가능 과목 수정 취소\t\t\t  ┃");
 			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
-		} else {
-			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-			System.out.println("\t┃\t\t\t강의 가능 과목 수정 실패\t\t\t  ┃");
-			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-			pause();
 		}
+		
+		
 		
 	} //editTeacher
 
@@ -394,9 +437,23 @@ public class TeacherAccountManagement {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t가능 과목 등록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		System.out.println();
 		
-		//TODO 과목 목록 출력 추가하기 -> 과목기초정보 DAO에서 받아오기
+		//과목기초정보 가져오기
+		ArrayList<BasicSubjectDTO> basicSubjectList = bsdao.wholeSubjectList();
+		
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t   과목 기초 정보 리스트\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t[번호]\t\t[과목명]\t\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		//가져온 과목기초정보 출력
+		for (BasicSubjectDTO dto : basicSubjectList) {
+			System.out.printf("\t\t  %s\t\t%s\n", dto.getSeqBasicSubject(), dto.getName());
+			System.out.println("\t――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――");
+		}
 		
 		System.out.println("\t가능 과목 번호를 ,로 구분하여 입력해주세요.");
 		System.out.println("\tex. 1,2,3,5,7");
