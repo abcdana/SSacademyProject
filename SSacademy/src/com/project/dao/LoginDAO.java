@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.project.admin.AdminController;
@@ -93,9 +94,9 @@ public class LoginDAO {
 					} else if ((id.substring(0, 1)).equals("S")) { //아이디 S로 시작 : 교육생
 						
 						StudentDAO dao = new StudentDAO();
-						StudentDTO dto = dao.getStudent(id);
+						ArrayList<StudentDTO> list = dao.getStudent(id);
 						
-						StudentController student = new StudentController(dto);
+						StudentController student = new StudentController(list.get(0));
 						student.studentMain();
 						
 					} else if ((id.substring(0, 1)).equals("T")) { //아이디 T로 시작 : 교사
