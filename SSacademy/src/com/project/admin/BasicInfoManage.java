@@ -295,6 +295,7 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
+				view.subjectListHeader();
 				subjectList();
 				pause();
 			} else if (num.equals("2")) {
@@ -320,7 +321,7 @@ public class BasicInfoManage {
 	 */
 	private void subjectList() {
 		
-		//헤더
+		view.subjectListHeader2();//헤더
 		
 		ArrayList<ViewSubjectDTO> list = vsdao.subjectList();
 		
@@ -341,14 +342,14 @@ public class BasicInfoManage {
 	 */
 	private void addSubjectInfoMenu() {
 		
-		//헤더
+		view.addSubjectHeader();//헤더
 		
 		System.out.print("\t█ 과목이름 : ");
 		String name = scan.nextLine();
 		
 		System.out.print("\t█ 과목소개 : ");
 		String info = scan.nextLine();
-		
+				
 		System.out.print("\t█ 교재번호 : ");
 		String seqBook = scan.nextLine();
 		
@@ -391,11 +392,9 @@ public class BasicInfoManage {
 	 */
 	private void updateSubjectInfo() {
 		
-		//헤더
+		view.updateSubjectHeader();//헤더
 		
 		subjectList(); //전체 과목
-		
-		bookList(); //전체 교재
 		
 		System.out.print("\n\t█ 과목 번호 : ");
 		String seqBasicSubject = scan.nextLine();
@@ -404,13 +403,16 @@ public class BasicInfoManage {
 		BasicSubjectDTO dtoBS = bsdao.get(seqBasicSubject);
 		
 		System.out.println();
-		System.out.println("\t* 과목번호 : " + dto.getSeqBasicSubject());
 		System.out.println("\t* 과목이름 : " + dto.getName());
 		System.out.println("\t* 과목소개 : " + dto.getInfo());
 		System.out.println("\t* 교재이름 : " + dto.getBook());
 		System.out.println("\n");
 		
 		System.out.println("\t\t  수정을 원치 않는 항목은 엔터를 입력하세요.\n");
+		
+		view.bookListHeader();
+		bookList();
+		System.out.println(); //교재 목록
 		
 		System.out.print("\t█ 수정할 과목이름 : ");
 		String name = scan.nextLine();
@@ -423,7 +425,6 @@ public class BasicInfoManage {
 		if (info.equals("")) {
 			info = dto.getInfo();
 		}
-		
 		System.out.print("\t█ 수정할 교재번호 : ");
 		String book = scan.nextLine();
 		if (book.equals("")) {
@@ -449,7 +450,7 @@ public class BasicInfoManage {
 	 */
 	private void deleteSubjectInfoMenu() {
 		
-		//헤더
+		view.deleteSubjectHeader();//헤더
 		
 		subjectList();
 		
@@ -542,7 +543,7 @@ public class BasicInfoManage {
 	 */
 	private void addRoomInfoMenu() {
 		
-		view.addSubjectHeader();
+		view.addRoomHeader();
 		
 		System.out.print("\t█ 강의실명 : ");
 		String name = scan.nextLine();
@@ -587,7 +588,7 @@ public class BasicInfoManage {
      */
 	private void updateRoomInfo() {
 		
-		//헤더
+		view.updateRoomHeader();//헤더
 		
 		//view
 		
@@ -684,6 +685,7 @@ public class BasicInfoManage {
 			String num = scan.nextLine();
 			
 			if (num.equals("1")) {
+				view.bookListHeader();
 				bookList();
 				pause();
 			} else if (num.equals("2")) {
@@ -709,7 +711,7 @@ public class BasicInfoManage {
 	 */
 	private void bookList() {
 		
-		//헤더
+		view.bookListHeader2();//헤더
 		
 		ArrayList<BookDTO> list = bdao.bookList();
 		
@@ -731,7 +733,7 @@ public class BasicInfoManage {
 	 */
 	private void addBookInfoMenu() {
 		
-		//헤더
+		view.addBookHeader();//헤더
 		
 		System.out.print("\t█ 교재이름 : ");
 		String name = scan.nextLine();
@@ -780,7 +782,7 @@ public class BasicInfoManage {
 		
 		//헤더
 		
-		//view
+		view.updateBookHeader();//view
 		
 		bookList();
 		
@@ -835,7 +837,8 @@ public class BasicInfoManage {
 	 */
 	private void deleteBookInfoMenu() {
 		
-		//헤더
+		view.deleteBookHeader();//헤더
+		bookList();
 		
 		System.out.print("\t█ 교재 번호 : ");
 		String seqBook = scan.nextLine();

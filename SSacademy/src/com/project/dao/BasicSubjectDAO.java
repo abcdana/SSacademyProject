@@ -142,6 +142,13 @@ public class BasicSubjectDAO {
 	}
 	
 	
+	/**
+	 * 기존 과목 정보를 수정하는 메서드이다
+	 * 수정할 과목 데이터 객체를 가져와 과목명, 과목소개, 교재번호를 수정할 수 있다.
+	 * 등록 성공 시 1, 실패 시 0을 반환한다.
+	 * @param dto2 수정할 과목 데이터 객체
+	 * @return 성공 여부
+	 */
 	public int updateSubject(BasicSubjectDTO dto2) {
 		
 		try {
@@ -157,7 +164,6 @@ public class BasicSubjectDAO {
 			pstat.setString(4, dto2.getSeqBasicSubject());
 			
 			return pstat.executeUpdate();
-			
 			
 		} catch (Exception e) {
 			System.out.println("primaryBasicSubjectDAO.enupdateSubject()");
@@ -184,7 +190,6 @@ public class BasicSubjectDAO {
 			cstat = conn.prepareCall(sql);
 			cstat.setString(1, seqBasicSubject);
 			return cstat.executeUpdate();
-			
 			
 		} catch (Exception e) {
 			System.out.println("primaryBasicSubjectDAO.enenclosing_method()");

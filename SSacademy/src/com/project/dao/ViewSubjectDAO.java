@@ -65,7 +65,6 @@ public class ViewSubjectDAO {
 				vsdto.setBook(rs.getString("book"));
 				
 				result.add(vsdto);
-				
 			}
 			
 			rs.close();
