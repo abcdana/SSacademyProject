@@ -54,10 +54,14 @@ public class AdminController {
 				teacherAccount.main(); //교사 계정 관리 메인
 				//break;
 			} else if (sel.equals("3")) {
-				System.out.println("3.	개설 과정 관리 -박지현");
-				//break;
+				//System.out.println("3.	개설 과정 관리 -박지현"); - 완료
+				OpenCourse oc = new OpenCourse();
+				oc.openCourseStart();
+				
 			} else if (sel.equals("4")) {
-				System.out.println("4.	개설 과목 관리 -박지현");
+				//System.out.println("4.	개설 과목 관리 -박지현");
+				OpenSubject os = new OpenSubject();
+				os.openSubjectStart();
 				//break;
 			} else if (sel.equals("5")) {
 //				System.out.println("5.	교육생 관리 - 임채원");

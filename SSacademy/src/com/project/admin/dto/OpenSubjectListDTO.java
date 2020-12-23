@@ -9,12 +9,13 @@ public class OpenSubjectListDTO {
 	private String seqOpenCourse;
 	private String seqOpenSubject;
 	private String subjectName;
-	private String OpenCourseName;
+	private String openCourseName;
 	private String startDate;
 	private String endDate;
 	private String teacherName;
 	private String bookName;
 	private String state;
+	private String availableSubject;
 	
 	
 	public String getSubjectName() {
@@ -76,12 +77,12 @@ public class OpenSubjectListDTO {
 
 	
 	public String getOpenCourseName() {
-		return OpenCourseName;
+		return openCourseName;
 	}
 
 	
 	public void setOpenCourseName(String openCourseName) {
-		OpenCourseName = openCourseName;
+		this.openCourseName = openCourseName;
 	}
 
 	/**
@@ -96,6 +97,20 @@ public class OpenSubjectListDTO {
 	 */
 	public void setSeqOpenCourse(String seqOpenCourse) {
 		this.seqOpenCourse = seqOpenCourse;
+	}
+
+	/**
+	 * @return the availableSubject
+	 */
+	public String getAvailableSubject() {
+		return availableSubject;
+	}
+
+	/**
+	 * @param availableSubject the availableSubject to set
+	 */
+	public void setAvailableSubject(String availableSubject) {
+		this.availableSubject = availableSubject;
 	}
 	
 	

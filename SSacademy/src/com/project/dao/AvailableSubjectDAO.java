@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import com.project.dto.AvailableSubjectDTO;
 import com.project.ssacademy.DBUtil;
+
+import oracle.jdbc.OracleTypes;
 /**
  * 강의가능과목관련 모든 프로시저를 관리하는 DAO
  * @author 박지현
@@ -128,6 +130,40 @@ public class AvailableSubjectDAO {
 		
 		return null;
 
+	}
+	
+	
+	
+	/**
+	 * 강의가능과목 중복검사 DAO
+	 * 현재 강의중인 강의가능과목은 등록할 수 없습니다.
+	 * @param 강의가능과목번호
+	 * @return 중복검사 결과값 1. 이미 강의중 0. 등록가능
+	 */
+	public int checkAvailableSubject(String seqAvailableSubject) {
+		
+		try {
+			
+			String sql = "{ call CheckAvailSub(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.setString(1, seqAvailableSubject);
+			cstat.registerOutParameter(2, OracleTypes.NUMBER);
+			
+			cstat.executeUpdate();
+			
+			return cstat.getInt(2);
+			
+			
+		} catch (Exception e) {
+			System.out.println("AvailableSubjectDAO.checkAvailableSubject()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+		
 	}
 
 	

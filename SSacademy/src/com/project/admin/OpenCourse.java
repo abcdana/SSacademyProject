@@ -56,15 +56,18 @@ public class OpenCourse {
 		
 		if(num.equals("1")) {
 			openCourseList();  //개설과정조회
-		} else if (num.equals("2")) {
+		} else if(num.equals("2")) {
 			openCourseAdd();	//개설과정등록
-		} else if (num.equals("3")) {
+		} else if(num.equals("3")) {
 			openCourseEdit();	//개설과정수정
-		} else if (num.equals("4")) {
+		} else if(num.equals("4")) {
 			openCourseDelete1();	//개설과정삭제
-		} else {
+		} else if(num.equals("0")){
 			//관리자 메인
 			adView.menu();
+		} else {
+			System.out.println("\t\t** 다시 입력해주세요. **");
+			openCourseStart();
 		}
 		
 	}
@@ -79,9 +82,9 @@ public class OpenCourse {
 		for (OpenCourseListDTO dto : list) {
 			int nameLength = checkTitle(dto.getName(), 60);
 			
-			System.out.printf("\t%-8s" 
-						+ "%-" + nameLength + "s"
-						+ "\t%15s\t%15s\t\t%s\t%10s" + "명" + "\t%-10s\n"
+			System.out.printf("\t%5s" 
+						+ "\t%-" + nameLength + "s"
+						+ "\t%15s\t%15s\t\t%s\t%8s" + "명" + "\t%-10s\n"
 			
 							, dto.getSeqOpenCourse()
 							, dto.getName()
@@ -91,7 +94,7 @@ public class OpenCourse {
 							, dto.getMemberCount()
 							, dto.getState());
 			
-			System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+			System.out.println("\t ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		}
 		
 		
@@ -133,7 +136,7 @@ public class OpenCourse {
 			
 			} else {
 				System.out.println();
-				System.out.println("\t\t** 해당 과정은 없습니다. 다시 입력해주세요. **");
+				System.out.println("\t\t** 다시 입력하려면 엔터를 눌러주세요. **");
 				pause();
 				openCourseList();
 			}
@@ -164,7 +167,8 @@ public class OpenCourse {
 		} else if(num2.equals("0")){
 			openCourseList();	//전체개설과정 리스트
 		} else {
-			System.out.println("\t\t** 다시 입력해주세요. **");
+			System.out.println();
+			System.out.println("\t\t** 다시 입력하려면 엔터를 눌러주세요. **");
 			pause();
 			SpecificCourseManage(num);
 		}
@@ -186,7 +190,7 @@ public class OpenCourse {
 			SpecificCourseManage(seqOpenCourse);	//특정개설과정 조회
 		} else {
 			System.out.println();
-			System.out.println("\t\t**다시 입력해주세요. **");
+			System.out.println("\t\t** 다시 입력하려면 엔터를 눌러주세요. **");
 			pause();
 			specificSubject(seqOpenCourse, openCourseName);
 			
@@ -209,7 +213,7 @@ public class OpenCourse {
 			SpecificCourseManage(seqOpenCourse);	//특정개설과정 조회
 		} else {
 			System.out.println();
-			System.out.println("\t\t** 다시 입력해주세요. **");
+			System.out.println("\t\t** 다시 입력하려면 엔터를 눌러주세요. **");
 			pause();
 			specificStudent(seqOpenCourse, openCourseName);
 			
@@ -289,45 +293,14 @@ public class OpenCourse {
 		//1이면 등록완료 0이면 실패
 		adView.addResult(result);
 		
-		System.out.println("\t** 이전화면으로 이동합니다. **");
+		System.out.println("\t\t** 개설과정관리 화면으로 이동합니다. 엔터를 눌러주세요. **");
 		pause();
+		openCourseStart();
 		
-		openCourseAdd();
+		
   }
   
   
-	public void openCourseAdd() {
-		
-		//개설과정등록 메뉴 헤더
-		adView.openCourseAddView();
-		
-		System.out.print("강의실번호: \n");
-		String seqRoom = scan.nextLine();
-		
-		System.out.print("기초과정번호: \n");
-		String seqBasicCourse = scan.nextLine();
-		
-		System.out.print("시작일: \n");
-		String startDate = scan.nextLine();
-
-		System.out.print("종료일: \n");
-		String endDate = scan.nextLine();
-		
-		System.out.print("인원: \n");
-		String count = scan.nextLine();
-		
-		//개설과정 공통 DTO에 값 쓰기
-		OpenCourseDTO oc = new OpenCourseDTO();
-		
-		oc.setSeqRoom(seqRoom);
-		oc.setSeqBasicCourseInfo(seqBasicCourse);
-		oc.setStartDate(startDate);
-		oc.setEndDate(endDate);
-		oc.setMemberCount(count);
-		
-		adView.AddCheck();
-	
-	}
 	
 	/**
 	 * 개설과정수정 메서드입니다.
@@ -417,12 +390,14 @@ public class OpenCourse {
 		
 		if(result == 1) {
 			System.out.println();
-			System.out.println("\t* 강의실 수정이 완료되었습니다. 이전화면으로 이동합니다.");
+			System.out.println("\t** 강의실 수정완료 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 		} else {
 			System.out.println();
-			System.out.println("\t* 강의실을 수정할 수 없습니다. 이전화면으로 이동합니다.");
+			System.out.println("\t** 강의실 수정실패 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 		}
@@ -450,13 +425,15 @@ public class OpenCourse {
 		
 		if(result == 1) {
 			System.out.println();
-			System.out.println("\t* 날짜 수정이 완료되었습니다.");
+			System.out.println("\t** 날짜 수정완료 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 			
 		} else {
 			System.out.println();
-			System.out.println("\t* 날짜를 수정할 수 없습니다.");
+			System.out.println("\t** 날짜 수정실패 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 		}
@@ -496,13 +473,15 @@ public class OpenCourse {
 		
 		if(result == 1) {
 			System.out.println();
-			System.out.println("\t* 기초과정번호 수정이 완료되었습니다. 이전화면으로 이동합니다.");
+			System.out.println("\t** 기초과정번호 수정완료 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 			
 		} else {
 			System.out.println();
-			System.out.println("\t* 기초과정번호를 수정할 수 없습니다. 이전화면으로 이동합니다.");
+			System.out.println("\t** 기초과정번호 수정실패 **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			openCourseEdit();
 		}
@@ -526,6 +505,7 @@ public class OpenCourse {
 		openCourseTotal();
 		
 		System.out.println();
+		System.out.println("\t* 뒤로가기를 원하시면 0을 입력해주세요.");
 		System.out.print("\t█ 삭제할 개설과정번호: ");
 		String seqOpenCourse = scan.nextLine();
 		
@@ -539,7 +519,7 @@ public class OpenCourse {
 			
 			//삭제성공 실패 확인
 			adView.deleteResult(result);
-			System.out.println("\t\t** 이전화면으로 이동합니다. **");
+			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
 			pause();
 			
 			//삭제메인화면 메서드
@@ -555,7 +535,6 @@ public class OpenCourse {
 	
 	private void pause() {
 		
-		System.out.println("\t\t** 계속 하시려면 엔터를 누르세요. **");
 		scan.nextLine();
 	}
 
