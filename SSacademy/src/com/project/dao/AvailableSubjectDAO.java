@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.project.dto.AvailableSubjectDTO;
-import com.project.dto.BasicSubjectDTO;
 import com.project.ssacademy.DBUtil;
 /**
  * 강의가능과목관련 모든 프로시저를 관리하는 DAO
@@ -92,7 +91,44 @@ public class AvailableSubjectDAO {
 		
 		return 0;
 	}
-	
-	
+
+
+	public ArrayList<AvailableSubjectDTO> getAvailableSubject(String seqTeacher) {
+		
+		return null;
+	}
+
+	/**
+	 * 교사의 강의가능과목번호를 가져오는 DAO
+	 * @param seqTeacher 교사번호
+	 * @return 강의가능과목번호를 저장한 ArrayList
+	 */
+	public ArrayList<String> getSeqBasicSubjectList(String seqTeacher) {
+		
+		try {
+			
+			String sql = "select seqBasicSubject from tblAvailableSubject where seqTeacher = " + seqTeacher + "order by seqBasicSubject";
+			
+			stat = conn.createStatement();
+			
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<String> seqBasicSubjectList = new ArrayList<String>();
+			
+			while (rs.next()) {
+				seqBasicSubjectList.add(rs.getString("seqBasicSubject"));
+			}
+			
+			return seqBasicSubjectList;
+			
+		} catch (Exception e) {
+			System.out.println("AvailableSubjectDAO.getSeqBasicSubject()");
+			e.printStackTrace();
+		}
+		
+		return null;
+
+	}
+
 	
 }

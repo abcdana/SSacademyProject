@@ -1,6 +1,7 @@
 package com.project.admin.dto;
 
 public class VwCompanyInfoDTO {
+
 	private String seqCompanyInfo;
 	private String name;
 	private String startDate;
@@ -71,7 +72,5 @@ public class VwCompanyInfoDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-
 
 }
