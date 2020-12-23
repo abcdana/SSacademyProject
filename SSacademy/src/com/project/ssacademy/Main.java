@@ -23,9 +23,10 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		
-		
-		showMainLogo();	//로고
-		showLogin();	//로그인 메인
+		while (true) {
+			showMainLogo();	//로고
+			showLogin();	//로그인 메인			
+		}
 		
 		
 		
