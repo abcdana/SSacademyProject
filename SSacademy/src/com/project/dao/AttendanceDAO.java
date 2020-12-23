@@ -13,6 +13,7 @@ import com.project.ssacademy.DBUtil;
 import oracle.jdbc.OracleTypes;
 
 import com.project.dto.AttendanceDTO;
+import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.StudentDTO;
 import com.project.dto.ViewStudentDTO;
 /**
@@ -98,12 +99,59 @@ public class AttendanceDAO {
 
 
 
-	
-	public ArrayList<AttendanceDTO> attPeriodList(String seqOpenCourse, String seqStudent, String startDate,
+	/**
+	 * 
+	 * @param seqOpenCourse	개설 과정 번호
+	 * @param seqStudent	교육생 번호
+	 * @param startDate		기간별조회 (시작일)
+	 * @param endDate		기간별조회 (종료일)
+	 * @return result 
+	 */
+	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqOpenCourse, String seqStudent, String startDate,
 			String endDate) {
-		// TODO Auto-generated method stub
+
+		
+		try {
+			
+			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
+			String sql = "{ call procAttPeriodList(?, ?, ?, ?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.registerOutParameter(1, OracleTypes.CURSOR);
+			cstat.setString(2, seqOpenCourse);
+			cstat.setString(3, seqStudent);
+			cstat.setString(4, startDate);
+			cstat.setString(5, endDate);
+			
+			cstat.executeQuery();
+			
+			rs = (ResultSet)cstat.getObject(1);
+
+			while (rs.next()) {
+				
+				PeriodAttendListDTO paldto = new PeriodAttendListDTO();
+				
+				paldto.setAttendDate(rs.getString("attendDate"));
+				paldto.setInTime(rs.getString("inTime"));
+				paldto.setOutTime(rs.getString("outTime"));
+				paldto.setAttendState(rs.getString("attendState"));
+				
+				result.add(paldto);
+				
+			}
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enattPeriodList()");
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
+
+
+
 
 
 

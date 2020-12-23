@@ -8,6 +8,7 @@ import com.project.admin.dto.OpenSubjectListDTO;
 import com.project.dto.AllOpenCourseDTO;
 import com.project.dto.AttendanceDTO;
 import com.project.dto.OpenCourseDTO;
+import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.ViewStudentDTO;
 
 /**
@@ -843,37 +844,34 @@ public class AdminView {
 		System.out.println();
 	}
 	
+		
 	
-	//TODO 프로시저 담은 상자 만들어야함
 	/**
 	 * 관리자 뷰의 특정 개설 과정의 특정 교육생의 특정 기간의 출결 목록을 출력하는 메소드이다.
 	 * 번호, 수강날짜, 출결상황을 출력한다.
 	 * @param result
 	 */
-	public void attendanceList(ArrayList<AttendanceDTO> result) {
-
-		System.out.println();
-		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.println("\t[번호]\t\t\t[과정이름]\t\t\t       [과정시작일] [과정종료일]   [교사]     [강의실]");
-		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+	public void attendanceList(ArrayList<PeriodAttendListDTO> result) {
 		
-		for (AttendanceDTO dto : result) {
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t  [날짜]\t [입실]\t\t [퇴실]\t\t[상태]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+		for (PeriodAttendListDTO dto : result) {
 			
-			System.out.printf("\t%3s\t%-20s\t%-20s%-20s%-10s\n"
-					, dto.getSeqtblAttendance()
-					, dto.getInTime()
+			System.out.printf("\t%s\t%-9s\t%-10s\t %-10s\n"
+					, dto.getAttendDate()
 					, dto.getInTime()
 					, dto.getOutTime()
 					, dto.getAttendState());
 		}
 		
-		System.out.println("\t────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("\t─────────────────────────────────────────────────────────────");
 		System.out.println();
 		
-		
 	}
-	
-	
+
 	
 	
 	/////////////////////////////////////////////////채원///////////////////////////////////////////
@@ -906,6 +904,8 @@ public class AdminView {
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
+
+
 
 
 

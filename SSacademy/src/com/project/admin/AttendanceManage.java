@@ -8,6 +8,7 @@ import com.project.dao.AttendanceDAO;
 import com.project.dao.StudentDAO;
 import com.project.dto.AllOpenCourseDTO;
 import com.project.dto.AttendanceDTO;
+import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.ViewStudentDTO;
 
 /**
@@ -112,7 +113,7 @@ public class AttendanceManage {
 		String endDate = eyear + "-" + emonth + "-" + eday;
 		System.out.println();
 		
-		ArrayList<AttendanceDTO> list = adao.attPeriodList(seqOpenCourse, seqStudent, startDate, endDate);
+		ArrayList<PeriodAttendListDTO> list = adao.attPeriodList(seqOpenCourse, seqStudent, startDate, endDate);
 		view.attendanceList(list);
 	}
 	
