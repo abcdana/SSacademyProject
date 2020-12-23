@@ -277,7 +277,7 @@ public class TeacherAccountManagement {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		//수정전 교사 가능 과목 출력 
-		ArrayList<BasicSubjectDTO> list = bsdao.get(seqTeacher);
+		ArrayList<BasicSubjectDTO> list = asdao.get(seqTeacher);
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.println("\t\t\t[번호]\t\t[과목명]");
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
