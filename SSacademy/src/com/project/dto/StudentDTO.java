@@ -11,6 +11,7 @@ public class StudentDTO {
 	private String email; //교육생이메일
 	private String firstRegistrationDate; //교육생최초등록일
 	private String employmentField; //교육생취업분야
+	public int num;
 	
 	public String getSeqStudent() {
 		return seqStudent;
@@ -49,7 +50,11 @@ public class StudentDTO {
 		this.email = email;
 	}
 	public String getFirstRegistrationDate() {
-		return firstRegistrationDate;
+		if (firstRegistrationDate!=null) {
+			return firstRegistrationDate.substring(0,10);
+		}else {
+			return firstRegistrationDate;
+		}
 	}
 	public void setFirstRegistrationDate(String firstRegistrationDate) {
 		this.firstRegistrationDate = firstRegistrationDate;
