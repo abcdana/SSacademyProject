@@ -28,4 +28,48 @@ public class StudentView {
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
 
+	/**
+	 * 교육생 연계기업 채용공고 조회 메뉴
+	 * @author 혜승
+	 */
+	public void menuCompanyList() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 전체 채용공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 업무별 채용공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 소재지별 채용공고 조회\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 연봉별 채용공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 채용상태별 공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 이전 화면으로 \t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+	
+	/**
+	 * 교육생 수료생 취업정보 조회 메뉴
+	 * @author 혜승
+	 */
+	public void menuGetJobInfoCheck() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 전체 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 업무별 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 소재지별 취업정보 조회\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 연봉별 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 연도별 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 연계기업 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t7. 이전 화면으로 \t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+	}
+	
+	
+
 }

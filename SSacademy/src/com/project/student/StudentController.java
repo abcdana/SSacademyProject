@@ -58,10 +58,14 @@ public class StudentController {
 				evaluation.main();
 				//break;
 			} else if (sel.equals("5")) {
-				System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
+				//System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
+				CompanyInfoCheck companyInfoCheck = new CompanyInfoCheck();
+				companyInfoCheck.menu();
 				//break;
 			} else if (sel.equals("6")) {
-				System.out.println("- 수료자 취업 현황을 확인할 수 있다.-- 조혜승");
+				//System.out.println("- 수료자 취업 현황을 확인할 수 있다.-- 조혜승");
+				GetJobInfoCheck getJobInfoCheck = new GetJobInfoCheck();
+				getJobInfoCheck.menu();
 				//break;
 			} else if (sel.equals("7")) {
 				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
