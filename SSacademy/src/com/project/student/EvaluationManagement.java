@@ -18,6 +18,8 @@ public class EvaluationManagement {
 	private Scanner scan;
 	private EvaluationDAO dao;
 	private StudentDTO sdto;
+	//종료된 수강 번호를 저장하는 객체
+	private ArrayList<String> seqRegCourses;
 	
 	/**
 	 * 교육생 평가 관리 클래스의 생성자
@@ -28,6 +30,7 @@ public class EvaluationManagement {
 		scan = new Scanner(System.in);
 		dao = new EvaluationDAO();
 		this.sdto = dto; 
+		seqRegCourses = new ArrayList<String>();
 		
 	}
 
@@ -76,6 +79,19 @@ public class EvaluationManagement {
 	
 	private void viewEndCourseList() {
 		
+		//종료된 과정 목록을 저장하는 객체 생성
+		ArrayList<ViewStudentEndCourseDTO> list = dao.studentCourseList(sdto.getSeqStudent());
+		
+		//종료된 과정이 없는 경우
+		if (list.size() == 0) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t\t종료 과정 없음\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
+		
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t종료 과정 목록\t\t\t\t  ┃");
@@ -83,7 +99,6 @@ public class EvaluationManagement {
 		
 		System.out.println("\t[수강번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]");
 		
-		ArrayList<ViewStudentEndCourseDTO> list = dao.studentCourseList(sdto.getSeqStudent());
 		
 		for (ViewStudentEndCourseDTO dto : list) {
 			System.out.printf("\t    %s\t\t%s\t%s\t%s\t%s\n"
@@ -92,6 +107,8 @@ public class EvaluationManagement {
 								, dto.getCourseStartDate()
 								, dto.getCourseEndDate()
 								, dto.getRoom());
+			
+			seqRegCourses.add(dto.getSeqRegCourse());
 		}
 		
 	} //viewEndCourseList
@@ -122,6 +139,24 @@ public class EvaluationManagement {
 		
 		System.out.print("\t█ 수강 번호를 입력하세요. : ");
 		String seqRegCourse = scan.nextLine();
+		
+		//교육생이 수강한 수강 번호를 입력했는지 확인
+		boolean isEndRegCourse = false;
+		
+		for (int i=0; i<seqRegCourses.size(); i++) {
+			if (seqRegCourse.equals(seqRegCourses.get(i))) {
+				isEndRegCourse = true;
+			}
+		}
+		
+		if (isEndRegCourse == false) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t해당 수강 번호가 없습니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
 		
 		//평가했는지 확인
 		int result = dao.isEvaluation(seqRegCourse);
@@ -266,6 +301,24 @@ public class EvaluationManagement {
 		
 		System.out.print("\t█ 수강 번호를 입력하세요. : ");
 		String seqRegCourse = scan.nextLine();
+		
+		//교육생이 수강한 수강 번호를 입력했는지 확인
+		boolean isEndRegCourse = false;
+		
+		for (int i=0; i<seqRegCourses.size(); i++) {
+			if (seqRegCourse.equals(seqRegCourses.get(i))) {
+				isEndRegCourse = true;
+			}
+		}
+		
+		if (isEndRegCourse == false) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t해당 수강 번호가 없습니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
 		
 		//평가했는지 확인
 		int result = dao.isEvaluation(seqRegCourse);
@@ -423,6 +476,25 @@ public class EvaluationManagement {
 		System.out.print("\t█ 수강 번호를 입력하세요. : ");
 		String seqRegCourse = scan.nextLine();
 		
+		//교육생이 수강한 수강 번호를 입력했는지 확인
+		boolean isEndRegCourse = false;
+		
+		for (int i=0; i<seqRegCourses.size(); i++) {
+			if (seqRegCourse.equals(seqRegCourses.get(i))) {
+				isEndRegCourse = true;
+			}
+		}
+		
+		if (isEndRegCourse == false) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t해당 수강 번호가 없습니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
+		
+		
 		//평가했는지 확인
 		int result = dao.isEvaluation(seqRegCourse);
 		
@@ -487,6 +559,24 @@ public class EvaluationManagement {
 		
 		System.out.print("\t█ 수강 번호를 입력하세요. : ");
 		String seqRegCourse = scan.nextLine();
+		
+		//교육생이 수강한 수강 번호를 입력했는지 확인
+		boolean isEndRegCourse = false;
+		
+		for (int i=0; i<seqRegCourses.size(); i++) {
+			if (seqRegCourse.equals(seqRegCourses.get(i))) {
+				isEndRegCourse = true;
+			}
+		}
+		
+		if (isEndRegCourse == false) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t해당 수강 번호가 없습니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
 		
 		//평가했는지 확인
 		int result = dao.isEvaluation(seqRegCourse);
