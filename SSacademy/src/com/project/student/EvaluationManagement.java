@@ -163,6 +163,7 @@ public class EvaluationManagement {
 		
 		if (result == 0) { //평가 안함
 			
+			System.out.println();
 			System.out.println("\t[수강번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]");
 			
 			//선택한 과정 정보 가져오기
@@ -171,7 +172,7 @@ public class EvaluationManagement {
 			//선택한 과정 정보 출력하기
 			for (ViewStudentEndCourseDTO dto : list) {
 				if (dto.getSeqRegCourse().equals(seqRegCourse)) {
-					System.out.printf("\t  %s\t%s\t%s\t%s\t%s\n"
+					System.out.printf("\t  %s\t\t%s\t%s\t%s\t%s\n"
 							, dto.getSeqRegCourse()
 							, dto.getCourseName()
 							, dto.getCourseStartDate()
