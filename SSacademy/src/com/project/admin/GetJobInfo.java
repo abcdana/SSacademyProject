@@ -36,7 +36,6 @@ public class GetJobInfo {
 		view = new AdminView();
 	}
 
-
 	/**
 	 * 수료생 취업정보 관리 메뉴 메서드
 	 * @author 조혜승

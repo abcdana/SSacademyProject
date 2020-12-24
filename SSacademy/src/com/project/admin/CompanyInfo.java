@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class CompanyInfo {
 
 	private static Scanner scan;
-	private AdminView view;
+	public AdminView view;
 	public CompanyInfoDAO dao;
 	
 	static{
@@ -39,6 +39,7 @@ public class CompanyInfo {
 	 * @author 조혜승
 	 *
 	 */
+
 	public void menu() {
 		
 		
