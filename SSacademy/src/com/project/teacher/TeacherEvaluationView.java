@@ -18,6 +18,8 @@ public class TeacherEvaluationView {
 	private Scanner scan;
 	private EvaluationDAO dao;
 	private TeacherDTO tdto;
+	//종료된 개설 과정 번호를 저장하는 객체
+	private ArrayList<String> seqCourses;
 	
 	/**
 	 * 교사 평가 조회 클래스의 생성자
@@ -28,6 +30,7 @@ public class TeacherEvaluationView {
 		scan = new Scanner(System.in);
 		dao = new EvaluationDAO();
 		this.tdto = tdto;
+		seqCourses = new ArrayList<String>();
 		
 	}
 	
@@ -68,22 +71,38 @@ public class TeacherEvaluationView {
 	
 	private void viewCourseList() {
 		
+		//종료된 과정 목록을 저장하는 객체 생성
+		ArrayList<ViewEndCourseDTO> list = dao.courseList(tdto.getSeqTeacher());
+		
+		//종료된 과정이 없는 경우
+		if (list.size() == 0) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t\t종료 과정 없음\t\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
+		
+		//종료된 과정이 있는 경우
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t종료 과정 목록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
-		System.out.println("\t[번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]");
+		System.out.println("\t[번호]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[수강인원]\t[강의실]");
 		
-		ArrayList<ViewEndCourseDTO> list = dao.courseList(tdto.getSeqTeacher());
-		
+		//종료된 과정 목록 출력 + 과정 번호 저장
 		for (ViewEndCourseDTO dto : list) {
-			System.out.printf("\t  %s\t%s\t%s\t%s\t   %s명\n"
+			System.out.printf("\t  %s\t%s\t%s\t%s\t   %s명\t\t%s\n"
 								, dto.getSeqOpenCourse()
 								, dto.getCourseName()
 								, dto.getCourseStartDate()
 								, dto.getCourseEndDate()
-								, dto.getStudentCount());
+								, dto.getStudentCount()
+								, dto.getRoom());
+			
+			seqCourses.add(dto.getSeqOpenCourse());
 		}
 		
 	} //viewCourseList
@@ -112,6 +131,28 @@ public class TeacherEvaluationView {
 		System.out.print("\t█ 과정 번호를 입력하세요. : ");
 		String seqOpenCourse = scan.nextLine();
 		
+		//종료된 과정 번호 중에서 입력했는지 체크
+		boolean isEndCourse = false;
+		
+		for (int i=0; i<seqCourses.size(); i++) {
+			if (seqOpenCourse.equals(seqCourses.get(i))) {
+				isEndCourse = true;
+			}
+		}
+		
+		//해당 과정 번호가 없는 경우
+		if (isEndCourse == false) {
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t해당 과정 번호가 없습니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
+		
+		//해당 과정 번호가 있는 경우
+		ArrayList<ViewSpecificEvaluationDTO> list = dao.courseEvaluationList(seqOpenCourse);
+		
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t과정 평가 정보\t\t\t\t  ┃");
@@ -119,14 +160,6 @@ public class TeacherEvaluationView {
 		
 		System.out.println("\t[번호]\t[이름]\t[강의계획서 이행] [교사의 강의전달 및 이해] [교사의 소통] [강의 유익성] [전반적인 만족]");
 		
-		ArrayList<ViewSpecificEvaluationDTO> list = dao.courseEvaluationList(seqOpenCourse);
-		
-		//해당 과정 번호가 없는 경우
-		if (list.size() == 0) {
-			System.out.println("해당 과정 번호가 없습니다.");
-			pause();
-			return;
-		}
 		
 		for (ViewSpecificEvaluationDTO dto : list) {
 			if (dto.getProcessScore() != null) {

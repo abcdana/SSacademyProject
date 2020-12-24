@@ -14,6 +14,7 @@ public class ViewEndCourseDTO {
 	private String studentCount;
 	private String seqTeacher;
 	private String teacherName;
+	private String room;
 	
 	public String getSeqOpenCourse() {
 		return seqOpenCourse;
@@ -56,6 +57,12 @@ public class ViewEndCourseDTO {
 	}
 	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
+	}
+	public String getRoom() {
+		return room;
+	}
+	public void setRoom(String room) {
+		this.room = room;
 	}
 	
 	

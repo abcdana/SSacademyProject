@@ -43,9 +43,9 @@ public class EvaluationDAO {
 		try {
 			String sql = "";
 			if (word != null) {
-				sql = "select * from vwRegCourse where seqTeacher = " + word;
+				sql = "select * from vwEndCourse where seqTeacher = " + word;
 			} else {
-				sql = "select * from vwRegCourse";				
+				sql = "select * from vwEndCourse";
 			}
 			
 			stat = conn.createStatement();
@@ -63,6 +63,7 @@ public class EvaluationDAO {
 				dto.setCourseStartDate(rs.getString("startDate").substring(0, 10));
 				dto.setCourseEndDate(rs.getString("endDate").substring(0, 10));
 				dto.setStudentCount(rs.getString("studentCount"));
+				dto.setRoom(rs.getString("room"));
 				
 				list.add(dto);
 				
