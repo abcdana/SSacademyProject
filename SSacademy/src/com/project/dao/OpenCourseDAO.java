@@ -151,6 +151,7 @@ public class OpenCourseDAO {
 			
 		} catch (Exception e) {
 			System.out.println("OpenSubjectDAO.SpecificOpenSubject(String seqOpenCourse)");
+			e.printStackTrace();
 		}
 	
 			return null; 
