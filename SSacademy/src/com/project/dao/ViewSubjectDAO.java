@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.project.dto.ViewSubjectDTO;
 import com.project.ssacademy.DBUtil;
@@ -17,7 +16,6 @@ import com.project.ssacademy.DBUtil;
  */
 public class ViewSubjectDAO {
 	
-	private static Scanner scan = new Scanner(System.in);
 	private Connection conn;
 	private Statement stat;
 	private PreparedStatement pstat; 

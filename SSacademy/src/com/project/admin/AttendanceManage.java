@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 import com.project.dao.AllOpenCourseDAO;
 import com.project.dao.AttendanceDAO;
-import com.project.dao.StudentDAO;
 import com.project.dto.AllOpenCourseDTO;
-import com.project.dto.AttendanceDTO;
 import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.ViewStudentDTO;
 
@@ -21,14 +19,12 @@ public class AttendanceManage {
 	private static Scanner scan = new Scanner(System.in);;
 	private AdminView view;
 	private AllOpenCourseDAO aocdao;
-	private StudentDAO sdao;
 	private AttendanceDAO adao;
 	
 	
 	public AttendanceManage() {
 		view = new AdminView();
 		this.aocdao = new AllOpenCourseDAO();
-		this.sdao = new StudentDAO();
 		this.adao = new AttendanceDAO();
 	}
 	
@@ -69,8 +65,10 @@ public class AttendanceManage {
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
 				searchPeriod(seqOpenCourse, seqStudent);
+				pause();
 			} else if (sel.equals("2")) {
 				updateAttendState(seqOpenCourse, seqStudent);
+				pause();
 			} else {
 				loop = false;
 			}
@@ -78,6 +76,11 @@ public class AttendanceManage {
 		}
 		
 	}
+	
+	private static void pause() {
+		System.out.println("\n\t\t이전 페이지로 가시려면 엔터를 눌러주세요.");
+		scan.nextLine();
+	}//pause()
 	
 	
 	/**
