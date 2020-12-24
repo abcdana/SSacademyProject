@@ -61,12 +61,16 @@ public class BasicInfoManage {
 			
 			if (num.equals("1")) {
 				courseinfoMenu();
+				pause();
 			} else if (num.equals("2")) {
 				subjectInfoMenu();
+				pause();
 			} else if (num.equals("3")) {
 				roomInfoMenu();
+				pause();
 			} else if (num.equals("4")) {
 				bookInfoMenu();
+				pause();
 			} else {
 				System.out.println("\n\t\t※ 올바르지 않은 번호입니다.");
 				loop = false;

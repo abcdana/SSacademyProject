@@ -1,6 +1,7 @@
 package com.project.admin;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenCourseStudentDTO;
@@ -21,6 +22,46 @@ import com.project.dto.ViewStudentDTO;
  */
 public class AdminView {
 	
+	
+	/**
+	 * 메인 SIST academy 로고 출력 메서드
+	 */
+	public static void showMainLogo() {
+		
+		System.out.println("\n" + 
+				" ███████╗██╗███████╗████████╗     █████╗  ██████╗ █████╗ ██████╗ ███████╗███╗   ███╗██╗   ██╗\n" + 
+				" ██╔════╝██║██╔════╝╚══██╔══╝    ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝████╗ ████║╚██╗ ██╔╝\n" + 
+				" ███████╗██║███████╗   ██║       ███████║██║     ███████║██║  ██║█████╗  ██╔████╔██║ ╚████╔╝ \n" + 
+				" ╚════██║██║╚════██║   ██║       ██╔══██║██║     ██╔══██║██║  ██║██╔══╝  ██║╚██╔╝██║  ╚██╔╝  \n" + 
+				" ███████║██║███████║   ██║       ██║  ██║╚██████╗██║  ██║██████╔╝███████╗██║ ╚═╝ ██║   ██║   \n" + 
+				" ╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝     ╚═╝   ╚═╝   \n" +                                               
+				"");
+		
+	}//mainlogo
+	
+	
+	/**
+	 * 로그인 화면 헤더 출력메서드
+	 */
+	public static void showLoginHeader() {
+		
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t  메인화면\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t┏━━━━━━━━━━━━━━━━━━┓\t┏━━━━━━━━━━━━━━━━━━┓\t\t  ┃");
+		System.out.println("\t┃\t\t┃     1.로그인     ┃\t┃ 0. 프로그램 종료 ┃\t\t  ┃");
+		System.out.println("\t┃\t\t┗━━━━━━━━━━━━━━━━━━┛\t┗━━━━━━━━━━━━━━━━━━┛\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 선택하세요. : ");
+	}
+	
+	
 	/**
 	 * 관리자의 메인메뉴를 출력하는 메소드이다.
 	 */
@@ -38,6 +79,7 @@ public class AdminView {
 		System.out.println("\t│\t\t4. 개설 과목 관리\t10. 취업 현황 관리\t\t  │");
 		System.out.println("\t│\t\t5. 교육생 관리\t\t11. 평가 관리\t\t\t  │");
 		System.out.println("\t│\t\t6. 시험 관리\t\t12. 우수훈련생 관리\t\t  │");
+		System.out.println("\t│\t\t\t\t\t\t\t\t\t  │");
 		System.out.println("\t│\t\t0. 로그 아웃\t\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
@@ -1043,11 +1085,23 @@ public class AdminView {
 	/**
 	 * 출결관리 헤더를 출력하는 메서드입니다.
 	 */
-	public void AttendanceHeader() {
+	public void attendanceHeader() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t 출결 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+	
+	/**
+	 * 출결조회 헤더를 출력하는 메서드입니다.
+	 */
+	public void checkAttendanceHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 출결 조회\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 	}
@@ -1110,7 +1164,7 @@ public class AdminView {
 	/**
 	 * 출결관리 메뉴를 출력하는 메서드이다.
 	 */
-	public void AttendanceMenu() {
+	public void attendanceMenu() {
 		
 		System.out.println();
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
@@ -1170,7 +1224,7 @@ public class AdminView {
 					, dto.getAttendState());
 		}
 		
-		System.out.println("\t─────────────────────────────────────────────────────────────");
+		System.out.println("\t──────────────────────────────────────────────────────────────");
 		System.out.println();
 		
 	}
