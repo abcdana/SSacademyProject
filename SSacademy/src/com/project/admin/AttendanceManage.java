@@ -16,7 +16,7 @@ import com.project.dto.ViewStudentDTO;
  */
 public class AttendanceManage {
 	
-	private static Scanner scan = new Scanner(System.in);;
+	private static Scanner scan = new Scanner(System.in);
 	private AdminView view;
 	private AllOpenCourseDAO aocdao;
 	private AttendanceDAO adao;

@@ -1,17 +1,11 @@
 package com.project.teacher;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.project.dto.TeacherDTO;
 import com.project.dto.VwSubjectInquiryDTO;
 import com.project.dto.VwSubjectScoreInquiryDTO;
-import com.project.ssacademy.DBUtil;
 
 public class TeacherController {
 
@@ -54,7 +48,9 @@ public class TeacherController {
 				System.out.println("- 강의 스케줄을 조회할 수 있다. - 박지현");
 				//break;
 			} else if (sel.equals("2")) {
-				System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. - 김다은");
+				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. - 김다은"); - 완료
+				CheckAttendanceList cal = new CheckAttendanceList(tdto);
+				cal.attendanceMain();
 				//break;
 			} else if (sel.equals("3")) {
 				TestManagementMain();

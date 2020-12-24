@@ -7,6 +7,7 @@ import com.project.admin.AdminView;
 import com.project.admin.AttendanceManage;
 import com.project.dao.AllOpenCourseDAO;
 import com.project.dao.AttendanceDAO;
+import com.project.dto.TeacherDTO;
 import com.project.dto.ViewStudentDTO;
 import com.project.teacher.dto.TeacherCourseListDTO;
 /**
@@ -22,23 +23,17 @@ public class CheckAttendanceList {
 	private AttendanceManage am;
 	private AllOpenCourseDAO aocdao;
 	private AttendanceDAO adao;
+	private TeacherDTO tdto;
 	
-	public CheckAttendanceList() {
+	public CheckAttendanceList(TeacherDTO tdto) {
 		aview = new AdminView();
 		view = new TeacherView();
 		am = new AttendanceManage();
 		aocdao = new AllOpenCourseDAO();
 		adao = new AttendanceDAO();
+		this.tdto = tdto;
 	}
 
-	//임시메인
-	public static void main(String[] args) {
-		
-		CheckAttendanceList cal = new CheckAttendanceList();
-		cal.attendanceMain();
-		
-	}
-	
 	/**
 	 * 교사모드의 출결 조회 메인 메서드이다.
 	 * 계정 접속한 교사가 진행했던 과정 목록들을 보여주고
@@ -48,11 +43,7 @@ public class CheckAttendanceList {
 		
 		aview.checkAttendanceHeader(); //출결 조회 헤더
 				
-		System.out.println("\t\t교사 번호를 입력해주세요.\n");
-		System.out.print("\t█ 교사 번호 : ");
-		String seqTeacher = scan.nextLine();
-		
-		ArrayList<TeacherCourseListDTO> tclist = aocdao.allOpenCourseListbyT(seqTeacher);
+		ArrayList<TeacherCourseListDTO> tclist = aocdao.allOpenCourseListbyT(tdto.getSeqTeacher());
 		view.allCourseList(tclist);
 		
 		boolean loop = true;
@@ -68,7 +59,6 @@ public class CheckAttendanceList {
 				loop = false;
 			}
 		}
-		
 	}
 
 	
