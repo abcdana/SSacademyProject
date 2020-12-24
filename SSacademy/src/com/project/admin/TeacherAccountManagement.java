@@ -482,7 +482,7 @@ public class TeacherAccountManagement {
 		System.out.println("\t┃\t\t\t\t교사 상세 정보\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
-		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목이름]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
+		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목명]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
 		
 		for (ViewTeacherCourseDTO dto : list) {
 			System.out.printf("\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"
