@@ -141,7 +141,13 @@ public class AttendanceDAO {
 	}
 
 
-
+	/**
+	 * 관리자모드에서 특정학생의 특정일 수강상태를 수정하는 메서드이다.
+	 * @param seqStudent	교육생 번호
+	 * @param attendanceDate 출결 날짜
+	 * @param attendState	 출결 상태
+	 * @return 성공 여부
+	 */
 	public int updateAttendState(String seqStudent, String attendanceDate, String attendState) {
 		
 		try {
@@ -164,6 +170,28 @@ public class AttendanceDAO {
 		return 0;
 	}
 
-
+	
+	/**
+	 * 교육생 모드의 입퇴실 체크 기능을 담당하는 메서드이다.
+	 * @param seqStudent 교육생 번호
+	 * @return 성공 여부
+	 */
+	public int addAttendance(String seqStudent) {
+		
+		try {
+			
+			String sql = "{ call procAddAttendance(?) }";
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqStudent);
+			
+			return cstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enenclosing_method()");
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

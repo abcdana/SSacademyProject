@@ -47,7 +47,9 @@ public class StudentController {
 				System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
 				//break;
 			} else if (sel.equals("2")) {
-				System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
+				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
+				CheckAttendance ca = new CheckAttendance(sdto);
+				ca.attendacneMain();
 				//break;
 			} else if (sel.equals("3")) {
 				System.out.println("- 성적 조회를 할 수 있다. --조성진");
