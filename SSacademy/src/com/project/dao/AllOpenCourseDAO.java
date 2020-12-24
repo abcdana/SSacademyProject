@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import com.project.dto.AllOpenCourseDTO;
 import com.project.ssacademy.DBUtil;
+import com.project.teacher.dto.TeacherCourseListDTO;
+
+import oracle.jdbc.OracleTypes;
 
 /**
  * 출결조회에서 사용할 모든 개설과정과 관련된 프로시저를 담은 DAO이다.
@@ -76,4 +79,53 @@ public class AllOpenCourseDAO {
 		
 		return null;
 	}
+	
+	
+	
+	/**
+	 * 특정 교사의 담당 개설 과정 정보를 ArrayList로 반환하는 메서드이다.
+	 * 개설과정번호, 과정명, 과정시작날짜, 과정종료날짜, 강의실, 강의진행상태이 포함되어있다.
+	 * @return 성공 여부
+	 */
+	public ArrayList<TeacherCourseListDTO> allOpenCourseListbyT(String seqTeacher) {
+		
+		try {
+			
+			ArrayList<TeacherCourseListDTO> result = new ArrayList<TeacherCourseListDTO>();
+			
+			String sql = "{ call procTCourseList (?, ?) }";
+
+			cstat = conn.prepareCall(sql);
+
+			cstat.registerOutParameter(1, OracleTypes.CURSOR);
+			cstat.setString(2, seqTeacher);
+			
+			cstat.executeQuery();
+			rs = (ResultSet)cstat.getObject(1);
+			
+			while (rs.next()) {
+				
+				TeacherCourseListDTO tcldto = new TeacherCourseListDTO();
+				
+				tcldto.setSeqOpenCourse(rs.getString("seqOpenCourse"));
+				tcldto.setName(rs.getString("name"));
+				tcldto.setStartDate(rs.getString("startDate"));
+				tcldto.setEndDate(rs.getString("endDate"));
+				tcldto.setRoomName(rs.getString("roomName"));
+				tcldto.setCourseRegState(rs.getString("courseRegState"));
+				
+				result.add(tcldto);
+				
+			}
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("primaryAllOpenCourseDAO.enallOpenCourseList()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }

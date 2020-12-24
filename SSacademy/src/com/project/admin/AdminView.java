@@ -1082,11 +1082,23 @@ public class AdminView {
 	/**
 	 * 출결관리 헤더를 출력하는 메서드입니다.
 	 */
-	public void AttendanceHeader() {
+	public void attendanceHeader() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t 출결 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+	
+	/**
+	 * 출결조회 헤더를 출력하는 메서드입니다.
+	 */
+	public void checkAttendanceHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 출결 조회\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 	}
@@ -1149,7 +1161,7 @@ public class AdminView {
 	/**
 	 * 출결관리 메뉴를 출력하는 메서드이다.
 	 */
-	public void AttendanceMenu() {
+	public void attendanceMenu() {
 		
 		System.out.println();
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
@@ -1209,7 +1221,7 @@ public class AdminView {
 					, dto.getAttendState());
 		}
 		
-		System.out.println("\t─────────────────────────────────────────────────────────────");
+		System.out.println("\t──────────────────────────────────────────────────────────────");
 		System.out.println();
 		
 	}

@@ -28,6 +28,7 @@ public class AttendanceManage {
 		this.adao = new AttendanceDAO();
 	}
 	
+	
 	//임시메인
 	public static void main(String[] args) {
 		
@@ -41,7 +42,7 @@ public class AttendanceManage {
 	 */
 	public void attendanceMain() {
 		
-		view.AttendanceHeader(); //출결 관리 헤더
+		view.attendanceHeader(); //출결 관리 헤더
 		
 		ArrayList<AllOpenCourseDTO> list = aocdao.allOpenCourseList();
 		view.allOpenCourseList(list);
@@ -60,7 +61,7 @@ public class AttendanceManage {
 		boolean loop = true;
 		while (loop) {
 			
-			view.AttendanceMenu(); //출결 관리 메뉴
+			view.attendanceMenu(); //출결 관리 메뉴
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {

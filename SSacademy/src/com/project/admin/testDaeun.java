@@ -5,6 +5,11 @@ public class testDaeun {
 
 	public static void main(String[] args) {
 		
+		System.out.println();
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 기간별 조회\t\t\t0. 뒤로 가기\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t│\t\t1. 기초 정보 관리\t7. 성적 관리\t\t\t  │");
