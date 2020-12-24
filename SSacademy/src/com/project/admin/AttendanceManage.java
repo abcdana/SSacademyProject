@@ -5,9 +5,7 @@ import java.util.Scanner;
 
 import com.project.dao.AllOpenCourseDAO;
 import com.project.dao.AttendanceDAO;
-import com.project.dao.StudentDAO;
 import com.project.dto.AllOpenCourseDTO;
-import com.project.dto.AttendanceDTO;
 import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.ViewStudentDTO;
 
@@ -18,19 +16,18 @@ import com.project.dto.ViewStudentDTO;
  */
 public class AttendanceManage {
 	
-	private static Scanner scan = new Scanner(System.in);;
+	private static Scanner scan = new Scanner(System.in);
 	private AdminView view;
 	private AllOpenCourseDAO aocdao;
-	private StudentDAO sdao;
 	private AttendanceDAO adao;
 	
 	
 	public AttendanceManage() {
 		view = new AdminView();
 		this.aocdao = new AllOpenCourseDAO();
-		this.sdao = new StudentDAO();
 		this.adao = new AttendanceDAO();
 	}
+	
 	
 	//임시메인
 	public static void main(String[] args) {
@@ -45,7 +42,7 @@ public class AttendanceManage {
 	 */
 	public void attendanceMain() {
 		
-		view.AttendanceHeader(); //출결 관리 헤더
+		view.attendanceHeader(); //출결 관리 헤더
 		
 		ArrayList<AllOpenCourseDTO> list = aocdao.allOpenCourseList();
 		view.allOpenCourseList(list);
@@ -64,13 +61,15 @@ public class AttendanceManage {
 		boolean loop = true;
 		while (loop) {
 			
-			view.AttendanceMenu(); //출결 관리 메뉴
+			view.attendanceMenu(); //출결 관리 메뉴
 			
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
 				searchPeriod(seqOpenCourse, seqStudent);
+				pause();
 			} else if (sel.equals("2")) {
 				updateAttendState(seqOpenCourse, seqStudent);
+				pause();
 			} else {
 				loop = false;
 			}
@@ -78,6 +77,11 @@ public class AttendanceManage {
 		}
 		
 	}
+	
+	private static void pause() {
+		System.out.println("\n\t\t이전 페이지로 가시려면 엔터를 눌러주세요.");
+		scan.nextLine();
+	}//pause()
 	
 	
 	/**

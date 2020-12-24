@@ -1,10 +1,14 @@
 package com.project.admin;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenCourseStudentDTO;
 import com.project.admin.dto.OpenSubjectListDTO;
+import com.project.admin.dto.VwCompanyInfoDTO;
+import com.project.admin.dto.VwEmpStatusDTO;
+import com.project.admin.dto.VwGetJobInfoDTO;
 import com.project.dto.AllOpenCourseDTO;
 import com.project.dto.AttendanceDTO;
 import com.project.dto.OpenCourseDTO;
@@ -17,6 +21,46 @@ import com.project.dto.ViewStudentDTO;
  *
  */
 public class AdminView {
+	
+	
+	/**
+	 * 메인 SIST academy 로고 출력 메서드
+	 */
+	public static void showMainLogo() {
+		
+		System.out.println("\n" + 
+				" ███████╗██╗███████╗████████╗     █████╗  ██████╗ █████╗ ██████╗ ███████╗███╗   ███╗██╗   ██╗\n" + 
+				" ██╔════╝██║██╔════╝╚══██╔══╝    ██╔══██╗██╔════╝██╔══██╗██╔══██╗██╔════╝████╗ ████║╚██╗ ██╔╝\n" + 
+				" ███████╗██║███████╗   ██║       ███████║██║     ███████║██║  ██║█████╗  ██╔████╔██║ ╚████╔╝ \n" + 
+				" ╚════██║██║╚════██║   ██║       ██╔══██║██║     ██╔══██║██║  ██║██╔══╝  ██║╚██╔╝██║  ╚██╔╝  \n" + 
+				" ███████║██║███████║   ██║       ██║  ██║╚██████╗██║  ██║██████╔╝███████╗██║ ╚═╝ ██║   ██║   \n" + 
+				" ╚══════╝╚═╝╚══════╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝     ╚═╝   ╚═╝   \n" +                                               
+				"");
+		
+	}//mainlogo
+	
+	
+	/**
+	 * 로그인 화면 헤더 출력메서드
+	 */
+	public static void showLoginHeader() {
+		
+		Scanner scan = new Scanner(System.in);
+
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t  메인화면\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t┏━━━━━━━━━━━━━━━━━━┓\t┏━━━━━━━━━━━━━━━━━━┓\t\t  ┃");
+		System.out.println("\t┃\t\t┃     1.로그인     ┃\t┃ 0. 프로그램 종료 ┃\t\t  ┃");
+		System.out.println("\t┃\t\t┗━━━━━━━━━━━━━━━━━━┛\t┗━━━━━━━━━━━━━━━━━━┛\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 선택하세요. : ");
+	}
+	
 	
 	/**
 	 * 관리자의 메인메뉴를 출력하는 메소드이다.
@@ -35,6 +79,7 @@ public class AdminView {
 		System.out.println("\t│\t\t4. 개설 과목 관리\t10. 취업 현황 관리\t\t  │");
 		System.out.println("\t│\t\t5. 교육생 관리\t\t11. 평가 관리\t\t\t  │");
 		System.out.println("\t│\t\t6. 시험 관리\t\t12. 우수훈련생 관리\t\t  │");
+		System.out.println("\t│\t\t\t\t\t\t\t\t\t  │");
 		System.out.println("\t│\t\t0. 로그 아웃\t\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
@@ -1040,11 +1085,23 @@ public class AdminView {
 	/**
 	 * 출결관리 헤더를 출력하는 메서드입니다.
 	 */
-	public void AttendanceHeader() {
+	public void attendanceHeader() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t 출결 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+	
+	/**
+	 * 출결조회 헤더를 출력하는 메서드입니다.
+	 */
+	public void checkAttendanceHeader() {
+		
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 출결 조회\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 	}
@@ -1107,7 +1164,7 @@ public class AdminView {
 	/**
 	 * 출결관리 메뉴를 출력하는 메서드이다.
 	 */
-	public void AttendanceMenu() {
+	public void attendanceMenu() {
 		
 		System.out.println();
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
@@ -1167,7 +1224,7 @@ public class AdminView {
 					, dto.getAttendState());
 		}
 		
-		System.out.println("\t─────────────────────────────────────────────────────────────");
+		System.out.println("\t──────────────────────────────────────────────────────────────");
 		System.out.println();
 		
 	}
@@ -1209,15 +1266,6 @@ public class AdminView {
 
 
 
-
-
-
-
-
-
-
-
-
 	
 		/**
 	 * 교육생 관리 메뉴 출력 메소드이다.
@@ -1252,6 +1300,545 @@ public class AdminView {
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
+	
+
+	//-------------------------------------------------연계기업채용관리 조혜승
+
+	/**
+	 * 연계기업채용공고관리페이지메뉴 출력 메소드이다.
+	 * @author 혜승
+	 * 
+	 */
+	public void menuCompanyInfo() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 관리페이지\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 채용공고 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 채용공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 채용공고 등록\t\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 채용공고 수정\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 채용공고 삭제\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 이전 화면으로\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+
+	}
+
+
+
+	/**
+	 * 연계기업채용공고 목록 출력 메서드
+	 * @author 혜승
+	 * @param list
+	 */
+	public void viewListCompany(ArrayList<VwCompanyInfoDTO> list) {
+		
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		for(VwCompanyInfoDTO dto : list) {
+			
+			if(dto.getName().length() <= 5) {
+
+				System.out.printf("%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+						dto.getState(),dto.getSeqCompanyInfo(),
+						dto.getName(),dto.getStartDate(),
+						dto.getEndDate(),dto.getEmploymentType(),
+						dto.getSalary(),dto.getComField(),
+						dto.getComSize(),dto.getAddress());
+				
+			} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
+				System.out.printf("%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+						dto.getState(),dto.getSeqCompanyInfo(),
+						dto.getName(),dto.getStartDate(),
+						dto.getEndDate(),dto.getEmploymentType(),
+						dto.getSalary(),dto.getComField(),
+						dto.getComSize(),dto.getAddress());
+			} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
+				System.out.printf("%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+						dto.getState(),dto.getSeqCompanyInfo(),
+						dto.getName(),dto.getStartDate(),
+						dto.getEndDate(),dto.getEmploymentType(),
+						dto.getSalary(),dto.getComField(),
+						dto.getComSize(),dto.getAddress());
+			} else if(dto.getName().length()>9) {
+					System.out.printf("%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+							dto.getState(),dto.getSeqCompanyInfo(),
+							dto.getName(),dto.getStartDate(),
+							dto.getEndDate(),dto.getEmploymentType(),
+							dto.getSalary(),dto.getComField(),
+							dto.getComSize(),dto.getAddress());
+			}//if
+		
+	}//for
+	
+		
+		
+}
+
+
+	/**
+	 * 연계기엄 채용공고 검색 메뉴 출력 메서드
+	 * @author 혜승
+	 * 
+	 */
+	public void searchCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 업무별 채용공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 소재지별 채용공고 검색\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 연봉별 채용공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 채용상태별 공고 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 이전 화면으로 \t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 채용상태별 채용공고 검색 출력문 헤더
+	 * @author 혜승
+	 */
+	public void stateSearchCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t채용상태별 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t 검색어 : 채용중 ");
+		System.out.println("\t\t\t\t 검색어 : 채용예정 ");
+		System.out.println("\t\t\t\t 검색어 : 채용마감 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
+	}
+
+
+	/**
+	 * 연봉별 채용공고 검색 출력문 헤더
+	 * @author 혜승
+	 */
+	public void salarySearchCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연봉별 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t 검색어 예) 검색 최저금액 : 20000000 (이상)");
+		System.out.println("\t\t\t 검색어 예) 검색 최고금액 : 30000000 (미만)");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 검색 원하시는 최저금액을 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 소재지별 채용공고 검색 출력문 헤더
+	 * @author 혜승
+	 */
+	public void addressSearchCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t소재지별 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t 검색어 예) 서울 ");
+		System.out.println("\t\t\t\t 검색어 예) 분당 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 검색어를 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 업무별 채용공고 검색 출력문 헤더
+	 * @author 혜승
+	 */
+	public void comFieldSearchCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t업무별 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t-검색 가능한 업무 목록-");
+		System.out.println();
+		
+	}
+
+
+	/**
+	 * 연계기업채용공고 등록 출력문 헤더
+	 * @author 혜승
+	 */
+	public void addCompanyInfo() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 등록\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t\t 등록을 위해 아래 내용을 입력해주세요.");
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println();
+		
+	}
+
+
+	/**
+	 * 연계기업채용공고 수정 출력문 헤더
+	 * @author 혜승
+	 */
+	public void editCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+		System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
+		System.out.println();
+		
+	}
+
+
+	/**
+	 * 연계기업채용공고 삭제 출력문 헤더
+	 * @author 혜승
+	 */
+	public void deleteCompany() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 삭제\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+	
+		System.out.println("\t\t\t\t - 전체 채용공고 목록 - ");
+		System.out.println();
+		
+	}
+
+	//----------------------수료생취업정보관리페이지 조혜승
+
+	/**
+	 * 수료생 취업정보 관리페이지 메뉴출력문 메서드
+	 * @author 혜승
+	 */
+	public void menuGetJobInfo() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 관리페이지\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 취업정보 전체조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 취업정보 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 취업정보 등록\t\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 취업정보 수정\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 취업정보 삭제\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 연계기업 취업정보 조회\t\t\t\t  │");
+		System.out.println("\t│\t\t7. 연계기업 취업정보 등록\t\t\t\t  │");
+		System.out.println("\t│\t\t8. 연계기업 취업정보 삭제\t\t\t\t  │");
+		System.out.println("\t│\t\t9. 이전 화면으로\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+	}
+
+
+
+	/**
+	 * 수료생 취업정보 조회 문 출력 형식문
+	 * @author 혜승
+	 */
+	
+	public void GetJobList(ArrayList<VwGetJobInfoDTO> list) {
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("[취업번호][이름]  [회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[수료과정]");
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		for(VwGetJobInfoDTO dto : list ) { //TODO 정리
+			
+			if(dto.getCompanyName().length() <= 5) {
+
+				System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-20s \n", 
+						dto.getGjseq(), dto.getName(), 
+						dto.getCompanyName(), 
+						dto.getForm(), dto.getSalary(),
+						dto.getGetJobDate(),dto.getDuty(),
+						dto.getCourse());
+				
+			} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
+				System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+						dto.getGjseq(), dto.getName(), 
+						dto.getCompanyName(), 
+						dto.getForm(), dto.getSalary(),
+						dto.getGetJobDate(),dto.getDuty(),
+						dto.getCourse());
+			} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
+				System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+						dto.getGjseq(), dto.getName(), 
+						dto.getCompanyName(), 
+						dto.getForm(), dto.getSalary(),
+						dto.getGetJobDate(),dto.getDuty(),
+						dto.getCourse());
+			} else if(dto.getCompanyName().length()>9) {
+					System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+							dto.getGjseq(), dto.getName(), 
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getCourse());
+			}//if
+			
+			
+		}//for
+		if (list.size() == 0) {
+			System.out.println("\t\t\t존재하지 않는 입력값입니다. ");
+			
+			return;
+		}
+		
+	}
+
+
+	/**
+	 * 수료생 취업정보 전체조회헤더
+	 * @author 혜승
+	 */
+	public void jobListHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 전체 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+	
+
+	/**
+	 * 수료생 취업정보 검색 메뉴 출력문 메서드
+	 * @author 혜승
+	 */
+	public void menuJobSearch() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t1. 업무별 취업정보 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t2. 소재지별 취업정보 검색\t\t\t\t  │");
+		System.out.println("\t│\t\t3. 연봉별 취업정보 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t4. 연도별 취업정보 검색\t\t\t\t\t  │");
+		System.out.println("\t│\t\t5. 이전 화면으로 \t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 연도별 취업정보 검색헤더 및 입력요청문장
+	 * @author 혜승
+	 */
+	public void yearSearchGet() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연도별 취업정보 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t 검색어 예): 2020 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 검색 원하시는 연도를 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 연봉별 취업정보 검색헤더및 입력요청문장
+	 * @author 혜승
+	 */
+	public void salarySearchGet() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연봉별 취업정보 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t 검색어 예) 검색 최저금액 : 20000000 (이상)");
+		System.out.println("\t\t\t 검색어 예) 검색 최고금액 : 30000000 (미만)");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 검색 원하시는 최저금액을 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 소재지별 취업정보 검색헤더및 입력요청문장
+	 * @author 혜승
+	 */
+	public void locationSearchGet() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t소재지별 취업정보 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t 검색어 예) 서울 ");
+		System.out.println("\t\t\t\t 검색어 예) 분당 ");
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 검색 원하시는 지역을 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 업무별 취업정보 검색헤더및 업무목록출력헤더
+	 * @author 혜승
+	 */
+	public void dutySearchGet() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t업무별 취업정보 검색\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t-검색 가능한 업무 목록-");
+		System.out.println();
+		
+	}
+
+	/**
+	 * 수료생 취업정보 등록 헤더 미 미등록수료생목록헤더
+	 * @author 혜승
+	 */
+	public void jobAddHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 등록\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("\t\t\t\t-미등록 수료생 목록 -");
+		System.out.println();
+		
+	}
+
+
+	/**
+	 * 입력값없을경우 알림 작은괄호
+	 * @author 혜승
+	 * 
+	 */
+	public void noinputcurve() {
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
+
+
+	/**
+	 * 입력값없을경우 알림 긴라인
+	 * @author 혜승
+	 */
+	public void noinputline() {
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println();
+		
+	}
+
+	/**
+	 * 수료생 취업정보 수정 헤더
+	 * @author 혜승
+	 */
+	public void jobEditHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 수정\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.print("\t█ 수정 원하시는 학생이름을 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 수료생 취업정보 삭제 헤더
+	 * @author 혜승
+	 */
+	public void jobDeleteHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t수료생 취업정보 삭제\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.print("\t█ 삭제 원하시는 학생이름을 입력하세요. : ");
+		
+	}
+
+
+	/**
+	 * 연계기업취업정보조회헤더
+	 * @author 혜승
+	 */
+	public void cjobListHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 전체 조회\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+	}
+
+
+	/**
+	 * 연계기업취업정보 목록 형태 TODO 형식수정하기
+	 * @author 혜승 
+	 * @param list
+	 */
+	public void cjobList(ArrayList<VwEmpStatusDTO> list) {
+		for(VwEmpStatusDTO dto : list) {
+			
+			System.out.printf("\t%s %s %s %s %s %s %s %s %s\n",
+					dto.getSeq(), dto.getName(), 
+					dto.getCompanyName(), dto.getDuty(),
+					dto.getForm(), dto.getSalary(),
+					dto.getGetJobDate(),dto.getLocation(),
+					dto.getCourse());
+			
+		}//for
+		
+	}
+
+
+	/**
+	 * 연계기업 취업정보 등록헤더
+	 * @author 혜승
+	 */
+	public void cjobAddHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 등록\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t\t- 연계기업 목록 -");
+	}
+
+	/**
+	 * 연계기업 취업정보 삭제헤더
+	 * @author 혜승
+	 */
+	public void cjobDeleteHeader() {
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 삭제\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.print("\t█ 삭제 원하시는 학생이름을 입력하세요. : ");
+		
+	}
+	
+
+	
+	
+	
+	
+	
+
+
+
 	
 
 	

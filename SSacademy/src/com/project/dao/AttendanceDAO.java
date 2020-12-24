@@ -2,19 +2,14 @@ package com.project.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import com.project.ssacademy.DBUtil;
 
 import oracle.jdbc.OracleTypes;
 
-import com.project.dto.AttendanceDTO;
 import com.project.dto.PeriodAttendListDTO;
-import com.project.dto.StudentDTO;
 import com.project.dto.ViewStudentDTO;
 /**
  * 출결데이터 관련 모든 프로시저를 관리하는 DAO이다.
@@ -23,10 +18,7 @@ import com.project.dto.ViewStudentDTO;
  */
 public class AttendanceDAO {
 	
-	private static Scanner scan = new Scanner(System.in);
 	private Connection conn;
-	private Statement stat;
-	private PreparedStatement pstat; 
 	private CallableStatement cstat;
 	private ResultSet rs;
 
@@ -38,7 +30,6 @@ public class AttendanceDAO {
 		try {
 			
 			this.conn = DBUtil.open();
-			this.stat = conn.createStatement();
 			
 		} catch (Exception e) {
 			System.out.println("primaryAttendanceDAO.enAttendanceDAO()");
@@ -150,7 +141,13 @@ public class AttendanceDAO {
 	}
 
 
-
+	/**
+	 * 관리자모드에서 특정학생의 특정일 수강상태를 수정하는 메서드이다.
+	 * @param seqStudent	교육생 번호
+	 * @param attendanceDate 출결 날짜
+	 * @param attendState	 출결 상태
+	 * @return 성공 여부
+	 */
 	public int updateAttendState(String seqStudent, String attendanceDate, String attendState) {
 		
 		try {
@@ -173,6 +170,28 @@ public class AttendanceDAO {
 		return 0;
 	}
 
-
+	
+	/**
+	 * 교육생 모드의 입퇴실 체크 기능을 담당하는 메서드이다.
+	 * @param seqStudent 교육생 번호
+	 * @return 성공 여부
+	 */
+	public int addAttendance(String seqStudent) {
+		
+		try {
+			
+			String sql = "{ call procAddAttendance(?) }";
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqStudent);
+			
+			return cstat.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enenclosing_method()");
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

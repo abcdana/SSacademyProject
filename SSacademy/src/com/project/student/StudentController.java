@@ -47,7 +47,9 @@ public class StudentController {
 				System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
 				//break;
 			} else if (sel.equals("2")) {
-				System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
+				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
+				CheckAttendance ca = new CheckAttendance(sdto);
+				ca.attendacneMain();
 				//break;
 			} else if (sel.equals("3")) {
 				System.out.println("- 성적 조회를 할 수 있다. --조성진");
@@ -58,10 +60,14 @@ public class StudentController {
 				evaluation.main();
 				//break;
 			} else if (sel.equals("5")) {
-				System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
+				//System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
+				CompanyInfoCheck companyInfoCheck = new CompanyInfoCheck();
+				companyInfoCheck.menu();
 				//break;
 			} else if (sel.equals("6")) {
-				System.out.println("- 수료자 취업 현황을 확인할 수 있다.-- 조혜승");
+				//System.out.println("- 수료자 취업 현황을 확인할 수 있다.-- 조혜승");
+				GetJobInfoCheck getJobInfoCheck = new GetJobInfoCheck();
+				getJobInfoCheck.menu();
 				//break;
 			} else if (sel.equals("7")) {
 				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
