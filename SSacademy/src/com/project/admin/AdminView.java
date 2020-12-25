@@ -1829,7 +1829,7 @@ public class AdminView {
 		System.out.print("\t█ 삭제 원하시는 학생이름을 입력하세요. : ");
 		
 	}
-	
+
 
 	
 	

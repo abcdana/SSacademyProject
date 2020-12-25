@@ -7,6 +7,7 @@ import com.project.admin.AdminView;
 import com.project.admin.AttendanceManage;
 import com.project.dao.AllOpenCourseDAO;
 import com.project.dao.AttendanceDAO;
+import com.project.dto.PeriodAttendListDTO;
 import com.project.dto.StudentDTO;
 import com.project.student.dto.StudentCourseListDTO;
 import com.project.teacher.TeacherView;
@@ -81,7 +82,7 @@ public class CheckAttendance {
 			int result = adao.addAttendance(sdto.getSeqStudent());
 			view.checkResult(result);
 		} else {
-			System.out.println("잘못 입력하셨습니다.");
+			System.out.println("\t\t※ 잘못 입력하셨습니다.");
 			checkAttend(sdto);
 		}
 		attendacneMain();
@@ -97,8 +98,8 @@ public class CheckAttendance {
 		view.attendanceList(); //출결조회 헤더 
 		
 		//교육생이 수강중인 과정 리스트 출력
-		ArrayList<StudentCourseListDTO> sclist = aocdao.allOpenCourseListbyS(sdto.getSeqStudent());
-		view.allCourseList(sclist);
+		ArrayList<StudentCourseListDTO> result = aocdao.allOpenCourseListbyS(sdto.getSeqStudent());
+		view.allCourseList(result);
 		
 		boolean loop = true;
 		while (loop) {
@@ -108,9 +109,10 @@ public class CheckAttendance {
 			String sel = scan.nextLine();
 			if (sel.equals("1")) {
 				view.totAttList();
+				allAttendanceList(sdto.getSeqStudent());
 					//전체 조회
 			} else if (sel.equals("2")) {
-				view.monthAttList();
+				monthAttendanceList(sdto.getSeqStudent());
 					//월별 조회
 			} else {
 				loop = false;
@@ -118,5 +120,36 @@ public class CheckAttendance {
 		
 		}
 	}
+
+
+	//전체 조회
+	private void allAttendanceList(String seqStudent) {
+		
+		view.totAttList();
+		ArrayList<PeriodAttendListDTO> list = adao.attPeriodList(seqStudent, year, month);
+		aview.attendanceList(list);
+		
+	}
+
+
+	//월별 조회
+	private void monthAttendanceList(String seqStudent) {
+
+		view.monthAttList();
+		
+		System.out.println("\t\t출결 조회를 원하시는 년도와 월을 입력해주세요.\n\t\t년도는 네자리 수, 월은 두자리 수로 입력해주세요. (ex. 2020, 01)\n");
+		System.out.print("\t█  년도 : ");
+		String year = scan.nextLine();
+		
+		System.out.print("\t█  월 : ");
+		String month = scan.nextLine();
+		System.out.println();
+		
+		ArrayList<PeriodAttendListDTO> list = adao.attPeriodList(seqStudent, year, month);
+		aview.attendanceList(list);
+		
+	}
+	
+	
 	
 }
