@@ -80,7 +80,7 @@ public class GetJobInfo {
 			
 			pause();
 		}else if(num.equals("9")) {
-			
+			loop = false;
 	
 		}
 		else {
@@ -290,8 +290,11 @@ public class GetJobInfo {
 	private void completeStudent() { //취업정보 등록을위해 미등록 수료생 목록 조회
 		
 		ArrayList<CompleteStudentDTO> list = dao.completeS();
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("\t[수강번호] [이름] [ID] \t\t[수료과정]");
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(CompleteStudentDTO dto : list) { //TODO 정리
-			System.out.printf("\t%s %s %s %s\n",dto.getRcseq(), dto.getSname(),dto.getId(), dto.getCourse());
+			System.out.printf("\t   %3s    %s %s %s\n",dto.getRcseq(), dto.getSname(),dto.getId(), dto.getCourse());
 			
 		}
 		if (list.size() == 0) {
@@ -331,9 +334,9 @@ public class GetJobInfo {
 		System.out.println();
 		VwGetJobInfoDTO dto = dao.getEdit(seqGetJobInfo);
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.printf("\t취업번호 : %s \n\t학생이름 : %s\n\t회사명 : %s\n"
-				+ "\t업무 : %s\n\t고용형태 : %s\n\t연봉 : %s\n\t취업일 : %s\n"
-				+ "\t회사주소 : %s\n\t수료한과정명 : %s\n",
+		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\n\t\t회사명 : %s\n"
+				+ "\t\t업무 : %s\n\t\t고용형태 : %s\n\t\t연봉 : %s\n\t\t취업일 : %s\n"
+				+ "\t\t회사주소 : %s\n\t\t수료한과정명 : %s\n",
 				dto.getGjseq(), dto.getName(), 
 				dto.getCompanyName(), dto.getDuty(),
 				dto.getForm(), dto.getSalary(),
@@ -428,9 +431,10 @@ public class GetJobInfo {
 		System.out.println();
 		VwGetJobInfoDTO dto = dao.getEdit(seqGetJobInfo);
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.printf("\t취업번호 : %s \n\t학생이름 : %s\n\t회사명 : %s\n"
-				+ "\t업무 : %s\n\t고용형태 : %s\n\t연봉 : %s\n\t취업일 : %s\n"
-				+ "\t회사주소 : %s\n\t수료한과정명 : %s\n\n",
+		System.out.println();
+		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\n\t\t회사명 : %s\n"
+				+ "\t\t업무 : %s\n\t\t고용형태 : %s\n\t\t연봉 : %s\n\t\t취업일 : %s\n"
+				+ "\t\t회사주소 : %s\n\t\t수료한과정명 : %s\n\n",
 				dto.getGjseq(), dto.getName(), 
 				dto.getCompanyName(), dto.getDuty(),
 				dto.getForm(), dto.getSalary(),
@@ -477,7 +481,9 @@ public class GetJobInfo {
 		ArrayList<CompanyInfoDTO> list = daoE.companyList();
 		System.out.println();
 		for(CompanyInfoDTO dto : list) {
-			System.out.println("\t\t번호 : "+dto.getSeqCompanyInfo() + "\t회사이름 : " + dto.getName());
+			System.out.println("\t회사번호 : "+dto.getSeqCompanyInfo() + "\t회사이름 : " + dto.getName());
+			System.out.println("\t\t\t회사주소 : " + dto.getAddress());
+			System.out.println();
 			
 		}
 		System.out.println();
@@ -490,21 +496,23 @@ public class GetJobInfo {
 		}
 		ArrayList<VwGetJobInfoDTO> list2 = daoE.companyGetJob(seqCompanyInfo);
 		System.out.println();
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("\t[취업번호][수강번호]\t[이름]  [ID]     \t[회사이름]    [취업일]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.printf("\t\t\t\t선택기업에 취업한 수료생 목록");
+		System.out.println();
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("\t[취업번호][수강번호]\t[이름]  [ID]     \t[회사이름]    [취업일]\t[회사주소]");
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println();
 		for(VwGetJobInfoDTO dto : list2) { 
-			System.out.printf("\t%5s \t%6s  \t%s %s    %s  %s\n",
+			System.out.printf("\t%5s \t%6s  \t%s %s    %s  %s  %s\n",
 							dto.getGjseq(), dto.getRcseq(),dto.getName(),
-							dto.getId(),dto.getCompanyName(),dto.getGetJobDate());
+							dto.getId(),dto.getCompanyName(),dto.getGetJobDate(),dto.getLocation());
 		}
 		
 		if (list2.size() == 0) {
 			System.out.println("\t\t\t선택한 기업에 취업한 수료생이 없습니다.");
-			pause();
 			return;
 		}
+		System.out.println();
 		view.noinputline();
 		System.out.print("\t█ 등록 원하는 학생의 취업번호를 입력해 주세요.: ");
 		String gjseq = scan.nextLine();
@@ -544,10 +552,23 @@ public class GetJobInfo {
 		}
 		
 		ArrayList<VwEmpStatusDTO> list = daoE.cjobList(word);
+		if(list.size() ==0) {
+			System.out.println();
+			System.out.println("\t\t\t -수료생취업정보에 존재하지 않는 학생이름입니다.-\n");
+			System.out.println();
+			System.out.println("\t 엔터를 입력해주세요");
+		}
+		System.out.println();
+		System.out.printf("\t\t\t\t-%s 학생 연계기업 취업정보 목록 -\n",word);
+		System.out.println();
 		view.cjobList(list);
-
+		
+		System.out.println();
 		System.out.print("\t█ 삭제 원하시는 학생의 번호를입력하세요 : ");
 		String seq = scan.nextLine();
+		if(seq.equals("")) {
+			menu();
+		}
 			VwEmpStatusDTO dto = daoE.getList(seq);
 			System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 			System.out.println("\t\t\t번호 : " + dto.getSeq());
@@ -555,6 +576,7 @@ public class GetJobInfo {
 			System.out.println("\t\t\tID : " + dto.getId());
 			System.out.println("\t\t\t회사명 : " + dto.getCompanyName());
 			System.out.println("\t\t\t취업일 : " + dto.getGetJobDate());	
+			System.out.println("\t\t\t회사주소 : " + dto.getLocation());	
 			System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 			System.out.print("\t█정말로 삭제 하시겠습니까 ? (y|n) : ");
 			String input = scan.nextLine();

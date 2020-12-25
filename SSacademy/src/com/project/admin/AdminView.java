@@ -1336,7 +1336,7 @@ public class AdminView {
 	public void viewListCompany(ArrayList<VwCompanyInfoDTO> list) {
 		
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [채용형태] [연봉]    [채용업무]  [회사규모]\t\t[주소]");
+		System.out.println("[채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [고용형태] [연봉]    [업무]  [회사규모]\t\t[주소]");
 		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwCompanyInfoDTO dto : list) {
 			
@@ -1407,7 +1407,7 @@ public class AdminView {
 	 */
 	public void stateSearchCompany() {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t채용상태별 채용공고 검색\t\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t채용상태별 채용공고 검색\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t\t\t\t 검색어 : 채용중 ");
@@ -1556,41 +1556,41 @@ public class AdminView {
 	 */
 	
 	public void GetJobList(ArrayList<VwGetJobInfoDTO> list) {
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[취업번호][이름]  [회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[수료과정]");
-		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		for(VwGetJobInfoDTO dto : list ) { //TODO 정리
+		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("[취업번호][이름]  [회사명]\t\t[고용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]");
+		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		for(VwGetJobInfoDTO dto : list ) { 
 			
 			if(dto.getCompanyName().length() <= 5) {
 
-				System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-20s \n", 
+				System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
 						dto.getGjseq(), dto.getName(), 
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
-						dto.getCourse());
+						dto.getLocation(),dto.getCourse());
 				
 			} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+				System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
 						dto.getGjseq(), dto.getName(), 
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
-						dto.getCourse());
+						dto.getLocation(),dto.getCourse());
 			} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+				System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
 						dto.getGjseq(), dto.getName(), 
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
-						dto.getCourse());
+						dto.getLocation(),dto.getCourse());
 			} else if(dto.getCompanyName().length()>9) {
-					System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-20s \n", 
+					System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
 							dto.getGjseq(), dto.getName(), 
 							dto.getCompanyName(), 
 							dto.getForm(), dto.getSalary(),
 							dto.getGetJobDate(),dto.getDuty(),
-							dto.getCourse());
+							dto.getLocation(),dto.getCourse());
 			}//if
 			
 			
@@ -1718,7 +1718,7 @@ public class AdminView {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t수료생 취업정보 등록\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println();
 		System.out.println("\t\t\t\t-미등록 수료생 목록 -");
 		System.out.println();
 		
@@ -1792,18 +1792,49 @@ public class AdminView {
 	 * @param list
 	 */
 	public void cjobList(ArrayList<VwEmpStatusDTO> list) {
+		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.println("[등록번호][이름]  [회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]");
+		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwEmpStatusDTO dto : list) {
+
+				if(dto.getCompanyName().length() <= 5) {
+
+					System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(), dto.getName(), 
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+					
+				} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
+					System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(),dto.getName(), 
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+				} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
+					System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(), dto.getName(), 
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+				} else if(dto.getCompanyName().length()>9) {
+						System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+								dto.getSeq(), dto.getName(), 
+								dto.getCompanyName(), 
+								dto.getForm(), dto.getSalary(),
+								dto.getGetJobDate(),dto.getDuty(),
+								dto.getLocation(),dto.getCourse());
+				}//if
+				
+				
+			}//for
 			
-			System.out.printf("\t%s %s %s %s %s %s %s %s %s\n",
-					dto.getSeq(), dto.getName(), 
-					dto.getCompanyName(), dto.getDuty(),
-					dto.getForm(), dto.getSalary(),
-					dto.getGetJobDate(),dto.getLocation(),
-					dto.getCourse());
-			
-		}//for
+		}
 		
-	}
+	
 
 
 	/**
@@ -1812,7 +1843,7 @@ public class AdminView {
 	 */
 	public void cjobAddHeader() {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t연계기업 취업정보 등록\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t연계기업 취업정보 등록\t\t\t\t ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t\t\t\t- 연계기업 목록 -");

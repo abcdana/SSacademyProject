@@ -24,7 +24,7 @@ public class CompanyInfoCheck {
 		 * 교육생 연계기업 채용공고 조회 클래스 생성자
 		 * @author 혜승
 		 */
-		public void companyInfoCheck() {
+		public CompanyInfoCheck() {
 			dao = new CompanyInfoDAO();
 			view = new StudentView();
 			CompanyInfo = new CompanyInfo();
@@ -67,7 +67,7 @@ public class CompanyInfoCheck {
 			CompanyInfo.pause();
 			
 		}else if(num.equals("6")) {
-			//이전화면 
+			loop = false;
 			 
 		}else {
 			System.out.println("\n없는 번호입니다. 다시입력해주세요.");

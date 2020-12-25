@@ -92,13 +92,15 @@ public class EmpStatusDAO {
 	public ArrayList<CompanyInfoDTO> companyList() { 
 		
 		try {
-			String sql = "select seqcompanyinfo, name from tblCompanyInfo";
+			String sql = "select seqcompanyinfo, name, address from tblCompanyInfo";
 			rs = stat.executeQuery(sql);
 			ArrayList<CompanyInfoDTO> list = new ArrayList<CompanyInfoDTO>();
 			while(rs.next()) {
 				CompanyInfoDTO dto = new CompanyInfoDTO();
 				dto.setSeqCompanyInfo(rs.getString("seqcompanyinfo")); //회사정보번호
 				dto.setName(rs.getString("name"));						//회사이름
+				dto.setAddress(rs.getString("address"));	
+				
 				list.add(dto);
 			}
 			return list;
@@ -130,6 +132,7 @@ public class EmpStatusDAO {
 				dto.setId(rs.getString("id")); 					//학생id
 				dto.setCompanyName(rs.getString("companyname")); //회사이름
 				dto.setGetJobDate(rs.getString("getjobdate")); //취업일
+				dto.setLocation(rs.getString("location")); 		//회사주소
 				
 				list.add(dto);
 			}
