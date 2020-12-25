@@ -90,6 +90,9 @@ public class CompanyInfo {
 	 *
 	 */
 	public void list() { //전체목록조회
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 전체조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		
