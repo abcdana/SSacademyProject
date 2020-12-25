@@ -66,7 +66,7 @@ public class GetJobInfoCheck {
 				
 				GetJobInfo.pause();
 			} else if(num.equals("7")){
-				//이전화면되돌아가기
+				loop = false;
 			} else {
 				System.out.println("\t**번호를 잘못 입력하셨습니다.");
 				menu();
