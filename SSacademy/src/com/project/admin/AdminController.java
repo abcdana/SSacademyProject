@@ -14,6 +14,7 @@ public class AdminController {
 	
 	private Scanner scan;
 	private AdminDTO adto;
+	private AdminTestScoreManagement atsm;
 
 	/**
 
@@ -24,6 +25,7 @@ public class AdminController {
 		
 		scan = new Scanner(System.in);
 		this.adto = dto;
+		atsm = new AdminTestScoreManagement();
 	}
 	
 	
@@ -66,10 +68,10 @@ public class AdminController {
 				AdministerStudent.AdministerStudent(adto);
 				//break;
 			} else if (sel.equals("6")) {
-				System.out.println("6.	시험 관리 - 조성진");
+				atsm.TestQuestionInquiry();
 				//break;
 			} else if (sel.equals("7")) {
-				System.out.println("7.	성적 관리 - 조성진");
+				atsm.TestQuestionInquiry();
 				//break;
 			} else if (sel.equals("8")) {
 				//System.out.println("8.	출결 관리 - 김다은"); - 완료

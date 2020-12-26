@@ -16,7 +16,7 @@ public class StudentController {
 	private Scanner scan;
 	private StudentView view;
 	private StudentDTO sdto;
-
+	private StudentTestScoreInquiry stsi;
 	/**
 	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
 	 */
@@ -25,6 +25,7 @@ public class StudentController {
 		scan = new Scanner(System.in);
 		view = new StudentView();
 		this.sdto = dto;
+		
 		
 	}
 	
@@ -55,7 +56,8 @@ public class StudentController {
 				ca.attendacneMain();
 				//break;
 			} else if (sel.equals("3")) {
-				System.out.println("- 성적 조회를 할 수 있다. --조성진");
+				stsi = new StudentTestScoreInquiry();
+				stsi.TestQuestionInquiry();
 				//break;
 			} else if (sel.equals("4")) {
 				//System.out.println("- 강의 및 시설 평가를 등록, 수정, 삭제 할 수 있다. - 김주혁");
