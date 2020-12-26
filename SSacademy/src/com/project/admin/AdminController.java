@@ -60,7 +60,7 @@ public class AdminController {
 				System.out.println("4.	개설 과목 관리 -박지현");
 				//break;
 			} else if (sel.equals("5")) {
-//				System.out.println("5.	교육생 관리 - 임채원");
+				//System.out.println("5.	교육생 관리 - 임채원"); - 완료
 				AdministerStudent.AdministerStudent(adto);
 				//break;
 			} else if (sel.equals("6")) {
@@ -84,7 +84,8 @@ public class AdminController {
 				evaluation.main();
 				//break;
 			} else if (sel.equals("12")) {
-				System.out.println("12.  우수 훈련생 관리 - 임채원");
+				//System.out.println("12.  우수 훈련생 관리 - 임채원");
+				TopStudent.TopStudent(adto);
 				//break;
 			} else if (sel.equals("0")) {
 				//로그아웃

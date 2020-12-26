@@ -946,39 +946,10 @@ public class AdminView {
 	
 	/////////////////////////////////////////////////채원///////////////////////////////////////////
 	
-	
-	public void menu_AdministerStudent() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
-		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-
-	public void menu_adminStd_search() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
-		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-	
-		/**
+	/**
 	 * 교육생 관리 메뉴 출력 메소드이다.
 	 */
-	public void menu_AdministerStudent() {
+	public void menu_adminStd() {
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
@@ -987,7 +958,7 @@ public class AdminView {
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
 		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t│\t\t0. 뒤로 가기\t\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
@@ -1002,15 +973,52 @@ public class AdminView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 아이디로 조회\t2. 수강번호로 조회\t\t  │");
-		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
+		System.out.println("\t│\t     1. 아이디로 조회\t\t2. 교육생번호로 조회\t\t  │");
+		System.out.println("\t│\t     3. 이름으로 조회\t\t4. 수강번호로 조회\t\t  │");
+		System.out.println("\t│\t     5. 전체 교육생 조회\t0. 뒤로 가기\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
 	
-
+	/**
+	 * 우수 훈련생 / 우수 훈련생 포상 메뉴 출력 메소드이다.
+	 */
+	public void menu_topStd() {
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t    우수훈련생 관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t   1. 우수 훈련생 목록\t\t 2. 우수 훈련 포상 목록\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
 	
+	/**
+	 * 우수 훈련생 / 우수 훈련생 포상 세부 메뉴 출력 메소드이다.
+	 */
+	public void menu_topStd_prize(int prize) {
+		String p="";
+		String t="";
+		if (prize==2) {
+			p="포상 ";
+		}else {
+			t="\t";
+		}
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t  "+(prize==1?"  ":"")+"우수훈련생 "+p+"관리\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t1. 우수 훈련생 "+p+"목록 조회\t2. 우수 훈련생 "+p+"등록\t"+t+"  │");
+		System.out.println("\t│\t3. 우수 훈련생 "+p+"수정"+t+"\t4. 우수 훈련생 "+p+"삭제\t"+t+"  │");
+		System.out.println("\t│\t0. 뒤로 가기\t\t\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+	}
+
 }
 	
 
