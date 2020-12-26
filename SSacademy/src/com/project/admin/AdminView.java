@@ -1234,33 +1234,6 @@ public class AdminView {
 	/////////////////////////////////////////////////채원///////////////////////////////////////////
 	
 	
-	public void menu_AdministerStudent() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 관리\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 교육생 조회\t\t2. 교육생 등록\t\t\t  │");
-		System.out.println("\t│\t\t3. 교육생 수정\t\t4. 교육생 삭제\t\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
-
-	public void menu_adminStd_search() {
-		System.out.println("\n");
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-		
-		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 수강번호로 조회\t2. 아이디로 조회\t\t  │");
-		System.out.println("\t│\t\t3. 이름으로 조회\t4. 전체 교육생 조회\t\t  │");
-		System.out.println("\t│\t\t5. 뒤로 가기\t\t\t\t\t\t  │");
-		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-		System.out.println();
-	}
 
 
 
@@ -1557,36 +1530,36 @@ public class AdminView {
 	
 	public void GetJobList(ArrayList<VwGetJobInfoDTO> list) {
 		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[취업번호][이름]  [회사명]\t\t[고용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]");
+		System.out.println("[취업번호][이름][ID]  \t[회사명]\t\t[고용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t[수료과정]");
 		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwGetJobInfoDTO dto : list ) { 
 			
 			if(dto.getCompanyName().length() <= 5) {
 
-				System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
-						dto.getGjseq(), dto.getName(), 
+				System.out.printf("%6s %-5s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
+						dto.getGjseq(), dto.getName(), dto.getId(),
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
 						dto.getLocation(),dto.getCourse());
 				
 			} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
-				System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
-						dto.getGjseq(), dto.getName(), 
+				System.out.printf("%6s %-5s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+						dto.getGjseq(), dto.getName(), dto.getId(),
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
 						dto.getLocation(),dto.getCourse());
 			} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
-				System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
-						dto.getGjseq(), dto.getName(), 
+				System.out.printf("%6s %-5s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+						dto.getGjseq(), dto.getName(), dto.getId(),
 						dto.getCompanyName(), 
 						dto.getForm(), dto.getSalary(),
 						dto.getGetJobDate(),dto.getDuty(),
 						dto.getLocation(),dto.getCourse());
 			} else if(dto.getCompanyName().length()>9) {
-					System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
-							dto.getGjseq(), dto.getName(), 
+					System.out.printf("%6s %-5s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+							dto.getGjseq(), dto.getName(), dto.getId(),
 							dto.getCompanyName(), 
 							dto.getForm(), dto.getSalary(),
 							dto.getGetJobDate(),dto.getDuty(),
@@ -1793,36 +1766,36 @@ public class AdminView {
 	 */
 	public void cjobList(ArrayList<VwEmpStatusDTO> list) {
 		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.println("[등록번호][이름]  [회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]");
+		System.out.println("[등록번호][이름][ID]  \t[회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]");
 		System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		for(VwEmpStatusDTO dto : list) {
 
 				if(dto.getCompanyName().length() <= 5) {
 
-					System.out.printf("%6s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
-							dto.getSeq(), dto.getName(), 
+					System.out.printf("%6s %-5s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(), dto.getName(), dto.getId(),
 							dto.getCompanyName(), 
 							dto.getForm(), dto.getSalary(),
 							dto.getGetJobDate(),dto.getDuty(),
 							dto.getLocation(),dto.getCourse());
 					
 				} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
-					System.out.printf("%6s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
-							dto.getSeq(),dto.getName(), 
+					System.out.printf("%6s %-5s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(),dto.getName(), dto.getId(),
 							dto.getCompanyName(), 
 							dto.getForm(), dto.getSalary(),
 							dto.getGetJobDate(),dto.getDuty(),
 							dto.getLocation(),dto.getCourse());
 				} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
-					System.out.printf("%6s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
-							dto.getSeq(), dto.getName(), 
+					System.out.printf("%6s %-5s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+							dto.getSeq(), dto.getName(), dto.getId(),
 							dto.getCompanyName(), 
 							dto.getForm(), dto.getSalary(),
 							dto.getGetJobDate(),dto.getDuty(),
 							dto.getLocation(),dto.getCourse());
 				} else if(dto.getCompanyName().length()>9) {
-						System.out.printf("%6s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
-								dto.getSeq(), dto.getName(), 
+						System.out.printf("%6s %-5s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+								dto.getSeq(), dto.getName(), dto.getId(),
 								dto.getCompanyName(), 
 								dto.getForm(), dto.getSalary(),
 								dto.getGetJobDate(),dto.getDuty(),
