@@ -2,6 +2,7 @@ package com.project.dto;
 
 public class BasicTestDTO {
 
+	private String seqBasicTest;
 	private String seqOpenSubject;
 	private String question;
 	private String questionNum;
@@ -23,5 +24,11 @@ public class BasicTestDTO {
 	}
 	public void setQuestionNum(String questionNum) {
 		this.questionNum = questionNum;
+	}
+	public String getSeqBasicTest() {
+		return seqBasicTest;
+	}
+	public void setSeqBasicTest(String seqBasicTest) {
+		this.seqBasicTest = seqBasicTest;
 	}
 }

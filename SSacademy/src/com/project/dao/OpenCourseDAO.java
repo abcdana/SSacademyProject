@@ -7,11 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
+import com.project.admin.OpenCourse;
 import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenCourseStudentDTO;
 import com.project.admin.dto.OpenSubjectListDTO;
-import com.project.dto.BasicCourseInfoDTO;
 import com.project.dto.OpenCourseDTO;
 import com.project.ssacademy.DBUtil;
 
@@ -45,56 +47,50 @@ public class OpenCourseDAO {
 		
 	}
 	
+
 	
-	public ArrayList<OpenCourseListDTO> openCourseList() {
+	/**
+	 * 전체개설과정 리스트입니다.
+	 */
+	public ArrayList<OpenCourseListDTO> openCourseList(int page) {
 
 		try {
 
+			int start = 1 + (page-1) * 10;	//한페이지에서 보여줄 첫번째 rownum
+			int end = 10 * page; 	//한페이지에서 마지막으로 보여줄 rownum
+			
 			// 전체개설과정 조회 쿼리
-			String sql = "select b.seqBasicCourseInfo as 기초과정번호,"
-					+ "			o.seqOpenCourse as 과정번호,"
-					+ "        b.name as 과정명,"
-					+ "        to_char(o.startdate, 'yyyy-mm-dd') as 시작일,"
-					+ "        to_char(o.enddate, 'yyyy-mm-dd') as 종료일,"
-					+ "        r.name as 강의실,"
-					+ "        o.memberCount as 등록인원,"
-					+ "    case"
-					+ "        when endDate > sysdate and startDate < sysdate then '강의중'"
-					+ "        when endDate < sysdate then '강의종료'"
-					+ "        when startDate > sysdate then '강의예정'"
-					+ "    end as 과정수료여부"
-					+ " from tblOpenCourse o"
-					+ "        inner join tblBasicCourseInfo b"
-					+ "            on o.seqBasicCourseInfo = b.seqBasicCourseInfo"
-					+ "                inner join tblRoom r"
-					+ "                    on r.seqroom = o.seqroom"
-					+ "                        order by seqOpenCourse asc";
+			String sql = "select * from vTotalOpenCourse"
+					+ " where num between ? and ?";
 
-
-			rs = stat.executeQuery(sql);
+			pstat = conn.prepareStatement(sql);
+			
+			//rownum 변수
+			pstat.setInt(1, start);
+			pstat.setInt(2, end);
+			
+			rs = pstat.executeQuery();
 
 			ArrayList<OpenCourseListDTO> list = new ArrayList<OpenCourseListDTO>();
-
+			
 			while(rs.next()) {
-
 				OpenCourseListDTO oc = new OpenCourseListDTO();
-
-				oc.setSeqBasicCourseInfo(rs.getString("기초과정번호"));
-				oc.setSeqOpenCourse(rs.getString("과정번호"));
-				oc.setName(rs.getString("과정명"));
-				oc.setStartDate(rs.getString("시작일"));
-				oc.setEndDate(rs.getString("종료일"));
-				oc.setRoom(rs.getString("강의실"));
-				oc.setMemberCount(rs.getString("등록인원"));
-				oc.setState(rs.getString("과정수료여부"));
+				
+				oc.setRownum(rs.getInt("num"));
+				oc.setSeqBasicCourseInfo(rs.getString("seqBasicCourse"));
+				oc.setSeqOpenCourse(rs.getString("seqOpenCourse"));
+				oc.setName(rs.getString("courseName"));
+				oc.setStartDate(rs.getString("startDate"));
+				oc.setEndDate(rs.getString("endDate"));
+				oc.setRoom(rs.getString("room"));
+				oc.setMemberCount(rs.getString("countMember"));
+				oc.setState(rs.getString("courseState"));
 
 				list.add(oc);
 			}
 			
 			rs.close();
-			//stat.close();
-			//conn.close();
-			
+	
 			return list;
 			
 		} catch (SQLException e) {
@@ -105,28 +101,110 @@ public class OpenCourseDAO {
 		return null;
 	}
 	
+	//과정글 총 개수
+	public int getCountCourse() {
+		
+		int count = 0;
+		
+		try {
+
+			// 전체개설과정 총 갯수
+			String sql = "select count(num) as count from vTotalOpenCourse";
+			
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+				
+				rs.close();
+			
+				return count;
+			}
+		
+		} catch (Exception e) {
+			System.out.println("OpenCourseDAO.getCountCourse()");
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+	
+	
+	/**
+	 * 특정개설과정 정보입니다.
+	 * @param 개설과정 rownum
+	 */
+	public ArrayList<OpenCourseListDTO> specificCourse(int rownum) {
+
+		try {
+
+			// 특정개설과정 조회 쿼리
+			String sql = "select * from vTotalOpenCourse where num = ?";
+
+			pstat = conn.prepareStatement(sql);
+			pstat.setInt(1, rownum);
+			
+			rs = pstat.executeQuery();
+	
+			ArrayList<OpenCourseListDTO> list = new ArrayList<OpenCourseListDTO>();
+
+			while(rs.next()) {
+
+				OpenCourseListDTO oc = new OpenCourseListDTO();
+
+				oc.setRownum(rs.getInt("num"));
+				oc.setSeqBasicCourseInfo(rs.getString("seqBasicCourse"));
+				oc.setSeqOpenCourse(rs.getString("seqOpenCourse"));
+				oc.setName(rs.getString("courseName"));
+				oc.setStartDate(rs.getString("startDate"));
+				oc.setEndDate(rs.getString("endDate"));
+				oc.setRoom(rs.getString("room"));
+				oc.setMemberCount(rs.getString("countMember"));
+				oc.setState(rs.getString("courseState"));
+
+				list.add(oc);
+			}
+			
+			rs.close();
+	
+			return list;
+			
+		} catch (SQLException e) {
+			System.out.println("ArrayList<OpenCourseListDTO>.specificCourse()");
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	
 
 	/**
 	 * 특정과정조회의 교육생 리스트
 	 */
-	public ArrayList<OpenCourseStudentDTO> openCourseStudent(String seqOpenCourse) {
+	public ArrayList<OpenCourseStudentDTO> openCourseStudent(String seqOpenCourse, int page) {
 
 		try {
 			
-			//개설과목조회 프로시저 호출 sql
-			String sql = "{ call procViewStudent2(?, ?) }";	
+			int start = 1 + (page-1) * 10;	//한페이지에서 보여줄 첫번째 rownum
+			int end = 10 * page; 	//한페이지에서 마지막으로 보여줄 rownum
+			
+			String sql = "select num, seqOpenCourse, seqStudent, name, ssn, tel, registDate, state"
+					+ "    from vViewStudent"
+					+ "        where seqOpenCourse = ? and rownum between ? and ?";	
+			
 			cstat = conn.prepareCall(sql);
 			
-			//scanner로 받은 인자값 넣기
+			//과정번호 넣기
 			cstat.setString(1, seqOpenCourse);
-			//out 인자값 넣기
-			cstat.registerOutParameter(2, OracleTypes.CURSOR);
+			//rownum
+			cstat.setInt(2, start);
+			cstat.setInt(3, end);
 			
 			//쿼리 날리기
-			cstat.executeQuery();
+			rs = cstat.executeQuery();
 			
-			//가져온 out값 형변환
-			rs = (ResultSet) cstat.getObject(2);
 			
 			ArrayList<OpenCourseStudentDTO> list = new ArrayList<OpenCourseStudentDTO>();
 			
@@ -143,21 +221,47 @@ public class OpenCourseDAO {
 				s.setState(rs.getString("state"));
 				
 				list.add(s);
-				
+			
 			}
 			
 			return list;
 			
-			
 		} catch (Exception e) {
-			System.out.println("OpenSubjectDAO.SpecificOpenSubject(String seqOpenCourse)");
+			System.out.println("OpenSubjectDAO.openCourseStudent()");
 			e.printStackTrace();
 		}
 	
 			return null; 
-		
 	}
 	
+	//특정과정 교육생 총 개수
+		public int getCountStudent(OpenCourseListDTO dto) {
+			
+			int count = 0;
+			
+			try {
+
+				//해당 과정 총 교육생
+				String sql = "select count(*) as count from vViewStudent where seqOpenCourse = ?";
+				
+				pstat = conn.prepareStatement(sql);
+				pstat.setString(1, dto.getSeqOpenCourse());
+				rs = pstat.executeQuery();
+				
+				if(rs.next()) {
+					count = rs.getInt("count");
+					rs.close();
+					return count;
+				}
+			
+			} catch (Exception e) {
+				System.out.println("OpenCourseDAO.getCountStudent()");
+				e.printStackTrace();
+			}
+			
+			return 0;
+		}
+		
 	
 	/**
 	 * 개설과정등록 DAO
@@ -180,7 +284,7 @@ public class OpenCourseDAO {
 			return cstat.executeUpdate();
 			
 		} catch (SQLException e) {
-			System.out.println("ArrayList<OpenCourseListDTO> OpenCourseList()");
+			System.out.println("OpenCourseDAO.openCourseAdd()");
 			e.printStackTrace();
 		}
 
@@ -188,95 +292,83 @@ public class OpenCourseDAO {
 		
 		
 	}
+	
 	
 	
 	/**
-	 * 개설과정수정DAO - 강의실
+	 * 개설과정수정 - 수정 전 개설과정 정보
 	 */
-	public int openCourseRoomEdit(String seqOpenCourse, String seqRoom) {
+	public OpenCourseListDTO normalOpenCourse(int rownum) {
 		
 		try {
-
-			//개설과정 강의실수정 프로시저 호출
-			String sql = "{ call procEditRoom(?, ?) }";
-
-			cstat = conn.prepareCall(sql);
-
-			cstat.setString(1, seqOpenCourse);
-			cstat.setString(2, seqRoom);
 			
-			int result = cstat.executeUpdate();
+			String sql = "select * from vTotalOpenCourse where num = ?"; 
 			
-			return result;
+			pstat = conn.prepareStatement(sql);
 			
+			pstat.setInt(1, rownum);
 			
-		} catch (SQLException e) {
-			System.out.println("OpenCourseDAO.openCourseEdit()");
-			e.printStackTrace();
+			rs = pstat.executeQuery();
+			
+			OpenCourseListDTO ocdto = new OpenCourseListDTO();
+			
+			while(rs.next()) {
+				
+				ocdto.setRownum(rs.getInt("num"));
+				ocdto.setSeqOpenCourse(rs.getString("seqOpenCourse"));
+				ocdto.setSeqBasicCourseInfo(rs.getString("seqBasicCourse"));
+				ocdto.setName(rs.getString("courseName"));
+				ocdto.setStartDate(rs.getString("startDate"));
+				ocdto.setEndDate(rs.getString("endDate"));
+				ocdto.setRoom(rs.getString("room"));
+				
+				return ocdto;
+			}
+			
+					
+		} catch (Exception e) {
+			System.out.println("OpenSubjectDAO.normalOpenSubject()");
 		}
-
-		return 0;
 		
+		return null;
 	}
-	
-	/**
-	 * 개설과정수정DAO - 날짜
-	 */
-	public int openCourseDateEdit(String seqOpenCourse, String startDate, String endDate) {
-		
-		try {
 
-			//개설과정 강의실수정 프로시저 호출
-			String sql = "{ call procEditCourse2(?, ?, ?) }";
-
-			cstat = conn.prepareCall(sql);
-
-			cstat.setString(1, seqOpenCourse);
-			cstat.setString(2, startDate);
-			cstat.setString(3, endDate);
-			
-			int result = cstat.executeUpdate();
-			
-			return result;
-			
-			
-		} catch (SQLException e) {
-			System.out.println("OpenCourseDAO.openCourseDateEdit()");
-			e.printStackTrace();
-		}
-
-		return 0;
-		
-	}
 	
 	
 	/**
-	 * 개설과정수정DAO - 기초과정번호
+	 * 개설과목수정 DAO
+	 * @return 결과값 1: 수정완료 0: 수정실패
 	 */
-	public int openBasicCourseEdit(String seqOpenCourse, String seqBasicCourse) {
+	
+	public int editOpenCourse(OpenCourseListDTO ocdto) {
 		
 		try {
-
-			//개설과정 강의실수정 프로시저 호출
-			String sql = "{ call procBasicCourseSeq(?, ?) }";
-
-			cstat = conn.prepareCall(sql);
-
-			cstat.setString(1, seqOpenCourse);
-			cstat.setString(2, seqBasicCourse);
 			
-			int result = cstat.executeUpdate();
+			String sql = "update tblOpenCourse set seqBasicCourseInfo = ?"
+					+ ", startDate = ?"
+					+ ", endDate = ?"
+					+ ", seqRoom = ?"
+							+ "where seqOpenCourse = ?";
 			
-			return result;
+			pstat = conn.prepareStatement(sql);
 			
+			pstat.setString(1, ocdto.getSeqBasicCourseInfo());
+			pstat.setString(2, ocdto.getStartDate());
+			pstat.setString(3, ocdto.getEndDate());
+			pstat.setString(4, ocdto.getSeqRoom());
+			pstat.setString(5, ocdto.getSeqOpenCourse());
 			
-		} catch (SQLException e) {
-			System.out.println("OpenCourseDAO.openCourseDateEdit()");
+			return pstat.executeUpdate();
+			
+		} catch (Exception e) {
+			
+			System.out.println("OpenSubjectDAO.editOpenCourse()");
 			e.printStackTrace();
 		}
-
+		
 		return 0;
 	}
+	
 	
 	
 	/**
@@ -378,4 +470,11 @@ public class OpenCourseDAO {
 
 		return 0;
 	}
-}
+
+
+	
+	
+}	
+
+
+
