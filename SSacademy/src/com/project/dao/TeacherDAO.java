@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import com.project.admin.dto.ViewTeacherCourseDTO;
 import com.project.dto.TeacherDTO;
 import com.project.ssacademy.DBUtil;
+import com.project.teacher.dto.TeacherScheduleDTO;
 
 import oracle.jdbc.OracleTypes;
 
 
 /**
  * 교사 계졍과 관련된 기능을 담당하는 DAO
- * @author 김주혁, 김다은
+ * @author 김주혁, 김다은, 박지현
  *
  */
 public class TeacherDAO {
@@ -35,7 +36,7 @@ public class TeacherDAO {
 		try {
 			
 			conn = DBUtil.open();
-			stat = conn.createStatement();			
+			stat = conn.createStatement();
 			
 		} catch (Exception e) {
 			System.out.println("TeacherDAO.TeacherDAO()");
@@ -323,6 +324,108 @@ public class TeacherDAO {
 		return null;
 	}
 	
+	
+	
+	
+	/**
+	 * 교사 스케줄 조회
+	 * @param seqTeacher 검색할 교사의 교사번호
+	 * @return 교사의 강의스케줄 정보
+	 * @author 박지현
+	 */
+	public ArrayList<TeacherScheduleDTO> scheduleSeqTeacher(String seqTeacher) {
+		
+		try {
+			
+			//쿼리
+			String sql = "{ call procTeacherSchedule(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			cstat.setString(1, seqTeacher);
+			cstat.registerOutParameter(2, OracleTypes.CURSOR);
+			
+			//쿼리날리기
+			cstat.executeQuery();
+			
+			//가져온 out값 형변환
+			ResultSet rs = (ResultSet) cstat.getObject(2);
+			
+			ArrayList<TeacherScheduleDTO> list = new ArrayList<TeacherScheduleDTO>();
+			
+			//System.out.println("seqTeacher : " + seqTeacher);
+			
+			while(rs.next()) {
+				
+				TeacherScheduleDTO tdto = new TeacherScheduleDTO();
+				
+				tdto.setSeqTeacher(rs.getString("seqTeacher"));
+				tdto.setTeahcerName(rs.getString("teacherName"));
+				tdto.setCourseName(rs.getString("courseName"));
+				tdto.setStartDate(rs.getString("startDate"));
+				tdto.setEndDate(rs.getString("endDate"));
+				tdto.setMemberCount(rs.getString("memberCount"));
+				
+				list.add(tdto);
+				
+			}
+			
+			return list;
+			
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.scheduleSeqTeahcer()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	
+	/**
+	 * 교사 스케줄 조회
+	 * @param teacherName 검색할 교사의 교사명
+	 * @return 교사의 강의스케줄 정보
+	 * @author 박지현
+	 */
+	public ArrayList<TeacherScheduleDTO> scheduleNameTeacher(String teacherName) {
+		
+		try {
+			
+			//쿼리
+			String sql = String.format("select * from vteacherSchedule where teacherName like '%%%s%%'"
+					, teacherName);
+			
+			//쿼리날리기
+			pstat =  conn.prepareStatement(sql);
+			rs = pstat.executeQuery();
+			
+			ArrayList<TeacherScheduleDTO> list = new ArrayList<TeacherScheduleDTO>();
+			
+			while(rs.next()) {
+				
+				TeacherScheduleDTO tdto = new TeacherScheduleDTO();
+				
+				tdto.setSeqTeacher(rs.getString("seqTeacher"));
+				tdto.setTeahcerName(rs.getString("teacherName"));
+				tdto.setCourseName(rs.getString("courseName"));
+				tdto.setStartDate(rs.getString("startDate"));
+				tdto.setEndDate(rs.getString("endDate"));
+				tdto.setMemberCount(rs.getString("memberCount"));
+				
+				list.add(tdto);
+				
+			}
+			
+			return list;
+			
+			
+		} catch (Exception e) {
+			System.out.println("TeacherDAO.scheduleNameTeacher()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 	
 }

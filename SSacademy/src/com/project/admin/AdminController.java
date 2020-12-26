@@ -13,7 +13,6 @@ import com.project.dto.AdminDTO;
 public class AdminController {
 	
 	private Scanner scan;
-	private AdminView view;
 	private AdminDTO adto;
 
 	/**
@@ -24,7 +23,6 @@ public class AdminController {
 	public AdminController(AdminDTO dto) {
 		
 		scan = new Scanner(System.in);
-		view = new AdminView();
 		this.adto = dto;
 	}
 	
@@ -40,24 +38,28 @@ public class AdminController {
 		boolean check = true;
 		while (check) {
 			
-			view.menu();
+			AdminView.menu();
 			
 			String sel = scan.nextLine();
 			
 			if (sel.equals("1")) {
-				//System.out.println("1.	기초 정보 관리 - 김다은");
-				BasicInfoManage manage = new BasicInfoManage();
-				manage.basicInfoMain();
+				//System.out.println("1.	기초 정보 관리 - 김다은"); - 완료
+				BasicInfoManage bim = new BasicInfoManage();
+				bim.basicInfoMain();
 			} else if (sel.equals("2")) {
 				//System.out.println("2.	교사 계정 관리 - 김주혁"); - 완료
 				TeacherAccountManagement teacherAccount = new TeacherAccountManagement(); //교사 계정 관리 생성
 				teacherAccount.main(); //교사 계정 관리 메인
 				//break;
 			} else if (sel.equals("3")) {
-				System.out.println("3.	개설 과정 관리 -박지현");
-				//break;
+				//System.out.println("3.	개설 과정 관리 -박지현"); - 완료
+				OpenCourse oc = new OpenCourse();
+				oc.openCourseStart();
+				
 			} else if (sel.equals("4")) {
-				System.out.println("4.	개설 과목 관리 -박지현");
+				//System.out.println("4.	개설 과목 관리 -박지현"); - 완료
+				OpenSubject os = new OpenSubject();
+				os.openSubjectStart();
 				//break;
 			} else if (sel.equals("5")) {
 				//System.out.println("5.	교육생 관리 - 임채원"); - 완료
@@ -70,13 +72,19 @@ public class AdminController {
 				System.out.println("7.	성적 관리 - 조성진");
 				//break;
 			} else if (sel.equals("8")) {
-				System.out.println("8.	출결 관리 - 김다은");
+				//System.out.println("8.	출결 관리 - 김다은"); - 완료
+				AttendanceManage am = new AttendanceManage();
+				am.attendanceMain();
 				//break;
 			} else if (sel.equals("9")) {
-				System.out.println("9.	연계 기업 취업공고 관리 -조혜승");
+				//System.out.println("9.	연계 기업 취업공고 관리 -조혜승");- 완료
+				CompanyInfo ci = new CompanyInfo();
+				ci.menu();
 				//break;
 			} else if (sel.equals("10")) {
-				System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");
+				//System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");- 완료
+				GetJobInfo gj = new GetJobInfo();
+				gj.menu();
 				//break;
 			} else if (sel.equals("11")) {
 				//System.out.println("11.  강의 및 시설 평가 조회 - 김주혁"); - 완료

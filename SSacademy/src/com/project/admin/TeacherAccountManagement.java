@@ -217,7 +217,7 @@ public class TeacherAccountManagement {
 		if (tdto == null) {
 			System.out.println();
 			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-			System.out.println("\t┃\t\t\t\t없는 교사 번호입니다.\t\t\t\t  ┃");
+			System.out.println("\t┃\t\t\t     없는 교사 번호입니다.\t\t\t  ┃");
 			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 			return;
@@ -393,7 +393,7 @@ public class TeacherAccountManagement {
 		if (tdto == null) { //교사 번호 없는 경우
 			System.out.println();
 			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-			System.out.println("\t┃\t\t\t\t없는 교사 번호입니다.\t\t\t\t  ┃");
+			System.out.println("\t┃\t\t\t     없는 교사 번호입니다.\t\t\t  ┃");
 			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 			pause();
 			return;
@@ -472,17 +472,30 @@ public class TeacherAccountManagement {
 		System.out.print("\t█ 검색할 교사 번호를 입력하세요. : ");
 		String seqTeacher = scan.nextLine();
 		
+		//삭제할 교사의 정보 가져오기
+		TeacherDTO tdto = tdao.get(seqTeacher);
+		
+		if (tdto == null) { //교사 번호 없는 경우
+			System.out.println();
+			System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("\t┃\t\t\t     없는 교사 번호입니다.\t\t\t  ┃");
+			System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+			pause();
+			return;
+		}
+		
 		//특정 교사 정보 가져오기
 		//과정명, 과정시작일, 과정종료일, 과목명, 과목시작일, 과목종료일, 교재명, 강의실, 강의진행여부
 		//교사번호 선택
 		ArrayList<ViewTeacherCourseDTO> list = tdao.search(seqTeacher);
+
 		
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("\t┃\t\t\t\t교사 상세 정보\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
-		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목이름]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
+		System.out.println("\t[이름]\t[과정명]\t\t\t\t\t\t[과정시작일]\t[과정종료일]\t[강의실]\t[과목명]\t\t[과목시작일]\t[과목종료일]\t[강의진행여부]");
 		
 		for (ViewTeacherCourseDTO dto : list) {
 			System.out.printf("\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n"

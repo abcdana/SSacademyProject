@@ -6,6 +6,7 @@ package com.project.admin.dto;
  */
 public class OpenCourseStudentDTO {
 
+	private int num;
 	private String seqOpenCourse;
 	private String seqStudent;
 	private String name;
@@ -83,7 +84,16 @@ public class OpenCourseStudentDTO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+
+
+	public int getNum() {
+		return num;
+	}
+
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+		
 	
 }

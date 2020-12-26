@@ -13,6 +13,7 @@ public class AttendanceDTO {
 	private String outTime;			//퇴실시간
 	private String attendState;		//근태현황
 	
+	
 	public String getSeqtblAttendance() {
 		return seqtblAttendance;
 	}
@@ -49,6 +50,8 @@ public class AttendanceDTO {
 	public void setAttendState(String attendState) {
 		this.attendState = attendState;
 	}
+	
+
 	
 	
 
