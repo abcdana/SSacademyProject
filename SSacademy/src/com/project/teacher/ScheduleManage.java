@@ -68,6 +68,7 @@ public class ScheduleManage {
 		//교사리스트 컬럼명
 		System.out.println("\t ** 아래 교사 리스트에서 교사명을 선택해주세요.\n");
 		
+
 		
 		//교사리스트
 		ArrayList<TeacherDTO> list2 = tdao.list();
@@ -137,7 +138,7 @@ public class ScheduleManage {
 		//교사리스트 컬럼명
 		System.out.println("\t ** 아래 교사 리스트에서 교사 번호를 선택해주세요.");
 		System.out.println();
-				
+
 
 		//교사리스트
 		ArrayList<TeacherDTO> list2 = tdao.list();

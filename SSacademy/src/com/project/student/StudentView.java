@@ -232,9 +232,6 @@ public class StudentView {
 
 
 	
-	
-	
-	
 ///////////////////////////////지현///////////////////////////////////////
 	
 	/**
@@ -346,11 +343,12 @@ public class StudentView {
 		System.out.println();
 	}
 	
+
 	/**
 	 * 교육생번호 조회시 보여줄 기본 교육생 컬럼입니다.
 	 */
 	public void seqBasicStudent() {
-		
+
 		System.out.println();
 		System.out.println("\t─────────────────────────────────────────────────────────────────");
 		System.out.printf("\t %-11s%-9s%-14s%-11s%-13s\n", "[번호]", "[이름]", "[생년월일]", "[아이디]", "[등록일]");
@@ -385,6 +383,8 @@ public class StudentView {
 			
 	}	
 	
-
+	
 
 }
+
+	
