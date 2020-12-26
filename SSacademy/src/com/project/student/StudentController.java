@@ -60,7 +60,7 @@ public class StudentController {
 				evaluation.main();
 				//break;
 			} else if (sel.equals("5")) {
-				//System.out.println("- 연계 기업 취업 공고를 확인할 수 있다. --조혜승");
+				//System.out.println("- 연계 기업 채용 공고를 확인할 수 있다. --조혜승");
 				CompanyInfoCheck companyInfoCheck = new CompanyInfoCheck();
 				companyInfoCheck.menu();
 				//break;

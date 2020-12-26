@@ -77,10 +77,14 @@ public class AdminController {
 				am.attendanceMain();
 				//break;
 			} else if (sel.equals("9")) {
-				System.out.println("9.	연계 기업 취업공고 관리 -조혜승");
+				//System.out.println("9.	연계 기업 취업공고 관리 -조혜승");- 완료
+				CompanyInfo ci = new CompanyInfo();
+				ci.menu();
 				//break;
 			} else if (sel.equals("10")) {
-				System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");
+				//System.out.println("10.	 수료자 취업 현황 관리 - 조혜승");- 완료
+				GetJobInfo gj = new GetJobInfo();
+				gj.menu();
 				//break;
 			} else if (sel.equals("11")) {
 				//System.out.println("11.  강의 및 시설 평가 조회 - 김주혁"); - 완료

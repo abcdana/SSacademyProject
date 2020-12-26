@@ -22,7 +22,7 @@ public class StudentView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. My Page\t\t5. 취업공고 조회\t\t  │");
+		System.out.println("\t│\t\t1. My Page\t\t5. 채용공고 조회\t\t  │");
 		System.out.println("\t│\t\t2. 출결 확인\t\t6. 취업현황 조회\t\t  │");
 		System.out.println("\t│\t\t3. 성적 조회\t\t7. 우수훈련생 확인\t\t  │");
 		System.out.println("\t│\t\t4. 강의 평가\t\t\t\t\t\t  │");
@@ -157,7 +157,7 @@ public class StudentView {
 	 */
 	public void menuCompanyList() {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t연계기업 채용공고 조회\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 조회\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t│\t\t1. 전체 채용공고 조회\t\t\t\t\t  │");
@@ -178,7 +178,7 @@ public class StudentView {
 	 */
 	public void menuGetJobInfoCheck() {
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t수료생 취업정보 조회\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t수료생 취업정보 조회\t\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t│\t\t1. 전체 취업정보 조회\t\t\t\t\t  │");
@@ -186,7 +186,7 @@ public class StudentView {
 		System.out.println("\t│\t\t3. 소재지별 취업정보 조회\t\t\t\t  │");
 		System.out.println("\t│\t\t4. 연봉별 취업정보 조회\t\t\t\t\t  │");
 		System.out.println("\t│\t\t5. 연도별 취업정보 조회\t\t\t\t\t  │");
-		System.out.println("\t│\t\t6. 연계기업 취업정보 조회\t\t\t\t\t  │");
+		System.out.println("\t│\t\t6. 연계기업 취업정보 조회\t\t\t\t  │");
 		System.out.println("\t│\t\t7. 이전 화면으로 \t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();

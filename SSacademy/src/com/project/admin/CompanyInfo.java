@@ -17,23 +17,24 @@ import java.util.Scanner;
  */
 public class CompanyInfo {
 
-	private static Scanner scan;
-	public AdminView view;
-	public CompanyInfoDAO dao;
-	
-	static{
-		scan = new Scanner(System.in);
-		
-	}
-	/**
-	 * 연계기업채용공고 관리 클래스 생성자
-	 * @author 조혜승
-	 *
-	 */
-	public void companyInfo() {
-		dao = new CompanyInfoDAO();
-		view = new AdminView();
-	}
+	   private static Scanner scan;
+	   private AdminView view;
+	   private CompanyInfoDAO dao;
+	   
+	   static{
+	      scan = new Scanner(System.in);
+	      
+	   }
+	   /**
+	    * 연계기업채용공고 관리 클래스 생성자
+	    * @author 조혜승
+	    * @return 
+	    *
+	    */
+	   public CompanyInfo() {
+	      view = new AdminView();
+	      this.dao = new CompanyInfoDAO();
+	   }
 	/**
 	 * 연계기업채용공고 관리 메뉴 메서드
 	 * @author 조혜승
@@ -68,9 +69,9 @@ public class CompanyInfo {
 			pause();
 		}else if(num.equals("5")) {
 			delete();
-			
+			pause();
 		} else if(num.equals("6")) {
-		  //이전화면으로 돌아가기 관리자메뉴
+		  loop = false;
 			
 		}else {
 			System.out.println("\n없는 번호입니다. 다시입력해주세요.");
@@ -89,6 +90,9 @@ public class CompanyInfo {
 	 *
 	 */
 	public void list() { //전체목록조회
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 전체조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		
@@ -396,14 +400,14 @@ public class CompanyInfo {
 	System.out.println();
 	VwCompanyInfoDTO dto = dao.editGet(seq);
 	System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-	System.out.println("\t회사 이름 : " + dto.getName());
-	System.out.println("\t채용 시작일 : " + dto.getStartDate());
-	System.out.println("\t채용 종료일 : " + dto.getEndDate());
-	System.out.println("\t채용 분야 : " + dto.getComField());
-	System.out.println("\t연봉 : " + dto.getSalary());
-	System.out.println("\t채용 형태 : " + dto.getEmploymentType());
-	System.out.println("\t회사 규모 : " + dto.getComSize());
-	System.out.println("\t회사 주소 : " + dto.getAddress());
+	System.out.println("\t\t\t\t회사 이름 : " + dto.getName());
+	System.out.println("\t\t\t\t채용 시작일 : " + dto.getStartDate());
+	System.out.println("\t\t\t\t채용 종료일 : " + dto.getEndDate());
+	System.out.println("\t\t\t\t채용 분야 : " + dto.getComField());
+	System.out.println("\t\t\t\t연봉 : " + dto.getSalary());
+	System.out.println("\t\t\t\t채용 형태 : " + dto.getEmploymentType());
+	System.out.println("\t\t\t\t회사 규모 : " + dto.getComSize());
+	System.out.println("\t\t\t\t회사 주소 : " + dto.getAddress());
 	System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 	System.out.println();
 	

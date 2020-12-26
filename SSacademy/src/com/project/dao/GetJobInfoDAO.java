@@ -42,8 +42,212 @@ public class GetJobInfoDAO {
 		}
 		
 	}
+	
 	/**
-	 * 수료생 취업정보 전체를 조회할 수있는 메서드
+	 * 교육생조회 이름**표시
+	 * 취업정보전체조회 및 연도별취업정보검색조회
+	 * @param word
+	 * @return
+	 */
+	
+	public ArrayList<VwGetJobInfoDTO> jobListS(String word) { 
+		
+		String where ="";
+		try {
+			if(word !=null) {
+				where = String.format("where substr(getjobdate,1,4) = '%s'",word); //연도별 취업정보 조회
+			}
+			String sql = String.format("select * from vwgetjobinfo %s",where);
+			rs = stat.executeQuery(sql);
+			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
+			while(rs.next()) {
+				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
+				
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
+				list.add(dto);
+			}
+			
+			return list;
+			
+			
+		} catch (Exception e) {
+			
+
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+	/**
+	 * 	 교육생조회 이름**표시
+	 * 업무별 취업공고 조회를 위한 업무목록을 출력해주는 메서드
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> dutyListS() { 
+		try {
+			String sql = "select duty from vwgetjobinfo group by duty order by duty";
+			
+			rs = stat.executeQuery(sql);
+			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
+			while(rs.next()) {
+				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
+				dto.setDuty(rs.getString("duty"));	//업무
+				list.add(dto);
+				
+				}
+			return list;
+			
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+		return null;
+	}
+	/**
+	 * 	교육생조회 이름**표시
+	 * 취업정보 조회시 업무별로 검색해서 조회하도록 하는 메소드이다.
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> dutySearchS(String word) { //업무별 검색조회
+		
+		try {
+			String sql = "{ call procDutyGetJob (?,?) }";
+			cstat = conn.prepareCall(sql);
+			
+			cstat.setString(1, word);
+			cstat.registerOutParameter(2, OracleTypes.CURSOR);
+			cstat.executeQuery();
+			rs = (ResultSet)cstat.getObject(2);
+			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
+			while (rs.next()) {
+				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
+				list.add(dto);
+			}
+			return list;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return null;
+	}
+	/**
+	 * 교육생조회 이름**표시
+	 * 취업정보 조회시 소재지별로 검색할 수 있도록 하는 메서드
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> locationSearchS(String word) { //소재지별 검색 조회
+		try {
+			String sql = "{ call procCityGetJob (?,?) }";
+			cstat = conn.prepareCall(sql);
+			
+			cstat.setString(1, word);
+			cstat.registerOutParameter(2, OracleTypes.CURSOR);
+			cstat.executeQuery();
+			rs = (ResultSet)cstat.getObject(2);
+			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
+			while (rs.next()) {
+				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
+				list.add(dto);
+			}
+			return list;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
+	/**
+	 * 교육생 조회 이름**표시
+	 * 취업정보 조회시 연봉의 최소값과 최대값의 사이를 입력해서 검색해주는 메소드
+	 * @param word
+	 * @param word2
+	 * @return
+	 */
+	public ArrayList<VwGetJobInfoDTO> salarySearchS(String word, String word2) { 
+		try {
+			String sql = "{ call procSalaryGetJob (?,?,?) }";
+			cstat = conn.prepareCall(sql);
+			
+			cstat.setString(1, word);
+			cstat.setString(2, word2);
+			cstat.registerOutParameter(3, OracleTypes.CURSOR);
+			cstat.executeQuery();
+			rs = (ResultSet)cstat.getObject(3);
+			ArrayList<VwGetJobInfoDTO> list = new ArrayList<VwGetJobInfoDTO>();
+			while (rs.next()) {
+				VwGetJobInfoDTO dto = new VwGetJobInfoDTO();
+				dto.setGjseq(rs.getString("gjseq"));		//취업정보번호
+				dto.setName(rs.getString("name"));			//학생이름
+				dto.setId(rs.getString("id"));				//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));//회사이름
+				dto.setDuty(rs.getString("duty"));				//업무
+				dto.setForm(rs.getString("form"));				//고용형태
+				dto.setSalary(rs.getString("salary"));			//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));	//취업일
+				dto.setLocation(rs.getString("location"));		//회사주소
+				dto.setRcseq(rs.getString("rcseq"));			//수강정보번호
+				dto.setCourse(rs.getString("course"));			//수료한과정명
+				
+				list.add(dto);
+			}
+			return list;
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
+	/**
+	 * 관리자 수료생 취업정보 전체를 조회할 수있는 메서드
 	 * @param word
 	 * @return
 	 */
@@ -88,7 +292,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
-	 * 업무별 취업공고 조회를 위한 업무목록을 출력해주는 메서드
+	 * 관리자 업무별 취업공고 조회를 위한 업무목록을 출력해주는 메서드
 	 * @return
 	 */
 	public ArrayList<VwGetJobInfoDTO> dutyList() { 
@@ -113,6 +317,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 취업정보 조회시 업무별로 검색해서 조회하도록 하는 메소드이다.
 	 * @param word
 	 * @return
@@ -156,6 +361,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 취업정보 조회시 소재지별로 검색할 수 있도록 하는 메서드
 	 * @param word
 	 * @return
@@ -197,6 +403,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 취업정보 조회시 연봉의 최소값과 최대값의 사이를 입력해서 검색해주는 메소드
 	 * @param word
 	 * @param word2
@@ -239,6 +446,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 수료는 했으나, 아직 취업 등록되지 않은 학생목록을 불러와주는 메서드
 	 * @return
 	 */
@@ -268,6 +476,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 수료생의 취업정보를 등록 해주는 메서드
 	 * @param dto
 	 * @return
@@ -299,6 +508,7 @@ public class GetJobInfoDAO {
 		return 0;
 	}
 	/**
+	 * 관리자
 	 * 취업정보를 수정, 삭제하기위해 이름을 검색해서 수정,삭제하기 위한 학생을 검색하는 메서드
 	 * 동명이인이 있을수 있으므로 목록 출력해준다.
 	 * @param name
@@ -335,6 +545,7 @@ public class GetJobInfoDAO {
 	}
 
 	/**
+	 * 관리자
 	 * 수료생의 취업정보를 수정하는 메서드,
 	 * @param dto2
 	 * @return
@@ -360,6 +571,7 @@ public class GetJobInfoDAO {
 		return 0;
 	}
 	/**
+	 * 관리자
 	 * 수정할 특정 취업정보를 가져오는 메서드
 	 * @param seqGetJobInfo
 	 * @return
@@ -394,6 +606,7 @@ public class GetJobInfoDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 수료생의 취업정보를 삭제하는 메서드
 	 * @param seqGetJobInfo
 	 * @return

@@ -42,9 +42,52 @@ public class EmpStatusDAO {
 		}
 		
 	}
+	/**
+	 * 교육생 이름 ** 표시해주는
+	 * 연계기업에 취업된 학생 목록을 조회하는 메서드
+	 * @return
+	 */
+	public ArrayList<VwEmpStatusDTO> cjobListS(String word) { 
+		
+		String where = "";
+		try {
+			
+			if(word!=null) {
+				where = String.format("where name = '%s'",word);
+			}
+			String sql = String.format("select * from vwSAllempStatus %s",where);
+			rs = stat.executeQuery(sql);
+			ArrayList<VwEmpStatusDTO> list = new ArrayList<VwEmpStatusDTO>();
+			while(rs.next()) {
+				VwEmpStatusDTO dto = new VwEmpStatusDTO();
+				
+				dto.setSeq(rs.getString("seq"));					//연계기업취업정보번호
+				dto.setName(rs.getString("name"));					//학생이름
+				dto.setId(rs.getString("id"));						//학생아이디
+				dto.setCompanyName(rs.getString("companyname"));	//회사이름
+				dto.setDuty(rs.getString("duty"));					//업무
+				dto.setForm(rs.getString("form"));					//고용형태
+				dto.setSalary(rs.getString("salary"));				//연봉
+				dto.setGetJobDate(rs.getString("getjobdate"));		//취업일
+				dto.setLocation(rs.getString("location"));			//회사주소
+				dto.setCourse(rs.getString("course"));				//수료한과정명
+				
+				list.add(dto);
+			}
+			return list;
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
 	
 	/**
-	 * 연계기업에 취업된 학생 목록을 조회하는 메서드
+	 * 관리자 
+	 * 연계기업에 취업된 학생(이름표시) 목록을 조회하는 메서드
 	 * @return
 	 */
 	public ArrayList<VwEmpStatusDTO> cjobList(String word) { 
@@ -85,6 +128,7 @@ public class EmpStatusDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 연계기업의 목록을 조회하는 메서드
 	 * 연계기업 취업등록할때 출력해준다.
 	 * @return
@@ -92,13 +136,15 @@ public class EmpStatusDAO {
 	public ArrayList<CompanyInfoDTO> companyList() { 
 		
 		try {
-			String sql = "select seqcompanyinfo, name from tblCompanyInfo";
+			String sql = "select seqcompanyinfo, name, address from tblCompanyInfo";
 			rs = stat.executeQuery(sql);
 			ArrayList<CompanyInfoDTO> list = new ArrayList<CompanyInfoDTO>();
 			while(rs.next()) {
 				CompanyInfoDTO dto = new CompanyInfoDTO();
 				dto.setSeqCompanyInfo(rs.getString("seqcompanyinfo")); //회사정보번호
 				dto.setName(rs.getString("name"));						//회사이름
+				dto.setAddress(rs.getString("address"));	
+				
 				list.add(dto);
 			}
 			return list;
@@ -111,6 +157,7 @@ public class EmpStatusDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 특정한 연계기업에 취업한 학생을 조회하는 메서드
 	 * 연계기업 취업등록할때 출력해준다.
 	 * @param seqCompanyInfo 
@@ -130,6 +177,7 @@ public class EmpStatusDAO {
 				dto.setId(rs.getString("id")); 					//학생id
 				dto.setCompanyName(rs.getString("companyname")); //회사이름
 				dto.setGetJobDate(rs.getString("getjobdate")); //취업일
+				dto.setLocation(rs.getString("location")); 		//회사주소
 				
 				list.add(dto);
 			}
@@ -144,6 +192,7 @@ public class EmpStatusDAO {
 	}
 	
 	/**
+	 * 관리자
 	 * 연계기업 취업등록을 위한 메서드
 	 * @param rcseq 
 	 * @param gjseq 
@@ -170,6 +219,7 @@ public class EmpStatusDAO {
 	}
 
 	/**
+	 * 관리자
 	 * 연계기업 취업정보 삭제할 목록을다시한번 조회시켜주는 메서드
 	 * @param seq
 	 * @return
@@ -203,6 +253,7 @@ public class EmpStatusDAO {
 		return null;
 	}
 	/**
+	 * 관리자
 	 * 연계기업취업정보 삭제 해주는 메서드 
 	 * @param seq
 	 * @return
