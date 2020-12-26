@@ -1167,6 +1167,7 @@ public class AdminView {
 		System.out.println();
 	}
 
+	/**
 	 * 출결 상태 수정 헤더 출력 메서드이다.
 	 */
 	public void editAttedanceHeader() {
@@ -1277,8 +1278,7 @@ public class AdminView {
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println("\t│\t1. 우수 훈련생 "+p+"목록 조회\t2. 우수 훈련생 "+p+"등록\t"+t+"  │");
-		System.out.println("\t│\t3. 우수 훈련생 "+p+"수정"+t+"\t4. 우수 훈련생 "+p+"삭제\t"+t+"  │");
-		System.out.println("\t│\t0. 뒤로 가기\t\t\t\t\t\t\t  │");
+		System.out.println("\t│\t3. 우수 훈련생 "+p+"삭제"+t+"\t0. 뒤로 가기\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 	}
