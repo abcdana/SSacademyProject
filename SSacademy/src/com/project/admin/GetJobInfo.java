@@ -334,10 +334,10 @@ public class GetJobInfo {
 		System.out.println();
 		VwGetJobInfoDTO dto = dao.getEdit(seqGetJobInfo);
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\n\t\t회사명 : %s\n"
+		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\n\t\t학생ID : %s\n\t\t회사명 : %s\n"
 				+ "\t\t업무 : %s\n\t\t고용형태 : %s\n\t\t연봉 : %s\n\t\t취업일 : %s\n"
 				+ "\t\t회사주소 : %s\n\t\t수료한과정명 : %s\n",
-				dto.getGjseq(), dto.getName(), 
+				dto.getGjseq(), dto.getName(),dto.getId(), 
 				dto.getCompanyName(), dto.getDuty(),
 				dto.getForm(), dto.getSalary(),
 				dto.getGetJobDate(),dto.getLocation(),
@@ -432,10 +432,10 @@ public class GetJobInfo {
 		VwGetJobInfoDTO dto = dao.getEdit(seqGetJobInfo);
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
 		System.out.println();
-		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\n\t\t회사명 : %s\n"
+		System.out.printf("\t\t취업번호 : %s \n\t\t학생이름 : %s\t\t학생ID : %s\n\t\t회사명 : %s\n"
 				+ "\t\t업무 : %s\n\t\t고용형태 : %s\n\t\t연봉 : %s\n\t\t취업일 : %s\n"
 				+ "\t\t회사주소 : %s\n\t\t수료한과정명 : %s\n\n",
-				dto.getGjseq(), dto.getName(), 
+				dto.getGjseq(), dto.getName(),dto.getId(), 
 				dto.getCompanyName(), dto.getDuty(),
 				dto.getForm(), dto.getSalary(),
 				dto.getGetJobDate(),dto.getLocation(),

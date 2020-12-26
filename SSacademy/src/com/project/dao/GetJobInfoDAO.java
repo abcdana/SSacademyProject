@@ -587,6 +587,7 @@ public class GetJobInfoDAO {
 			dto.setRcseq(rs.getString("rcseq"));				//수강정보번호
 			dto.setGjseq(rs.getString("gjseq"));				//채용정보번호
 			dto.setName(rs.getString("name"));					//학생이름
+			dto.setId(rs.getString("id"));						//학생ID
 			dto.setCompanyName(rs.getString("companyname"));		//회사이름
 			dto.setLocation(rs.getString("location"));			//회사주소
 			dto.setDuty(rs.getString("duty"));					//업무
