@@ -209,7 +209,7 @@ public class AttendanceDAO {
 		try {
 
 			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
-			String sql = "{ call procAattListByMonth(?, ?, ?, ?, ?) }";
+			String sql = "{ call procSattListByMonth(?, ?, ?, ?, ?) }";
 			
 			cstat = conn.prepareCall(sql);
 			
