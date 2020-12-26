@@ -126,7 +126,7 @@ public class CheckAttendance {
 	private void allAttendanceList(String seqStudent) {
 		
 		view.totAttList();
-		ArrayList<PeriodAttendListDTO> list = adao.attPeriodList(seqStudent, year, month);
+		ArrayList<PeriodAttendListDTO> list = adao.attPeriodList(seqStudent);
 		aview.attendanceList(list);
 		
 	}

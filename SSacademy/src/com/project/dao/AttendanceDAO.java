@@ -23,7 +23,7 @@ public class AttendanceDAO {
 	private ResultSet rs;
 
 	/**
-	 * 기본 생성자 Connection과 Statement를 생성한다.
+	 * 기본 생성자 Connection을 생성한다.
 	 */
 	public AttendanceDAO() {
 		
@@ -217,6 +217,52 @@ public class AttendanceDAO {
 			cstat.setString(2, seqStudent);
 			cstat.setString(3, year);
 			cstat.setString(4, month);
+			
+			cstat.executeQuery();
+			
+			rs = (ResultSet)cstat.getObject(1);
+			
+			while (rs.next()) {
+			
+				PeriodAttendListDTO paldto = new PeriodAttendListDTO();
+				
+				paldto.setAttendDate(rs.getString("attendDate"));
+				paldto.setInTime(rs.getString("inTime"));
+				paldto.setOutTime(rs.getString("outTime"));
+				paldto.setAttendState(rs.getString("attendState"));
+				
+				result.add(paldto);
+				
+			}
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enattPeriodList()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+
+	/**
+	 * 전체 조회
+	 * @param seqStudent
+	 * @return
+	 */
+	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqStudent) {
+		
+		try {
+
+			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
+			String sql = "{ call procAllAttList(?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.registerOutParameter(1, OracleTypes.CURSOR);
+			cstat.setString(2, seqStudent);
 			
 			cstat.executeQuery();
 			
