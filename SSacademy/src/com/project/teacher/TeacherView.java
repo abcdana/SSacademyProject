@@ -45,9 +45,9 @@ public class TeacherView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 종료 과목 조회\t4. 출결 배점 입력\t\t  │");
-		System.out.println("\t│\t\t2. 과목별 배점 관리\t5. 필기 배점 입력\t\t  │");
-		System.out.println("\t│\t\t3. 교육생별 배점 관리\t6. 실기 배점 입력\t\t  │");
+		System.out.println("\t│\t\t1. 종료 과목 조회\t4. 필기 시험 날짜 입력\t\t  │");
+		System.out.println("\t│\t\t2. 과목 배점 관리\t5. 실기 시험 날짜 입력\t\t  │");
+		System.out.println("\t│\t\t3. 시험 문제 추가\t6. 시험 문제 조회\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
@@ -62,7 +62,7 @@ public class TeacherView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 과목 조회\t3. 학생별 성적 관리\t\t\t  │");
+		System.out.println("\t│\t\t1. 과목 조회\t        3. 학생별 성적 관리\t\t  │");
 		System.out.println("\t│\t\t2. 과목별 성적 관리\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();

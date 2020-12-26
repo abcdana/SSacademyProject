@@ -10,43 +10,19 @@ import java.util.ArrayList;
 
 import com.project.dto.VwSubjectInquiryDTO;
 import com.project.ssacademy.DBUtil;
+import com.project.teacher.dto.VwTestPercentInquiryDTO;
 
 public class TestManagementDAO {
 	
-//	private Connection conn;
-//	private Statement stat;
-//	private PreparedStatement pstat;
-//	private CallableStatement cstat;
-//	private ResultSet rs;
-	
-	
-//	public TestManagementDAO() {
-//		
-//		try {
-//			
-//			this.conn = DBUtil.open();
-//			this.stat = conn.createStatement();
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//	}
 	
 	
 	
-	
-	public ArrayList<VwSubjectInquiryDTO> list(String tSeq,String time) {
+	public ArrayList<VwSubjectInquiryDTO> list(String tSeq,String time) { 
 		
-		//word -> null -> 목록 보기
-		//word -> "???" -> 검색 하기
-		
-		//select -> ResultSet -> ArrayList<AddressDTO> -> 반환
+
 		
 		Connection conn = null;
 		Statement stat = null;
-		PreparedStatement pstat = null;
-		CallableStatement cstat = null;
 		ResultSet rs = null;
 		
 		try {
@@ -88,7 +64,139 @@ public class TestManagementDAO {
 		
 		return null;
 	}
+	
+	public ArrayList<VwTestPercentInquiryDTO> list2(String subSeq) {// 특정과목에대한 배점정보 출력
+		
 
+		Connection conn = null;
+		Statement stat = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBUtil.open();
+			String where = String.format("where subSeq = %s",subSeq);
+			
+			
+			String sql = String.format("select * from VwTestPercentInquiry %s",where);
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+			
+			ArrayList<VwTestPercentInquiryDTO> list = new ArrayList<VwTestPercentInquiryDTO>();
+			
+				//레코드 1개 -> AddressDTO 1개
+			if(rs.next()) {
+				VwTestPercentInquiryDTO dto = new VwTestPercentInquiryDTO();
+				dto.setTpSeq(rs.getString("tpSeq"));
+				dto.setBtSeq(rs.getString("btSeq"));
+				dto.setSubSeq(rs.getString("subSeq"));
+				dto.setWritten(rs.getString("written"));
+				dto.setPractical(rs.getString("practical"));
+				dto.setAttendance(rs.getString("attendance"));
+				dto.setWrittenDate(rs.getString("writtenDate"));
+				dto.setPracticaldate(rs.getString("practicaldate"));
+				list.add(dto);
+			}
+			//list는 rs랑 동일하게 변한다.
+			return list;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+public int subScoreEdit(String subnum, String wpercent, String ppercent, String apercent) { // 배점관련 업데이트 프로시저
+		
+		Connection conn = null;
+		CallableStatement stat = null;
+		
+		try {
+			
+			conn = DBUtil.open();
+			String sql = "{ call procTestPercent(?, ?, ?, ?) }";
+			
+			stat = conn.prepareCall(sql);
+			
+			stat.setString(1, subnum);
+			stat.setString(2, wpercent);
+			stat.setString(3, ppercent);
+			stat.setString(4, apercent);
+
+			stat.executeUpdate(); 
+
+
+			stat.close();
+			conn.close();
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return 0;
+		
+		
+	}
+
+public int subWrittenDateUpdate(String subnum, String writtenDate) {
+	Connection conn = null;
+	CallableStatement stat = null;
+	
+	try {
+		
+		conn = DBUtil.open();
+		String sql = "{ call procWrittenDate(?, ?) }";
+		
+		stat = conn.prepareCall(sql);
+		
+		stat.setString(1, subnum);
+		stat.setString(2, writtenDate);
+
+
+		stat.executeUpdate(); 
+
+
+		stat.close();
+		conn.close();
+
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	return 0;
+	
+}
+
+public int subPracticalDateUpdate(String subnum, String PracticalDate) {
+	Connection conn = null;
+	CallableStatement stat = null;
+	
+	try {
+		
+		conn = DBUtil.open();
+		String sql = "{ call procPracticalDate(?, ?) }";
+		
+		stat = conn.prepareCall(sql);
+		
+		stat.setString(1, subnum);
+		stat.setString(2, PracticalDate);
+
+
+		stat.executeUpdate(); 
+
+
+		stat.close();
+		conn.close();
+
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	return 0;
+	
+}
 
 	
 }
