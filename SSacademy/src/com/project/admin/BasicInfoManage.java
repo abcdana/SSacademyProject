@@ -276,7 +276,7 @@ public class BasicInfoManage {
 	private void deleteCourseInfo(String seqBasicCourseInfo) {
 
 		int result = bcidao.deleteCourse(seqBasicCourseInfo);
-		view.addResult(result);
+		view.deleteResult(result);
 		
 	}//deleteCourseInfo(String seqBasicCourseInfo)
 	
@@ -870,14 +870,6 @@ public class BasicInfoManage {
 		view.deleteResult(result);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
