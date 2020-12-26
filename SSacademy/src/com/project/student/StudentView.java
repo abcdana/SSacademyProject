@@ -2,7 +2,9 @@ package com.project.student;
 
 import java.util.ArrayList;
 
+import com.project.dto.PeriodAttendListDTO;
 import com.project.student.dto.StudentCourseListDTO;
+import com.project.teacher.dto.TeacherCourseListDTO;
 
 /**
  * 교육생 뷰 입니다.
@@ -68,6 +70,24 @@ public class StudentView {
 		System.out.print("\t█ 입/퇴실 체크를 하시겠습니까? (Y/N) : ");
 	}
 	
+	
+	/**
+	 * 교육생 뷰의 출석체크의 결과를 출력하는 메소드이다.
+	 * 출석체크를 성공시 "출석체크 완료"메세지를 , 실패시 "출석체크 실패" 메세지를 출력한다.
+	 * @param result 0 또는 1이 저장되어 있는 변수이다.
+	 */
+	public void checkResult(int result) {
+		
+		if(result == 0) {
+			System.out.println();
+			System.out.println("\t\t* 출석체크 실패. *");
+		} else if(result == 1) {
+			System.out.println();
+			System.out.println("\t\t* 출석체크 완료. *");
+		}
+		
+	}
+	
 	/**
 	 * 출결 조회 헤더를 출력하는 메서드이다.
 	 */
@@ -123,31 +143,46 @@ public class StudentView {
 
 
 
-
-	public void allCourseList(ArrayList<StudentCourseListDTO> sclist) {
-		// TODO Auto-generated method stub
-		System.out.println("교육생리스트");
-	}
-
-
-
-
 	/**
-	 * 교육생 뷰의 출석체크의 결과를 출력하는 메소드이다.
-	 * 출석체크를 성공시 "출석체크 완료"메세지를 , 실패시 "출석체크 실패" 메세지를 출력한다.
-	 * @param result 0 또는 1이 저장되어 있는 변수이다.
+	 * 교육생이 수강하는 과정들의 정보를 출력하는 메서드이다.
+	 * @param result
 	 */
-	public void checkResult(int result) {
+	public void allCourseList(ArrayList<StudentCourseListDTO> result) {
 		
-		if(result == 0) {
-			System.out.println();
-			System.out.println("\t\t* 출석체크 실패. *");
-		} else if(result == 1) {
-			System.out.println();
-			System.out.println("\t\t* 출석체크 완료. *");
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 수강 과정 목록\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[수강번호] [과정번호]\t\t\t   [과정명]   \t\t\t[과정시작일] [과정종료일]   [강의실]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
+		
+		for (StudentCourseListDTO dto : result) {
+			
+			System.out.printf("\t%6s\t  %6s\t%-25s   %-10s   %-10s   %-10s\n"
+					, dto.getSeqRegCourse()
+					, dto.getSeqOpenCourse()
+					, dto.getName()
+					, dto.getStartDate()
+					, dto.getEndDate()
+					, dto.getRoomName());
 		}
 		
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+
 	}
+
+
+
+	public void attendanceList(ArrayList<PeriodAttendListDTO> list) {
+		
+		
+		
+	}
+	
+	
 	
 	
 ///////////////////////////////혜승///////////////////////////////////////
@@ -192,6 +227,10 @@ public class StudentView {
 		System.out.println();
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
+
+
+
+
 	
 	
 

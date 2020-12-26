@@ -23,7 +23,7 @@ public class AttendanceDAO {
 	private ResultSet rs;
 
 	/**
-	 * 기본 생성자 Connection과 Statement를 생성한다.
+	 * 기본 생성자 Connection을 생성한다.
 	 */
 	public AttendanceDAO() {
 		
@@ -192,6 +192,105 @@ public class AttendanceDAO {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+
+
+	/**
+	 * 특정 교육생의 월별 출결 정보를 출력하는 메서드이다.
+	 * 출결날짜, 입실시간, 퇴실시간, 출결상태를 포함한다. 
+	 * @param seqStudent 교육생 번호
+	 * @param year		 출결정보를 조회할 년도
+	 * @param month		 출결정보를 조회할 월	
+	 * @return 성공 여부
+	 */
+	public ArrayList<PeriodAttendListDTO> studentAttPeriodList(String seqStudent, String seqOpenCourse, String year, String month) {
+		
+		try {
+
+			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
+			String sql = "{ call procAattListByMonth(?, ?, ?, ?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.registerOutParameter(1, OracleTypes.CURSOR);
+			cstat.setString(2, seqStudent);
+			cstat.setString(3, seqOpenCourse);
+			cstat.setString(4, year);
+			cstat.setString(5, month);
+			
+			cstat.executeQuery();
+			
+			rs = (ResultSet)cstat.getObject(1);
+			
+			while (rs.next()) {
+			
+				PeriodAttendListDTO paldto = new PeriodAttendListDTO();
+				
+				paldto.setAttendDate(rs.getString("attendDate"));
+				paldto.setInTime(rs.getString("inTime"));
+				paldto.setOutTime(rs.getString("outTime"));
+				paldto.setAttendState(rs.getString("attendState"));
+				
+				result.add(paldto);
+				
+			}
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enattPeriodList()");
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+
+
+	/**
+	 * 전체 조회
+	 * @param seqStudent
+	 * @return
+	 */
+	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqStudent, String seqOpenCourse) {
+		
+		try {
+
+			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
+			String sql = "{ call procAllAttList(?, ?, ?) }";
+			
+			cstat = conn.prepareCall(sql);
+			
+			cstat.registerOutParameter(1, OracleTypes.CURSOR);
+			cstat.setString(2, seqStudent);
+			cstat.setString(3, seqOpenCourse);
+			
+			cstat.executeQuery();
+			
+			rs = (ResultSet)cstat.getObject(1);
+			
+			while (rs.next()) {
+			
+				PeriodAttendListDTO paldto = new PeriodAttendListDTO();
+				
+				paldto.setAttendDate(rs.getString("attendDate"));
+				paldto.setInTime(rs.getString("inTime"));
+				paldto.setOutTime(rs.getString("outTime"));
+				paldto.setAttendState(rs.getString("attendState"));
+				
+				result.add(paldto);
+				
+			}
+			
+			return result;
+			
+		} catch (Exception e) {
+			System.out.println("primaryAttendanceDAO.enattPeriodList()");
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 }

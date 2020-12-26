@@ -216,6 +216,10 @@ public class TeacherView {
 	
 	/////////////////////////////////다은///////////////////////////////////////////
 	
+	/**
+	 * 교사가 강의한 과정들의 정보를 출력하는 메서드이다.
+	 * @param result
+	 */
 	public void allCourseList(ArrayList<TeacherCourseListDTO> result) {
 		
 		System.out.println();
