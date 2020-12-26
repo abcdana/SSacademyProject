@@ -3,6 +3,9 @@ package com.project.admin;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.omg.CORBA.INTERNAL;
+
+import com.project.admin.dto.OpenCourseListDTO;
 import com.project.admin.dto.OpenSubjectListDTO;
 import com.project.dao.AvailableSubjectDAO;
 import com.project.dao.OpenSubjectDAO;
@@ -17,8 +20,10 @@ public class OpenSubject {
 	private static Scanner scan;
 	private OpenSubjectDAO osdao;
 	private OpenSubjectDTO osdto2;
+	private OpenSubjectListDTO osdto;
 	private AdminView adView;
 	private AvailableSubjectDAO asdao;
+	private int page;
 	
 	static {
 		scan = new Scanner(System.in);
@@ -27,10 +32,12 @@ public class OpenSubject {
 	//생성자
 	public OpenSubject() {
 		
-		adView = new AdminView();
-		osdao = new OpenSubjectDAO();
-		asdao = new AvailableSubjectDAO();
-		osdto2 = new OpenSubjectDTO();
+		this.osdto = new OpenSubjectListDTO();
+		this.adView = new AdminView();
+		this.osdao = new OpenSubjectDAO();
+		this.asdao = new AvailableSubjectDAO();
+		this.osdto2 = new OpenSubjectDTO();
+		this.page = 1;
 	
 	}
 	
@@ -69,7 +76,13 @@ public class OpenSubject {
 	 */
 	public void openSubjectTotal() {
 		
-		ArrayList<OpenSubjectListDTO> list = osdao.openSubjectList();
+		int count = osdao.getCountSubject();
+		int lastPage = count/10;
+		lastPage = count % 10 > 0 ? lastPage + 1 : lastPage;
+		//데이터 10개씩 보여주기
+		//총갯수/10 -> 나머지가 있다면 마지막페이지는 + 1
+		
+		ArrayList<OpenSubjectListDTO> list = osdao.openSubjectList(osdto, page);
 		
 		for (OpenSubjectListDTO dto : list) {
 			
@@ -77,17 +90,18 @@ public class OpenSubject {
 						+ "\t%-40s"
 						+ "\t%-25s"
 						+ "\t%-10s%10s%15s\n"
-			
-							, dto.getSeqOpenSubject()
+							
+							, dto.getRownum()
 							, dto.getSubjectName()
 							, dto.getBookName()
 							, dto.getTeacherName()
 							, dto.getStartDate()
 							, dto.getEndDate());
 			
-			System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+			System.out.println("\t────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
 		
 		}
+		System.out.printf("\t 페이지 %s / %s", page, lastPage);
 		
 	}//openSubjectTotal()
 	
@@ -97,52 +111,115 @@ public class OpenSubject {
 	 * 전체 개설과목조회입니다.
 	 */
 	public void openSubjectList() {
-		//개설과목조회 헤더
-		adView.openSubjectView1();
-				
-		//개설과목조회 컬럼명
-		adView.openSubjectView2();
 		
-		//개설과목 리스트
-		openSubjectTotal();
-				
-		//개설과목조회 번호입력
-		adView.openSubjectView3();
-		String seqOpenSubject = scan.nextLine();
+		while(true) {
 		
-		if(seqOpenSubject.equals("0")) {
-			//개설과목메인 이동
-			openSubjectStart();
-		} else {
-			//특정개설과목 조회 메서드
-			specificOpenSubject(seqOpenSubject);
+			//개설과목조회 헤더
+			adView.openSubjectView1();
+				
+			//개설과목조회 컬럼명
+			adView.openSubjectView2();
+		
+			//개설과목 리스트
+			openSubjectTotal();
+		
+			//페이지 헤더
+			adView.pageInfo();
+			String num = scan.nextLine();
+	
+			if(num.equals("1")) {
+				//특정개설과목 행번호 입력
+				adView.openCourseView3();
+				specificOpenSubject(osdto);
+				break;
+			} else if(num.equals("2")) {
+				//이전페이지
+				prevPage();
+			
+			} else if(num.equals("3")) {
+				//다음페이지
+				nextPage();
+			
+			} else if(num.equals("0")) {
+				//개설과목관리 메인
+				openSubjectStart();
+				break;
+			}
 		}
 				
 	}//openSubjectList()
 	
 	
+	
+	/**
+	 * 다음페이지
+	 */
+	public void nextPage() {
+		
+		int count = osdao.getCountSubject();
+		int lastPage = count/10;
+		lastPage = count % 10 > 0 ? lastPage + 1 : lastPage;
+		
+		if(page == lastPage) {
+			System.out.println("\t\t** 다음페이지가 없습니다. **");
+			pause1();
+			return;
+		} else {
+			page++;
+		}
+	}
+	
+	
+	/*
+	 * 이전페이지
+	 */
+	public void prevPage() {
+		
+		if(page == 1) {
+			System.out.println("\t\t** 이전페이지가 없습니다. **");
+			pause1();
+			return;
+		} else {
+			page--;
+		}
+	}	
+
+	
 
 	/**
 	 * 특정 개설과목조회입니다.
 	 */
-	public void specificOpenSubject(String seqOpenSubject) {
+	public void specificOpenSubject(OpenSubjectListDTO osdto) {
 		
-		ArrayList<OpenSubjectListDTO> list = osdao.openSubjectList();
+		String input = scan.nextLine();
+		int num = Integer.parseInt(input);
 		
-		//특정개설과목 조회 메서드
-		adView.specificOpenSubject(list, seqOpenSubject);
-		String num = scan.nextLine();
+		//특정개설과목 조회 쿼리
+		ArrayList<OpenSubjectListDTO> list = osdao.specificOpenSubject2(num);
 		
-		if(num.equals("0")) {
-			//개설과목조회 메인
-			openSubjectStart();
+		while(true) {	
+		
+			//특정개설과목 조회 뷰
+			adView.specificOpenSubject(list);
+			//뒤로가기 뷰
+			adView.specificOpenSubject2();
+				
+			String input2 = scan.nextLine();
+					
+			if(input2.equals("0")) {
+				openSubjectList(); //전체개설과목조회
+				break;
+			} else {
+				pause1();
+				
+			}
 		}
 		
 	}//specificOpenSubject()
 	
 	
-	
-	
+
+
 	/**
 	 * 개설과목등록(1) 메뉴
 	 */
@@ -155,12 +232,12 @@ public class OpenSubject {
 		String seqAvailableSubject = scan.nextLine();
 		
 		//강의가능과목 중복검사
-		int result = asdao.checkAvailableSubject(seqAvailableSubject);
+		//int result = asdao.checkAvailableSubject(seqAvailableSubject);
 		
-		if(result == 1) {
-			System.out.println("\t\t** 현재 진행중인 과목입니다. **");
-			openSubjectAdd1();
-		} 
+//		if(result == 1) {
+//			System.out.println("\t\t** 현재 진행중인 과목입니다. **");
+//			openSubjectAdd1();
+//		} 
 		
 		System.out.print("\t\t* 개설과정번호: ");
 		String seqOpenCourse = scan.nextLine();
@@ -210,7 +287,7 @@ public class OpenSubject {
 		adView.addResult(result);
 		
 		System.out.println("\t\t** 개설과목관리 화면으로 이동합니다. 엔터를 눌러주세요. **");
-		pause();
+		pause2();
 		openSubjectStart();	
 	
 	}//openSubjectAdd2()		
@@ -222,86 +299,133 @@ public class OpenSubject {
 	 */
 	public void openSubjectEdit() {
 		
-		System.out.println();
-		System.out.println("\t* 아래 개설과목리스트에서 수정을 원하는 과목번호를 입력해주세요.");
+		//개설과목수정 헤더
+		adView.openSubjectEdit();
+		System.out.println("\t* 아래 개설과목리스트에서 수정을 원하는 번호를 입력해주세요.");
 		
+		while(true) {
 		//개설과목리스트 컬럼명 & 리스트
 		adView.openSubjectView2();
 		openSubjectTotal();
 		
-		//개설과목수정 바텀
-		adView.openSubjectEdit2();
-		String seqOpenSubject = scan.nextLine();
+		//개설과목 번호입력 & 이전, 다음페이지
+		adView.openCourseEdit2();
+		String input = scan.nextLine();
 		
-		OpenSubjectListDTO osdto2 = new OpenSubjectListDTO();
-		
-		osdto2 = osdao.normalOpenSubject(seqOpenSubject);
-		
-		if(seqOpenSubject.equals("0")) {
-			openSubjectStart(); //개설과목관리 메인	
-		} else if(seqOpenSubject.equals(osdto2.getSeqOpenSubject())) {
+			if(input.equals("0")) {
+				//개설과목관리 메인
+				openSubjectStart();
+				break;
+			} else if(input.equals("1")) {
+				//번호입력
+				adView.openSubjectEdit2();
+				editOpenSubject2(); 	//진짜수정
+				break;
+			} else if(input.equals("2")) {
+				//이전페이지
+				prevPage();
 			
-			//현재과목정보 헤더
-			adView.openSubjectEdit3();
+			} else if(input.equals("3")) {
+				//다음페이지
+				nextPage();
+			}
+		}
+		
+	}//openSubjectEdit()
+		
+	
+	
+	/**
+	 * 개설과목수정2 
+	 */
+	public void editOpenSubject2() {
+		
+		String input = scan.nextLine();
+		int num = Integer.parseInt(input);
+		
+		if(num == 0) {
+			openSubjectStart(); //개설과목관리 메인	
+		} 
+		
+		//개설과목 총 rownum 배열
+		ArrayList<Integer> list = osdao.specificOpenSubject3();
+		
+		for(int i=0; i<list.size(); i++) {
+			if(num == list.get(i)) {
+				editOpenSubject3(num);
+				break;
+			} 
+		}
+
+	}
+	
+	
+	/**
+	 * 개설과목수정 - 현재과목정보 & 진짜 수정
+	 */
+	
+	public void editOpenSubject3(int num) {
+			
+		//현재과목정보 헤더
+		adView.openSubjectEdit3();
+		
+		OpenSubjectListDTO osdto = osdao.normalOpenSubject(num);
 			
 			System.out.println("\t─────────────────────────────────────────────────────────");
-			System.out.printf("\t * 개설과목 : %s. %s\n", osdto2.getSeqOpenSubject(), osdto2.getSubjectName());
-			System.out.printf("\t * 강의가능과목 : %s. %s - %s\n", osdto2.getAvailableSubject()
-															, osdto2.getTeacherName()
-															, osdto2.getSubjectName());
-			System.out.printf("\t * 개설과정 : %s. %s\n", osdto2.getSeqOpenCourse(), osdto2.getOpenCourseName());
-			System.out.printf("\t * 시작일 : %s\n", osdto2.getStartDate());
-			System.out.printf("\t * 종료일 : %s\n", osdto2.getEndDate());
+			System.out.printf("\t * 개설과목 : %s. %s\n", osdto.getSeqOpenSubject(), osdto.getSubjectName());
+			System.out.printf("\t * 강의가능과목 : %s. %s - %s\n", osdto.getAvailableSubject()
+															, osdto.getTeacherName()
+															, osdto.getSubjectName());
+			System.out.printf("\t * 개설과정 : %s. %s\n", osdto.getSeqOpenCourse(), osdto.getOpenCourseName());
+			System.out.printf("\t * 시작일 : %s\n", osdto.getStartDate());
+			System.out.printf("\t * 종료일 : %s\n", osdto.getEndDate());
 			System.out.println("\t─────────────────────────────────────────────────────────");
 			System.out.println("\t ** 수정을 원하지 않는 항목은 엔터를 입력하세요. **");
 			System.out.println();
-			
-			
+	
+		
 			System.out.print("\t■ 수정할 강의가능과목 번호 : ");
 			String seqAvailableSubject = scan.nextLine();
 			
 			if(seqAvailableSubject.equals("")) {
-				osdto2.getAvailableSubject();
+				seqAvailableSubject = osdto.getAvailableSubject();
 			}
 			
 			System.out.print("\t■ 수정할 개설과정 번호 : ");
 			String seqOpenCourse = scan.nextLine();
 			
 			if(seqOpenCourse.equals("")) {
-				osdto2.getSeqOpenCourse();
+				seqOpenCourse = osdto.getSeqOpenCourse();
 			}
 			
 			System.out.print("\t■ 수정할 시작일(yyyy-mm-dd) : ");
 			String startDate = scan.nextLine();
 			
 			if(startDate.equals("")) {
-				osdto2.getStartDate();
+				startDate = osdto.getStartDate();
 			}
 			
 			System.out.print("\t■ 수정할 종료일(yyyy-mm-dd) : ");
 			String endDate = scan.nextLine();
 			
 			if(endDate.equals("")) {
-				osdto2.getEndDate();
+				endDate = osdto.getEndDate();
 			}
 			
+			osdto.setSeqOpenCourse(seqOpenCourse);
+			osdto.setAvailableSubject(seqAvailableSubject);
+			osdto.setStartDate(startDate);
+			osdto.setEndDate(endDate);
 			
-			osdto2.setSeqOpenCourse(seqOpenCourse);
-			osdto2.setAvailableSubject(seqAvailableSubject);
-			osdto2.setStartDate(startDate);
-			osdto2.setEndDate(endDate);
-			
-			int result = osdao.editOpenSubject(osdto2);
+			int result = osdao.editOpenSubject(osdto);
 			
 			adView.updateResult(result);
+			
 			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
-			pause();
+			pause2();
 			openSubjectEdit();
 			
-			}
-		
-	}//openSubjectEdit()
-		
+		}
 	
 	
 	/**
@@ -339,7 +463,7 @@ public class OpenSubject {
 			//삭제성공 실패 확인
 			adView.deleteResult(result);
 			System.out.println("\t\t** 이전화면으로 이동하시려면 엔터를 눌러주세요. **");
-			pause();
+			pause2();
 			
 			//삭제메인화면 메서드
 			openSubjectDelete();
@@ -351,10 +475,14 @@ public class OpenSubject {
 		
 	}//openSubjectDelete()	
 	
-
 	
-	private void pause() {
-		
+	
+	private void pause1() {
+		System.out.println("\t\t** 다시 입력하려면 엔터를 눌러주세요. **");
+		scan.nextLine();
+	}
+	
+	private void pause2() {
 		scan.nextLine();
 	}
 	
