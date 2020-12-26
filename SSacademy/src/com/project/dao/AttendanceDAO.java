@@ -204,19 +204,20 @@ public class AttendanceDAO {
 	 * @param month		 출결정보를 조회할 월	
 	 * @return 성공 여부
 	 */
-	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqStudent, String year, String month) {
+	public ArrayList<PeriodAttendListDTO> studentAttPeriodList(String seqStudent, String seqOpenCourse, String year, String month) {
 		
 		try {
 
 			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
-			String sql = "{ call procAattListByMonth(?, ?, ?, ?) }";
+			String sql = "{ call procAattListByMonth(?, ?, ?, ?, ?) }";
 			
 			cstat = conn.prepareCall(sql);
 			
 			cstat.registerOutParameter(1, OracleTypes.CURSOR);
 			cstat.setString(2, seqStudent);
-			cstat.setString(3, year);
-			cstat.setString(4, month);
+			cstat.setString(3, seqOpenCourse);
+			cstat.setString(4, year);
+			cstat.setString(5, month);
 			
 			cstat.executeQuery();
 			
@@ -252,17 +253,18 @@ public class AttendanceDAO {
 	 * @param seqStudent
 	 * @return
 	 */
-	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqStudent) {
+	public ArrayList<PeriodAttendListDTO> attPeriodList(String seqStudent, String seqOpenCourse) {
 		
 		try {
 
 			ArrayList<PeriodAttendListDTO> result = new ArrayList<PeriodAttendListDTO>();
-			String sql = "{ call procAllAttList(?, ?) }";
+			String sql = "{ call procAllAttList(?, ?, ?) }";
 			
 			cstat = conn.prepareCall(sql);
 			
 			cstat.registerOutParameter(1, OracleTypes.CURSOR);
 			cstat.setString(2, seqStudent);
+			cstat.setString(3, seqOpenCourse);
 			
 			cstat.executeQuery();
 			
