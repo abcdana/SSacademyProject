@@ -57,7 +57,7 @@ public class AdminController {
 				oc.openCourseStart();
 				
 			} else if (sel.equals("4")) {
-				//System.out.println("4.	개설 과목 관리 -박지현"); - 완료
+				//System.out.println("4.	개설 과목 관리 -박지현");
 				OpenSubject os = new OpenSubject();
 				os.openSubjectStart();
 				//break;

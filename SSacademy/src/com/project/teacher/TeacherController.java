@@ -45,9 +45,7 @@ public class TeacherController {
 			String sel = scan.nextLine();
 
 			if (sel.equals("1")) {
-				//System.out.println("- 강의 스케줄을 조회할 수 있다. - 박지현"); - 완료
-				ScheduleManage sm = new ScheduleManage();
-				sm.scheduleStart();
+				System.out.println("- 강의 스케줄을 조회할 수 있다. - 박지현");
 				//break;
 			} else if (sel.equals("2")) {
 				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. - 김다은"); - 완료

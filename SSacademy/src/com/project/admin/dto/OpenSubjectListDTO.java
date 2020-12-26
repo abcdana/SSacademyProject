@@ -6,27 +6,17 @@ package com.project.admin.dto;
  */
 public class OpenSubjectListDTO {
 	
-	private int rownum;	//행번호
-	private String seqOpenCourse;	//과정번호
-	private String seqOpenSubject;	//과목번호
-	private String subjectName;	//과목명
-	private String openCourseName;	//과정명
-	private String startDate;	//과목시작일
-	private String endDate;		//과목종료일
-	private String teacherName;	//교사이름
-	private String bookName;	//교재명
-	private String state;	//과목상태
-	private String availableSubject;	//강의가능과목
+	private String seqOpenCourse;
+	private String seqOpenSubject;
+	private String subjectName;
+	private String openCourseName;
+	private String startDate;
+	private String endDate;
+	private String teacherName;
+	private String bookName;
+	private String state;
+	private String availableSubject;
 	
-	
-	
-	public int getRownum() {
-		return rownum;
-	}
-
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
-	}
 	
 	public String getSubjectName() {
 		return subjectName;

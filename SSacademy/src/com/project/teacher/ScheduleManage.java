@@ -66,8 +66,8 @@ public class ScheduleManage {
 		tView.scheduleTeacherName();
 		
 		//교사리스트 컬럼명
-		System.out.println("\t ** 아래 교사 리스트에서 교사명을 선택해주세요.\n");
-		
+		System.out.println("\t ** 아래 교사 리스트에서 교사명을 선택해주세요.");
+		tView.teacherTotalList();
 		
 		//교사리스트
 		ArrayList<TeacherDTO> list2 = tdao.list();
@@ -77,7 +77,7 @@ public class ScheduleManage {
 			System.out.printf("\t%5s%10s\t%10s\t%18s\n"
 							, dto.getSeqTeacher()
 							, dto.getName()
-							, dto.getSsn().substring(0, 6)
+							, dto.getSsn()
 							, dto.getTel());
 					
 			System.out.println("\t ───────────────────────────────────────────────────────────────");
@@ -89,6 +89,7 @@ public class ScheduleManage {
 		
 		ArrayList<TeacherScheduleDTO> list = tdao.scheduleNameTeacher(name);
 		
+		System.out.println(list.size());
 		if(name.equals("0")) {
 			scheduleStart(); //강의스케줄 조회 메인
 		}
@@ -136,7 +137,7 @@ public class ScheduleManage {
 		
 		//교사리스트 컬럼명
 		System.out.println("\t ** 아래 교사 리스트에서 교사 번호를 선택해주세요.");
-		System.out.println();
+		tView.teacherTotalList();
 				
 
 		//교사리스트

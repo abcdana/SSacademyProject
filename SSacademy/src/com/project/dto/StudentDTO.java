@@ -13,7 +13,6 @@ public class StudentDTO {
 	private String employmentField; //교육생취업분야
 	public int num;
 	
-	
 	public String getSeqStudent() {
 		return seqStudent;
 	}
@@ -66,6 +65,5 @@ public class StudentDTO {
 	public void setEmploymentField(String employmentField) {
 		this.employmentField = employmentField;
 	}
-
 	
 }

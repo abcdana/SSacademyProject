@@ -129,7 +129,7 @@ public class AdminView {
 	 */
 	public void openCourseView2() {
 		System.out.println("\t┌───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
-		System.out.printf("\t│%-5s\t%20s%45s%14s%17s%10s%11s\t│\n", "[번호]", "[과정명]", "[시작일]", "[종료일]", "[강의실]", "[등록인원]", "[수료여부]");
+		System.out.printf("\t│%-5s\t%20s%45s%14s%17s%10s%10s\t│\n", "[번호]", "[과정명]", "[시작일]", "[종료일]", "[강의실]", "[등록인원]", "[수료여부]");
 		System.out.println("\t└───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
 	}
 	
@@ -138,40 +138,23 @@ public class AdminView {
 	 * 개설과정조회 번호입력
 	 * @author 박지현
 	 */
-	public void pageInfo() {
-		
-		System.out.println();
-		System.out.println();
-		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t1. 상세조회\t2. 이전페이지\t3. 다음페이지\t0. 뒤로가기\t│");
-		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t█ 입력 : ");
-		
-	}
-	
-	
-	/**
-	 * 특정개설과정조회, 개설과목 번호입력  
-	 * @author 박지현
-	 */
 	public void openCourseView3() {
 		
 		System.out.println();
 		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│ * 조회를 원하시는 번호를 입력해주세요.\t\t\t\t\t│");
+		System.out.println("\t│ * 특정과정조회를 원하시면 과정번호를 입력해주세요.\t\t\t\t│");
 		System.out.println("\t│ * 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t\t\t│");
 		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t█ 입력 : ");
+		System.out.print("\t█ 과정 번호: ");
 		
 	}
-	
 	
 	
 	/**
 	 * 특정개설과정조회 뷰입니다.
 	 * @author 박지현
 	 */
-	public String openSpecificCourseView(ArrayList<OpenCourseListDTO> list, int num) {
+	public String openSpecificCourseView(ArrayList<OpenCourseListDTO> list, String num) {
 		
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -180,8 +163,10 @@ public class AdminView {
 		System.out.println();
 		
 		for (OpenCourseListDTO dto : list) {
+			
+			if(num.equals(dto.getSeqOpenCourse())) {
 				
-				System.out.printf("\t 과정번호 : %-65s\n", dto.getSeqOpenCourse());
+				System.out.printf("\t 번호 : %-65s\n", dto.getSeqOpenCourse());
 				System.out.printf("\t 과정명 : %-55s \n", dto.getName());
 				System.out.printf("\t 시작일 : %s\n", dto.getStartDate());
 				System.out.printf("\t 종료일 : %s\n", dto.getEndDate());
@@ -195,7 +180,8 @@ public class AdminView {
 				System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
 				System.out.print("\t█ 원하시는 메뉴를 입력하세요 : ");
 			
-				return dto.getName();		
+				return dto.getName();
+			}			
 		}
 		
 		return null;
@@ -208,7 +194,6 @@ public class AdminView {
 	 */
 	public void specificSubjectView(ArrayList<OpenSubjectListDTO> list, String openCourseName) {
 		
-		System.out.println();
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 		System.out.printf("\t\t\"%s\"의 과목리스트입니다.\t\t\n", openCourseName);
 		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
@@ -245,30 +230,38 @@ public class AdminView {
 	 * 2. 특정개설과정의 교육생조회 뷰입니다.
 	 * @author 박지현
 	 */
-	public void specificStudentView(String openCourseName) {
+	public void specificStudentView(ArrayList<OpenCourseStudentDTO> list, String openCourseName) {
 		
-		System.out.println();
-		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-		System.out.printf("\t\t\"%s\"의 교육생리스트입니다.\n", openCourseName);
-		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("\t┃    \"%s\"의 교육생리스트입니다.\t┃\n", openCourseName);
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println();
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────────────────────┐");
 		System.out.printf("\t│ %-5s%-13s%-18s%-17s%-15s%-10s│\n", "[번호]", "[이름]", "[주민번호]", "[전화번호]", "[등록일]", "[교육생상태]");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────────────────────┘");
 		
-	}
-	
-	/**
-	 * 특정개설과정 교육생조회 바텀
-	 */
-	public void specificStudentView2() {
+		for(OpenCourseStudentDTO dto : list) {
+				
+			System.out.printf("\t  %-7s%-12s%-20s%-19s%-17s%-20s\n", dto.getSeqStudent()
+								,dto.getName()
+								,dto.getSsn()
+								,dto.getTel()
+								,dto.getRegistDate()
+								,dto.getState());
+			
+			System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────");			
 		
+		}//for
+		
+		
+	
 		System.out.println();
-		System.out.println("\n\t* 뒤로가기를 원하시면 0을 입력해주세요.");
+		System.out.println("\t* 뒤로가기를 원하시면 0을 입력해주세요.");
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 		
 	}
+	
 	
 	/**
 	 * 개설과정등록 헤더입니다.
@@ -303,30 +296,14 @@ public class AdminView {
 	
 	
 	/**
-	 * 개설과정수정 번호입력
+	 * 개설과정수정에서 과정번호를 받을 뷰입니다.
 	 * @author 박지현
 	 */
 	public void openCourseEdit2() {
 		
 		System.out.println();
-		System.out.println();
-		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t1. 번호입력\t2. 이전페이지\t3. 다음페이지\t0. 뒤로가기\t│");
-		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t█ 입력 : ");
-		
-	}
-	
-	
-	/**
-	 * 개설과정수정에서 과정번호를 받을 뷰입니다.
-	 * @author 박지현
-	 */
-	public void openCourseEdit3() {
-		
-		System.out.println();
 		System.out.println("\t┌───────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t * 수정할 번호를 입력해주세요.\t\t\t│");
+		System.out.println("\t│\t * 수정할 과정번호를 입력해주세요.\t\t\t│");
 		System.out.println("\t│\t * 뒤로가기를 원하시면 0을 입력해주세요.\t\t│");
 		System.out.println("\t└───────────────────────────────────────────────────────┘");
 		System.out.print("\t█ 입력: ");
@@ -337,16 +314,69 @@ public class AdminView {
 	 * 개설과정수정에서 수정할 목록입니다.
 	 * @author 박지현
 	 */
-	public void openCourseEdit4() {
+	public void openCourseEdit3() {
 		
 		System.out.println();
-		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.printf("\t┃\t\t\t현재과정정보\t\t\t┃\n");
-		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\t┌───────────────────────────────────────────────────────┐");
+		System.out.println("\t│ \t\t1. 강의실수정\t\t\t\t│");
+		System.out.println("\t│ \t\t2. 날짜수정\t\t\t\t│");
+		System.out.println("\t│ \t\t3. 기초과정번호수정\t\t\t\t│");
+		System.out.println("\t│ \t\t0. 뒤로가기\t\t\t\t│");
+		System.out.println("\t└───────────────────────────────────────────────────────┘");
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 	}
 	
 	
+	/**
+	 * 개설과정수정 - 강의실
+	 * @author 박지현
+	 */
+	public void openCourseRoomEdit(String roomName) {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("\t┃\t\t\t강의실수정\t\t\t\t┃\n");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.printf("\t현재 강의실은 %s 입니다.\n", roomName);
+		System.out.print("\t█ 수정할 강의실 번호 : ");
+		
+		
+	}
 	
+	/**
+	 * 개설과정수정 - 날짜
+	 * @author 박지현
+	 */
+	public void openCourseDateEdit(String startDate, String endDate) {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("\t┃\t\t\t날짜수정\t\t\t\t┃\n");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.println("\t┌───────────────────────────────────────────────────────┐");
+		System.out.printf("\t│ 해당 과정은 시작일 %s - 종료일 %s 입니다.\t│\n", startDate, endDate);
+		System.out.println("\t└───────────────────────────────────────────────────────┘");
+		
+		
+	}
+	
+	
+	/**
+	 * 개설과정수정 - 기초과정번호
+	 * @author 박지현
+	 */
+	public void openBasicCourseEdit(String basicCourse, String seqBasicCourse) {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.printf("\t┃\t\t\t\t기초과정번호 수정\t\t\t\t  ┃\n");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+		System.out.printf("\t* 현재 기초과정은 \"%s. %s\"입니다.\t\n", seqBasicCourse, basicCourse);
+		System.out.printf("\t* 아래 기초과정리스트 중에서 과정번호를 선택해주세요.\n");
+
+	}
 	
 	
 	/**
@@ -365,8 +395,6 @@ public class AdminView {
 
 	}
 
-	
-	//////////////////////개설과목///////////////////////////
 	
 	/*
 	 * 개설과목관리 시작메뉴입니다.
@@ -413,26 +441,26 @@ public class AdminView {
 	
 	
 	/**
-	 * 개설과목조회 번호입력
+	 * 개설과정조회 번호입력
 	 * @author 박지현
 	 */
 	public void openSubjectView3() {
 		
 		System.out.println();
 		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│ 특정과목조회를 원하시면 번호를 입력해주세요.\t\t\t\t\t│");
+		System.out.println("\t│ 특정과목조회를 원하시면 과목번호를 입력해주세요.\t\t\t\t\t│");
 		System.out.println("\t│ 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t\t\t\t│");
 		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t█ 입력 =\\: ");
+		System.out.print("\t█ 과목 번호: ");
 		
 	}
 	
 	
 	/**
-	 * 특정개설과목조회 뷰입니다.
+	 * 특정개설과정조회 뷰입니다.
 	 * @author 박지현
 	 */
-	public void specificOpenSubject(ArrayList<OpenSubjectListDTO> list) {
+	public void specificOpenSubject(ArrayList<OpenSubjectListDTO> list, String seqOpenSubject) {
 		
 		System.out.println();
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
@@ -441,30 +469,28 @@ public class AdminView {
 		System.out.println();
 		
 		for (OpenSubjectListDTO dto : list) {
+			
+			if(seqOpenSubject.equals(dto.getSeqOpenSubject())) {
 				
-			System.out.printf("\t 과목번호 : %-65s\n", dto.getSeqOpenSubject());
-			System.out.printf("\t 과목명 : %-55s\n", dto.getSubjectName());
-			System.out.printf("\t 교재명 : %-20s\n", dto.getBookName());
-			System.out.printf("\t 과정명 : %-20s\n", dto.getOpenCourseName());
-			System.out.printf("\t 교사명 : %-5s\n", dto.getTeacherName());
-			System.out.printf("\t 시작일 : %s\n", dto.getStartDate());
-			System.out.printf("\t 종료일 : %s\n", dto.getEndDate());
-		}		
-					
-	}
+				System.out.printf("\t 번호 : %-65s\n", dto.getSeqOpenSubject());
+				System.out.printf("\t 과목명 : %-55s\n", dto.getSubjectName());
+				System.out.printf("\t 교재명 : %-20s\n", dto.getBookName());
+				System.out.printf("\t 교사명 : %-5s\n", dto.getTeacherName());
+				System.out.printf("\t 시작일 : %s\n", dto.getStartDate());
+				System.out.printf("\t 종료일 : %s\n", dto.getEndDate());
+				
+				System.out.println();
+				System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
+				System.out.println("\t│ \t\t * 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t│");
+				System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
+				System.out.print("\t█ 입력 : ");
+			}			
+		}
 		
-	
-	public void specificOpenSubject2() {
-	
-		System.out.println();
-		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│ \t\t * 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t│");
-		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
-		System.out.print("\t█ 입력 : ");
-	
 	}
 	
 	
+	//////////////////////개설과목///////////////////////////
 	/**
 	 * 개설과목등록 헤더입니다.
 	 * @author 박지현
