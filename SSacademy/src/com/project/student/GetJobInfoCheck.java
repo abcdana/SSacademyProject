@@ -99,7 +99,7 @@ public class GetJobInfoCheck {
 			
 			ArrayList<VwEmpStatusDTO> list = daoE.cjobListS(null);
 			
-			Aview.cjobList(list);
+			view.cjobList(list);
 
 			
 		}
@@ -116,7 +116,7 @@ public class GetJobInfoCheck {
 			
 			ArrayList<VwGetJobInfoDTO> list = dao.jobListS(null);
 			
-			Aview.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+			view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 			
 		}
 
@@ -140,7 +140,7 @@ public class GetJobInfoCheck {
 			
 			ArrayList<VwGetJobInfoDTO> list = dao.jobListS(word);
 			
-			Aview.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+			view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 			
 		}
 		
@@ -168,7 +168,7 @@ public class GetJobInfoCheck {
 
 			ArrayList<VwGetJobInfoDTO> list = dao.salarySearchS(word, word2);
 			
-			Aview.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+			view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 			
 		}
 		
@@ -190,7 +190,7 @@ public class GetJobInfoCheck {
 			System.out.println();
 			ArrayList<VwGetJobInfoDTO> list = dao.locationSearchS(word);
 			
-			Aview.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+			view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 		}
 
 		/**
@@ -220,7 +220,7 @@ public class GetJobInfoCheck {
 			System.out.println();
 			ArrayList<VwGetJobInfoDTO> list = dao.dutySearchS(word.toUpperCase());
 			
-			Aview.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+			view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 			
 		}
 }

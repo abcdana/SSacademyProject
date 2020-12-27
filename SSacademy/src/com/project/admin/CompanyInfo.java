@@ -20,7 +20,9 @@ public class CompanyInfo {
 	   private static Scanner scan;
 	   private AdminView view;
 	   private CompanyInfoDAO dao;
-	   
+		int i=0; //출력문 페이지
+		int j=0; //출력문 라인
+		int line = 10; //10줄까지 출력
 	   static{
 	      scan = new Scanner(System.in);
 	      
@@ -91,17 +93,19 @@ public class CompanyInfo {
 	 */
 	public void list() { //전체목록조회
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("\t┃\t\t\t연계기업 채용공고 전체조회\t\t\t\t  ┃");
+		System.out.println("\t┃\t\t\t연계기업 채용공고 전체조회\t\t\t  ┃");
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
 		
 		view.viewListCompany(list);//목록출력메서드호출
-
+		
+		
+		
+		}
 
 		
 		
-	}
 
 	/**
 	 * 연계기업채용공고 검색 메뉴 메서드
@@ -270,26 +274,7 @@ public class CompanyInfo {
 		
 	}
 
-	private boolean seDate(String startDate, String endDate) { //TODO 유효성 검사해야함
-		Calendar scal = Calendar.getInstance();
-		int sYear = Integer.parseInt(startDate.substring(0,3));
-		int sMonth = Integer.parseInt(startDate.substring(5,6));
-		int sDay = Integer.parseInt(startDate.substring(8,10));
-		scal.set(sYear,sMonth,sDay);
-		Calendar ecal = Calendar.getInstance();
-		int eYear = Integer.parseInt(endDate.substring(0,3));
-		int eMonth = Integer.parseInt(endDate.substring(5,6));
-		int eDay = Integer.parseInt(endDate.substring(8,10));
-		ecal.set(eYear,  eMonth, eDay);
-		long sTick = scal.getTimeInMillis();
-		long eTick = ecal.getTimeInMillis();
-		long gap = eTick - sTick;
-		if (gap<0) {
-		
-			return false;
-		}
-		return true;
-	}
+	
 	/**
 	 * 연계기업채용공고 수정 메서드
 	 * @author 조혜승
@@ -300,10 +285,19 @@ public class CompanyInfo {
 			view.editCompany();//연계기업채용공고 수정 출력문 헤더
 
 			ArrayList<VwCompanyInfoDTO> list = dao.list(null);
-			view.viewListCompany(list); //목록출력 메서드 호출
+			view.editListCompany(list); //목록출력 메서드 호출
 			view.noinputcurve();
 
-			
+
+		
+	}
+	/**
+	 * 연계기업 채용공고 수정 번호선택 및 출력
+	 *  @author 조혜승
+	 */
+	public void editSelect() {
+		System.out.println();
+		System.out.println("\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.print("\t█ 수정 원하시는 번호를 입력하세요. : ");
 		String seq = scan.nextLine();
 		if(seq.equals("")) {
@@ -311,14 +305,16 @@ public class CompanyInfo {
 		}
 		System.out.println();
 		VwCompanyInfoDTO dto = dao.editGet(seq);
-		System.out.println("\t회사 이름: " + dto.getName());
-		System.out.println("\t채용 시작일: " + dto.getStartDate());
-		System.out.println("\t채용 종료일: " + dto.getEndDate());
-		System.out.println("\t채용 분야: " + dto.getComField());
-		System.out.println("\t연봉: " + dto.getSalary());
-		System.out.println("\t채용 형태: " + dto.getEmploymentType());
-		System.out.println("\t회사 규모: " + dto.getComSize());
-		System.out.println("\t회사 주소: " + dto.getAddress());
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t회사 이름: " + dto.getName());
+		System.out.println("\t\t\t채용 시작일: " + dto.getStartDate());
+		System.out.println("\t\t\t채용 종료일: " + dto.getEndDate());
+		System.out.println("\t\t\t채용 분야: " + dto.getComField());
+		System.out.println("\t\t\t연봉: " + dto.getSalary());
+		System.out.println("\t\t\t채용 형태: " + dto.getEmploymentType());
+		System.out.println("\t\t\t회사 규모: " + dto.getComSize());
+		System.out.println("\t\t\t회사 주소: " + dto.getAddress());
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
 		System.out.println("\t**수정을 원하지 않는 항목은 엔터를 입력하세요.");
@@ -379,7 +375,6 @@ public class CompanyInfo {
 		view.updateResult(result); //수정완료 출력문
 		
 	}
-	
 	/**
 	 * 연계기업채용공고 삭제 메서드
 	 * @author 조혜승
@@ -389,44 +384,53 @@ public class CompanyInfo {
 		view.deleteCompany();
 
 		ArrayList<VwCompanyInfoDTO> list = dao.list(null);
-		view.viewListCompany(list); //목록출력 메서드 호출
-	System.out.println();
-	System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
-	System.out.print("\t█ 삭제 원하시는 번호를 입력하세요. : ");
-	String seq = scan.nextLine();
-	if(seq.equals("")) {
-		menu();
-	}
-	System.out.println();
-	VwCompanyInfoDTO dto = dao.editGet(seq);
-	System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-	System.out.println("\t\t\t\t회사 이름 : " + dto.getName());
-	System.out.println("\t\t\t\t채용 시작일 : " + dto.getStartDate());
-	System.out.println("\t\t\t\t채용 종료일 : " + dto.getEndDate());
-	System.out.println("\t\t\t\t채용 분야 : " + dto.getComField());
-	System.out.println("\t\t\t\t연봉 : " + dto.getSalary());
-	System.out.println("\t\t\t\t채용 형태 : " + dto.getEmploymentType());
-	System.out.println("\t\t\t\t회사 규모 : " + dto.getComSize());
-	System.out.println("\t\t\t\t회사 주소 : " + dto.getAddress());
-	System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
-	System.out.println();
-	
-	System.out.print("\t정말로 삭제 하시겠습니까 ? (y|n) : ");
-	String input = scan.nextLine();
-	if(input.toLowerCase().equals("y")) {
-		int result = dao.delete(seq);
-		view.deleteResult(result); //삭제성공유무출력
-	} else if (input.toLowerCase().equals("n")){
-		System.out.println("\t이전화면으로 돌아갑니다. ");
-	} else {
-		System.out.println("\t잘못 입력했습니다. 다시 입력해주세요.");
-		delete();
-	}
+		view.deleteListCompany(list); //목록출력 메서드 호출
+
 		
 	}
-	
+	/**
+	 * 연계기업채용공고 삭제 번호선택 및 출력
+	 *  @author 조혜승
+	 */
+	public void deleteSelect() {
+		
+		System.out.println();
+		System.out.println("\t\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
+		System.out.print("\t█ 삭제 원하시는 번호를 입력하세요. : ");
+		String seq = scan.nextLine();
+		if(seq.equals("")) {
+			menu();
+		}
+		System.out.println();
+		VwCompanyInfoDTO dto = dao.editGet(seq);
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t\t\t회사 이름 : " + dto.getName());
+		System.out.println("\t\t\t채용 시작일 : " + dto.getStartDate());
+		System.out.println("\t\t\t채용 종료일 : " + dto.getEndDate());
+		System.out.println("\t\t\t채용 분야 : " + dto.getComField());
+		System.out.println("\t\t\t연봉 : " + dto.getSalary());
+		System.out.println("\t\t\t채용 형태 : " + dto.getEmploymentType());
+		System.out.println("\t\t\t회사 규모 : " + dto.getComSize());
+		System.out.println("\t\t\t회사 주소 : " + dto.getAddress());
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t정말로 삭제 하시겠습니까 ? (y|n) : ");
+		String input = scan.nextLine();
+		if(input.toLowerCase().equals("y")) {
+			int result = dao.delete(seq);
+			view.deleteResult(result); //삭제성공유무출력
+		} else if (input.toLowerCase().equals("n")){
+			System.out.println("\t이전화면으로 돌아갑니다. ");
+		} else {
+			System.out.println("\t잘못 입력했습니다. 다시 입력해주세요.");
+			delete();
+		}
+		
+	}
 	/**
 	 * 메뉴로 다시돌아가는 메서드
+	 * @author 혜승
 	 */
 	public void pause() {
 		System.out.println();
