@@ -479,7 +479,7 @@ public class BasicInfoManage {
 	
 	
 	/**
-	 * 강의실 삭제 메서드이다.
+	 * 과목 삭제 메서드이다.
 	 * @param seqBasicSubject
 	 */
 	private void deleteBasicSubjectInfo(String seqBasicSubject) {
@@ -644,7 +644,7 @@ public class BasicInfoManage {
      */
     private void deleteRoomInfoMenu() {
     	
-    	view.deleteCourseHeader();
+    	view.deleteRoomHeader();
     	
     	roomList(); //전체 강의실 목록
     	
