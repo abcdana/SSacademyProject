@@ -2,12 +2,11 @@ package com.project.dto;
 
 
 /**
- * 
- * 성적,과목관련 정보를 담는 DTO
+ * 학생의 정보와 시험관련 정보를 담은 DTO클래스이다.
  * @author 조성진
  *
  */
-public class VwSubjectScoreInquiryDTO {
+public class VwStudentTestScoreDTO {
 
 	private String stuSeq;
 	private String studentName;
@@ -24,6 +23,12 @@ public class VwSubjectScoreInquiryDTO {
 	private String AttendanceScore;
 	private String studentState;
 	private String roomName;
+	private String testSeq;
+	private String writtenPercent;
+	private String practicalPercent;
+	private String attendancePercent;
+	private String tSeq;
+	private String studentSsn;
 	
 	
 	public String getStuSeq() {
@@ -115,6 +120,42 @@ public class VwSubjectScoreInquiryDTO {
 	}
 	public void setSubjectStart(String subjectStart) {
 		this.subjectStart = subjectStart;
+	}
+	public String getTestSeq() {
+		return testSeq;
+	}
+	public void setTestSeq(String testSeq) {
+		this.testSeq = testSeq;
+	}
+	public String getWrittenPercent() {
+		return writtenPercent;
+	}
+	public void setWrittenPercent(String writtenPercent) {
+		this.writtenPercent = writtenPercent;
+	}
+	public String getPracticalPercent() {
+		return practicalPercent;
+	}
+	public void setPracticalPercent(String practicalPercent) {
+		this.practicalPercent = practicalPercent;
+	}
+	public String getAttendancePercent() {
+		return attendancePercent;
+	}
+	public void setAttendancePercent(String attendancePercent) {
+		this.attendancePercent = attendancePercent;
+	}
+	public String gettSeq() {
+		return tSeq;
+	}
+	public void settSeq(String tSeq) {
+		this.tSeq = tSeq;
+	}
+	public String getStudentSsn() {
+		return studentSsn;
+	}
+	public void setStudentSsn(String studentSsn) {
+		this.studentSsn = studentSsn;
 	}
 	
 	

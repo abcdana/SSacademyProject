@@ -8,7 +8,11 @@ import com.project.admin.GetJobInfo;
 import com.project.admin.dto.VwCompanyInfoDTO;
 import com.project.admin.dto.VwEmpStatusDTO;
 import com.project.admin.dto.VwGetJobInfoDTO;
+
+import com.project.dto.PeriodAttendListDTO;
+
 import com.project.student.dto.StudentCourseListDTO;
+import com.project.teacher.dto.TeacherCourseListDTO;
 
 /**
  * 교육생 뷰 입니다.
@@ -74,6 +78,24 @@ public class StudentView {
 		System.out.print("\t█ 입/퇴실 체크를 하시겠습니까? (Y/N) : ");
 	}
 	
+	
+	/**
+	 * 교육생 뷰의 출석체크의 결과를 출력하는 메소드이다.
+	 * 출석체크를 성공시 "출석체크 완료"메세지를 , 실패시 "출석체크 실패" 메세지를 출력한다.
+	 * @param result 0 또는 1이 저장되어 있는 변수이다.
+	 */
+	public void checkResult(int result) {
+		
+		if(result == 0) {
+			System.out.println();
+			System.out.println("\t\t* 출석체크 실패. *");
+		} else if(result == 1) {
+			System.out.println();
+			System.out.println("\t\t* 출석체크 완료. *");
+		}
+		
+	}
+	
 	/**
 	 * 출결 조회 헤더를 출력하는 메서드이다.
 	 */
@@ -129,31 +151,46 @@ public class StudentView {
 
 
 
-
-	public void allCourseList(ArrayList<StudentCourseListDTO> sclist) {
-		// TODO Auto-generated method stub
-		System.out.println("교육생리스트");
-	}
-
-
-
-
 	/**
-	 * 교육생 뷰의 출석체크의 결과를 출력하는 메소드이다.
-	 * 출석체크를 성공시 "출석체크 완료"메세지를 , 실패시 "출석체크 실패" 메세지를 출력한다.
-	 * @param result 0 또는 1이 저장되어 있는 변수이다.
+	 * 교육생이 수강하는 과정들의 정보를 출력하는 메서드이다.
+	 * @param result
 	 */
-	public void checkResult(int result) {
+	public void allCourseList(ArrayList<StudentCourseListDTO> result) {
 		
-		if(result == 0) {
-			System.out.println();
-			System.out.println("\t\t* 출석체크 실패. *");
-		} else if(result == 1) {
-			System.out.println();
-			System.out.println("\t\t* 출석체크 완료. *");
+		System.out.println("\n");
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t 수강 과정 목록\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println("\t[수강번호] [과정번호]\t\t\t   [과정명]   \t\t\t[과정시작일] [과정종료일]   [강의실]");
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
+		
+		for (StudentCourseListDTO dto : result) {
+			
+			System.out.printf("\t%6s\t  %6s\t%-25s   %-10s   %-10s   %-10s\n"
+					, dto.getSeqRegCourse()
+					, dto.getSeqOpenCourse()
+					, dto.getName()
+					, dto.getStartDate()
+					, dto.getEndDate()
+					, dto.getRoomName());
 		}
 		
+		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+
 	}
+
+
+
+	public void attendanceList(ArrayList<PeriodAttendListDTO> list) {
+		
+		
+		
+	}
+	
+	
 	
 	
 ///////////////////////////////혜승///////////////////////////////////////
@@ -290,6 +327,122 @@ public class StudentView {
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
 		
 	}
+
+
+
+
+	
+///////////////////////////////지현///////////////////////////////////////
+	
+	/**
+	 * 교육생 조회 메인입니다.
+	 */
+	public void StudentListMain() {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t\t\t  1. 교육생명으로 조회\t\t\t\t  │");
+		System.out.println("\t│\t\t\t  2. 교육생번호로 조회\t\t\t\t  │");
+		System.out.println("\t│\t\t\t  0. 뒤로가기\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+	}
+	
+	
+	/**
+	 * 교육생 번호입력
+	 * @author 박지현
+	 */
+	public void pageInfo() {
+		
+		System.out.println();
+		System.out.println();
+		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t1. 번호입력\t2. 이전페이지\t3. 다음페이지\t0. 뒤로가기\t│");
+		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
+		System.out.print("\t█ 입력 : ");
+		
+	}
+	
+	/**
+	 * 교육생명으로 교육생조회 헤더입니다.
+	 */
+	public void studentListName() {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t\t교육생명으로 조회\t\t\t\t  ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	
+		
+	}
+	
+	/**
+	 * 교육생명으로 교육생조회 바텀입니다.
+	 */
+	public void studentListName2() {
+		
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│ * 교육생명을 입력해주세요.\t\t\t\t\t\t\t  │");
+		System.out.println("\t│ * 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		System.out.print("\t█ 교육생명 : ");
+		
+	}
+	
+	
+	/**
+	 * 교육생명으로 조회 시 강의스케줄 정보 헤더입니다.
+	 */
+	public void studentListName3(String studentName) {
+		
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.printf("\t\t\t\t검색하신 '%s'의 정보입니다.\t\t  \n", studentName);
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		
+	}	
+	
+	public void studentListColunm() {
+		
+		System.out.println("\t────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.printf("\t%-10s%-10s%-14s%-46s%-14s%-14s%-5s    \n", "[교육생번호]", "[교육생명]", "[생년월일]", "[과정명]", "[시작일]", "[종료일]", "[강의실]");
+		System.out.println("\t────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+	}
+	
+	
+	public void back() {
+		
+		System.out.println();
+		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│ * 뒤로가기를 원하시면 아무키나 입력해주세요.\t\t\t\t\t  │");
+		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+		System.out.println();
+		
+		System.out.print("\t█ 입력 : ");
+		
+	}
+  
+  	 * 교육생번호로 조회 헤더입니다.
+	 */
+	public void seqStudentList1() {
+		
+		System.out.println();
+		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("\t┃\t\t\t교육생번호로 조회\t\t\t\t ┃");
+		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println();
+
+	}
+	
+	
 	
 	/**
 	 * 수료생 취업정보 조회 문 출력 형식문
@@ -381,9 +534,6 @@ public class StudentView {
 		}//while
 		
 		
-		
-	}
-	
 	/**
 	 * 연계기업취업정보 목록 형태 
 	 * @author 혜승 
@@ -482,5 +632,47 @@ public class StudentView {
 		
 
 
+	/**
+	 * 교육생번호 조회시 보여줄 기본 교육생 컬럼입니다.
+	 */
+	public void seqBasicStudent() {
+
+		System.out.println();
+		System.out.println("\t─────────────────────────────────────────────────────────────────");
+		System.out.printf("\t %-11s%-9s%-14s%-11s%-13s\n", "[번호]", "[이름]", "[생년월일]", "[아이디]", "[등록일]");
+		System.out.println("\t─────────────────────────────────────────────────────────────────");
+	
+	}	
+	
+	/**
+	 * 교육생번호로 조회 바텀입니다.
+	 */
+	public void seqStudentList2() {
+		
+		System.out.println();
+		System.out.println("\t┌───────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│ * 번호를 입력해주세요.\t\t\t\t\t\t│");
+		System.out.println("\t│ * 뒤로가기를 원하시면 0을 입력해주세요.\t\t\t\t│");
+		System.out.println("\t└───────────────────────────────────────────────────────────────┘");
+		System.out.print("\t█ 입력 : ");
+	}
+	
+	
+	/**
+	 * 교육생번호로 조회 시 정보 헤더입니다.
+	 */
+	public void seqStudentList3(String seqStudent) {
+			
+		System.out.println();
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.printf("\t\t\t검색하신 %s번 교육생의 정보입니다.\n", seqStudent);
+		System.out.println("\t━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		System.out.println();	
+			
+	}	
+	
+	
 
 }
+
+	

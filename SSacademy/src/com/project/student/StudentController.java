@@ -16,7 +16,7 @@ public class StudentController {
 	private Scanner scan;
 	private StudentView view;
 	private StudentDTO sdto;
-
+	private StudentTestScoreInquiry stsi;
 	/**
 	 * 기본 생성자에서 컨트롤에 이용될 DAO들을 생성해준다. 
 	 */
@@ -25,6 +25,7 @@ public class StudentController {
 		scan = new Scanner(System.in);
 		view = new StudentView();
 		this.sdto = dto;
+		
 		
 	}
 	
@@ -44,15 +45,20 @@ public class StudentController {
 			String sel = scan.nextLine();
 			
 			if (sel.equals("1")) {
-				System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
+				//System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
+//				StudentList sl = new StudentList();
+//				sl.studentStart();
 				//break;
+				
 			} else if (sel.equals("2")) {
-				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은");
+				//System.out.println("- 출결 관리 및 출결 조회를 할 수 있다. --김다은"); - 완료
 				CheckAttendance ca = new CheckAttendance(sdto);
 				ca.attendacneMain();
 				//break;
 			} else if (sel.equals("3")) {
-				System.out.println("- 성적 조회를 할 수 있다. --조성진");
+				//System.out.println("- 성적을 조회를 할 수있다.. --조성진");
+				stsi = new StudentTestScoreInquiry();
+				stsi.TestQuestionInquiry();
 				//break;
 			} else if (sel.equals("4")) {
 				//System.out.println("- 강의 및 시설 평가를 등록, 수정, 삭제 할 수 있다. - 김주혁");
@@ -70,7 +76,8 @@ public class StudentController {
 				getJobInfoCheck.menu();
 				//break;
 			} else if (sel.equals("7")) {
-				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
+//				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원"); -완료
+				TopStudent.TopStudent(sdto);
 				//break;
 			} else if (sel.equals("0")) {
 				//로그 아웃

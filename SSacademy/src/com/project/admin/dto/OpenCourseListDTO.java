@@ -1,11 +1,12 @@
 package com.project.admin.dto;
 
 /**
- * @author jenny
+ * @author 박지현
  *
  */
 public class OpenCourseListDTO {
 
+	private int rownum;
 	private String seqOpenCourse;
 	private String seqRoom;
 	private String seqBasicCourseInfo;
@@ -97,19 +98,31 @@ public class OpenCourseListDTO {
 	}
 
 
-	/**
-	 * @return the seqBasicCourseInfo
-	 */
+
 	public String getSeqBasicCourseInfo() {
 		return seqBasicCourseInfo;
 	}
 
 
-	/**
-	 * @param seqBasicCourseInfo the seqBasicCourseInfo to set
-	 */
+
 	public void setSeqBasicCourseInfo(String seqBasicCourseInfo) {
 		this.seqBasicCourseInfo = seqBasicCourseInfo;
+	}
+
+
+	/**
+	 * @return the rownum
+	 */
+	public int getRownum() {
+		return rownum;
+	}
+
+
+	/**
+	 * @param rownum the rownum to set
+	 */
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 	
 	

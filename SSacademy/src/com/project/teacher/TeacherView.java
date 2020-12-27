@@ -45,9 +45,9 @@ public class TeacherView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 종료 과목 조회\t4. 출결 배점 입력\t\t  │");
-		System.out.println("\t│\t\t2. 과목별 배점 관리\t5. 필기 배점 입력\t\t  │");
-		System.out.println("\t│\t\t3. 교육생별 배점 관리\t6. 실기 배점 입력\t\t  │");
+		System.out.println("\t│\t\t1. 종료 과목 조회\t4. 필기 시험 날짜 입력\t\t  │");
+		System.out.println("\t│\t\t2. 과목 배점 관리\t5. 실기 시험 날짜 입력\t\t  │");
+		System.out.println("\t│\t\t3. 시험 문제 추가\t6. 시험 문제 조회\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		
@@ -62,7 +62,7 @@ public class TeacherView {
 		System.out.println("\t┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		
 		System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
-		System.out.println("\t│\t\t1. 과목 조회\t3. 학생별 성적 관리\t\t\t  │");
+		System.out.println("\t│\t\t1. 과목 조회\t        3. 학생별 성적 관리\t\t  │");
 		System.out.println("\t│\t\t2. 과목별 성적 관리\t\t\t\t\t  │");
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
@@ -151,6 +151,13 @@ public class TeacherView {
 		
 	}
 	
+	public void scheduleSeqTeacher3() {
+	
+		System.out.println("\t┌──────────────────────────────────────────────────────────────────────────────────────────────────────────────┐");
+		System.out.printf("\t│%-8s%-10s%20s%33s%15s%13s │\n", "[교사번호]", "[교사명]", "[과정명]", "[시작일]", "[종료일]", "[등록인원]");
+		System.out.println("\t└──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘");
+	}
+	
 	/**
 	 * 교사번호로 강의스케줄 조회 바텀입니다.
 	 */
@@ -193,22 +200,20 @@ public class TeacherView {
 		
 	}
 	
+		
 	
 	/**
-	 * 강의스케줄 조회 시 보여줄 교사리스트 컬럼명입니다.
+	 * 강의스케줄조회 번호입력
 	 * @author 박지현
 	 */
-	public void teacherTotalList() {
+	public void pageInfo() {
 		
-		System.out.println("\t┌───────────────────────────────────────────────────────────────┐");
-		System.out.printf("\t│%-8s%-14s%-19s%-10s\t│\n", "[교사번호]", "[교사명]", "[주민번호]", "[전화번호]");
-		System.out.println("\t└───────────────────────────────────────────────────────────────┘");
-		
-	}
-		
-	
-	public void openScheduleView3() {
-		
+		System.out.println();
+		System.out.println();
+		System.out.println("\t┌───────────────────────────────────────────────────────────────────────┐");
+		System.out.println("\t│\t1. 상세조회\t2. 이전페이지\t3. 다음페이지\t0. 뒤로가기\t│");
+		System.out.println("\t└───────────────────────────────────────────────────────────────────────┘");
+		System.out.print("\t█ 입력 : ");
 		
 	}
 
@@ -216,6 +221,10 @@ public class TeacherView {
 	
 	/////////////////////////////////다은///////////////////////////////////////////
 	
+	/**
+	 * 교사가 강의한 과정들의 정보를 출력하는 메서드이다.
+	 * @param result
+	 */
 	public void allCourseList(ArrayList<TeacherCourseListDTO> result) {
 		
 		System.out.println();

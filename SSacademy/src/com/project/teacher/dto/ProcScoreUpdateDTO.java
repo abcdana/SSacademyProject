@@ -1,6 +1,6 @@
-package com.project.teacher;
+package com.project.teacher.dto;
 
-public class procScoreUpdateDTO {
+public class ProcScoreUpdateDTO {
 
 	private String subnum;
 	private String stunum;

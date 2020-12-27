@@ -14,6 +14,8 @@ public class AdminController {
 	
 	private Scanner scan;
 	private AdminDTO adto;
+	private AdminTestScoreManagement atsm;
+	private AdminTestManagement atm;
 
 	/**
 
@@ -24,6 +26,8 @@ public class AdminController {
 		
 		scan = new Scanner(System.in);
 		this.adto = dto;
+		atsm = new AdminTestScoreManagement();
+		atm = new AdminTestManagement();
 	}
 	
 	
@@ -57,19 +61,19 @@ public class AdminController {
 				oc.openCourseStart();
 				
 			} else if (sel.equals("4")) {
-				//System.out.println("4.	개설 과목 관리 -박지현");
+				//System.out.println("4.	개설 과목 관리 -박지현"); - 완료
 				OpenSubject os = new OpenSubject();
 				os.openSubjectStart();
 				//break;
 			} else if (sel.equals("5")) {
-//				System.out.println("5.	교육생 관리 - 임채원");
+				//System.out.println("5.	교육생 관리 - 임채원"); - 완료
 				AdministerStudent.AdministerStudent(adto);
 				//break;
 			} else if (sel.equals("6")) {
-				System.out.println("6.	시험 관리 - 조성진");
+				atm.menu();
 				//break;
 			} else if (sel.equals("7")) {
-				System.out.println("7.	성적 관리 - 조성진");
+				atsm.menu();
 				//break;
 			} else if (sel.equals("8")) {
 				//System.out.println("8.	출결 관리 - 김다은"); - 완료
@@ -92,7 +96,8 @@ public class AdminController {
 				evaluation.main();
 				//break;
 			} else if (sel.equals("12")) {
-				System.out.println("12.  우수 훈련생 관리 - 임채원");
+				//System.out.println("12.  우수 훈련생 관리 - 임채원");
+				TopStudent.TopStudent(adto);
 				//break;
 			} else if (sel.equals("0")) {
 				//로그아웃
