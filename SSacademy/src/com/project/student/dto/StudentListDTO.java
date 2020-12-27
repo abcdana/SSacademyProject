@@ -15,7 +15,7 @@ public class StudentListDTO {
 	private String room;
 	private String firstRegistDate;
 	private String id;
-	private int rownum;	//교육생 rownum
+	private int rownum;	//교육생
 	
 	
 	
@@ -111,17 +111,10 @@ public class StudentListDTO {
 	}
 
 
-	/**
-	 * @return the rownum
-	 */
 	public int getRownum() {
 		return rownum;
 	}
 
-
-	/**
-	 * @param rownum the rownum to set
-	 */
 	public void setRownum(int rownum) {
 		this.rownum = rownum;
 	}
