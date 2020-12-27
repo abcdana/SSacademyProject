@@ -20,9 +20,7 @@ public class CompanyInfo {
 	   private static Scanner scan;
 	   private AdminView view;
 	   private CompanyInfoDAO dao;
-		int i=0; //출력문 페이지
-		int j=0; //출력문 라인
-		int line = 10; //10줄까지 출력
+
 	   static{
 	      scan = new Scanner(System.in);
 	      
