@@ -1167,6 +1167,7 @@ public class AdminView {
 		System.out.println();
 	}
 
+
 	/**
 	 * 출결 상태 수정 헤더 출력 메서드이다.
 	 */
