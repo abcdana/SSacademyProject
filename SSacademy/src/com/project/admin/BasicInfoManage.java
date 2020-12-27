@@ -646,6 +646,7 @@ public class BasicInfoManage {
     	
     	view.deleteRoomHeader();
     	
+   
     	roomList(); //전체 강의실 목록
     	
 		System.out.print("\t█ 강의실 번호 : ");
