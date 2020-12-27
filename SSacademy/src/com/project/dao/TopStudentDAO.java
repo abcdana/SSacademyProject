@@ -22,7 +22,6 @@ public class TopStudentDAO {
 	private static PreparedStatement pstat;
 	private static CallableStatement cstat;
 	private static ResultSet rs;
-	private static TopStudentDTO dto = new TopStudentDTO();
 	private static Scanner scanner = new Scanner(System.in);
 
 	/**
@@ -48,12 +47,13 @@ public class TopStudentDAO {
 	 */
 	public ArrayList<TopStudentDTO> getTopStudent() {
 		try {
-			String sql = "select ss.seqScholarship ,ss.name ssName,prize,descrip,seqTopStudent,st.name stName,r.seqRegCourse seqRegCourse from tblTopStudent tos" + 
+			String sql = "select distinct ss.seqScholarship,ss.name ssName,prize,descrip,seqTopStudent,st.id stId,st.name stName,r.seqRegCourse seqRegCourse from tblTopStudent tos" + 
 					" inner join tblScholarship ss on tos.seqScholarship=ss.seqScholarship" + 
 					" inner join tblTestScore ts on tos.seqTestScore=ts.seqTestScore" + 
 					" inner join tblTestPercent tp on tp.seqTestPercent=ts.seqTestPercent" + 
 					" inner join tblRegCourse r on r.seqRegCourse=tp.seqRegCourse" + 
-					" inner join tblStudent st on st.seqStudent=r.seqStudent";
+					" inner join tblStudent st on st.seqStudent=r.seqStudent" +
+					" order by tos.seqTopStudent";
 			
 			pstat = conn.prepareStatement(sql);
 			rs = pstat.executeQuery();
@@ -62,8 +62,10 @@ public class TopStudentDAO {
 				
 			while (rs.next()) {
 				
+				TopStudentDTO dto = new TopStudentDTO();
+				
 				dto.setSeqTopStudent(rs.getString("seqTopStudent"));
-//				dto.setStName(rs.getString("stid"));
+				dto.setStId(rs.getString("stId"));
 				dto.setStName(rs.getString("stName"));
 				dto.setSeqRegCourse(rs.getString("seqRegCourse"));
 				dto.setSsName(rs.getString("ssName"));

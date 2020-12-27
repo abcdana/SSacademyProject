@@ -68,7 +68,8 @@ public class TeacherController {
 				teacherEvaluation.main();
 				// break;
 			} else if (sel.equals("6")) {
-				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
+//				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
+				TopStudent.TopStudent(tdto);
 				// break;
 			} else if (sel.equals("7")) {
 				System.out.println("7.	성적 관리 - 조성진");

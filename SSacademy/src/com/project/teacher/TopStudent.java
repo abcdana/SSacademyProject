@@ -1,4 +1,4 @@
-package com.project.admin;
+package com.project.teacher;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,33 +7,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.project.admin.AdminView;
 import com.project.dao.ScholarshipDAO;
 import com.project.dao.TopStudentDAO;
-import com.project.dto.AdminDTO;
 import com.project.dto.ScholarshipDTO;
+import com.project.dto.TeacherDTO;
 import com.project.dto.TopStudentDTO;
-import com.project.ssacademy.DBUtil;
 
 public class TopStudent {
 	
 	static AdminView view = new AdminView();
 	static ScholarshipDAO dao_p = new ScholarshipDAO();
-	static AdminDTO adto = new AdminDTO();
+	static TeacherDTO tdto = new TeacherDTO();
 	static Scanner scanner = new Scanner(System.in);
 	static Connection conn = null;
 	static Statement stat = null;
 	static PreparedStatement pstat = null;
 	static ResultSet rs = null;
-	
+
 	
 	/**
 	 * 우수 훈련생 / 우수훈련생 포상 목록을 조회할수 있는 메뉴를 출력하는 메소드
-	 * @param adto
+	 * @param tdto
 	 */
-	public static void TopStudent(AdminDTO adto) {
+	public static void TopStudent(TeacherDTO tdto) {
 
 		int listT;
-		TopStudent.adto=adto;
+		TopStudent.tdto=tdto;
 		
 		while(true) {
 			
@@ -67,8 +67,8 @@ public class TopStudent {
 				}else if(data.equals("3")){ //우수 훈련생 삭제
 					top_student_remove();
 				}else if(data.equals("0")){ //뒤로가기
-					AdminController AdCon = new AdminController(adto);
-					AdCon.adminMain();
+					TeacherController AdCon = new TeacherController(tdto);
+					AdCon.teacherMain();
 				}else {
 					System.out.println("\t\t※ 잘못 입력하셨습니다. 다시 입력하세요.\n");
 				}
@@ -89,8 +89,8 @@ public class TopStudent {
 				}else if(data.equals("4")){ //포상 삭제
 					top_prize_remove();
 				}else if(data.equals("0")){ //뒤로가기
-					AdminController AdCon = new AdminController(adto);
-					AdCon.adminMain();
+					TeacherController AdCon = new TeacherController(tdto);
+					AdCon.teacherMain();
 				}else {
 					System.out.println("\t\t※ 잘못 입력하셨습니다. 다시 입력하세요.\n");
 				}
@@ -120,7 +120,7 @@ public class TopStudent {
 	 */
 	private static void top_student_add() {
 		dao_p.addTopStudent();
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class TopStudent {
 	 */
 	private static void top_student_remove() {
 		dao_p.removeTopStudent();
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class TopStudent {
 	private static void top_prize_list() {
 		ArrayList<ScholarshipDTO> list = dao_p.getScholarshipList();
 		dao_p.printScholarshipList(list);
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class TopStudent {
 	 */
 	private static void top_prize_add() {
 		dao_p.addScholarship();
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class TopStudent {
 	 */
 	private static void top_prize_mod() {
 		dao_p.modScholarship();
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class TopStudent {
 	 */
 	private static void top_prize_remove() {
 		dao_p.removeScholarship();
-		TopStudent(adto);
+		TopStudent(tdto);
 	}
 	
 	

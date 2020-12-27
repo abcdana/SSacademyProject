@@ -46,8 +46,8 @@ public class StudentController {
 			
 			if (sel.equals("1")) {
 				//System.out.println("교육생 개인 정보를 확인할 수 있다. --박지현");
-				StudentList sl = new StudentList();
-				sl.studentStart();
+//				StudentList sl = new StudentList();
+//				sl.studentStart();
 				//break;
 				
 			} else if (sel.equals("2")) {
@@ -75,8 +75,8 @@ public class StudentController {
 				getJobInfoCheck.menu();
 				//break;
 			} else if (sel.equals("7")) {
-//				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원");
-				TopStudentCheck.TopStudent(sdto);
+//				System.out.println("- 우수훈련생 여부를 확인할 수 있다. --임채원"); -완료
+				TopStudent.TopStudent(sdto);
 				//break;
 			} else if (sel.equals("0")) {
 				//로그 아웃
