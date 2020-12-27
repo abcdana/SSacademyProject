@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 import com.project.dto.StudentDTO;
+import com.project.dto.VwStudentTestScoreDTO;
 import com.project.ssacademy.DBUtil;
 import com.project.student.dto.StudentListDTO;
 import com.project.teacher.dto.TeacherScheduleDTO;
@@ -603,6 +604,49 @@ public class StudentDAO {
 			
 		return 0;
 	}
+	
+	
+	/**
+	 * 학생의 개인정보를 가져오는 메서드입니다.
+	 * @return
+	 */
+	
+	public ArrayList<StudentDTO> list() {
+
+		Connection conn = null;
+		Statement stat = null;
+		ResultSet rs = null;
+		try {
+			conn = DBUtil.open();
+
+			String sql = String.format("select * from  tblStudent");
+			stat = conn.createStatement();
+			rs = stat.executeQuery(sql);
+
+			ArrayList<StudentDTO> list = new ArrayList<StudentDTO>();
+
+			while (rs.next()) {
+				// 레코드 1개 -> AddressDTO 1개
+				StudentDTO dto = new StudentDTO();
+				dto.setSeqStudent(rs.getString("seqStudent"));
+				dto.setName(rs.getString("Name"));
+				dto.setSsn(rs.getString("ssn"));
+				dto.setFirstRegistrationDate(rs.getString("firstRegistrationDate"));
+				dto.setPhone(rs.getString("phone"));
+				list.add(dto);
+			}
+			rs.close();
+			stat.close();
+			conn.close();
+			return list;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+	
 		
 }
 	
