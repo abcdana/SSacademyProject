@@ -8,9 +8,18 @@ import java.util.ArrayList;
 import com.project.dto.VwStudentTestScoreDTO;
 import com.project.ssacademy.DBUtil;
 
+/**
+ * 학생의 성적정보와 배점정보를 관리하기위해 사용하는 DAO클래스이다.
+ * @author 조성진
+ *
+ */
 public class VwStudentTestScoreDAO {
 	
-
+/**
+ * 학생의 성적정보와 배점정보를 리스트로 만들어 반환해주는 메서드
+ * @param stuSeq 학생번호
+ * @return 성적정보와 배점정보 리스트
+ */
 public ArrayList<VwStudentTestScoreDTO> list(String stuSeq) {
 		
 

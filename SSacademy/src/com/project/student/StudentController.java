@@ -56,6 +56,7 @@ public class StudentController {
 				ca.attendacneMain();
 				//break;
 			} else if (sel.equals("3")) {
+				//System.out.println("- 성적을 조회를 할 수있다.. --조성진");
 				stsi = new StudentTestScoreInquiry();
 				stsi.TestQuestionInquiry();
 				//break;

@@ -7,6 +7,12 @@ import com.project.dto.TeacherDTO;
 import com.project.dto.VwSubjectInquiryDTO;
 import com.project.dto.VwStudentTestScoreDTO;
 
+
+/**
+ * 교사가 모든 학생의 성적 정보를 관리하기위한 클래스입니다.
+ * @author 조성진
+ *
+ */
 public class TestScoreManagement {
 	
 	private Scanner scan;
@@ -26,7 +32,10 @@ public class TestScoreManagement {
 	}
 	
 
-
+	/**
+	 * 교사가 학생번호를 이용해 성적을 업데이트하는 메서드입니다.
+	 * @param tSeq2 로그인한 교사번호
+	 */
 	public void stuScoreEdit(String tSeq2) { // 교사가 학생번호로 성적을 업데이트하는 메서드
 		
 		ArrayList<VwStudentTestScoreDTO> list2 = manageScoredao.list2(tSeq);
@@ -113,6 +122,10 @@ public class TestScoreManagement {
 	
 	
 
+	/**
+	 * 교사가 특정 과목으로 학생의 성적을 업데이트하는 메서드입니다.
+	 * @param tSeq 로그인한 교사번호
+	 */
 public void subScoreEdit(String tSeq) { // 특정과목으로 학생성적 업데이트
 		subScoreInquiry(tSeq);
 		System.out.print("\t관리할 과목번호를 입력해주세요 : ");
@@ -195,6 +208,11 @@ public void subScoreEdit(String tSeq) { // 특정과목으로 학생성적 업�
 		pause();
 	} // 특정과목 성적입력 메서드 End
 
+
+	/**
+	 * 특정과목에 대한 정보를 조회하는 메서드
+	 * @param tSeq 로그인한 교사 번호
+	 */
 	public void subScoreInquiry(String tSeq) {
 		String sSeq2 = "";
 		String time = "and subEnd < sysdate";
@@ -219,25 +237,9 @@ public void subScoreEdit(String tSeq) { // 특정과목으로 학생성적 업�
 	}
 
 
-
-	public void subEndinquiry(String tSeq) {
-
-		String time = "and subEnd < sysdate";
-		ArrayList<VwSubjectInquiryDTO> list = managedao.list(tSeq, time);
-
-		// ResultSet -> 탐색 + 조작
-		// ArrayList -> 탐색 + 조작
-
-		for (VwSubjectInquiryDTO dto : list) {
-			System.out.printf("%s, %s, %s, %s\n", dto.getCourseName(), dto.getSubName(), dto.getSubStart(),
-					dto.getSubEnd());
-
-		}
-		System.out.println();
-		pause();
-
-	}
-
+	/**
+	 * 진행을 잠시 막기위한 pause 메서드입니다.
+	 */
 	public void pause() {
 
 		System.out.print("\t진행하시려면 Enter를 눌러주세요..");

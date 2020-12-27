@@ -12,11 +12,21 @@ import com.project.dto.VwSubjectInquiryDTO;
 import com.project.ssacademy.DBUtil;
 import com.project.teacher.dto.VwTestPercentInquiryDTO;
 
+/**
+ * 교사가 배점을 관리하기위해 사용하는DAO
+ * @author 조성진
+ *
+ */
 public class TestManagementDAO {
 	
 	
 	
-	
+	/**
+	 * 교사의 배점 관련 데이터를 리스트로 만들어 반환해주는 메서드 
+	 * @param tSeq 로그인한 교사 번호
+	 * @param time 현재 날짜 정보
+	 * @return 로그인한 강사의 배점관련 정보
+	 */
 	public ArrayList<VwSubjectInquiryDTO> list(String tSeq,String time) { 
 		
 
@@ -65,6 +75,12 @@ public class TestManagementDAO {
 		return null;
 	}
 	
+	
+	/**
+	 * 교사의 특정 과목의 배점관련 데이터를 리스트로 만들어 주는 메서드
+	 * @param subSeq 로그인한 강사의 번호
+	 * @return 로그인한 강사의 특정배점관련 정보
+	 */
 	public ArrayList<VwTestPercentInquiryDTO> list2(String subSeq) {// 특정과목에대한 배점정보 출력
 		
 
@@ -105,6 +121,15 @@ public class TestManagementDAO {
 		
 		return null;
 	}
+	
+	/**
+	 * 교사의 특정 과목의 배점정보를 업데이트하는 메서드
+	 * @param subnum 특정과목 번호
+	 * @param wpercent 사용자가 입력한 필기배점 점수
+	 * @param ppercent 사용자가 입력한 실기배점 점수
+	 * @param apercent 사용자가 입력한 출결배점 점수
+	 * @return 업데이트가 됐는지 안됐는지 확인하기위한 넘버
+	 */
 public int subScoreEdit(String subnum, String wpercent, String ppercent, String apercent) { // 배점관련 업데이트 프로시저
 		
 		Connection conn = null;
@@ -138,6 +163,13 @@ public int subScoreEdit(String subnum, String wpercent, String ppercent, String 
 		
 	}
 
+
+	/**
+	 * 교사의 특정 과목의 필기시험정보를 업데이트하는 메서드
+	 * @param subnum 특정과목 번호
+	 * @param writtenDate 사용자가 입력한 필기시험날짜
+	 * @return 업데이트 확인을 위한 넘버
+	 */
 public int subWrittenDateUpdate(String subnum, String writtenDate) {
 	Connection conn = null;
 	CallableStatement stat = null;
@@ -168,6 +200,12 @@ public int subWrittenDateUpdate(String subnum, String writtenDate) {
 	
 }
 
+/**
+ * 교사의 특정 과목의 실기시험정보를 업데이트하는 메서드
+ * @param subnum 특정과목 번호
+ * @param PracticalDate 사용자가 입력한 실기시험날짜 데이터
+ * @return 업데이트 확인을 위한 넘버
+ */
 public int subPracticalDateUpdate(String subnum, String PracticalDate) {
 	Connection conn = null;
 	CallableStatement stat = null;

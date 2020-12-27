@@ -8,6 +8,12 @@ import com.project.dao.StudentDAO;
 import com.project.dto.StudentDTO;
 import com.project.dto.VwStudentTestScoreDTO;
 
+
+/**
+ * 관리자 모드의 모든 성적관련 기능을 담당하는 클래스이다.
+ * @author 조성진
+ *
+ */
 public class AdminTestScoreManagement {
 
 	private Scanner scan = new Scanner(System.in);
@@ -20,6 +26,10 @@ public class AdminTestScoreManagement {
 		atsm = new AdminTestScoreManagementDAO();
 		sdao = new StudentDAO();
 	}
+	
+	/**
+	 * 관리자 성적관리 메뉴 메서드입니다.
+	 */
 	public void menu() {
 		
 		
@@ -45,7 +55,7 @@ public class AdminTestScoreManagement {
 	}
 	
 	/**
-	 * 관리자가 과목별로 배점을조회하는 메서드 
+	 * 관리자가 개설과목별로 배점을조회하는 메서드입니다.
 	 */
 	public void TestQuestionInquiry() {
 
@@ -180,7 +190,10 @@ public void StudentInquiry() {
 		}
 		 pause();
 	}
-	
+
+	/**
+ 	* 연속진행을 막기위한 pause 메서드입니다.
+ 	*/
 	public void pause() {
 		
 		System.out.print("계속 진행하시려면 Enter를 입력해주세요..");

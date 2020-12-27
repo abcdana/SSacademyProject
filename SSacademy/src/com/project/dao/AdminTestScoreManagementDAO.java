@@ -8,8 +8,18 @@ import java.util.ArrayList;
 import com.project.dto.VwStudentTestScoreDTO;
 import com.project.ssacademy.DBUtil;
 
+/**
+ * 관리자의 성적조회를 관리를 위해 사용하는 DAO클래스이다.
+ * @author 조성진
+ *
+ */
 public class AdminTestScoreManagementDAO {
 
+	
+	/**
+	 * 성적관련 정보를 리스트로 만들어 반환하는 메서드
+	 * @return 성적관련정보를 담은 리스트
+	 */
 	public ArrayList<VwStudentTestScoreDTO> list() {
 
 		Connection conn = null;
