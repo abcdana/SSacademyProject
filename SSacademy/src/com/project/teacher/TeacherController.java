@@ -57,9 +57,11 @@ public class TeacherController {
 				cal.attendanceMain();
 				// break;
 			} else if (sel.equals("3")) {
+				// System.out.println("- 배점 관리 및 조회를 할 수 있다. - 조성진"); - 완료
 				TestManagementMain();
 				break;
 			} else if (sel.equals("4")) {
+				// System.out.println("- 성적 관리 및 조회를 할 수 있다. - 조성진"); - 완료
 				TestScoreManagementMain();
 				break;
 			} else if (sel.equals("5")) {
@@ -129,7 +131,10 @@ public class TeacherController {
 		}
 
 	}
-
+	
+	/**
+	 * 성적관리 메인입니다.
+	 */
 	public void TestScoreManagementMain() {
 
 		boolean loop = true;

@@ -1,5 +1,11 @@
 package com.project.dto;
 
+
+/**
+ * 학생의 정보와 시험관련 정보를 담은 DTO클래스이다.
+ * @author 조성진
+ *
+ */
 public class VwStudentTestScoreDTO {
 
 	private String stuSeq;

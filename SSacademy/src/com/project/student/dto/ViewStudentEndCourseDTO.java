@@ -1,5 +1,11 @@
 package com.project.student.dto;
 
+
+/**
+ * 학생모드 성적 조회 시 해당 학생의 모든 데이터를 담은 DTO클래스이다.
+ * @author 조성진
+ *
+ */
 public class ViewStudentEndCourseDTO {
 
 	private String seqStudent; //교육생번호

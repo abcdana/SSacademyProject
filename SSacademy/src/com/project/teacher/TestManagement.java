@@ -8,6 +8,12 @@ import com.project.dto.VwSubjectInquiryDTO;
 import com.project.dto.VwStudentTestScoreDTO;
 import com.project.teacher.dto.VwTestPercentInquiryDTO;
 
+
+/**
+ * 교사의 모든 배점을 관리하는 클래스입니다.
+ *@author 조성진
+ *
+ */
 public class TestManagement {
 	
 	private Scanner scan;
@@ -24,7 +30,10 @@ public class TestManagement {
 
 	}
 	
-	
+	/**
+	 * 교사가 강의하는 과목들을 조회하는 메서드입니다.
+	 * @param tSeq 로그인한 교사 번호
+	 */
 	public void subScoreInquiry(String tSeq) {
 
 		String sSeq2 = "";
@@ -50,6 +59,10 @@ public class TestManagement {
 	}
 	
 	
+	/**
+	 * 교사가 강의한 과목에 대한 배점을 업데이트하는 메서드입니다.
+	 * @param tSeq 로그인한 교사 번호
+	 */
 	public void subTestManagement(String tSeq) { // 배점 업데이트
 		subScoreInquiry(tSeq);
 		System.out.print("\t관리할 과목번호를 입력해주세요 : ");
@@ -141,6 +154,10 @@ public class TestManagement {
 		pause();
 	}
 	
+	/**
+	 * 교사가 강의한 과목에 대한 필기시험 날짜를 업데이트하는 메서드입니다.
+	 * @param tSeq 로그인한 교사 번호
+	 */
 	public void subWrittenDateUpdate(String tSeq) { // 필기시험 날짜 업데이트
 		subScoreInquiry(tSeq);
 		System.out.print("\t관리할 과목번호를 입력해주세요 : ");
@@ -208,7 +225,10 @@ public class TestManagement {
 	
 	
 	
-	
+	/**
+	 * 	 * 교사가 강의한 과목에 대한 실기시험 날짜를 업데이트하는 메서드입니다.
+	 * @param tSeq 로그인한 교사 번호
+	 */
 	public void subPracticalDateUpdate(String tSeq) { // 실기시험 날짜 업데이트
 		subScoreInquiry(tSeq);
 		System.out.print("\t관리할 과목번호를 입력해주세요 : ");
@@ -273,6 +293,9 @@ public class TestManagement {
 		pause();
 	}
 
+	/**
+	 * 연속된 진행을막기위한 pause메서드입니다.
+	 */
 	private void pause() {
 		
 		System.out.print("\t진행하시려면 Enter를 눌러주세요..");

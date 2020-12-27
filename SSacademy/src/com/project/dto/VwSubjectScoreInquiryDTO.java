@@ -1,5 +1,12 @@
 package com.project.dto;
 
+
+/**
+ * 
+ * 성적,과목관련 정보를 담는 DTO
+ * @author 조성진
+ *
+ */
 public class VwSubjectScoreInquiryDTO {
 
 	private String stuSeq;

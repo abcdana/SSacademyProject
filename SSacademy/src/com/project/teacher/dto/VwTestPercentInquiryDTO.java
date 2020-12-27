@@ -1,5 +1,11 @@
 package com.project.teacher.dto;
 
+
+/**
+ * 배점에 대한 과목조회시 교사가 강의중인 과목에대한 정보 데이터를 담는 DTO이다.
+ * @author 조성진
+ *
+ */
 public class VwTestPercentInquiryDTO {
 
 	private String tpSeq;

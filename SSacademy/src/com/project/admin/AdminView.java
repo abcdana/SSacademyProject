@@ -1848,8 +1848,9 @@ public class AdminView {
 	
 	
 	///////////////////////////////////성진/////////////////////////////////////////////////////////////////
+	
 	/** 
-	 *관리자의 성적조회 메뉴 메서드이다.
+	 *관리자 성적조회 메뉴 메서드입니다.
 	 */
 	public static void admin_TestScoreManagementMenu() {
 		
@@ -1864,8 +1865,10 @@ public class AdminView {
 		System.out.println();
 	}
 	
-	
-public static void admin_TestManagementMenu() {
+	/** 
+	 *관리자 배점조회 메뉴 메서드입니다.
+	 */
+	public static void admin_TestManagementMenu() {
 		
 		System.out.println("\n");
 		System.out.println("\t┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");

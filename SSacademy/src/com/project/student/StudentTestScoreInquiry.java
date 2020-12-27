@@ -8,6 +8,12 @@ import com.project.dao.VwStudentTestScoreDAO;
 import com.project.dto.BasicTestDTO;
 import com.project.dto.VwStudentTestScoreDTO;
 
+
+/**
+ * 학생 모드의 모든 성적조회관련 기능을 담당하는 클래스이다.
+ * @author 조성진
+ *
+ */
 public class StudentTestScoreInquiry {
 	private Scanner scan;
 	private VwStudentTestScoreDAO vsto;
