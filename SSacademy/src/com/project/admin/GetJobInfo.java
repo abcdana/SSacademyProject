@@ -21,9 +21,7 @@ public class GetJobInfo {
 	public GetJobInfoDAO dao;
 	public EmpStatusDAO daoE;
 	public AdminView view;
-	int i=0; //출력문 페이지
-	int j=0; //출력문 라인
-	int line = 10; //10줄까지 출력
+
 	static{
 		scan = new Scanner(System.in);
 	}

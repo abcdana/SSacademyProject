@@ -429,7 +429,8 @@ public class StudentView {
 		System.out.print("\t█ 입력 : ");
 		
 	}
-  
+	/*
+	 * 
   	 * 교육생번호로 조회 헤더입니다.
 	 */
 	public void seqStudentList1() {
@@ -532,7 +533,7 @@ public class StudentView {
 			}//fori
 
 		}//while
-		
+	}
 		
 	/**
 	 * 연계기업취업정보 목록 형태 
