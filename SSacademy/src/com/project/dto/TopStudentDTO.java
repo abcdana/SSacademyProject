@@ -12,7 +12,7 @@ public class TopStudentDTO {
 	private String ssName;	//혜택명
 	private String prize;	//혜택상품
 	private String descrip;	//혜택내용
-	private String stid;	//학생아이디
+	private String stId;	//학생아이디
 	private String stName;	//학생이름
 	private String seqRegCourse;	//수강번호
 	
@@ -64,11 +64,11 @@ public class TopStudentDTO {
 	public void setStName(String stName) {
 		this.stName = stName;
 	}
-	public String getStid() {
-		return stid;
+	public String getStId() {
+		return stId;
 	}
-	public void setStid(String stid) {
-		this.stid = stid;
+	public void setStId(String stId) {
+		this.stId = stId;
 	}
 
 

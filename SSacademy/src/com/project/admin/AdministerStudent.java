@@ -61,8 +61,7 @@ public class AdministerStudent {
 				System.out.println();
 				System.out.print("\t█ id를 입력하세요 : ");
 				String txt = scanner.nextLine();
-				ArrayList<StudentDTO> list = dao.getStudent(txt);
-				
+				ArrayList<StudentDTO> list = dao.getStudent(txt); //정보 리스트를 저장하는 메소드
 				printInfoList(list); //정보 리스트를 출력하는 메소드
 				
 				System.out.println();
@@ -77,7 +76,6 @@ public class AdministerStudent {
 				System.out.println("\t█ 뒤로 가시려면 엔터를 입력하세요.");
 				scanner.nextLine();
 				AdministerStudent(sadto);
-//				조회에서 수정/삭제기능 추가 = 나중에
 				
 			}else if(data.equals("2")){ //교육생번호로 조회
 				System.out.println();
@@ -90,7 +88,6 @@ public class AdministerStudent {
 				System.out.println("\t█ 뒤로 가시려면 엔터를 입력하세요.");
 				scanner.nextLine();
 				AdministerStudent(sadto);
-//				조회에서 수정/삭제기능 추가 = 나중에
 				
 			}else if(data.equals("3")){ //이름으로 조회
 				
@@ -125,7 +122,6 @@ public class AdministerStudent {
 				System.out.println("\t█ 뒤로 가시려면 엔터를 입력하세요.");
 				scanner.nextLine();
 				AdministerStudent(sadto);
-//				조회에서 수정/삭제기능 추가 = 나중에
 			
 			}else if(data.equals("5")){ //전체 교육생 조회
 				dao.getStudentAll();
