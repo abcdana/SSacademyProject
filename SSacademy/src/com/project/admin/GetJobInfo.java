@@ -21,7 +21,9 @@ public class GetJobInfo {
 	public GetJobInfoDAO dao;
 	public EmpStatusDAO daoE;
 	public AdminView view;
-	
+	int i=0; //출력문 페이지
+	int j=0; //출력문 라인
+	int line = 10; //10줄까지 출력
 	static{
 		scan = new Scanner(System.in);
 	}
@@ -101,10 +103,12 @@ public class GetJobInfo {
 		view.jobListHeader();//수료생 취업정보 조회헤더
 		
 		ArrayList<VwGetJobInfoDTO> list = dao.jobList(null);
-		
+
 		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
-		
+
+
 	}
+
 
 	/**
 	 * 수료생 취업정보 검색 메뉴 메서드
@@ -153,7 +157,10 @@ public class GetJobInfo {
 		
 		ArrayList<VwGetJobInfoDTO> list = dao.jobList(word);
 		
+
 		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+
+		
 		
 	}
 	
@@ -180,7 +187,10 @@ public class GetJobInfo {
 
 		ArrayList<VwGetJobInfoDTO> list = dao.salarySearch(word, word2);
 		
+	
 		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+
+		
 		
 	}
 	
@@ -201,7 +211,11 @@ public class GetJobInfo {
 		System.out.println();
 		ArrayList<VwGetJobInfoDTO> list = dao.locationSearch(word);
 		
+
 		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+
+
+			
 	}
 
 	/**
@@ -230,7 +244,10 @@ public class GetJobInfo {
 		System.out.println();
 		ArrayList<VwGetJobInfoDTO> list = dao.dutySearch(word.toUpperCase());
 		
+
 		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
+
+	
 		
 	}
 	/**
@@ -320,12 +337,21 @@ public class GetJobInfo {
 			menu();
 		}
 		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
-		System.out.printf("\t\t\t\t-%s 학생 취업정보 목록 -",name);
+		System.out.printf("\t\t\t\t-%s 학생 취업정보 목록 -\n",name);
+		ArrayList<VwGetJobInfoDTO> list = dao.nameSearch(name);
+
+		view.editGetJob(list);
+		
+		
+	}
+	/**
+	 * 수료생취업정보 수정할 학생취업번호 선택 및 수정
+	 * @author 혜승 
+	 */
+	public void jobEditSelect() {
+		
 		System.out.println();
-		searchName(name);
-		System.out.println();
-		view.noinputline();
-		System.out.println();
+		System.out.println("\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.print("\t█ 수정 원하시는 학생 취업번호를 입력하세요. : ");
 		String seqGetJobInfo = scan.nextLine();
 		if(seqGetJobInfo.equals("")) {
@@ -392,18 +418,9 @@ public class GetJobInfo {
 		
 		
 	}
-	/**
-	 * 수료생 취업정보 이름검색 메서드
-	 * @author 조혜승
-	 *
-	 */
-	private void searchName(String name) { 
-		ArrayList<VwGetJobInfoDTO> list = dao.nameSearch(name);
-		view.GetJobList(list);//수료생 취업정보 조회 문 출력 형식문
 
-	}
 	/**
-	 * 수료생 취업정보 삭제 메서드
+	 * 수료생 취업정보 삭제 시작
 	 * @author 조혜승
 	 *
 	 */
@@ -419,9 +436,21 @@ public class GetJobInfo {
 		System.out.println("\t───────────────────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.printf("\t\t\t\t-%s 학생 취업정보 목록 -",name);
 		System.out.println();
-		searchName(name);
+		ArrayList<VwGetJobInfoDTO> list = dao.nameSearch(name);
+		
 		System.out.println();
-		view.noinputline();
+		view.deleteGetJob(list);
+		
+		
+	}
+	/**
+	 * 수료생취업정보 삭제번호선택 및 삭제
+	 * @author 혜승
+	 * @param list 
+	 * 
+	 */
+	public void jobDeleteSelect() {
+	
 		System.out.println();
 		System.out.print("\t█ 삭제 원하시는 학생 취업번호를 입력하세요. : ");
 		String seqGetJobInfo = scan.nextLine();
@@ -455,6 +484,7 @@ public class GetJobInfo {
 		}
 		
 	}
+
 	/**
 	 * 연계기업 취업정보 조회메서드
 	 * @author 조혜승
@@ -488,6 +518,7 @@ public class GetJobInfo {
 		}
 		System.out.println();
 		view.noinputcurve();
+		System.out.println("\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.print("\t█ 등록 원하는 회사 번호를 입력해 주세요. : ");
 		String seqCompanyInfo = scan.nextLine();
 		
@@ -561,9 +592,18 @@ public class GetJobInfo {
 		System.out.println();
 		System.out.printf("\t\t\t\t-%s 학생 연계기업 취업정보 목록 -\n",word);
 		System.out.println();
-		view.cjobList(list);
+		view.deleteCjobList(list);
+
 		
+	}
+	/**
+	 * 연계기업취업정보 삭제 번호 선택및 삭제
+	 * @author 혜승
+	 */
+	public void deleteCjobSel() {
+
 		System.out.println();
+		System.out.println("\t\t**입력값이 없으면 이전화면으로 돌아갑니다.");
 		System.out.print("\t█ 삭제 원하시는 학생의 번호를입력하세요 : ");
 		String seq = scan.nextLine();
 		if(seq.equals("")) {
@@ -591,7 +631,9 @@ public class GetJobInfo {
 				cjobDelete();
 			}
 		
+		
 	}
+
 	/**
 	 * 메뉴로다시돌아가는 메서드
 	 */
@@ -603,6 +645,9 @@ public class GetJobInfo {
 		
 		
 	}
+
+
+
 	
 	
 }

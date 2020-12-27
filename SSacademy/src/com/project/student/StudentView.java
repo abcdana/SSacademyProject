@@ -1,7 +1,13 @@
 package com.project.student;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import com.project.admin.CompanyInfo;
+import com.project.admin.GetJobInfo;
+import com.project.admin.dto.VwCompanyInfoDTO;
+import com.project.admin.dto.VwEmpStatusDTO;
+import com.project.admin.dto.VwGetJobInfoDTO;
 import com.project.student.dto.StudentCourseListDTO;
 
 /**
@@ -173,6 +179,97 @@ public class StudentView {
 	}
 	
 	/**
+	 * 연계기업채용공고 목록 출력 메서드
+	 * @author 혜승
+	 * @param list
+	 */
+	public void viewListCompany(ArrayList<VwCompanyInfoDTO> list) {
+		int i=0;
+		int j=0;
+		int line = 10;
+		while(true) {
+			for(i =0; i < (list.size()/line)+1 ; i++) {
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+		System.out.printf("-%s page- [채용현황][번호] [회사명]\t    [채용시작일] [채용종료일] [고용형태] [연봉]    [업무]  [회사규모]\t\t[주소] \n",i+1);
+		System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				for( j=i*line; j<line+(line*i); j++ ) {
+					
+					if(j>=list.size()) {
+						break;
+					} else {
+					VwCompanyInfoDTO dto = list.get(j);
+					if(dto.getName().length() <= 5) {
+						System.out.printf("\t%5s %-5s %-15s %10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+								dto.getState(),dto.getSeqCompanyInfo(),
+								dto.getName(),dto.getStartDate(),
+								dto.getEndDate(),dto.getEmploymentType(),
+								dto.getSalary(),dto.getComField(),
+								dto.getComSize(),dto.getAddress());
+						
+					} else if(dto.getName().length()>5 && dto.getName().length() <= 7) {
+						System.out.printf("\t%5s %-5s %-14s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+								dto.getState(),dto.getSeqCompanyInfo(),
+								dto.getName(),dto.getStartDate(),
+								dto.getEndDate(),dto.getEmploymentType(),
+								dto.getSalary(),dto.getComField(),
+								dto.getComSize(),dto.getAddress());
+					} else if(dto.getName().length()>7 && dto.getName().length() <= 9) {
+						System.out.printf("\t%5s %-5s %-12s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+								dto.getState(),dto.getSeqCompanyInfo(),
+								dto.getName(),dto.getStartDate(),
+								dto.getEndDate(),dto.getEmploymentType(),
+								dto.getSalary(),dto.getComField(),
+								dto.getComSize(),dto.getAddress());
+					} else if(dto.getName().length()>9) {
+							System.out.printf("\t%5s %-5s %-11s %-10s ~ %-13s %-6s %-10s %-10s %-6s %s\n", 
+									dto.getState(),dto.getSeqCompanyInfo(),
+									dto.getName(),dto.getStartDate(),
+									dto.getEndDate(),dto.getEmploymentType(),
+									dto.getSalary(),dto.getComField(),
+									dto.getComSize(),dto.getAddress());
+					}//elseif
+		
+					}//if
+			}//forj
+		        System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+				System.out.println("\t│\t\t1. 이전 페이지\t\t\t\t\t\t  │");
+				System.out.println("\t│\t\t2. 다음 페이지\t\t\t\t\t\t  │");
+				System.out.println("\t│\t\t3. 이전 화면으로\t\t\t\t\t  │");
+				System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+				System.out.print("\t█ 원하시는 번호를 입력하세요. : ");
+				Scanner scan = new Scanner(System.in);
+				String num = scan.nextLine();
+				
+				if(num.equals("1")) {
+					if(i==0){
+						i-=1;
+						System.out.println();
+						System.out.println("\t\t**첫 페이지입니다");
+				
+					}else{
+						i-=2;
+					}
+				} else if(num.equals("2")) {
+					if (j>=list.size()){
+						i -= 1;
+						System.out.println();
+						System.out.println("\t\t**페이지가 끝났습니다.");
+					
+					} 
+				} else if(num.equals("3")) {
+					CompanyInfoCheck ci = new CompanyInfoCheck();
+					ci.menu();
+					
+				}
+
+			}//fori
+		}//while
+		
+}
+
+	
+	/**
 	 * 교육생 수료생 취업정보 조회 메뉴
 	 * @author 혜승
 	 */
@@ -191,9 +288,199 @@ public class StudentView {
 		System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
 		System.out.println();
 		System.out.print("\t█ 원하시는 메뉴를 입력하세요. : ");
+		
 	}
 	
+	/**
+	 * 수료생 취업정보 조회 문 출력 형식문
+	 * @author 혜승
+	 * @param list
+	 */
 	
+	public void GetJobList(ArrayList<VwGetJobInfoDTO> list) {
+		
+		int i=0;
+		int j=0;
+		int line = 10;
+		while(true) {
+			for(i =0; i < (list.size()/line)+1 ; i++) {
+				System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				System.out.printf("-%s page- [취업번호][이름][ID]  \t[회사명]\t\t[고용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t[수료과정]\n",i+1);
+				System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				for( j=i*line; j<line+(line*i); j++ ) {
+					
+					if(j>=list.size()) {
+						break;
+					} else {
+					VwGetJobInfoDTO dto = list.get(j);
+				if(dto.getCompanyName().length() <= 5) {
+					System.out.printf("\t%6s %-5s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
+							dto.getGjseq(), dto.getName(), dto.getId(),
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+					
+				} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
+					System.out.printf("\t%6s %-5s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+							dto.getGjseq(), dto.getName(), dto.getId(),
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+				} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
+					System.out.printf("\t%6s %-5s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+							dto.getGjseq(), dto.getName(), dto.getId(),
+							dto.getCompanyName(), 
+							dto.getForm(), dto.getSalary(),
+							dto.getGetJobDate(),dto.getDuty(),
+							dto.getLocation(),dto.getCourse());
+				} else if(dto.getCompanyName().length()>9) {
+						System.out.printf("\t%6s %-5s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s \n", 
+								dto.getGjseq(), dto.getName(), dto.getId(),
+								dto.getCompanyName(), 
+								dto.getForm(), dto.getSalary(),
+								dto.getGetJobDate(),dto.getDuty(),
+								dto.getLocation(),dto.getCourse());
+				}
+				}//if
+			}//forj
+				 System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+					System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+					System.out.println("\t│\t\t1. 이전 페이지\t\t\t\t\t\t  │");
+					System.out.println("\t│\t\t2. 다음 페이지\t\t\t\t\t\t  │");
+					System.out.println("\t│\t\t3. 이전 화면으로\t\t\t\t\t  │");
+					System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+					System.out.print("\t█ 원하시는 번호를 입력하세요. : ");
+					Scanner scan = new Scanner(System.in);
+					String num = scan.nextLine();
+					
+					if(num.equals("1")) {
+						if(i==0){
+							i-=1;
+							System.out.println();
+							System.out.println("\t\t**첫 페이지입니다");
+					
+						}else{
+							i-=2;
+						}
+					} else if(num.equals("2")) {
+						if (j>=list.size()){
+							i -= 1;
+							System.out.println();
+							System.out.println("\t\t**페이지가 끝났습니다.");
+						
+						} 
+					} else if(num.equals("3")) {
+						GetJobInfoCheck gj = new GetJobInfoCheck();
+						gj.menu();
+						
+					}
+			}//fori
+
+		}//while
+		
+		
+		
+	}
+	
+	/**
+	 * 연계기업취업정보 목록 형태 
+	 * @author 혜승 
+	 * @param list
+	 */
+	public void cjobList(ArrayList<VwEmpStatusDTO> list) {
+		
+		
+		int i=0;
+		int j=0;
+		int line = 10;
+		while(true) {
+			for(i =0; i < (list.size()/line)+1 ; i++) {
+				System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				System.out.printf("-%s page- [등록번호][이름][ID]  \t[회사명]\t\t[채용형태] \t[연봉] \t[취업일] \t[업무] \t\t\t[회사주소]\t\t\t\t\t[수료과정]\n",i+1);
+				System.out.println("─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+				for( j=i*line; j<line+(line*i); j++ ) {
+					
+					if(j>=list.size()) {
+						break;
+					} else {
+					VwEmpStatusDTO dto = list.get(j);
+
+					if(dto.getCompanyName().length() <= 5) {
+
+						System.out.printf("\t%6s %-5s %-5s %-15s %-10s %-10s %-10s \t\t%-10s \t%-30s \t%-30s\n", 
+								dto.getSeq(), dto.getName(), dto.getId(),
+								dto.getCompanyName(), 
+								dto.getForm(), dto.getSalary(),
+								dto.getGetJobDate(),dto.getDuty(),
+								dto.getLocation(),dto.getCourse());
+						
+					} else if(dto.getCompanyName().length()>5 && dto.getName().length() <= 7) {
+						System.out.printf("\t%6s %-5s %-5s %-14s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+								dto.getSeq(),dto.getName(), dto.getId(),
+								dto.getCompanyName(), 
+								dto.getForm(), dto.getSalary(),
+								dto.getGetJobDate(),dto.getDuty(),
+								dto.getLocation(),dto.getCourse());
+					} else if(dto.getCompanyName().length()>7 && dto.getName().length() <= 9) {
+						System.out.printf("\t%6s %-5s %-5s %-12s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+								dto.getSeq(), dto.getName(), dto.getId(),
+								dto.getCompanyName(), 
+								dto.getForm(), dto.getSalary(),
+								dto.getGetJobDate(),dto.getDuty(),
+								dto.getLocation(),dto.getCourse());
+					} else if(dto.getCompanyName().length()>9) {
+							System.out.printf("\t%6s %-5s %-5s %-11s %-10s %-10s %-10s \t%-10s \t%-30s \t%-30s\n", 
+									dto.getSeq(), dto.getName(), dto.getId(),
+									dto.getCompanyName(), 
+									dto.getForm(), dto.getSalary(),
+									dto.getGetJobDate(),dto.getDuty(),
+									dto.getLocation(),dto.getCourse());
+					}//elseif
+					
+				}//if
+			}//forj
+				 System.out.println("───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────");
+					System.out.println("\t┌─────────────────────────────────────────────────────────────────────────┐");
+					System.out.println("\t│\t\t1. 이전 페이지\t\t\t\t\t\t  │");
+					System.out.println("\t│\t\t2. 다음 페이지\t\t\t\t\t\t  │");
+					System.out.println("\t│\t\t3. 이전 화면으로\t\t\t\t\t  │");
+					System.out.println("\t└─────────────────────────────────────────────────────────────────────────┘");
+					System.out.print("\t█ 원하시는 번호를 입력하세요. : ");
+					Scanner scan = new Scanner(System.in);
+					String num = scan.nextLine();
+					
+					if(num.equals("1")) {
+						if(i==0){
+							i-=1;
+							System.out.println();
+							System.out.println("\t\t**첫 페이지입니다");
+					
+						}else{
+							i-=2;
+						}
+					} else if(num.equals("2")) {
+						if (j>=list.size()){
+							i -= 1;
+							System.out.println();
+							System.out.println("\t\t**페이지가 끝났습니다.");
+						
+						} 
+					} else if(num.equals("3")) {
+						GetJobInfoCheck gj = new GetJobInfoCheck();
+						gj.menu();
+						
+					}
+			}//fori
+
+		}//while
+		
+		
+			
+		}
+		
+
 
 
 }
