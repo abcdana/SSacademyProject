@@ -14,7 +14,7 @@ import java.sql.DriverManager;
 
 /**
  * DBUtil. 데이터베이스 연결 클래스입니다.
- * @author 홍길동
+ * @author 김주혁
  *
  */
 public class DBUtil {
