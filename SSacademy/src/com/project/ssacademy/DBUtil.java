@@ -8,9 +8,7 @@ import java.sql.DriverManager;
 /*
   2. 다중 라인 주석
  */
-/**
-  3. 자바 도큐먼트 주석
- */
+
 
 /**
  * DBUtil. 데이터베이스 연결 클래스입니다.
